@@ -35,6 +35,11 @@ app.config(function($routeProvider) {
         controller : 'main as ctrl'
     })
 });
+app.controller('main', function($scope, $http) {
+	var vm = this;
+
+	
+});
 
 app.controller('viewSkills', function($scope, $http) {
 	var vm = this,
