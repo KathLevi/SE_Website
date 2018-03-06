@@ -6,25 +6,37 @@ app.config(function($routeProvider) {
         templateUrl : "partials/home.htm",
         controller : 'main as ctrl'
     })
-    .when("/page1", {
-        templateUrl : "partials/page1.htm",
+    .when("/demo", {
+        templateUrl : "partials/demo.htm",
         controller : 'main as ctrl'
     })
-    .when("/page2", {
-        templateUrl : "partials/page2.htm",
-        controller : 'page2 as ctrl'
+    .when("/profile", {
+        templateUrl : "partials/profile.htm",
+        controller : 'profile as ctrl'
     })
-	.when("/drop1", {
-        templateUrl : "partials/drop1.htm",
-        controller : 'drop1 as ctrl'
+	.when("/viewSkills", {
+        templateUrl : "partials/viewSkills.htm",
+        controller : 'viewSkills as ctrl'
     })
-	.when("/drop2", {
-        templateUrl : "partials/drop2.htm",
+	.when("/createSkills", {
+        templateUrl : "partials/createSkills.htm",
+        controller : 'main as ctrl'
+    })
+	.when("/team", {
+        templateUrl : "partials/team.htm",
+        controller : 'main as ctrl'
+    })
+	.when("/contact", {
+        templateUrl : "partials/contact.htm",
+        controller : 'main as ctrl'
+    })
+	.when("/signIn", {
+        templateUrl : "partials/signIn.htm",
         controller : 'main as ctrl'
     })
 });
 
-app.controller('drop1', function($scope, $http) {
+app.controller('viewSkills', function($scope, $http) {
 	var vm = this,
 		img = ["default1.jpg", "default2.jpg", "default3.jpg", "default4.jpg", "default1.jpg", "default2.jpg", "default3.jpg", "default4.jpg", "default1.jpg", "default2.jpg", "default3.jpg", "default4.jpg"];
 
@@ -37,7 +49,7 @@ app.controller('drop1', function($scope, $http) {
 	};
 });
 
-app.controller('page2', function($scope, $http) {
+app.controller('profile', function($scope, $http) {
 	var vm = this,
 		img = ["default1.jpg", "default1.jpg", "default1.jpg", "default1.jpg"];
 

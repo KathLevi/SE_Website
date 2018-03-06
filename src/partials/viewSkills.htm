@@ -1,0 +1,30 @@
+<h4>view skills</h4>
+<!--portfolio display-->
+<div align="center">
+	<div class="gallery">
+		<div ng-repeat="x in ctrl.images">
+			<img class="galleryImg" ng-click="ctrl.openModal(x)" data-toggle="modal" data-target="#myModal" ng-src="{{x.path}}"/>
+		</div>
+	</div>
+</div>
+
+<!--Modal-->
+<div class="modal" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">X</button>
+        <h4 class="modal-title">{{ctrl.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <img id="modalImg" ng-src="{{ctrl.modalImg}}"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

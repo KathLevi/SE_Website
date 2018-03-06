@@ -1,6 +1,12 @@
 @charset "UTF-8";
 /* CSS Document */
-html {
+
+/* COLORS
+ * #232f3e -- navy
+ * #ff7f00 -- orange
+ */
+
+ html {
   min-height: 100%;
   position: relative;
 }
@@ -16,20 +22,19 @@ body{
     margin: 0;
     padding: 0;
     overflow: hidden;
-	border-top: 2px solid black;
-	border-bottom: 2px solid black;
+	background-color: #232f3e;	
 }
 .menuListElement {
-	display: inline;
+	display: inline;	
 }
 .menuListElement a, .dropbtn {
     display: inline-block;
-    color: black;
-    padding: 14px 16px;
+    color: white;
+    padding: 20px 24px;
     text-decoration: none;
 }
-.menuListElement a:hover, .dropdwn:hover .dropbtn {
-    background-color: black;
+.menuListElement a:hover, .dropdwn:hover .dropbtn, .dropdown-content a:hover {
+    background-color: #ff7f00;
 	color: white;
 }
 .menuListElement.dropdwn {
@@ -49,12 +54,24 @@ body{
     text-decoration: none;
     display: block;
 }
-.dropdown-content a:hover {
-	background-color: black;
-}
 .dropdwn:hover .dropdown-content {
     display: block;
 }
+
+.logo {
+	padding-top: 20px;
+	width: 100%;
+}
+
+/* 
+ * HOME
+ */
+.logo img {
+	width: 60%;
+	display: block;
+	margin: auto;
+}
+
 /* 
  * PORTFOLIO
  */
@@ -119,7 +136,7 @@ body{
  * FOOTER
  */
 footer {
-	background-color: black;
+	background-color: #232f3e;
 	color: white;
 	position: absolute;
     left: 0;
