@@ -1,8 +1,10 @@
 <h4 class="pageHeader">Our Team</h4>
 <div align="center">
-    <div class="card" ng-repeat="x in ctrl.images">
-            <div class="cardTitle">{{x.name}}</div>
-            <img src="{{x.path}}" alt="{{x.name}}" />   
-        </a>
+    <div class="teamCard" ng-repeat="x in ctrl.team">
+        <img src="{{x.path}}" alt="{{x.name}}" />
+        <div class="teamInfo">
+            <div class="teamName">{{x.name}}</div>
+            <div class="teamDesc">{{x.desc}}</div>
+        </div>   
     </div>
 </div>

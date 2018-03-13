@@ -35,6 +35,7 @@ app.config(function($routeProvider) {
         controller : 'main as ctrl'
     })
 });
+
 app.controller('main', function($scope, $http) {
 	var vm = this;
 
@@ -63,11 +64,27 @@ app.controller('viewSkills', function($scope, $http) {
 });
 
 app.controller('team', function($scope, $http) {
-	var vm = this,
-		img = ["default1.jpg", "default2.jpg", "default1.jpg", "default4.jpg", "default3.jpg"];
+    var vm = this,
+        team = [
+            {
+                name: "Person A",
+                path: "img/default1.jpg",
+                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                name: "Person B",
+                path: "img/default1.jpg",
+                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+            {
+                name: "Person C",
+                path: "img/default1.jpg",
+                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            }
+        ];
 
 	//finds images and gives a path based on page
-	vm.images = convertImagePath(img);
+    vm.team = team;
 });
 
 
