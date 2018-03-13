@@ -24,7 +24,7 @@ app.config(function($routeProvider) {
     })
 	.when("/team", {
         templateUrl : "partials/team.htm",
-        controller : 'main as ctrl'
+        controller : 'team as ctrl'
     })
 	.when("/contact", {
         templateUrl : "partials/contact.htm",
@@ -41,6 +41,14 @@ app.controller('main', function($scope, $http) {
 	
 });
 
+app.controller('profile', function($scope, $http) {
+	var vm = this,
+		img = ["default1.jpg", "default1.jpg", "default1.jpg", "default1.jpg"];
+
+	//finds images and gives a path based on page
+	vm.images = convertImagePath(img);
+});
+
 app.controller('viewSkills', function($scope, $http) {
 	var vm = this,
 		img = ["default1.jpg", "default2.jpg", "default3.jpg", "default4.jpg", "default1.jpg", "default2.jpg", "default3.jpg", "default4.jpg", "default1.jpg", "default2.jpg", "default3.jpg", "default4.jpg"];
@@ -54,13 +62,14 @@ app.controller('viewSkills', function($scope, $http) {
 	};
 });
 
-app.controller('profile', function($scope, $http) {
+app.controller('team', function($scope, $http) {
 	var vm = this,
-		img = ["default1.jpg", "default1.jpg", "default1.jpg", "default1.jpg"];
+		img = ["default1.jpg", "default2.jpg", "default1.jpg", "default4.jpg", "default3.jpg"];
 
 	//finds images and gives a path based on page
 	vm.images = convertImagePath(img);
 });
+
 
 //converts a ton of images to the correct path
 function convertImagePath(img){

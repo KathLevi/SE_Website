@@ -15,6 +15,13 @@ body{
 	margin: 0;
 	padding: 0 0 100px;
 }
+
+.pageHeader{
+	padding: 30px;
+	font-size: 40px;
+	text-align: center;
+	font-weight: bold;
+}
 /*
  * HEADER
  */
