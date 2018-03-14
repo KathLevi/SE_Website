@@ -17,10 +17,13 @@ body{
 }
 
 .pageHeader{
-	padding: 30px;
+	margin-top: 80px;
 	font-size: 40px;
 	text-align: center;
-	font-weight: bold;
+}
+.pageHeader span {
+	font-size: 45px;
+	color: #0880f7;
 }
 /*
  * HEADER
@@ -185,7 +188,7 @@ body{
 }
 
 /*
- * CONTACT
+ * TEAM
  */
  .teamCard {
 	width: 100%;
@@ -196,8 +199,9 @@ body{
 .teamCard img {
 	width: 300px;
 	height: 300px;
-	border-radius: 50%;	
+	border-radius: 50%;
 	display: inline-block;
+	margin-right: 120px;
 }
 .teamInfo {
 	padding: 0 16px;
