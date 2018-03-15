@@ -73,18 +73,30 @@ app.controller('team', function($scope, $http) {
             },
             {
                 name: "Person B",
-                path: "img/default1.jpg",
+                path: "img/default2.jpg",
                 desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
             {
                 name: "Person C",
-                path: "img/default1.jpg",
+                path: "img/default3.jpg",
                 desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
             }
         ];
 
 	//finds images and gives a path based on page
     vm.team = team;
+
+    vm.dropModal = function(image) {
+        if (vm.teamName == undefined) {
+            vm.teamName = image.name;
+            vm.teamDesc = image.desc;
+        }
+        else {
+            vm.teamName = null;
+            vm.teamDesc = null;
+        }
+        
+    };
 });
 
 

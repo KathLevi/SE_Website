@@ -18,12 +18,15 @@ body{
 
 .pageHeader{
 	margin-top: 80px;
-	font-size: 40px;
 	text-align: center;
 }
 .pageHeader span {
 	font-size: 45px;
 	color: #0880f7;
+}
+.pageSubheader {
+	text-align: center;
+	margin-bottom: 30px;
 }
 /*
  * HEADER
@@ -193,25 +196,30 @@ body{
  .teamCard {
 	width: 100%;
 	display: inline-block;
-	background-color: white;
-	margin: 40px;
+	margin: 10px 40px;
+	margin-left: -15px;
 }
-.teamCard img {
-	width: 300px;
-	height: 300px;
-	border-radius: 50%;
+.teamImg img:hover {
+	height: 120%;
+}
+.teamImg {
 	display: inline-block;
-	margin-right: 120px;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin: 0px 50px;
+}
+.teamImg img {
+	width: auto;
+	height: 100%;
 }
 .teamInfo {
-	padding: 0 16px;
 	font-size: 20px;
-	color: black;
-	background-color: white;
-	width: 50%;
-	display: inline-block;
-	vertical-align: middle;
+	width: 60%;
 	text-align: left;
+	margin-bottom: 30px;
+	margin-left: 20px;
 }
 .teamName {
 	font-size: 30px;

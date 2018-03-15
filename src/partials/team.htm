@@ -1,10 +1,13 @@
-<h4 class="pageHeader">Meet our <span>Team</span></h4>
+<h1 class="pageHeader">Meet our <span>Team</span></h1>
+<h3 class="pageSubheader">Click an image to learn more about one of our team members</h3>
 <div align="center">
-    <div class="teamCard" ng-repeat="x in ctrl.team">
-        <img src="{{x.path}}" alt="{{x.name}}" />
-        <div class="teamInfo">
-            <div class="teamName">{{x.name}}</div>
-            <div class="teamDesc">{{x.desc}}</div>
-        </div>   
+    <div class="teamCard">
+        <div class="teamImg"  ng-repeat="x in ctrl.team"> 
+            <img ng-click="ctrl.dropModal(x)" src="{{x.path}}" alt="{{x.name}}" />
+        </div>      
+    </div> 
+    <div class="teamInfo" id="info">
+        <div class="teamName" data-dismiss="teamInfo">{{ctrl.teamName}}</div>
+        <div class="teamDesc">{{ctrl.teamDesc}}</div>
     </div>
 </div>
