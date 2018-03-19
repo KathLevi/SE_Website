@@ -192,6 +192,9 @@ body{
 	color: black;
 	background-color: white;
 }
+/*
+ * NEW SKILL
+ */
 
 /*
  * TEAM
@@ -212,6 +215,7 @@ body{
 	border-radius: 50%;
 	overflow: hidden;
 	margin: 0px 50px;
+	cursor: pointer;
 }
 .teamImg img {
 	width: auto;
