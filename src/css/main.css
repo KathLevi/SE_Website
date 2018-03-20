@@ -195,6 +195,28 @@ body{
 /*
  * NEW SKILL
  */
+ .newSkillForm {
+	 width: 100%;
+	 margin: 20px;
+ }
+ .newSkillForm form {
+	 width: 60%;
+	 margin: auto;
+ }
+.newSkillForm input[type="text"] {
+	 width: 100%;
+	 height: 35px;
+	 border-radius: 5px;
+	 margin-bottom: 5px;
+	 font-size: 12px;
+ }
+.lblBig {
+
+}
+
+.lblSmall {
+
+}
 
 /*
  * TEAM
