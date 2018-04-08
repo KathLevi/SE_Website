@@ -38,8 +38,6 @@ app.config(function($routeProvider) {
 
 app.controller('main', function($scope, $http) {
 	var vm = this;
-
-	
 });
 
 app.controller('profile', function($scope, $http) {
@@ -107,15 +105,15 @@ app.controller('team', function($scope, $http) {
     vm.team = team;
 
     vm.dropModal = function(image) {
-        if (vm.teamName == undefined) {
-            vm.teamName = image.name;
-            vm.teamDesc = image.desc;
-        }
-        else {
-            vm.teamName = null;
-            vm.teamDesc = null;
-        }
-        
+       if (vm.teamName == image.name) {
+           console.log("click");
+           vm.teamName = null;
+           vm.teamDesc = null;
+       }
+       else {
+           vm.teamName = image.name;
+           vm.teamDesc = image.desc;
+       }
     };
 });
 
