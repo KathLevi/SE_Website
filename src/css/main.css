@@ -131,7 +131,21 @@ body{
 	 background-color: grey;
 	 color: white;
  }
- 
+ /* 
+ * REGISTER
+ */
+ #noMatch {
+	color: red;
+	float: right;
+	font-weight: normal;
+ }
+ .capcha {
+	 text-align: center;
+ }
+ #capchaInput {
+	 width: 100px;
+ }
+
 /* 
  * PORTFOLIO
  */

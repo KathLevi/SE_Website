@@ -34,10 +34,40 @@ app.config(function($routeProvider) {
         templateUrl : "partials/signIn.htm",
         controller : 'main as ctrl'
     })
+    .when("/register", {
+        templateUrl : "partials/register.htm",
+        controller : 'register as ctrl'
+    })
 });
 
 app.controller('main', function($scope, $http) {
-	var vm = this;
+    var vm = this;
+});
+
+app.controller('register', function($scope, $http) {
+    var vm = this,
+        rand1 = Math.floor(Math.random() * 20) + 1, 
+        rand2 = Math.floor(Math.random() * 3), 
+        rand3 = Math.floor(Math.random() * 20) + 1,
+        sign, answer;
+    $("#newPassword, #confirmPassword").keyup(checkPasswordMatch);
+
+    //CAPCHA
+    if (rand2 == 0) {
+        sign = "+";
+        answer = rand1 + rand3;
+    }
+    else if (rand2 == 1){
+        sign = "-";
+        answer = rand1 - rand3;
+    }
+    else {
+        sign = "*";
+        answer = rand1 * rand3;
+    }
+    $("#number1").html(rand1);
+    $("#sign").html(sign);
+    $("#number2").html(rand3);
 });
 
 app.controller('profile', function($scope, $http) {
@@ -131,3 +161,14 @@ function convertImagePath(img){
 function getImagePath(imageName){
 	return "img/" + imageName;	
 };
+
+//check if passwords match on registration page
+function checkPasswordMatch() {
+    var password = $("#newPassword").val();
+    var confirmPassword = $("#confirmPassword").val();
+
+    if (password != confirmPassword)
+        $("#noMatch").html("Passwords do not match");
+    else
+        $("#noMatch").html("");
+}
