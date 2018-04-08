@@ -193,8 +193,30 @@ body{
 	background-color: white;
 }
 /*
- * NEW SKILL
+ * CREATE SKILL
  */
+.templates {
+	vertical-align: top;
+	width: 18%;
+	display: inline-block;
+	margin: 60px;
+	text-align: left;
+}
+.templates h3 {
+	font-weight: bold;
+	color: #232f3e;
+	cursor: pointer;
+}
+.templates h3:hover {
+	color: #0880f7;
+}
+.underline {
+	margin-top: -5px;
+	background-color: #0880f7;
+	height: 5px;
+	width: 100%;
+}
+
  .newSkillForm {
 	 width: 100%;
 	 margin: 20px;
@@ -210,13 +232,6 @@ body{
 	 margin-bottom: 5px;
 	 font-size: 12px;
  }
-.lblBig {
-
-}
-
-.lblSmall {
-
-}
 
 /*
  * TEAM

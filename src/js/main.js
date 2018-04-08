@@ -20,7 +20,7 @@ app.config(function($routeProvider) {
     })
 	.when("/createSkills", {
         templateUrl : "partials/createSkills.htm",
-        controller : 'main as ctrl'
+        controller : 'skills as ctrl'
     })
 	.when("/team", {
         templateUrl : "partials/team.htm",
@@ -62,6 +62,26 @@ app.controller('viewSkills', function($scope, $http) {
 		vm.modalImg = image.path;
 	};
 });
+
+app.controller('skills', function($scope, $http) {
+    var vm = this,
+        templates = [
+            {
+                name: "Simple Skills",
+                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                name: "News Briefing",
+                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+            {
+                name: "Complex Skills",
+                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            }
+        ];
+
+    vm.templateTypes = templates;
+})
 
 app.controller('team', function($scope, $http) {
     var vm = this,
