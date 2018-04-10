@@ -24,11 +24,11 @@ const Navigation = () => (
           MY PROFILE
         </NavLink>
         <div className="dropdown-content text-left">
-          <NavLink exact activeClassName="current" to="/viewSkills">
-            VIEW MY SKILLS
-          </NavLink>
           <NavLink exact activeClassName="current" to="/createSkill">
             CREATE NEW SKILL
+          </NavLink>
+          <NavLink exact activeClassName="current" to="/viewSkills">
+            VIEW MY SKILLS
           </NavLink>
         </div>
       </li>

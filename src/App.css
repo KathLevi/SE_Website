@@ -310,3 +310,17 @@ footer {
   width: 100%;
   padding-top: 40px;
 }
+
+.form-submit {
+  margin-bottom: 25px !important;
+}
+
+.skill-template-item {
+  padding: 20px;
+  width: 50%;
+}
+
+.skill-template-container {
+  margin-top: 50px;
+  display: flex;
+}

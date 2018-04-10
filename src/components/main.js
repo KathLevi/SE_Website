@@ -8,6 +8,8 @@ import Contact from "./contact";
 import SignIn from "./signIn";
 import ViewSkills from "./viewSkills";
 import CreateSkill from "./createSkill";
+import SimpleInteraction from "./simpleInteraction";
+import FlashBriefing from "./flashBriefing";
 
 const Main = () => (
   <Switch>
@@ -19,6 +21,12 @@ const Main = () => (
     <Route exact path="/signin" component={SignIn} />
     <Route exact path="/viewSkills" component={ViewSkills} />
     <Route exact path="/createSkill" component={CreateSkill} />
+    <Route
+      exact
+      path="/createSkill/simpleInteraction"
+      component={SimpleInteraction}
+    />
+    <Route exact path="/createSkill/flashBriefing" component={FlashBriefing} />
   </Switch>
 );
 
