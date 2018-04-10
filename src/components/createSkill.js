@@ -1,9 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { PageHeader } from "react-bootstrap";
 
 const CreateSkill = () => (
   <div className="container">
-    <h1 className="page-header">Select a template</h1>
+    <PageHeader>Select a template</PageHeader>
+
     <div className="skill-template-container">
       <div className="skill-template-item">
         <div className="thumbnail">
