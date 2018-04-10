@@ -65,7 +65,7 @@ body {
   position: absolute;
   background-color: white;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 .dropdown-content a {
@@ -73,15 +73,74 @@ body {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  
 }
 .dropdwn:hover .dropdown-content {
   display: block;
+  left:auto;
+  right:0;
+
 }
 
 .logo {
   padding-top: 20px;
   width: 100%;
 }
+
+
+
+/*
+ * FOOTER
+ */
+ .fmenuList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #232f3e;
+}
+.fmenuListElement {
+  display: inline;
+}
+.fmenuListElement a,
+.fdropbtn {
+  display: inline-block;
+  color: white;
+  padding: 20px 24px;
+  text-decoration: none;
+}
+.fmenuListElement a:hover,
+.fdropdwn:hover .fdropbtn,
+.fdropdown-content a:hover {
+  background-color: #232f3e;
+  color: white;
+}
+.fmenuListElement.dropdwn {
+  display: inline-block;
+}
+.fdropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.fdropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.fdropdwn:hover .fdropdown-content {
+  display: block;
+}
+
+.flogo {
+  padding-top: 20px;
+  width: 100%;
+}
+
 
 /*
  * HOME
