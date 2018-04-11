@@ -103,7 +103,7 @@ body {
 }
 .form-signin {
   max-width: 380px;
-  padding: 15px 35px 45px;
+  padding: 15px 35px 15px;
   margin: 0 auto;
   background-color: WhiteSmoke;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -121,7 +121,6 @@ body {
   margin-bottom: 30px;
   font-weight: normal;
 }
-
 .form-control {
   position: relative;
   font-size: 16px;
@@ -137,7 +136,25 @@ body {
   background-color: grey;
   color: white;
 }
-
+.TnC {
+  padding-top: 20px;
+  text-align: center;
+}
+ /* 
+ * REGISTER
+ */
+ #noMatch {
+	color: red;
+	float: right;
+	font-weight: normal;
+ }
+ .capcha {
+   text-align: center;
+   padding: 10px;
+ }
+ #capchaInput {
+	 width: 100px;
+ }
 /*
  * PORTFOLIO
  */
