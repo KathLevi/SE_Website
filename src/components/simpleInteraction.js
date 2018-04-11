@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Modal, Button } from "react-bootstrap";
 
 class SimpleInteraction extends React.Component {
   constructor() {
@@ -18,10 +19,11 @@ class SimpleInteraction extends React.Component {
       utterance4: "",
       utterance5: "",
       response: "",
-      category: "",
+      category: "Business & Finance",
       skillDescShort: "",
       skillDescLong: "",
-      keywords: ""
+      keywords: "",
+      showModal: false
     };
   }
 
@@ -37,6 +39,7 @@ class SimpleInteraction extends React.Component {
 
     let data = {
       email: this.state.email,
+      template: "Alexa Interaction",
       firstName: this.state.fName,
       lastName: this.state.lName,
       template: this.state.template,
@@ -65,15 +68,21 @@ class SimpleInteraction extends React.Component {
     };
 
     axios
-      .post("http://127.0.0.1:5001/post", {
-        ...data
+      .post("http://127.0.0.1:5001/post", data)
+      .then(response => {
+        this.showModal();
       })
-      .then(function(response) {
-        alert("Request sent");
-      })
-      .catch(function(error) {
-        alert("Error");
+      .catch(error => {
+        this.showModal();
       });
+  };
+
+  showModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -287,6 +296,19 @@ class SimpleInteraction extends React.Component {
             Submit
           </button>
         </form>
+        {/* Server response modal */}
+
+        <Modal show={this.state.showModal} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Server response</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>{"Request sent"}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.closeModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }

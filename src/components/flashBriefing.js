@@ -9,19 +9,16 @@ class FlashBriefing extends React.Component {
       email: "",
       fName: "",
       lName: "",
-      template: "Flash Briefing",
       skillName: "",
-      invocation: "",
-      utterance1: "",
-      utterance2: "",
-      utterance3: "",
-      utterance4: "",
-      utterance5: "",
-      response: "",
-      category: "",
+      category: "Business & Finance",
       skillDescShort: "",
       skillDescLong: "",
-      keywords: ""
+      keywords: "",
+      feedName: "",
+      preamble: "",
+      updateFrequency: "Hourly",
+      contentGenre: "Headline News",
+      feedURL: ""
     };
   }
 
@@ -37,28 +34,30 @@ class FlashBriefing extends React.Component {
 
     let data = {
       email: this.state.email,
+      template: "Alexa Flash Briefing",
       firstName: this.state.fName,
       lastName: this.state.lName,
-      template: this.state.template,
       skillName: this.state.skillName,
-      invocationName: this.state.invocation,
       category: this.state.category,
       shortDescription: this.state.skillDescShort,
       longDescription: this.state.skillDescLong,
       keywords: this.state.keywords.split(",").map(k => {
         return k.trim();
-      })
+      }),
+      feedName: this.state.feedName,
+      preamble: this.state.preamble,
+      updateFrequency: this.state.updateFrequency,
+      genre: this.state.contentGenre,
+      feedURL: this.state.feedURL
     };
 
     axios
-      .post("http://127.0.0.1:5001/post", {
-        ...data
-      })
+      .post("http://127.0.0.1:5003/post", data)
       .then(function(response) {
-        alert("Request sent");
+        //alert("Request sent");
       })
       .catch(function(error) {
-        alert("Error");
+        //alert("Error");
       });
   };
 
@@ -230,16 +229,16 @@ class FlashBriefing extends React.Component {
           <input
             className="form-control"
             type="text"
-            name="fName"
-            placeholder="e.g. John"
+            name="feedName"
+            placeholder=""
             onChange={this.handleInputChange}
           />
           <label>{'Feed Preamble (starting with "in" or "from")'}</label>
           <input
             className="form-control"
             type="text"
-            name="fName"
-            placeholder="e.g. John"
+            name="preamble"
+            placeholder=""
             onChange={this.handleInputChange}
           />
 
@@ -282,7 +281,7 @@ class FlashBriefing extends React.Component {
             className="form-control"
             type="text"
             name="feedURL"
-            placeholder="e.g. John"
+            placeholder=""
             onChange={this.handleInputChange}
           />
 

@@ -151,16 +151,7 @@ body {
   width: 100%;
   margin: 5px;
 }
-.modal {
-  position: absolute;
-  width: 100%;
-}
-.modal-title {
-  font-size: 40px;
-}
-.modal-dialog {
-  width: 200%;
-}
+
 .modal-content {
   width: 150%;
   text-align: center;
@@ -172,12 +163,7 @@ body {
   margin: 40px 0px 40px 150px;
   border: solid black 4px;
 }
-.close {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  font-size: 40px;
-}
+
 /*
  * Button Cards
  */
@@ -323,4 +309,8 @@ footer {
 .skill-template-container {
   margin-top: 50px;
   display: flex;
+}
+
+.server-response-modal {
+  width: 80%;
 }
