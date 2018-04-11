@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 const SignIn = () => (
   <div className="signInBox">
@@ -32,9 +33,9 @@ const SignIn = () => (
       </h5>
 
       <hr />
-      <a className="btn btn-lg btn-block newCustBtn" href="#!register">
+      <Link className="btn btn-lg btn-block newCustBtn" to="/register">
         I am new to bluemarble
-      </a>
+      </Link>
     </form>
   </div>
 );
