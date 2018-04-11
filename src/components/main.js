@@ -10,6 +10,7 @@ import ViewSkills from "./viewSkills";
 import CreateSkill from "./createSkill";
 import SimpleInteraction from "./simpleInteraction";
 import FlashBriefing from "./flashBriefing";
+import Register from "./register";
 
 const Main = () => (
   <Switch>
@@ -27,6 +28,7 @@ const Main = () => (
       component={SimpleInteraction}
     />
     <Route exact path="/createSkill/flashBriefing" component={FlashBriefing} />
+    <Route exact path="/register" component={Register} />
   </Switch>
 );
 
