@@ -14,40 +14,37 @@ const Navigation = () => (
           DEMO
         </NavLink>
       </li>
+      <li className="menuListElement">
+        <NavLink exact activeClassName="current" to="/createSkill">
+          CREAT NEW SKILL
+        </NavLink>
+      </li>
+      <li className="menuListElement">
+        <NavLink exact activeClassName="current" to="/viewSkills">
+          VIEW MY SKILLS
+        </NavLink>
+      </li>
+
       <li className="menuListElement dropdwn">
         <NavLink
           exact
           className="dropbtn text-center"
           activeClassName="current"
-          to="/profile"
+          to="/signIn"
         >
-          MY PROFILE
+          SIGN IN
         </NavLink>
         <div className="dropdown-content text-left">
-          <NavLink exact activeClassName="current" to="/createSkill">
-            CREATE NEW SKILL
+          <NavLink exact activeClassName="current" to="/profile">
+            MY PROFILE
           </NavLink>
-          <NavLink exact activeClassName="current" to="/viewSkills">
-            VIEW MY SKILLS
+          <NavLink exact activeClassName="current" to="/home">
+            SIGN OUT
           </NavLink>
         </div>
       </li>
-      <li className="menuListElement">
-        <NavLink exact activeClassName="current" to="/team">
-          OUR TEAM
-        </NavLink>
-      </li>
-      <li className="menuListElement">
-        <NavLink exact activeClassName="current" to="/contact">
-          CONTACT US
-        </NavLink>
-      </li>
-      <li className="menuListElement">
-        <NavLink exact activeClassName="current" to="/signin">
-          SIGN IN
-        </NavLink>
-      </li>
-    </ul>
+
+      </ul>
   </nav>
 );
 
