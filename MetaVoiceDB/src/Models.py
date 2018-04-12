@@ -1,13 +1,15 @@
 from sqlalchemy import Column, Integer, String, Boolean
-from src.database import Base
+from src.Database import Base
 
 class User(Base):
+    __tablename__ = 'Users'
+
     Id = Column( Integer , primary_key = True)
     Username = Column(String(20))
     Password = Column(String(20))
     IsAdmin = Column(Boolean)
 
-    def __init__(self, Id=None, Username=None, Password=None, IsAdmin=None)
+    def __init__(self, Id=None, Username=None, Password=None, IsAdmin=None):
         self.Id = Id
         self.Username = Username
         self.Password = Password
@@ -15,6 +17,8 @@ class User(Base):
         return
 
 class User_Profile(Base):
+    __tablename__ = 'User_Profiles'
+
     UserId = Column(Integer, primary_key=True)
     Fname = Column(String(20))
     Lname = Column(String(20))
@@ -45,6 +49,8 @@ class User_Profile(Base):
         return
 
 class Skills(Base):
+    __tablename__ = 'Skills'
+
     SkillId = Column(Integer, primary_key=True)
     UserId = Column(Integer)
     AMZ_SkillId = Column(String(60))
@@ -69,6 +75,8 @@ class Skills(Base):
         return
 
 class Utterances(Base):
+    __tablename__ = 'Utterances'
+
     UtterId = Column(Integer, primary_key=True)
     SkillId = Column(Integer)
     Utter = Column(String(100))
@@ -80,7 +88,9 @@ class Utterances(Base):
         return
 
 class Response(Base):
-    RespId = Column(Integer primary_key=True)
+    __tablename__ = 'Responses'
+
+    RespId = Column(Integer, primary_key=True)
     SkillId = Column(Integer)
     Resp = Column(String(100))
 
@@ -91,6 +101,8 @@ class Response(Base):
         return
 
 class Template(Base):
+    __tablename__ = 'Templates'
+
     TemplateId = Column(Integer, primary_key=True)
     Name = Column(String(20))
     
