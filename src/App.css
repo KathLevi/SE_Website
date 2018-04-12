@@ -73,13 +73,11 @@ body {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  
 }
 .dropdwn:hover .dropdown-content {
   display: block;
-  left:auto;
-  right:0;
-
+  left: auto;
+  right: 0;
 }
 
 .logo {
@@ -87,12 +85,10 @@ body {
   width: 100%;
 }
 
-
-
 /*
  * FOOTER
  */
- .fmenuList {
+.fmenuList {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -140,7 +136,6 @@ body {
   padding-top: 20px;
   width: 100%;
 }
-
 
 /*
  * HOME
@@ -199,21 +194,21 @@ body {
   padding-top: 20px;
   text-align: center;
 }
- /* 
+/*
  * REGISTER
  */
- #noMatch {
-	color: red;
-	float: right;
-	font-weight: normal;
- }
- .capcha {
-   text-align: center;
-   padding: 10px;
- }
- #capchaInput {
-	 width: 100px;
- }
+#noMatch {
+  color: red;
+  float: right;
+  font-weight: normal;
+}
+.capcha {
+  text-align: center;
+  padding: 10px;
+}
+#capchaInput {
+  width: 100px;
+}
 /*
  * PORTFOLIO
  */
@@ -227,33 +222,7 @@ body {
   width: 100%;
   margin: 5px;
 }
-.modal {
-  position: absolute;
-  width: 100%;
-}
-.modal-title {
-  font-size: 40px;
-}
-.modal-dialog {
-  width: 200%;
-}
-.modal-content {
-  width: 150%;
-  text-align: center;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.modalImg {
-  width: 60%;
-  margin: 40px 0px 40px 150px;
-  border: solid black 4px;
-}
-.close {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  font-size: 40px;
-}
+
 /*
  * Button Cards
  */
@@ -399,4 +368,8 @@ footer {
 .skill-template-container {
   margin-top: 50px;
   display: flex;
+}
+
+.response-modal {
+  /*width: 80%;*/
 }

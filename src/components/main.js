@@ -20,14 +20,14 @@ const Main = () => (
     <Route exact path="/team" component={Team} />
     <Route exact path="/contact" component={Contact} />
     <Route exact path="/signin" component={SignIn} />
-    <Route exact path="/viewSkills" component={ViewSkills} />
-    <Route exact path="/createSkill" component={CreateSkill} />
+    <Route exact path="/view-skills" component={ViewSkills} />
+    <Route exact path="/create-skill" component={CreateSkill} />
     <Route
       exact
-      path="/createSkill/simpleInteraction"
+      path="/createSkill/simple-interaction"
       component={SimpleInteraction}
     />
-    <Route exact path="/createSkill/flashBriefing" component={FlashBriefing} />
+    <Route exact path="/createSkill/flash-briefing" component={FlashBriefing} />
     <Route exact path="/register" component={Register} />
   </Switch>
 );

@@ -1,5 +1,7 @@
 import React from "react";
-import axios from "axios";
+import { request } from "../helpers/requests.js";
+import { Modal, Button } from "react-bootstrap";
+import ResponseModal from "./modules/responseModal";
 
 class FlashBriefing extends React.Component {
   constructor() {
@@ -9,19 +11,18 @@ class FlashBriefing extends React.Component {
       email: "",
       fName: "",
       lName: "",
-      template: "Flash Briefing",
       skillName: "",
-      invocation: "",
-      utterance1: "",
-      utterance2: "",
-      utterance3: "",
-      utterance4: "",
-      utterance5: "",
-      response: "",
-      category: "",
+      category: "Business & Finance",
       skillDescShort: "",
       skillDescLong: "",
-      keywords: ""
+      keywords: "",
+      feedName: "",
+      preamble: "",
+      updateFrequency: "Hourly",
+      contentGenre: "Headline News",
+      feedURL: "",
+      showModal: false,
+      modalMessage: ""
     };
   }
 
@@ -37,29 +38,35 @@ class FlashBriefing extends React.Component {
 
     let data = {
       email: this.state.email,
+      template: "Alexa Flash Briefing",
       firstName: this.state.fName,
       lastName: this.state.lName,
-      template: this.state.template,
       skillName: this.state.skillName,
-      invocationName: this.state.invocation,
       category: this.state.category,
       shortDescription: this.state.skillDescShort,
       longDescription: this.state.skillDescLong,
       keywords: this.state.keywords.split(",").map(k => {
         return k.trim();
-      })
+      }),
+      feedName: this.state.feedName,
+      preamble: this.state.preamble,
+      updateFrequency: this.state.updateFrequency,
+      contentGenre: this.state.contentGenre,
+      feedURL: this.state.feedURL
     };
 
-    axios
-      .post("http://127.0.0.1:5001/post", {
-        ...data
-      })
-      .then(function(response) {
-        alert("Request sent");
-      })
-      .catch(function(error) {
-        alert("Error");
-      });
+    request("http://127.0.0.1:5003/post", data, resp => {
+      this.setState({ modalMessage: String(resp) });
+      this.showModal();
+    });
+  };
+
+  showModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -230,16 +237,16 @@ class FlashBriefing extends React.Component {
           <input
             className="form-control"
             type="text"
-            name="fName"
-            placeholder="e.g. John"
+            name="feedName"
+            placeholder=""
             onChange={this.handleInputChange}
           />
           <label>{'Feed Preamble (starting with "in" or "from")'}</label>
           <input
             className="form-control"
             type="text"
-            name="fName"
-            placeholder="e.g. John"
+            name="preamble"
+            placeholder=""
             onChange={this.handleInputChange}
           />
 
@@ -282,7 +289,7 @@ class FlashBriefing extends React.Component {
             className="form-control"
             type="text"
             name="feedURL"
-            placeholder="e.g. John"
+            placeholder=""
             onChange={this.handleInputChange}
           />
 
@@ -290,6 +297,11 @@ class FlashBriefing extends React.Component {
             Submit
           </button>
         </form>
+        <ResponseModal
+          show={this.state.showModal}
+          closeModal={this.closeModal}
+          message={this.state.modalMessage}
+        />
       </div>
     );
   }

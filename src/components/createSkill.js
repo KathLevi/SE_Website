@@ -22,7 +22,7 @@ const CreateSkill = () => (
                 className="btn btn-primary"
                 exact
                 activeClassName="current"
-                to="/createSkill/simpleInteraction"
+                to="/createSkill/simple-interaction"
               >
                 Choose skill
               </NavLink>
@@ -45,7 +45,7 @@ const CreateSkill = () => (
                 className="btn btn-primary"
                 exact
                 activeClassName="current"
-                to="/createSkill/flashBriefing"
+                to="/createSkill/flash-briefing"
               >
                 Choose skill
               </NavLink>

@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import ResponseModal from "./modules/responseModal";
+import { request } from "../helpers/requests.js";
 
 class SimpleInteraction extends React.Component {
   constructor() {
@@ -18,10 +20,12 @@ class SimpleInteraction extends React.Component {
       utterance4: "",
       utterance5: "",
       response: "",
-      category: "",
+      category: "Business & Finance",
       skillDescShort: "",
       skillDescLong: "",
-      keywords: ""
+      keywords: "",
+      showModal: false,
+      modalMessage: ""
     };
   }
 
@@ -37,6 +41,7 @@ class SimpleInteraction extends React.Component {
 
     let data = {
       email: this.state.email,
+      template: "Alexa Interaction",
       firstName: this.state.fName,
       lastName: this.state.lName,
       template: this.state.template,
@@ -64,16 +69,18 @@ class SimpleInteraction extends React.Component {
       })
     };
 
-    axios
-      .post("http://127.0.0.1:5001/post", {
-        ...data
-      })
-      .then(function(response) {
-        alert("Request sent");
-      })
-      .catch(function(error) {
-        alert("Error");
-      });
+    request("http://127.0.0.1:5001/post", data, resp => {
+      this.setState({ modalMessage: String(resp) });
+      this.showModal(resp);
+    });
+  };
+
+  showModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -287,6 +294,13 @@ class SimpleInteraction extends React.Component {
             Submit
           </button>
         </form>
+        {/* Server response modal */}
+
+        <ResponseModal
+          show={this.state.showModal}
+          closeModal={this.closeModal}
+          message={this.state.modalMessage}
+        />
       </div>
     );
   }
