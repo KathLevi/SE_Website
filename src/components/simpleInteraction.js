@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { Modal, Button } from "react-bootstrap";
+import ResponseModal from "./modules/responseModal";
+import { request } from "../helpers/requests.js";
 
 class SimpleInteraction extends React.Component {
   constructor() {
@@ -23,7 +24,8 @@ class SimpleInteraction extends React.Component {
       skillDescShort: "",
       skillDescLong: "",
       keywords: "",
-      showModal: false
+      showModal: false,
+      modalMessage: ""
     };
   }
 
@@ -67,14 +69,10 @@ class SimpleInteraction extends React.Component {
       })
     };
 
-    axios
-      .post("http://127.0.0.1:5001/post", data)
-      .then(response => {
-        this.showModal();
-      })
-      .catch(error => {
-        this.showModal();
-      });
+    request("http://127.0.0.1:5001/post", data, resp => {
+      this.setState({ modalMessage: String(resp) });
+      this.showModal(resp);
+    });
   };
 
   showModal = () => {
@@ -298,17 +296,11 @@ class SimpleInteraction extends React.Component {
         </form>
         {/* Server response modal */}
 
-        <Modal show={this.state.showModal} onHide={this.closeModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Server response</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>{"Request sent"}</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.closeModal}>Close</Button>
-          </Modal.Footer>
-        </Modal>
+        <ResponseModal
+          show={this.state.showModal}
+          closeModal={this.closeModal}
+          message={this.state.modalMessage}
+        />
       </div>
     );
   }

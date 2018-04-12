@@ -1,5 +1,7 @@
 import React from "react";
-import axios from "axios";
+import { request } from "../helpers/requests.js";
+import { Modal, Button } from "react-bootstrap";
+import ResponseModal from "./modules/responseModal";
 
 class FlashBriefing extends React.Component {
   constructor() {
@@ -18,7 +20,9 @@ class FlashBriefing extends React.Component {
       preamble: "",
       updateFrequency: "Hourly",
       contentGenre: "Headline News",
-      feedURL: ""
+      feedURL: "",
+      showModal: false,
+      modalMessage: ""
     };
   }
 
@@ -47,18 +51,22 @@ class FlashBriefing extends React.Component {
       feedName: this.state.feedName,
       preamble: this.state.preamble,
       updateFrequency: this.state.updateFrequency,
-      genre: this.state.contentGenre,
+      contentGenre: this.state.contentGenre,
       feedURL: this.state.feedURL
     };
 
-    axios
-      .post("http://127.0.0.1:5003/post", data)
-      .then(function(response) {
-        //alert("Request sent");
-      })
-      .catch(function(error) {
-        //alert("Error");
-      });
+    request("http://127.0.0.1:5003/post", data, resp => {
+      this.setState({ modalMessage: String(resp) });
+      this.showModal();
+    });
+  };
+
+  showModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -289,6 +297,11 @@ class FlashBriefing extends React.Component {
             Submit
           </button>
         </form>
+        <ResponseModal
+          show={this.state.showModal}
+          closeModal={this.closeModal}
+          message={this.state.modalMessage}
+        />
       </div>
     );
   }

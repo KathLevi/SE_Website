@@ -15,12 +15,12 @@ const Navigation = () => (
         </NavLink>
       </li>
       <li className="menuListElement">
-        <NavLink exact activeClassName="current" to="/createSkill">
-          CREAT NEW SKILL
+        <NavLink exact activeClassName="current" to="/create-skill">
+          CREATE NEW SKILL
         </NavLink>
       </li>
       <li className="menuListElement">
-        <NavLink exact activeClassName="current" to="/viewSkills">
+        <NavLink exact activeClassName="current" to="/view-skills">
           VIEW MY SKILLS
         </NavLink>
       </li>
@@ -30,7 +30,7 @@ const Navigation = () => (
           exact
           className="dropbtn text-center"
           activeClassName="current"
-          to="/signIn"
+          to="/signin"
         >
           SIGN IN
         </NavLink>
@@ -43,8 +43,7 @@ const Navigation = () => (
           </NavLink>
         </div>
       </li>
-
-      </ul>
+    </ul>
   </nav>
 );
 
