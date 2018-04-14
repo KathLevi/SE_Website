@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.Models import User , User_Profile , Base
+from src.Models import User , User_Profile , Base, Skills, Response, Utterances
 
 
 class db:
@@ -67,6 +67,11 @@ class db:
 
         return status
 
+    def attempt_get_skills(self,UserId):
+        # This can be a seperate function
+        skills = self.get_skills(Id=UserId)
+        return skills
+
     def build_user ( self , json ):
         u = User(
             Email=json[ 'Email' ] ,
@@ -98,3 +103,25 @@ class db:
 
     def shutdown ( self ):
         return self.engine.dispose ( )
+
+    def get_skills(self,Id,Limit=None):
+        viewskills = {}
+        if Limit:
+            print("Limit!")
+        else:
+            SkillIds = self.session.query ( Skills ).filter_by ( UserId = Id ).all()
+
+            for Skill in SkillIds:
+                viewskills[Skill.SkillId] = Skill.dict()
+            for id in viewskills.keys():
+                Resps = self.session.query(Response).filter_by(SkillId = id).all()
+
+                viewskills[id]['Responses'] = []
+                viewskills[id]['Utterances'] = []
+
+                for r in Resps:
+                    viewskills[id]['Responses'].append(r.dict())
+                Uttrs = self.session.query(Utterances).filter_by(SkillId = id).all()
+                for u in Uttrs:
+                    viewskills[id]['Utterances'].append(u.dict())
+        return viewskills

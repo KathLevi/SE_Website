@@ -24,7 +24,7 @@ def Index ():
 
     return '<h1>Hello World</h1>'
 
-@app.route ( '/login' , methods=[ 'POST' ] )
+@app.route ( '/Login' , methods=[ 'POST' ] )
 def Login ():
     jsonData = json.loads ( request.get_json ( ) )
     print ( "Login Request: " + jsonData[ 'Email' ] )
@@ -33,12 +33,21 @@ def Login ():
     _db.shutdown()
     return good_response(status)
 
-@app.route('/register', methods=['POST'])
+@app.route('/Register', methods=['POST'])
 def Register():
     jsonData = json.loads(request.get_json())
     print("Register Request: " + jsonData['Email'])
     _db = db(cs)
     status = _db.attempt_register(jsonData)
+    _db.shutdown()
+    return good_response(status)
+
+@app.route('/ViewSkills', methods=['POST'])
+def ViewSkills():
+    UserId = json.loads(request.get_json())['UserId']
+    print("Requesting Skills for User ID: " + str(UserId))
+    _db = db(cs)
+    status = _db.attempt_get_skills(UserId)
     _db.shutdown()
     return good_response(status)
 

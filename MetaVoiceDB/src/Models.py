@@ -48,6 +48,7 @@ class User(Base):
     # Maps Userprofile class to User class
     User_Profile = relationship('User_Profile', uselist = False,
                                 order_by=User_Profile.UserId,back_populates="User")
+    Skills = relationship('Skills')
 
     def __init__(self, Id=None, Email=None, Password=None, IsAdmin=None,User_Profile=None):
         self.Id = Id
@@ -60,18 +61,29 @@ class User(Base):
     def __str__(self):
         return "User(%r, %r, %r)" % (self.Id, self.Username, self.Password)
 
+    def dict(self):
+        return {
+            'Id' : self.Id,
+            'Email' : self.Email,
+            'Password' : self.Password,
+            'IsAdmin' : self.IsAdmin
+        }
+
 class Skills(Base):
     __tablename__ = 'Skills'
 
     SkillId = Column(Integer, primary_key=True)
-    UserId = Column(Integer)
+    UserId = Column(Integer, ForeignKey('Users.Id'))
     AMZ_SkillId = Column(String(60))
     Status = Column(String(20))
     Category = Column(Integer)      #Make this a string(20)?
     ShortDesc = Column(String(60))
     LongDesc = Column(String(200))
     Keywords = Column(String(200))
-    TemplateId = Column(Integer)
+    # Maps many to many relationship with Utterances and Responses
+    Utterances = relationship('Utterances')
+    Responses = relationship('Response')
+    TemplateId = Column(Integer, ForeignKey('Templates.TemplateId'))
 
     def __init__(self, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
                 Category=None,ShortDesc=None,LongDesc=None,Keywords=None,TemplateId=None):
@@ -86,11 +98,24 @@ class Skills(Base):
         self.TemplateId = TemplateId        
         return
 
+    def dict(self):
+        return {
+            'SkillId' : self.SkillId,
+            'UserId' : self.UserId,
+            'AMZ_SkillId' : self.AMZ_SkillId,
+            'Status' : self.Status,
+            'Category' : self.Category,
+            'ShortDesc' : self.ShortDesc,
+            'LongDesk' : self.LongDesc,
+            'Keywords' : self.Keywords,
+            'TemplateId' : self.TemplateId
+        }
+
 class Utterances(Base):
     __tablename__ = 'Utterances'
 
     UtterId = Column(Integer, primary_key=True)
-    SkillId = Column(Integer)
+    SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
     Utter = Column(String(100))
 
     def __init(self,UtterId=None,SkillId=None,Utter=None):
@@ -98,12 +123,18 @@ class Utterances(Base):
         self.SkillId = SkillId
         self.Utter = Utter
         return
+    def dict(self):
+        return {
+            'UtterId' : self.UtterId,
+            'SkillId' : self.SkillId,
+            'Utter' : self.Utter
+        }
 
 class Response(Base):
     __tablename__ = 'Responses'
 
     RespId = Column(Integer, primary_key=True)
-    SkillId = Column(Integer)
+    SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
     Resp = Column(String(100))
 
     def __init__(self,RespId=None,SkillId=None,Resp=None):
@@ -112,13 +143,26 @@ class Response(Base):
         self.Resp = Resp
         return
 
+    def dict(self):
+        return {
+            'RespId' : self.RespId,
+            'SkillId' : self.SkillId,
+            'Resp' : self.Resp
+        }
+
 class Template(Base):
     __tablename__ = 'Templates'
-
-    TemplateId = Column(Integer, primary_key=True)
+    Skills = relationship('Skills')
+    TemplateId = Column(Integer, primary_key=True, )
     Name = Column(String(20))
-    
+
     def __init__(self, TemplateId=None, Name=None):
         self.TemplateId = TemplateId
         self.Name = Name
         return
+
+    def dict(self):
+        return {
+            'TemplateId' : self.TemplateId,
+            'Name' : self.Name
+        }
