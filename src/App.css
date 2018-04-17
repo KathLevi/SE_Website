@@ -83,7 +83,7 @@ h3{
   display: block;
 }
 .dropdwn:hover .dropdown-content {
-  display: block;
+  display: none;
   left: auto;
   right: 0;
 }
