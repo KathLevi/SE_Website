@@ -21,6 +21,18 @@ const Navigation = props => (
           DEMO
         </NavLink>
       </li>
+
+      <li className="menuListElement">
+        <NavLink exact activeClassName="current" to="/create-skill">
+          CREATE NEW SKILL
+        </NavLink>
+      </li>
+      <li className="menuListElement">
+        <NavLink exact activeClassName="current" to="/view-skills">
+          VIEW MY SKILLS
+        </NavLink>
+      </li>
+      
       <li className="menuListElement dropdwn">
         {window.localStorage.userId ? (
           <div>
