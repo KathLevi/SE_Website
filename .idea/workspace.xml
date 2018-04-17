@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a9bb6f79-739a-4506-94ea-8e8c0d64f374" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/app.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/src/Models.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/src/Models.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,30 +10,6 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/MetaVoiceDB/app.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="754">
-                    <caret line="49" column="42" lean-forward="false" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
-                    <folding>
-                      <element signature="e#0#32#0" expanded="true" />
-                      <element signature="e#359#556#0" expanded="false" />
-                      <element signature="e#619#785#0" expanded="false" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -426,12 +400,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.36333698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-1913" y="0" width="953" height="1041" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.36333698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="390" y="0" width="953" height="1041" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -694,18 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="49" column="42" lean-forward="false" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#359#556#0" expanded="false" />
-            <element signature="e#619#785#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Database.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -720,6 +683,18 @@
             <element signature="e#3322#3588#0" expanded="false" />
             <element signature="e#3625#3655#0" expanded="false" />
             <element signature="e#3705#4489#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="49" column="45" lean-forward="false" selection-start-line="49" selection-start-column="45" selection-end-line="49" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#359#556#0" expanded="false" />
+            <element signature="e#619#785#0" expanded="false" />
           </folding>
         </state>
       </provider>
