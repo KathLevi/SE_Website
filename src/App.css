@@ -19,12 +19,20 @@ body {
   line-height: 1.42857143;
 }
 
+p {
+  padding-top: 15px;
+}
+
+h3{
+  padding-bottom: 8px;
+}
+
 .pageHeader {
   margin-top: 80px;
   text-align: center;
 }
 .pageHeader span {
-  font-size: 45px;
+  font-size: 40px;
   color: #0880f7;
 }
 .pageSubheader {
@@ -276,6 +284,33 @@ body {
   width: 80%;
   margin: auto;
 }
+
+/*
+ * VIEW MY SKILLS
+ */
+.viewskills {
+  height: 0px;
+  border-bottom:solid 2px black;
+}
+.table {
+  width: 100%;
+}
+th {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  text-align: center;
+  border-bottom: 1.2px solid;
+  white-space: nowrap;
+}
+
+td {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  border-bottom: .5px solid;
+  white-space: nowrap;
+}
+
 
 /*
  * TEAM
