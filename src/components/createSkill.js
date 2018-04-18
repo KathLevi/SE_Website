@@ -9,79 +9,65 @@ const CreateSkill = () => (
     <div className="skill-template-container">
       <div className="skill-template-item">
         <div className="thumbnail">
-          {" "}
           <div className="caption">
-            {" "}
-            <h3>Simple Interaction</h3>{" "}
-            <NavLink
-                className="btn btn-primary"
-                exact
-                activeClassName="current"
-                to="/createSkill/simple-interaction"
-              >
-                Choose skill
-              </NavLink>
+            <h3>Simple Interaction</h3>
             <p>
               This is a simple interaction skill. Provide some sentences to
               trigger the skill and Alexa will respond with a static response.
-            </p>{" "}
-            <p>
-              
-            </p>{" "}
-          </div>{" "}
+            </p>
+            <NavLink
+              className="btn btn-primary"
+              exact
+              activeClassName="current"
+              to="/createSkill/simple-interaction"
+            >
+              Choose skill
+            </NavLink>
+            <p />
+          </div>
         </div>
       </div>
 
       <div className="skill-template-item">
         <div className="thumbnail">
-          {" "}
           <div className="caption">
-            {" "}
-            <h3>Flash Briefing</h3>{" "}
-            <NavLink
-                className="btn btn-primary"
-                exact
-                activeClassName="current"
-                to="/createSkill/flash-briefing"
-              >
-                Choose skill
-              </NavLink>
+            <h3>Flash Briefing</h3>
             <p>
               This template allows you to upload an existing RSS feed as a flash
               briefing skill.
-            </p>{" "}
-            <p>
-            
-            </p>{" "}
-          </div>{" "}
-        </div>
-      </div>
-
-            <div className="skill-template-item">
-        <div className="thumbnail">
-          {" "}
-          <div className="caption">
-            {" "}
-            <h3>Complex Skill</h3>{" "}
+            </p>
             <NavLink
-                className="btn btn-primary"
-                exact
-                activeClassName="current"
-                to="/createSkill/flash-briefing"
-              >
-                Choose skill
-              </NavLink>
-            <p>
-            This is a complex interaction skill. Provide multiple sentences to
-              trigger the skill and Alexa will respond with dynamic responses.
-            </p>{" "}
-            <p>
-              
-            </p>{" "}
-          </div>{" "}
+              className="btn btn-primary"
+              exact
+              activeClassName="current"
+              to="/createSkill/flash-briefing"
+            >
+              Choose skill
+            </NavLink>
+          </div>
         </div>
       </div>
 
+      <div className="skill-template-item">
+        <div className="thumbnail">
+          <div className="caption">
+            <h3>Complex Skill</h3>
+            <p>
+              This is a complex interaction skill. Provide multiple sentences to
+              trigger the skill and Alexa will respond with dynamic responses.
+            </p>
+            <NavLink
+              className="btn btn-primary"
+              exact
+              activeClassName="current"
+              to="/createSkill/flash-briefing"
+            >
+              Choose skill
+            </NavLink>
+            <p />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );

@@ -19,11 +19,7 @@ body {
   line-height: 1.42857143;
 }
 
-p {
-  padding-top: 15px;
-}
-
-h3{
+h3 {
   padding-bottom: 8px;
 }
 
@@ -290,7 +286,7 @@ h3{
  */
 .viewskills {
   height: 0px;
-  border-bottom:solid 2px black;
+  border-bottom: solid 2px black;
 }
 .table {
   width: 100%;
@@ -307,10 +303,9 @@ td {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
-  border-bottom: .5px solid;
+  border-bottom: 0.5px solid;
   white-space: nowrap;
 }
-
 
 /*
  * TEAM
@@ -407,4 +402,8 @@ footer {
 
 .response-modal {
   /*width: 80%;*/
+}
+
+.home-section-1 {
+  height: ;
 }
