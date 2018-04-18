@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 from src.Database import db
+import os
 from src.Models import User, User_Profile
 import json
 
@@ -51,6 +52,5 @@ def ViewSkills():
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
-    # port = int(os.environ.get('PORT', 5000))
-    port = 5004
+    port = int(os.environ.get('PORT', 5004))
     app.run(host='0.0.0.0', port=port, debug=True)
