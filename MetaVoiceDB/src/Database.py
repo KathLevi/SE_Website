@@ -1,11 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-<<<<<<< HEAD
 from src.Models import User , User_Profile , Base, Skills, Response, Utterances
-=======
-from src.Models import User , User_Profile , Base
-import sys, traceback
->>>>>>> b9bef4b3ce4bfb589c4f433e7e5b1fcad0b24443
 
 
 class db:
@@ -30,8 +25,8 @@ class db:
             else:
                 status[ 'userId' ] = q.Id
                 status[ 'status'] = "SUCCESS"
-        except:
-            print "Unexpected error at attempt_login: ", traceback.format_exc()
+        except Exception as e:
+            print ("Unexpected error at attempt_login: ", e)
             status['status'] = "SERVER_ERROR"
         return status
 
@@ -50,13 +45,13 @@ class db:
                 self.session.add ( self.build_user ( json ) )
                 self.session.commit ( )
                 q = self.get_user_and_profile ( json[ 'Email' ] , json[ 'Password' ] )
-                print "Attempting registration"
+                print ("Attempting registration")
                 print ( "Registered: " + q.Email )
 
                 resp['userId'] = q.Id
                 resp['status'] = "SUCCESS"
-            except:
-                print "Unexpected error at attempt_register: ", traceback.format_exc()
+            except Exception as e:
+                print ("Unexpected error at attempt_register: ", e)
                 resp['status'] = "SERVER_ERROR"
 
         return resp
