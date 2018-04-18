@@ -20,10 +20,6 @@ def good_response(resp):
 
 @app.route ( '/test' , methods=[ 'GET' ] )
 def Index ():
-    session = db ( cs ).session
-    session.add ( User ( Username='Hello' , Password='World' , IsAdmin=False ) )
-    session.commit ( )
-
     return '<h1>Hello World</h1>'
 
 @app.route ( '/login' , methods=[ 'POST' ] )

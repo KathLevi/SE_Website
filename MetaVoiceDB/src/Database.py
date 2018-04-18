@@ -26,7 +26,7 @@ class db:
                 status[ 'userId' ] = q.Id
                 status[ 'status'] = "SUCCESS"
         except Exception as e:
-            print ("Unexpected error at attempt_login: ", e)
+            print ("Unexpected error at attempt_login: " +  e)
             status['status'] = "SERVER_ERROR"
         return status
 
@@ -51,7 +51,7 @@ class db:
                 resp['userId'] = q.Id
                 resp['status'] = "SUCCESS"
             except Exception as e:
-                print ("Unexpected error at attempt_register: ", e)
+                print ("Unexpected error at attempt_register: " + e)
                 resp['status'] = "SERVER_ERROR"
 
         return resp
