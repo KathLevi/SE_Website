@@ -1,9 +1,11 @@
 from flask import Flask, request
+from flask_cors import CORS
 from src.Database import db
 from src.Models import User, User_Profile
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 cs = "mysql://apeacock18:Pirate21@" \
      "bluemarble-db.cjpojclzuwqy.us-east-1.rds.amazonaws.com" \
@@ -26,21 +28,21 @@ def Index ():
 
 @app.route ( '/login' , methods=[ 'POST' ] )
 def Login ():
-    jsonData = json.loads ( request.get_json ( ) )
+    jsonData = request.get_json()
     print ( "Login Request: " + jsonData[ 'Email' ] )
     _db = db(cs)
-    status = _db.attempt_login ( json=jsonData )
+    resp = _db.attempt_login ( json=jsonData )
     _db.shutdown()
-    return good_response(status)
+    return good_response(resp)
 
 @app.route('/register', methods=['POST'])
 def Register():
-    jsonData = json.loads(request.get_json())
+    jsonData = request.get_json()
     print("Register Request: " + jsonData['Email'])
     _db = db(cs)
-    status = _db.attempt_register(jsonData)
+    resp = _db.attempt_register(jsonData)
     _db.shutdown()
-    return good_response(status)
+    return good_response(resp)
 
 @app.route('/viewskills', methods=['POST'])
 def ViewSkills():
@@ -55,4 +57,4 @@ if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
     # port = int(os.environ.get('PORT', 5000))
     port = 5004
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)

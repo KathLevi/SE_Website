@@ -1,6 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+<<<<<<< HEAD
 from src.Models import User , User_Profile , Base, Skills, Response, Utterances
+=======
+from src.Models import User , User_Profile , Base
+import sys, traceback
+>>>>>>> b9bef4b3ce4bfb589c4f433e7e5b1fcad0b24443
 
 
 class db:
@@ -20,52 +25,41 @@ class db:
         status = {}
         try:
             q = self.get_user_and_profile ( Email=json[ 'Email' ] , Password=json[ 'Password' ] )
-            if q:
-                # need to get user_profile for user
-                print ( 'One match' )
-                status[ 'UserId' ] = q.Id
-                status[ 'Email' ] = q.Email
-                status[ 'Fname' ] = q.User_Profile.Fname
-                status[ 'Lname' ] = q.User_Profile.Lname
-                status[ 'Company' ] = q.User_Profile.Company
-                status[ 'State' ] = q.User_Profile.State
-                status[ 'Cell' ] = q.User_Profile.Cell
+            if q is None:
+                status['status'] = "INVALID_LOGIN"
             else:
-                status[ 'login' ] = 0
-        except Exception as e:
-            print ( e )
-            status[ 'error' ] = str ( e )
+                status[ 'userId' ] = q.Id
+                status[ 'status'] = "SUCCESS"
+        except:
+            print "Unexpected error at attempt_login: ", traceback.format_exc()
+            status['status'] = "SERVER_ERROR"
         return status
 
     def attempt_register ( self , json ):
-        status = {}
+        resp = {}
 
         q = self.session.query ( User ).\
             filter_by( Email = json[ 'Email' ] ).\
             one_or_none ( )
 
-        if q:
-            status[ 'register' ] = 0
-            print("Failed to Register " + q.Email)
+        if q is not None:
+            resp[ 'status' ] = 'USER_ALREADY_EXISTS_ERROR'
+            print("Failed to Register " + json[ 'Email' ])
         else:
             try:
                 self.session.add ( self.build_user ( json ) )
                 self.session.commit ( )
                 q = self.get_user_and_profile ( json[ 'Email' ] , json[ 'Password' ] )
+                print "Attempting registration"
                 print ( "Registered: " + q.Email )
 
-                status[ 'UserId' ] = q.Id
-                status[ 'Email' ] = q.Email
-                status[ 'Fname' ] = q.User_Profile.Fname
-                status[ 'Lname' ] = q.User_Profile.Lname
-                status[ 'Company' ] = q.User_Profile.Company
-                status[ 'State' ] = q.User_Profile.State
-                status[ 'Cell' ] = q.User_Profile.Cell
-            except Exception as e:
-                print(e)
-                status['error'] = str(e)
+                resp['userId'] = q.Id
+                resp['status'] = "SUCCESS"
+            except:
+                print "Unexpected error at attempt_register: ", traceback.format_exc()
+                resp['status'] = "SERVER_ERROR"
 
-        return status
+        return resp
 
     def attempt_get_skills(self,UserId):
         # This can be a seperate function
@@ -78,16 +72,16 @@ class db:
             Password=json[ 'Password' ] ,
             IsAdmin=0)
         up = User_Profile (
-                Fname=json[ 'Fname' ] ,
-                Lname=json[ 'Lname' ] ,
-                Company=json[ 'Company' ] ,
-                Address=json[ 'Address' ] ,
-                Premise=json[ 'Premise' ] ,
-                Country=json[ 'Country' ] ,
-                City=json[ 'City' ] ,
-                State=json[ 'State' ] ,
-                Zipcode=json[ 'Zipcode' ] ,
-                Cell=json[ 'Cell' ]
+                Fname=json.get('Fname', 'Default') ,
+                Lname=json.get('Lname', 'Default'),
+                Company=json.get('Company', 'Default') ,
+                Address=json.get('Address', 'Default') ,
+                Premise=json.get('Premise', 'Default') ,
+                Country=json.get('Country', 'Default') ,
+                City=json.get('City', 'Default') ,
+                State=json.get('State', 'Default') ,
+                Zipcode=json.get('Zipcode', 99999) ,
+                Cell=json.get('Cell', 'Default')
             )
         u.User_Profile = up
         return u
