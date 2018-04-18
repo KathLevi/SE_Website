@@ -1,9 +1,9 @@
 from flask import Flask, request
 from flask_cors import CORS
 from src.Database import db
-import os
 from src.Models import User, User_Profile
 import json
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -26,7 +26,7 @@ def Index ():
 @app.route ( '/login' , methods=[ 'POST' ] )
 def Login ():
     jsonData = request.get_json()
-    print ( "Login Request: " + jsonData[ 'Email' ] )
+    print ( "Login Request" )
     _db = db(cs)
     resp = _db.attempt_login ( json=jsonData )
     _db.shutdown()
@@ -35,7 +35,7 @@ def Login ():
 @app.route('/register', methods=['POST'])
 def Register():
     jsonData = request.get_json()
-    print("Register Request: " + jsonData['Email'])
+    print("Register Request")
     _db = db(cs)
     resp = _db.attempt_register(jsonData)
     _db.shutdown()
@@ -44,7 +44,7 @@ def Register():
 @app.route('/viewskills', methods=['POST'])
 def ViewSkills():
     UserId = json.loads(request.get_json())['UserId']
-    print("Requesting Skills for User ID: " + str(UserId))
+    print("Requesting Skills for User")
     _db = db(cs)
     status = db.attempt_get_skills(limit=None)
     _db.shutdown()
