@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ResponseModal from "./modules/responseModal";
 import { request } from "../helpers/requests.js";
+import classNames from "classnames";
 
 class SimpleInteraction extends React.Component {
   constructor() {
@@ -33,6 +34,13 @@ class SimpleInteraction extends React.Component {
     const target = event.target;
     this.setState({
       [target.name]: target.value
+    });
+  };
+
+  handleInputBlur = event => {
+    const target = event.target;
+    this.setState({
+      [target.name + "Error"]: this.state[target.name] === "" ? "EMPTY" : ""
     });
   };
 
@@ -83,20 +91,42 @@ class SimpleInteraction extends React.Component {
     this.setState({ showModal: false });
   };
 
+  getInputFieldClasses = name => {
+    return classNames("form-group", {
+      "has-warning": this.state[name + "Error"] === "EMPTY"
+    });
+  };
+
   render() {
     return (
       <div className="container">
         <h1 className="page-header">Create Simple Interaction Skill</h1>
         <form onSubmit={this.submitForm}>
-          <div className="form-group">
-            {" "}
+          <div
+            className={
+              "form-group " +
+              (this.state["emailError"] === "EMPTY" ? "has-error" : "")
+            }
+          >
             <label htmlFor="exampleInputEmail1">Email address</label>{" "}
             <input
               type="email"
+              name="email"
               className="form-control"
               id="exampleInputEmail1"
               placeholder="Email"
-            />{" "}
+              onChange={this.handleInputChange}
+              onBlur={this.handleInputBlur}
+            />
+            <span
+              className={
+                "help-block " + this.state["emailError"] === "EMPTY"
+                  ? "show"
+                  : "hidden"
+              }
+            >
+              {"Email cannot be empty."}
+            </span>
           </div>
           <div className="form-group">
             <div className="radio">
