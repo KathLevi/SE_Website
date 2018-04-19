@@ -75,8 +75,9 @@ class Skills(Base):
     SkillId = Column(Integer, primary_key=True)
     UserId = Column(Integer, ForeignKey('Users.Id'))
     AMZ_SkillId = Column(String(60))
+    Name = Column(String(60))
     Status = Column(String(20))
-    Category = Column(Integer, ForeignKey('Category.Id'))
+    Category = Column(String(40))
     ShortDesc = Column(String(60))
     LongDesc = Column(String(200))
     Keywords = Column(String(200))
@@ -85,8 +86,9 @@ class Skills(Base):
     Responses = relationship('Response')
     TemplateId = Column(Integer, ForeignKey('Templates.TemplateId'))
 
-    def __init__(self, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
+    def __init__(self,Name=None, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
                 Category=None,ShortDesc=None,LongDesc=None,Keywords=None,TemplateId=None):
+        self.Name = Name
         self.SkillId = SkillId
         self.UserId = UserId
         self.AMZ_SkillId = AMZ_SkillId
@@ -170,12 +172,12 @@ class Template(Base):
 class Feed(Base):
     __tablename__ = 'Feeds'
 
-    Skills = relationship('Skills')
+    SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
     FeedId = Column(Integer,primary_key=True)
     Name = Column(String(40))
     Preamble = Column(String(100))
     UpdateFreq = Column(String(10))
-    Genre = Column(Integer, ForeignKey('Category.Id'))
+    Genre = Column(String(40))
     URL = Column(String(200))
 
     def __init__(self,FeedId=None,Name=None,Preamble=None,UpdateFreq=None,Genre=None,URL=None):
@@ -195,19 +197,4 @@ class Feed(Base):
             'UpdateFreq' : self.UpdateFreq,
             'Genre' : self.Genre,
             'URL' : self.URL
-        }
-
-class Category(Base):
-    Id = Column(Integer, primary_key=True)
-    Name = Column(String(50))
-
-    def __init__(self, Id = None, Name= None):
-        self.Id = Id
-        self.Name = Name
-        return
-
-    def dict(self):
-        return {
-            'Id' : self.Id,
-            'Name' : self.Name
         }

@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.Models import User , User_Profile , Base, Skills, Response, Utterances
-
+from src.Models import User , User_Profile , Base, Skills, Response, Utterances, Feed
+import json as js
 
 class db:
     def __init__ ( self , conn_string=None ):
@@ -26,7 +26,7 @@ class db:
                 status[ 'userId' ] = q.Id
                 status[ 'status'] = "SUCCESS"
         except Exception as e:
-            print ("Unexpected error at attempt_login: " +  e)
+            print ("Unexpected error at attempt_login: " +  str(e))
             status['status'] = "SERVER_ERROR"
         return status
 
@@ -51,7 +51,7 @@ class db:
                 resp['userId'] = q.Id
                 resp['status'] = "SUCCESS"
             except Exception as e:
-                print ("Unexpected error at attempt_register: " + e)
+                print ("Unexpected error at attempt_register: " + str(e))
                 resp['status'] = "SERVER_ERROR"
 
         return resp
@@ -60,6 +60,16 @@ class db:
         # This can be a seperate function
         skills = self.get_skills(Id=UserId)
         return skills
+
+    def build_feed(self, feed,SkillId):
+        return Feed(
+            Name = feed.get('Name', 'Default') ,
+            SkillId = SkillId , 
+            Preamble= feed.get('Preamble', 'Default') ,
+            UpdateFreq= feed.get('UpdateFreq', 'Default') ,
+            Genre = feed.get('Genre', 'Default') ,
+            URL = feed.get('URL', 'Default')
+        )
 
     def build_user ( self , json ):
         u = User(
@@ -81,6 +91,33 @@ class db:
         u.User_Profile = up
         return u
 
+    def build_utter(self,ut,SkillId):
+        return Utterances(
+            SkillId = SkillId,
+            Utter = ut
+        )
+
+    def build_resp(self,resp,SkillId):
+        return Response(
+            SkillId=SkillId,
+            Resp=resp
+        )
+
+    def build_skill(self,json):
+        json = js.loads(json)
+        Keywords = json.get('Keywords', 'Default')
+        return Skills(
+            UserId=json.get("UserId",0) ,
+            Name=json.get("Name","Default Name"),
+            AMZ_SkillId= json.get('AMZ_SkillId','Default') ,
+            Status=json.get('Status', 'In Development') ,
+            Category=json.get('Category','Default') , 
+            ShortDesc=json.get('ShortDesc', 'Default'),
+            LongDesc=json.get('LongDesc', 'Default') ,
+            Keywords= str(Keywords),
+            TemplateId=0
+        )
+        
     def get_user_and_profile ( self , Email , Password ):
         q = self.session.query ( User ).\
             join ( User_Profile ).\
@@ -114,3 +151,37 @@ class db:
                 for u in Uttrs:
                     viewskills[id]['Utterances'].append(u.dict())
         return viewskills
+    
+    def new_skill(self,json):
+        resp = {}
+        s = self.build_skill(json)
+        try:
+            self.session.add(s)
+            self.session.flush()
+            self.session.refresh(s)
+            
+            if json.get('template', None) == 'Alexa Flash Briefing':
+                feeds = json.get('Feeds', None)
+                if feeds:
+                    for feed in feeds:
+                        self.session.add(self.build_feed(feed,s.SkillId))
+            else:
+                utters = json.get('Utterances',None)
+                SkillUtterances = []
+                if utters:
+                    for ut in utters:
+                        self.session.add(self.build_utter(ut,s.SkillId))
+                
+                resps = json.get('Responses', None)
+                if resps:
+                    for resp in resps:
+                        self.session.add(self.build_resp(resp,s.SkillId))
+            
+            self.session.commit()
+            resp['SkillId'] = s.SkillId
+            resp['status'] = "SUCCESS"
+
+        except Exception as e:
+            print ("Unexpected error at new_skill: " + str(e))
+            resp['status'] = "SERVER_ERROR"
+        return resp

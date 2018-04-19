@@ -1,7 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
 from src.Database import db
-from src.Models import User, User_Profile
 import json
 import os
 
@@ -46,9 +45,18 @@ def ViewSkills():
     UserId = json.loads(request.get_json())['UserId']
     print("Requesting Skills for User")
     _db = db(cs)
-    status = db.attempt_get_skills(limit=None)
+    resp = _db.attempt_get_skills(limit=None)
     _db.shutdown()
-    return good_response(status)
+    return good_response(resp)
+
+@app.route('/newskill', methods=['POST'])
+def NewSkill():
+    jsonData = request.get_json()
+    print("New Skill Submission")
+    _db = db(cs)
+    resp = _db.new_skill(jsonData)
+    _db.shutdown()
+    return good_response(resp)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
