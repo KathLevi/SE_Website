@@ -1,6 +1,7 @@
 import React from "react";
 import { request } from "../helpers/requests.js";
 import ResponseModal from "./modules/responseModal";
+import Input from "./modules/input";
 
 class FlashBriefing extends React.Component {
   constructor() {
@@ -29,6 +30,13 @@ class FlashBriefing extends React.Component {
     const target = event.target;
     this.setState({
       [target.name]: target.value
+    });
+  };
+
+  handleInputBlur = event => {
+    const target = event.target;
+    this.setState({
+      [target.name + "Error"]: this.state[target.name] === "" ? "EMPTY" : ""
     });
   };
 
@@ -73,16 +81,15 @@ class FlashBriefing extends React.Component {
       <div className="container">
         <h1 className="page-header">Create Flash Briefing Skill</h1>
         <form onSubmit={this.submitForm}>
-          <div className="form-group">
-            {" "}
-            <label htmlFor="exampleInputEmail1">Email address</label>{" "}
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              placeholder="Email"
-            />{" "}
-          </div>
+          <Input
+            label="Email address"
+            name="email"
+            placeholder="Email address"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.emailError}
+            errorMessage={"Email is required"}
+          />
           <div className="form-group">
             <div className="radio">
               <label className="form-check-label">
@@ -111,185 +118,169 @@ class FlashBriefing extends React.Component {
               </label>
             </div>
           </div>
-          <div className="form-group">
-            <label>First Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="fName"
-              placeholder="e.g. John"
-              onChange={this.handleInputChange}
-            />
-            <label>Last Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="lName"
-              placeholder="e.g. Smith"
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label className="lblBig">Verification Email</label>
-            <input
-              className="form-control"
-              type="text"
-              name="email"
-              placeholder="e.g. you@example.com"
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label className="lblBig">
-              What is the name you want to appear in the Amazon or Google store?
-            </label>
-            <input
-              className="form-control"
-              type="text"
-              name="skillName"
-              placeholder="e.g. Apple Color Finder"
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <label className="lblBig">
-            What do you want people to say to invoke or start your MetaVoice
-            application?
-          </label>
-          <input
-            className="form-control"
-            type="text"
-            name="invocation"
-            placeholder="e.g. Apple Color Finder"
-            onChange={this.handleInputChange}
+          <Input
+            label="First name"
+            name="fName"
+            placeholder="e.g. John"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.fNameError}
+            errorMessage={"First name is required"}
           />
-          <label className="lblBig">
-            What should people ask or say to your voice application?
-          </label>
+          <Input
+            label="Last name"
+            name="lName"
+            placeholder="e.g. Smith"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.lNameError}
+            errorMessage={"Last name is required"}
+          />
 
-          <label className="lblBig">
-            What category will your MetaVoice application show up as on the
-            store?
-          </label>
-          <select
-            className="form-control"
-            name="category"
-            onChange={this.handleInputChange}
-          >
-            <option value="Business & Finance">Business and Finance</option>
-            <option value="Connected Car">Connected Car</option>
-            <option value="Education and Refference">
-              Education and Refference
-            </option>
-            <option value="Food & Drink">Food and Drink</option>
-            <option value="Games, Trivia & Accessories">
-              Games, Trivia, and Accessories
-            </option>
-            <option value="Health & Fitness">Health and Fitness</option>
-            <option value="Kids">Kids</option>
-            <option value="Lifestyle">Lifestyle</option>
-            <option value="Local">Local</option>
-            <option value="Movies & TV">Movies and TV</option>
-            <option value="Music & Audio">Music and Audio</option>
-            <option value="News">News</option>
-            <option value="Novelty & Humor">Novelty and Humor</option>
-            <option value="Productivity">Productivity</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Smart Home">Smart Home</option>
-            <option value="Social">Social</option>
-            <option value="Sports">Sports</option>
-            <option value="Travel & Transportation">
-              Travel and Transportation
-            </option>
-            <option value="Utilities">Utilities</option>
-          </select>
-          <label className="lblBig">
-            Enter descriptions of your MetaVoice application
-          </label>
-          <input
-            className="form-control"
-            type="text"
+          <Input
+            label="What name do you want to appear in the Alexa skill store?"
+            name="skillName"
+            placeholder="e.g. MySkill"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.skillNameError}
+            errorMessage={"Skill name is required"}
+          />
+
+          <div className={"form-group"}>
+            <label className="lblBig">
+              What category will your application show up as on the store?
+            </label>
+            <select
+              className="form-control"
+              name="category"
+              onChange={this.handleInputChange}
+            >
+              <option value="Business & Finance">Business and Finance</option>
+              <option value="Connected Car">Connected Car</option>
+              <option value="Education and Refference">
+                Education and Refference
+              </option>
+              <option value="Food & Drink">Food and Drink</option>
+              <option value="Games, Trivia & Accessories">
+                Games, Trivia, and Accessories
+              </option>
+              <option value="Health & Fitness">Health and Fitness</option>
+              <option value="Kids">Kids</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Local">Local</option>
+              <option value="Movies & TV">Movies and TV</option>
+              <option value="Music & Audio">Music and Audio</option>
+              <option value="News">News</option>
+              <option value="Novelty & Humor">Novelty and Humor</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Smart Home">Smart Home</option>
+              <option value="Social">Social</option>
+              <option value="Sports">Sports</option>
+              <option value="Travel & Transportation">
+                Travel and Transportation
+              </option>
+              <option value="Utilities">Utilities</option>
+            </select>
+          </div>
+
+          <Input
+            label="Give a few words describing your skill"
             name="skillDescShort"
-            placeholder="e.g. Enter a short description of your skill, the one liner"
-            onChange={this.handleInputChange}
+            placeholder=""
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.skillDescShortError}
+            errorMessage={"Please give a brief summary"}
           />
-          <input
-            className="form-control"
-            type="text"
+
+          <Input
+            label="Give a brief description for your skill  (optional)"
             name="skillDescLong"
-            placeholder="e.g. Enter the full description of your skill"
-            onChange={this.handleInputChange}
+            placeholder=""
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={""}
+            errorMessage={""}
           />
-          <label className="lblBig">
-            What keywords do you want your MetaVoice application to have?
-          </label>
-          <input
-            className="form-control"
-            type="text"
+
+          <Input
+            label="What keywords should your skill have? (optional)"
             name="keywords"
-            placeholder="e.g. Enter keywords for your skill separated by commas"
-            onChange={this.handleInputChange}
+            placeholder=""
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={""}
+            errorMessage={""}
           />
 
           <h3 className="page-header">Feed 1</h3>
 
-          <label>Feed Name</label>
-          <input
-            className="form-control"
-            type="text"
+          <Input
+            label="Feed name"
             name="feedName"
-            placeholder=""
-            onChange={this.handleInputChange}
+            placeholder="e.g. MyFeed"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.feedNameError}
+            errorMessage={"Feed name is required"}
           />
-          <label>{'Feed Preamble (starting with "in" or "from")'}</label>
-          <input
-            className="form-control"
-            type="text"
+
+          <Input
+            label="Feed preamble"
             name="preamble"
             placeholder=""
-            onChange={this.handleInputChange}
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.preambleError}
+            errorMessage={"Preamble is required"}
           />
 
-          <label>Update Frequency</label>
+          <div className="form-group">
+            <label>Update Frequency</label>
+            <select
+              className="form-control"
+              name="updateFrequency"
+              onChange={this.handleInputChange}
+            >
+              <option value="Hourly">Hourly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Yearly">Yearly</option>
+            </select>
+          </div>
 
-          <select
-            className="form-control"
-            name="updateFrequency"
-            onChange={this.handleInputChange}
-          >
-            <option value="Hourly">Hourly</option>
-            <option value="Monthly">Monthly</option>
-            <option value="Yearly">Yearly</option>
-          </select>
+          <div className="form-group">
+            <label>Content Genre</label>
+            <select
+              className="form-control"
+              name="contentGenre"
+              onChange={this.handleInputChange}
+            >
+              <option value="Headline News">Headline News</option>
+              <option value="Business">Business</option>
+              <option value="Politics">Politics</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Technology">Technology</option>
+              <option value="Humor">Humor</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Health and Fitness">Health and Fitness</option>
+              <option value="Arts and Culture">Arts and Culture</option>
+              <option value="Productivity and Utilities">
+                Productivity and Utilities
+              </option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
 
-          <label>Content Genre</label>
-
-          <select
-            className="form-control"
-            name="contentGenre"
-            onChange={this.handleInputChange}
-          >
-            <option value="Headline News">Headline News</option>
-            <option value="Business">Business</option>
-            <option value="Politics">Politics</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Technology">Technology</option>
-            <option value="Humor">Humor</option>
-            <option value="Lifestyle">Lifestyle</option>
-            <option value="Health and Fitness">Health and Fitness</option>
-            <option value="Arts and Culture">Arts and Culture</option>
-            <option value="Productivity and Utilities">
-              Productivity and Utilities
-            </option>
-            <option value="Other">Other</option>
-          </select>
-
-          <label>Provide the URL to your RSS feed</label>
-          <input
-            className="form-control"
-            type="text"
+          <Input
+            label="Feed URL"
             name="feedURL"
             placeholder=""
-            onChange={this.handleInputChange}
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.feedURLError}
+            errorMessage={"Please provide the feed URL"}
           />
 
           <button className="btn btn-primary form-submit" type="submit">

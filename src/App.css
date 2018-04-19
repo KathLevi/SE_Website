@@ -168,6 +168,9 @@ h3 {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
+.signin-password {
+  margin-bottom: 30px;
+}
 .lbl {
   font-weight: bold;
 }

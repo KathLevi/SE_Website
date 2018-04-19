@@ -58,7 +58,7 @@ class SignIn extends React.Component {
 
           <input
             type="password"
-            className="form-control"
+            className="form-control signin-password"
             name="password"
             onChange={this.handleInputChange}
           />

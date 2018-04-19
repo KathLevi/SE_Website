@@ -90,12 +90,6 @@ class SimpleInteraction extends React.Component {
     this.setState({ showModal: false });
   };
 
-  getInputFieldClasses = name => {
-    return classNames("form-group", {
-      "has-warning": this.state[name + "Error"] === "EMPTY"
-    });
-  };
-
   render() {
     return (
       <div className="container form-container">
@@ -253,8 +247,7 @@ class SimpleInteraction extends React.Component {
 
           <div className={"form-group"}>
             <label className="lblBig">
-              What category will your MetaVoice application show up as on the
-              store?
+              What category will your application show up as on the store?
             </label>
             <select
               className="form-control"
