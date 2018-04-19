@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
-import { AppContainer } from "react-hot-loader";
 
 // Wrap the rendering in a function:
 const render = Component => {

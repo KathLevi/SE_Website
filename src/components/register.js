@@ -41,7 +41,7 @@ class Register extends React.Component {
     e.preventDefault();
     if (this.state.password !== this.state.confirmPassword) {
       alert("passwords do not match");
-    } else if (parseInt(this.state.userAns) !== this.state.answer) {
+    } else if (parseInt(this.state.userAns, 10) !== this.state.answer) {
       alert("you are a robot");
     } else {
       let data = {

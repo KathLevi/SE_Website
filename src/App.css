@@ -44,6 +44,7 @@ h3 {
   padding: 0;
   overflow: hidden;
   background-color: #232f3e;
+  min-width: 632px;
 }
 .menuListElement {
   display: inline;
@@ -184,7 +185,7 @@ h3 {
   font-size: 16px;
   height: auto;
   padding: 10px;
-  margin-bottom: 20px;
+  max-width: 800px;
 }
 .mainBtn {
   background-color: #0880f7;
@@ -384,6 +385,7 @@ footer {
   height: 100px;
   width: 100%;
   padding-top: 40px;
+  min-width: 632px;
 }
 
 .form-submit {
@@ -393,6 +395,7 @@ footer {
 .skill-template-item {
   padding: 20px;
   width: 50%;
+  min-width: 200px;
 }
 
 .skill-template-container {
@@ -406,4 +409,31 @@ footer {
 
 .home-section-1 {
   height: ;
+}
+
+.hidden {
+  display: none;
+}
+
+.negative-margin-btm {
+  margin-bottom: -15px;
+}
+
+.form-container {
+  max-width: 750px;
+}
+
+.thumbnail-ext {
+  height: 100%;
+  position: relative;
+}
+
+.select-skill-btn {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 5px;
+}
+
+.select-skill-text {
+  margin-bottom: 20px;
 }

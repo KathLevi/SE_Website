@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
-import { Button } from "react-bootstrap";
 
 const signOut = props => {
   window.localStorage.removeItem("userId");
@@ -32,7 +31,7 @@ const Navigation = props => (
           VIEW MY SKILLS
         </NavLink>
       </li>
-      
+
       <li className="menuListElement dropdwn">
         {window.localStorage.userId ? (
           <div>

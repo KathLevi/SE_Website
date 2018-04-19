@@ -8,15 +8,15 @@ const CreateSkill = () => (
 
     <div className="skill-template-container">
       <div className="skill-template-item">
-        <div className="thumbnail">
-          <div className="caption">
+        <div className="thumbnail thumbnail-ext">
+          <div className="caption thumbnail-ext">
             <h3>Simple Interaction</h3>
-            <p>
+            <p className="select-skill-text">
               This is a simple interaction skill. Provide some sentences to
               trigger the skill and Alexa will respond with a static response.
             </p>
             <NavLink
-              className="btn btn-primary"
+              className="btn btn-primary select-skill-btn"
               exact
               activeClassName="current"
               to="/createSkill/simple-interaction"
@@ -29,15 +29,15 @@ const CreateSkill = () => (
       </div>
 
       <div className="skill-template-item">
-        <div className="thumbnail">
-          <div className="caption">
+        <div className="thumbnail thumbnail-ext">
+          <div className="caption thumbnail-ext">
             <h3>Flash Briefing</h3>
-            <p>
+            <p className="select-skill-text">
               This template allows you to upload an existing RSS feed as a flash
               briefing skill.
             </p>
             <NavLink
-              className="btn btn-primary"
+              className="btn btn-primary select-skill-btn"
               exact
               activeClassName="current"
               to="/createSkill/flash-briefing"
@@ -49,15 +49,15 @@ const CreateSkill = () => (
       </div>
 
       <div className="skill-template-item">
-        <div className="thumbnail">
-          <div className="caption">
+        <div className="thumbnail thumbnail-ext">
+          <div className="caption thumbnail-ext">
             <h3>Complex Skill</h3>
-            <p>
+            <p className="select-skill-text">
               This is a complex interaction skill. Provide multiple sentences to
               trigger the skill and Alexa will respond with dynamic responses.
             </p>
             <NavLink
-              className="btn btn-primary"
+              className="btn btn-primary select-skill-btn"
               exact
               activeClassName="current"
               to="/createSkill/flash-briefing"

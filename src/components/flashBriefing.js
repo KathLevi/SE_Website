@@ -1,6 +1,5 @@
 import React from "react";
 import { request } from "../helpers/requests.js";
-import { Modal, Button } from "react-bootstrap";
 import ResponseModal from "./modules/responseModal";
 
 class FlashBriefing extends React.Component {

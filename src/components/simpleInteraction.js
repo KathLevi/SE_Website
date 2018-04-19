@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
 import ResponseModal from "./modules/responseModal";
+import Input from "./modules/input";
 import { request } from "../helpers/requests.js";
 import classNames from "classnames";
 
@@ -52,7 +52,6 @@ class SimpleInteraction extends React.Component {
       template: "Alexa Interaction",
       firstName: this.state.fName,
       lastName: this.state.lName,
-      template: this.state.template,
       skillName: this.state.skillName,
       invocationName: this.state.invocation,
       intents: [
@@ -99,35 +98,18 @@ class SimpleInteraction extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container form-container">
         <h1 className="page-header">Create Simple Interaction Skill</h1>
         <form onSubmit={this.submitForm}>
-          <div
-            className={
-              "form-group " +
-              (this.state["emailError"] === "EMPTY" ? "has-error" : "")
-            }
-          >
-            <label htmlFor="exampleInputEmail1">Email address</label>{" "}
-            <input
-              type="email"
-              name="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              placeholder="Email"
-              onChange={this.handleInputChange}
-              onBlur={this.handleInputBlur}
-            />
-            <span
-              className={
-                "help-block " + this.state["emailError"] === "EMPTY"
-                  ? "show"
-                  : "hidden"
-              }
-            >
-              {"Email cannot be empty."}
-            </span>
-          </div>
+          <Input
+            label="Email address"
+            name="email"
+            placeholder="Email address"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.emailError}
+            errorMessage={"Email is required"}
+          />
           <div className="form-group">
             <div className="radio">
               <label className="form-check-label">
@@ -156,168 +138,186 @@ class SimpleInteraction extends React.Component {
               </label>
             </div>
           </div>
-          <div className="form-group">
-            <label>First Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="fName"
-              placeholder="e.g. John"
-              onChange={this.handleInputChange}
-            />
-            <label>Last Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="lName"
-              placeholder="e.g. Smith"
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label className="lblBig">Verification Email</label>
-            <input
-              className="form-control"
-              type="text"
-              name="email"
-              placeholder="e.g. you@example.com"
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label className="lblBig">
-              What is the name you want to appear in the Amazon or Google store?
-            </label>
-            <input
-              className="form-control"
-              type="text"
-              name="skillName"
-              placeholder="e.g. Apple Color Finder"
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <label className="lblBig">
-            What do you want people to say to invoke or start your MetaVoice
-            application?
-          </label>
-          <input
-            className="form-control"
-            type="text"
-            name="invocation"
-            placeholder="e.g. Apple Color Finder"
-            onChange={this.handleInputChange}
+          <Input
+            label="First name"
+            name="fName"
+            placeholder="e.g. John"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.fNameError}
+            errorMessage={"First name is required"}
           />
-          <label className="lblBig">
-            What should people ask or say to your voice application?
-          </label>
-          <input
-            className="form-control"
-            type="text"
-            name="utterance1"
-            placeholder="e.g. What color are apples?"
-            onChange={this.handleInputChange}
-          />
-          <input
-            className="form-control"
-            type="text"
-            name="utterance2"
-            placeholder="e.g. Apples are what color?"
-            onChange={this.handleInputChange}
-          />
-          <input
-            className="form-control"
-            type="text"
-            name="utterance3"
-            placeholder="e.g. Apple colors"
-            onChange={this.handleInputChange}
-          />
-          <input
-            className="form-control"
-            type="text"
-            name="utterance4"
-            placeholder="e.g. Are apples red?"
-            onChange={this.handleInputChange}
-          />
-          <input
-            className="form-control"
-            type="text"
-            name="utterance5"
-            placeholder="e.g. Are apples green?"
-            onChange={this.handleInputChange}
-          />
-          <label className="lblBig">
-            What will your voice application say back?
-          </label>
-          <input
-            className="form-control"
-            type="text"
-            name="response"
-            placeholder="e.g. Apples are red."
-            onChange={this.handleInputChange}
+          <Input
+            label="Last name"
+            name="lName"
+            placeholder="e.g. Smith"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.lNameError}
+            errorMessage={"Last name is required"}
           />
 
-          <label className="lblBig">
-            What category will your MetaVoice application show up as on the
-            store?
-          </label>
-          <select
-            className="form-control"
-            name="category"
-            onChange={this.handleInputChange}
-          >
-            <option value="Business & Finance">Business and Finance</option>
-            <option value="Connected Car">Connected Car</option>
-            <option value="Education and Refference">
-              Education and Refference
-            </option>
-            <option value="Food & Drink">Food and Drink</option>
-            <option value="Games, Trivia & Accessories">
-              Games, Trivia, and Accessories
-            </option>
-            <option value="Health & Fitness">Health and Fitness</option>
-            <option value="Kids">Kids</option>
-            <option value="Lifestyle">Lifestyle</option>
-            <option value="Local">Local</option>
-            <option value="Movies & TV">Movies and TV</option>
-            <option value="Music & Audio">Music and Audio</option>
-            <option value="News">News</option>
-            <option value="Novelty & Humor">Novelty and Humor</option>
-            <option value="Productivity">Productivity</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Smart Home">Smart Home</option>
-            <option value="Social">Social</option>
-            <option value="Sports">Sports</option>
-            <option value="Travel & Transportation">
-              Travel and Transportation
-            </option>
-            <option value="Utilities">Utilities</option>
-          </select>
-          <label className="lblBig">
-            Enter descriptions of your MetaVoice application
-          </label>
-          <input
-            className="form-control"
-            type="text"
+          <Input
+            label="What name do you want to appear in the Alexa skill store?"
+            name="skillName"
+            placeholder="e.g. MySkill"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.skillNameError}
+            errorMessage={"Skill name is required"}
+          />
+
+          <Input
+            label="What phrases will trigger your skill?"
+            name="invocation"
+            placeholder="e.g. Start MySkill"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.invocationError}
+            errorMessage={"Invocation is required"}
+          />
+
+          <Input
+            label="What phrases will trigger your skill?"
+            name="invocation"
+            placeholder="e.g. Start MySkill"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.invocationError}
+            errorMessage={"Invocation is required"}
+          />
+
+          <Input
+            label="What should people say to your skill?"
+            name="utterance1"
+            placeholder="e.g. Say &quot;Hello world!&quot;"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.utterance1Error}
+            errorMessage={"Please provide at least one phrase"}
+            classes={"negative-margin-btm"}
+          />
+
+          <Input
+            label=""
+            name="utterance2"
+            placeholder="e.g. How do you greet the Earth each morning?"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={""}
+            errorMessage={""}
+            classes={"negative-margin-btm"}
+          />
+
+          <Input
+            label=""
+            name="utterance3"
+            placeholder="e.g. What did the moon say back to its planet?"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={""}
+            errorMessage={""}
+            classes={"negative-margin-btm"}
+          />
+
+          <Input
+            label=""
+            name="utterance4"
+            placeholder="e.g. Say &quot;Bonjour le monde!&quot; in English"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={""}
+            errorMessage={""}
+            classes={"negative-margin-btm"}
+          />
+
+          <Input
+            label=""
+            name="utterance5"
+            placeholder="What is &quot;dlrow olleh&quot; backwards?"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={""}
+            errorMessage={""}
+          />
+
+          <Input
+            label="What will your skill say back?"
+            name="response"
+            placeholder="e.g. Hello world!"
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.responseError}
+            errorMessage={"Response message is required"}
+          />
+
+          <div className={"form-group"}>
+            <label className="lblBig">
+              What category will your MetaVoice application show up as on the
+              store?
+            </label>
+            <select
+              className="form-control"
+              name="category"
+              onChange={this.handleInputChange}
+            >
+              <option value="Business & Finance">Business and Finance</option>
+              <option value="Connected Car">Connected Car</option>
+              <option value="Education and Refference">
+                Education and Refference
+              </option>
+              <option value="Food & Drink">Food and Drink</option>
+              <option value="Games, Trivia & Accessories">
+                Games, Trivia, and Accessories
+              </option>
+              <option value="Health & Fitness">Health and Fitness</option>
+              <option value="Kids">Kids</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Local">Local</option>
+              <option value="Movies & TV">Movies and TV</option>
+              <option value="Music & Audio">Music and Audio</option>
+              <option value="News">News</option>
+              <option value="Novelty & Humor">Novelty and Humor</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Smart Home">Smart Home</option>
+              <option value="Social">Social</option>
+              <option value="Sports">Sports</option>
+              <option value="Travel & Transportation">
+                Travel and Transportation
+              </option>
+              <option value="Utilities">Utilities</option>
+            </select>
+          </div>
+
+          <Input
+            label="Give a few words describing your skill"
             name="skillDescShort"
-            placeholder="e.g. Enter a short description of your skill, the one liner"
-            onChange={this.handleInputChange}
+            placeholder=""
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={this.state.skillDescShortError}
+            errorMessage={"Please give a brief summary"}
           />
-          <input
-            className="form-control"
-            type="text"
+
+          <Input
+            label="Give a brief description for your skill  (optional)"
             name="skillDescLong"
-            placeholder="e.g. Enter the full description of your skill"
-            onChange={this.handleInputChange}
+            placeholder=""
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={""}
+            errorMessage={""}
           />
-          <label className="lblBig">
-            What keywords do you want your MetaVoice application to have?
-          </label>
-          <input
-            className="form-control"
-            type="text"
+
+          <Input
+            label="What keywords should your skill have? (optional)"
             name="keywords"
-            placeholder="e.g. Enter keywords for your skill separated by commas"
-            onChange={this.handleInputChange}
+            placeholder=""
+            handleInputChange={this.handleInputChange}
+            handleInputBlur={this.handleInputBlur}
+            error={""}
+            errorMessage={""}
           />
 
           <button className="btn btn-primary form-submit" type="submit">
