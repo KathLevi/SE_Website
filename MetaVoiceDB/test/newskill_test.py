@@ -61,13 +61,13 @@ SSData = {
     ]
 }
 
-#jsonData = json.dumps(FBdata)
-#print("Data: " + jsonData)
-#resp_FB = requests.post('http://127.0.0.1:5004/newskill')
+jsonData = json.dumps(FBdata)
+print("Data: " + jsonData)
+resp_FB = requests.post('http://127.0.0.1:5004/newskill', json=jsonData)
 
 jsonData = json.dumps(SSData)
 print("Data : " + jsonData)
 resp_SS = requests.post('http://127.0.0.1:5004/newskill', json=jsonData)
 
-#print("Success? " + str(resp_FB))
+print("Success? " + str(resp_FB))
 print("Success? " + str(resp_SS))

@@ -62,7 +62,8 @@ class db:
         return skills
 
     def build_feed(self, feed,SkillId):
-        return Feed(
+        try:
+            f = Feed(
             Name = feed.get('Name', 'Default') ,
             SkillId = SkillId , 
             Preamble= feed.get('Preamble', 'Default') ,
@@ -70,6 +71,11 @@ class db:
             Genre = feed.get('Genre', 'Default') ,
             URL = feed.get('URL', 'Default')
         )
+            return f
+        except Exception as e:
+            print("Unexpected error at build_feed: " + str(e))
+        return "SERVER_ERROR"
+        
 
     def build_user ( self , json ):
         u = User(
@@ -104,7 +110,6 @@ class db:
         )
 
     def build_skill(self,json):
-        json = js.loads(json)
         Keywords = json.get('Keywords', 'Default')
         return Skills(
             UserId=json.get("UserId",0) ,
@@ -153,7 +158,8 @@ class db:
         return viewskills
     
     def new_skill(self,json):
-        resp = {}
+        response = {}
+        json = js.loads ( json )
         s = self.build_skill(json)
         try:
             self.session.add(s)
@@ -178,10 +184,11 @@ class db:
                         self.session.add(self.build_resp(resp,s.SkillId))
             
             self.session.commit()
-            resp['SkillId'] = s.SkillId
-            resp['status'] = "SUCCESS"
-
+            response['SkillId'] = s.SkillId
+            response['status'] = "SUCCESS"
+        
         except Exception as e:
             print ("Unexpected error at new_skill: " + str(e))
-            resp['status'] = "SERVER_ERROR"
-        return resp
+            response['status'] = "SERVER_ERROR"
+        
+        return response

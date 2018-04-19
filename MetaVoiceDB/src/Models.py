@@ -180,8 +180,9 @@ class Feed(Base):
     Genre = Column(String(40))
     URL = Column(String(200))
 
-    def __init__(self,FeedId=None,Name=None,Preamble=None,UpdateFreq=None,Genre=None,URL=None):
+    def __init__(self,SkillId=None,FeedId=None,Name=None,Preamble=None,UpdateFreq=None,Genre=None,URL=None):
         self.FeedId = FeedId
+        self.SkillId = SkillId
         self.Name = Name
         self.Preamble = Preamble
         self.UpdateFreq = UpdateFreq
