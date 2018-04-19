@@ -18,6 +18,7 @@ const Input = props => {
         placeholder={props.placeholder}
         onChange={props.handleInputChange}
         onBlur={props.handleInputBlur}
+        ref={props.setRef}
       />
       <span
         className={"help-block " + (props.error === "EMPTY" ? "" : "hidden")}

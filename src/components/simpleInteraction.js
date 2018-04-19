@@ -1,77 +1,124 @@
 import React from "react";
 import ResponseModal from "./modules/responseModal";
 import Input from "./modules/input";
+import Select from "./modules/select";
 import { request } from "../helpers/requests.js";
-import classNames from "classnames";
+import { categoryOptions } from "../constants/selectFieldOptions.js";
 
 class SimpleInteraction extends React.Component {
   constructor() {
     super();
+    // input fields
+    this.inputs = {
+      email: { value: "", optional: false },
+      fName: { value: "", optional: false },
+      lName: { value: "", optional: false },
+      skillName: { value: "", optional: false },
+      invocation: { value: "", optional: false },
+      utterance1: { value: "", optional: false },
+      utterance2: { value: "", optional: true },
+      utterance3: { value: "", optional: true },
+      utterance4: { value: "", optional: true },
+      utterance5: { value: "", optional: true },
+      response: { value: "", optional: false },
+      category: { value: "Business & Finance", optional: false },
+      skillDescShort: { value: "", optional: false },
+      skillDescLong: { value: "", optional: true },
+      keywords: { value: "", optional: true }
+    };
     this.state = {
+      ...this.inputs
+    };
+    for (let attr of Object.keys(this.inputs)) {
+      this.state[attr].error = "";
+      this.state[attr].ref = React.createRef();
+      this.state[attr].props = {
+        name: attr,
+        handleInputChange: this.handleInputChange,
+        handleInputBlur: this.handleInputBlur,
+        setRef: this.state[attr].ref
+      };
+    }
+    this.state = {
+      ...this.state,
       platform: "amazon",
-      email: "",
-      fName: "",
-      lName: "",
       template: "Alexa Interaction",
-      skillName: "",
-      invocation: "",
-      utterance1: "",
-      utterance2: "",
-      utterance3: "",
-      utterance4: "",
-      utterance5: "",
-      response: "",
-      category: "Business & Finance",
-      skillDescShort: "",
-      skillDescLong: "",
-      keywords: "",
       showModal: false,
       modalMessage: ""
     };
   }
 
+  componentDidMount = () => {
+    this.state.email.ref.current.focus();
+  };
+
   handleInputChange = event => {
     const target = event.target;
-    this.setState({
-      [target.name]: target.value
-    });
+    this.setState(prevState => ({
+      [target.name]: {
+        ...prevState[target.name],
+        value: target.value
+      }
+    }));
   };
 
   handleInputBlur = event => {
     const target = event.target;
-    this.setState({
-      [target.name + "Error"]: this.state[target.name] === "" ? "EMPTY" : ""
-    });
+    this.setState(prevState => ({
+      [target.name]: {
+        ...prevState[target.name],
+        error: prevState[target.name].value === "" ? "EMPTY" : ""
+      }
+    }));
+  };
+
+  validate = () => {
+    let isValid = true;
+    for (let input of Object.keys(this.inputs).reverse()) {
+      if (!this.state[input].optional && !this.state[input].value) {
+        this.setState(prevState => ({
+          [input]: {
+            ...prevState[input],
+            error: "EMPTY"
+          }
+        }));
+        isValid = false;
+        this.state[input].ref.current.focus();
+      }
+    }
+    return isValid;
   };
 
   submitForm = e => {
     e.preventDefault();
 
+    if (!this.validate()) return;
+
     let data = {
-      email: this.state.email,
+      email: this.state.email.value,
       template: "Alexa Interaction",
-      firstName: this.state.fName,
-      lastName: this.state.lName,
-      skillName: this.state.skillName,
-      invocationName: this.state.invocation,
+      firstName: this.state.fName.value,
+      lastName: this.state.lName.value,
+      skillName: this.state.skillName.value,
+      invocationName: this.state.invocation.value,
       intents: [
         {
           intent: "intent",
           utterances: {
-            "1": this.state.utterance1,
-            "2": this.state.utterance2,
-            "3": this.state.utterance3,
-            "4": this.state.utterance4,
-            "5": this.state.utterance5,
+            "1": this.state.utterance1.value,
+            "2": this.state.utterance2.value,
+            "3": this.state.utterance3.value,
+            "4": this.state.utterance4.value,
+            "5": this.state.utterance5.value,
             "6": ""
           },
-          response: this.state.response
+          response: this.state.response.value
         }
       ],
-      category: this.state.category,
-      shortDescription: this.state.skillDescShort,
-      longDescription: this.state.skillDescLong,
-      keywords: this.state.keywords.split(",").map(k => {
+      category: this.state.category.value,
+      shortDescription: this.state.skillDescShort.value,
+      longDescription: this.state.skillDescLong.value,
+      keywords: this.state.keywords.value.split(",").map(k => {
         return k.trim();
       })
     };
@@ -96,14 +143,13 @@ class SimpleInteraction extends React.Component {
         <h1 className="page-header">Create Simple Interaction Skill</h1>
         <form onSubmit={this.submitForm}>
           <Input
+            {...this.state.email.props}
             label="Email address"
-            name="email"
             placeholder="Email address"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.emailError}
-            errorMessage={"Email is required"}
+            error={this.state.email.error}
+            errorMessage="Email is required"
           />
+
           <div className="form-group">
             <div className="radio">
               <label className="form-check-label">
@@ -132,183 +178,118 @@ class SimpleInteraction extends React.Component {
               </label>
             </div>
           </div>
+
           <Input
+            {...this.state.fName.props}
             label="First name"
-            name="fName"
             placeholder="e.g. John"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.fNameError}
+            error={this.state.fName.error}
             errorMessage={"First name is required"}
           />
+
           <Input
+            {...this.state.lName.props}
             label="Last name"
-            name="lName"
             placeholder="e.g. Smith"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.lNameError}
+            error={this.state.lName.error}
             errorMessage={"Last name is required"}
           />
 
           <Input
+            {...this.state.skillName.props}
             label="What name do you want to appear in the Alexa skill store?"
-            name="skillName"
             placeholder="e.g. MySkill"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.skillNameError}
+            error={this.state.skillName.error}
             errorMessage={"Skill name is required"}
           />
 
           <Input
+            {...this.state.invocation.props}
             label="What phrases will trigger your skill?"
-            name="invocation"
             placeholder="e.g. Start MySkill"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.invocationError}
+            error={this.state.invocation.error}
             errorMessage={"Invocation is required"}
           />
 
           <Input
-            label="What phrases will trigger your skill?"
-            name="invocation"
-            placeholder="e.g. Start MySkill"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.invocationError}
-            errorMessage={"Invocation is required"}
-          />
-
-          <Input
+            {...this.state.utterance1.props}
             label="What should people say to your skill?"
-            name="utterance1"
             placeholder="e.g. Say &quot;Hello world!&quot;"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.utterance1Error}
+            error={this.state.utterance1.error}
             errorMessage={"Please provide at least one phrase"}
             classes={"negative-margin-btm"}
           />
 
           <Input
+            {...this.state.utterance2.props}
             label=""
-            name="utterance2"
             placeholder="e.g. How do you greet the Earth each morning?"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={""}
             errorMessage={""}
             classes={"negative-margin-btm"}
           />
 
           <Input
+            {...this.state.utterance3.props}
             label=""
-            name="utterance3"
             placeholder="e.g. What did the moon say back to its planet?"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={""}
             errorMessage={""}
             classes={"negative-margin-btm"}
           />
 
           <Input
+            {...this.state.utterance4.props}
             label=""
-            name="utterance4"
             placeholder="e.g. Say &quot;Bonjour le monde!&quot; in English"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={""}
             errorMessage={""}
             classes={"negative-margin-btm"}
           />
 
           <Input
+            {...this.state.utterance5.props}
             label=""
-            name="utterance5"
             placeholder="What is &quot;dlrow olleh&quot; backwards?"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={""}
             errorMessage={""}
           />
 
           <Input
+            {...this.state.response.props}
             label="What will your skill say back?"
-            name="response"
             placeholder="e.g. Hello world!"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.responseError}
+            error={this.state.response.error}
             errorMessage={"Response message is required"}
           />
 
-          <div className={"form-group"}>
-            <label className="lblBig">
-              What category will your application show up as on the store?
-            </label>
-            <select
-              className="form-control"
-              name="category"
-              onChange={this.handleInputChange}
-            >
-              <option value="Business & Finance">Business and Finance</option>
-              <option value="Connected Car">Connected Car</option>
-              <option value="Education and Refference">
-                Education and Refference
-              </option>
-              <option value="Food & Drink">Food and Drink</option>
-              <option value="Games, Trivia & Accessories">
-                Games, Trivia, and Accessories
-              </option>
-              <option value="Health & Fitness">Health and Fitness</option>
-              <option value="Kids">Kids</option>
-              <option value="Lifestyle">Lifestyle</option>
-              <option value="Local">Local</option>
-              <option value="Movies & TV">Movies and TV</option>
-              <option value="Music & Audio">Music and Audio</option>
-              <option value="News">News</option>
-              <option value="Novelty & Humor">Novelty and Humor</option>
-              <option value="Productivity">Productivity</option>
-              <option value="Shopping">Shopping</option>
-              <option value="Smart Home">Smart Home</option>
-              <option value="Social">Social</option>
-              <option value="Sports">Sports</option>
-              <option value="Travel & Transportation">
-                Travel and Transportation
-              </option>
-              <option value="Utilities">Utilities</option>
-            </select>
-          </div>
+          <Select
+            label="Select a category for your app"
+            name="category"
+            handleInputChange={this.handleInputChange}
+            options={categoryOptions}
+          />
 
           <Input
+            {...this.state.skillDescShort.props}
             label="Give a few words describing your skill"
-            name="skillDescShort"
             placeholder=""
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.skillDescShortError}
+            error={this.state.skillDescShort.error}
             errorMessage={"Please give a brief summary"}
           />
 
           <Input
+            {...this.state.skillDescLong.props}
             label="Give a brief description for your skill  (optional)"
-            name="skillDescLong"
             placeholder=""
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={""}
             errorMessage={""}
           />
 
           <Input
+            {...this.state.keywords.props}
             label="What keywords should your skill have? (optional)"
-            name="keywords"
             placeholder=""
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={""}
             errorMessage={""}
           />
@@ -317,8 +298,8 @@ class SimpleInteraction extends React.Component {
             Submit
           </button>
         </form>
-        {/* Server response modal */}
 
+        {/* Server response modal */}
         <ResponseModal
           show={this.state.showModal}
           closeModal={this.closeModal}
