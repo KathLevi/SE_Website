@@ -76,7 +76,7 @@ class Skills(Base):
     UserId = Column(Integer, ForeignKey('Users.Id'))
     AMZ_SkillId = Column(String(60))
     Status = Column(String(20))
-    Category = Column(Integer)      #Make this a string(20)?
+    Category = Column(Integer, ForeignKey('Category.Id'))
     ShortDesc = Column(String(60))
     LongDesc = Column(String(200))
     Keywords = Column(String(200))
@@ -164,5 +164,50 @@ class Template(Base):
     def dict(self):
         return {
             'TemplateId' : self.TemplateId,
+            'Name' : self.Name
+        }
+
+class Feed(Base):
+    __tablename__ = 'Feeds'
+
+    Skills = relationship('Skills')
+    FeedId = Column(Integer,primary_key=True)
+    Name = Column(String(40))
+    Preamble = Column(String(100))
+    UpdateFreq = Column(String(10))
+    Genre = Column(Integer, ForeignKey('Category.Id'))
+    URL = Column(String(200))
+
+    def __init__(self,FeedId=None,Name=None,Preamble=None,UpdateFreq=None,Genre=None,URL=None):
+        self.FeedId = FeedId
+        self.Name = Name
+        self.Preamble = Preamble
+        self.UpdateFreq = UpdateFreq
+        self.Genre = Genre
+        self.URL = URL
+        return
+    
+    def dict(self):
+        return {
+            'FeedId' : self.FeedId,
+            'Name' : self.Name,
+            'Preamble' : self.Preamble,
+            'UpdateFreq' : self.UpdateFreq,
+            'Genre' : self.Genre,
+            'URL' : self.URL
+        }
+
+class Category(Base):
+    Id = Column(Integer, primary_key=True)
+    Name = Column(String(50))
+
+    def __init__(self, Id = None, Name= None):
+        self.Id = Id
+        self.Name = Name
+        return
+
+    def dict(self):
+        return {
+            'Id' : self.Id,
             'Name' : self.Name
         }
