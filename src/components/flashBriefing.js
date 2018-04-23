@@ -2,64 +2,110 @@ import React from "react";
 import { request } from "../helpers/requests.js";
 import ResponseModal from "./modules/responseModal";
 import Input from "./modules/input";
+import Form from "./form";
 
 class FlashBriefing extends React.Component {
   constructor() {
     super();
+    this.inputs = {
+      platform: { value: "amazon", optional: false },
+      email: { value: "", optional: false },
+      fName: { value: "", optional: false },
+      lName: { value: "", optional: false },
+      skillName: { value: "", optional: false },
+      category: { value: "Business & Finance", optional: false },
+      skillDescShort: { value: "", optional: false },
+      skillDescLong: { value: "", optional: true },
+      keywords: { value: "", optional: true },
+      feedName: { value: "", optional: false },
+      preamble: { value: "", optional: false },
+      updateFrequency: { value: "Hourly", optional: false },
+      contentGenre: { value: "Headline News", optional: false },
+      feedURL: { value: "", optional: false }
+    };
     this.state = {
-      platform: "amazon",
-      email: "",
-      fName: "",
-      lName: "",
-      skillName: "",
-      category: "Business & Finance",
-      skillDescShort: "",
-      skillDescLong: "",
-      keywords: "",
-      feedName: "",
-      preamble: "",
-      updateFrequency: "Hourly",
-      contentGenre: "Headline News",
-      feedURL: "",
+      ...this.inputs
+    };
+    for (let attr of Object.keys(this.inputs)) {
+      this.state[attr].error = "";
+      this.state[attr].ref = React.createRef();
+      this.state[attr].props = {
+        name: attr,
+        handleInputChange: this.handleInputChange,
+        handleInputBlur: this.handleInputBlur,
+        setRef: this.state[attr].ref
+      };
+    }
+    this.state = {
+      ...this.state,
       showModal: false,
       modalMessage: ""
     };
   }
 
+  componentDidMount = () => {
+    this.state.email.ref.current.focus();
+  };
+
   handleInputChange = event => {
     const target = event.target;
-    this.setState({
-      [target.name]: target.value
-    });
+    this.setState(prevState => ({
+      [target.name]: {
+        ...prevState[target.name],
+        value: target.value
+      }
+    }));
   };
 
   handleInputBlur = event => {
     const target = event.target;
-    this.setState({
-      [target.name + "Error"]: this.state[target.name] === "" ? "EMPTY" : ""
-    });
+    this.setState(prevState => ({
+      [target.name]: {
+        ...prevState[target.name],
+        error: prevState[target.name].value === "" ? "EMPTY" : ""
+      }
+    }));
+  };
+
+  validate = () => {
+    let isValid = true;
+    for (let input of Object.keys(this.inputs).reverse()) {
+      if (!this.state[input].optional && !this.state[input].value) {
+        this.setState(prevState => ({
+          [input]: {
+            ...prevState[input],
+            error: "EMPTY"
+          }
+        }));
+        isValid = false;
+        this.state[input].ref.current.focus();
+      }
+    }
+    return isValid;
   };
 
   submitForm = e => {
     e.preventDefault();
 
+    if (!this.validate()) return;
+
     let data = {
-      email: this.state.email,
+      email: this.state.email.value,
       template: "Alexa Flash Briefing",
-      firstName: this.state.fName,
-      lastName: this.state.lName,
-      skillName: this.state.skillName,
-      category: this.state.category,
-      shortDescription: this.state.skillDescShort,
-      longDescription: this.state.skillDescLong,
-      keywords: this.state.keywords.split(",").map(k => {
+      firstName: this.state.fName.value,
+      lastName: this.state.lName.value,
+      skillName: this.state.skillName.value,
+      category: this.state.category.value,
+      shortDescription: this.state.skillDescShort.value,
+      longDescription: this.state.skillDescLong.value,
+      keywords: this.state.keywords.value.split(",").map(k => {
         return k.trim();
       }),
-      feedName: this.state.feedName,
-      preamble: this.state.preamble,
-      updateFrequency: this.state.updateFrequency,
-      contentGenre: this.state.contentGenre,
-      feedURL: this.state.feedURL
+      feedName: this.state.feedName.value,
+      preamble: this.state.preamble.value,
+      updateFrequency: this.state.updateFrequency.value,
+      contentGenre: this.state.contentGenre.value,
+      feedURL: this.state.feedURL.value
     };
 
     request("http://127.0.0.1:5003/post", data, resp => {
@@ -78,17 +124,14 @@ class FlashBriefing extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <h1 className="page-header">Create Flash Briefing Skill</h1>
-        <form onSubmit={this.submitForm}>
+      <div>
+        <Form submitForm={this.submitForm} label={"Flash Briefing Form"}>
           <Input
+            {...this.state.email.props}
             label="Email address"
-            name="email"
             placeholder="Email address"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.emailError}
-            errorMessage={"Email is required"}
+            error={this.state.email.error}
+            errorMessage="Email is required"
           />
           <div className="form-group">
             <div className="radio">
@@ -119,31 +162,26 @@ class FlashBriefing extends React.Component {
             </div>
           </div>
           <Input
+            {...this.state.fName.props}
             label="First name"
-            name="fName"
             placeholder="e.g. John"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.fNameError}
+            error={this.state.fName.error}
             errorMessage={"First name is required"}
           />
+
           <Input
+            {...this.state.lName.props}
             label="Last name"
-            name="lName"
             placeholder="e.g. Smith"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.lNameError}
+            error={this.state.lName.error}
             errorMessage={"Last name is required"}
           />
 
           <Input
+            {...this.state.skillName.props}
             label="What name do you want to appear in the Alexa skill store?"
-            name="skillName"
             placeholder="e.g. MySkill"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.skillNameError}
+            error={this.state.skillName.error}
             errorMessage={"Skill name is required"}
           />
 
@@ -186,31 +224,25 @@ class FlashBriefing extends React.Component {
           </div>
 
           <Input
+            {...this.state.skillDescShort.props}
             label="Give a few words describing your skill"
-            name="skillDescShort"
             placeholder=""
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
-            error={this.state.skillDescShortError}
+            error={this.state.skillDescShort.error}
             errorMessage={"Please give a brief summary"}
           />
 
           <Input
+            {...this.state.skillDescLong.props}
             label="Give a brief description for your skill  (optional)"
-            name="skillDescLong"
             placeholder=""
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={""}
             errorMessage={""}
           />
 
           <Input
+            {...this.state.keywords.props}
             label="What keywords should your skill have? (optional)"
-            name="keywords"
             placeholder=""
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={""}
             errorMessage={""}
           />
@@ -218,21 +250,17 @@ class FlashBriefing extends React.Component {
           <h3 className="page-header">Feed 1</h3>
 
           <Input
+            {...this.state.feedName.props}
             label="Feed name"
-            name="feedName"
             placeholder="e.g. MyFeed"
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={this.state.feedNameError}
             errorMessage={"Feed name is required"}
           />
 
           <Input
+            {...this.state.preamble.props}
             label="Feed preamble"
-            name="preamble"
             placeholder=""
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={this.state.preambleError}
             errorMessage={"Preamble is required"}
           />
@@ -274,19 +302,14 @@ class FlashBriefing extends React.Component {
           </div>
 
           <Input
+            {...this.state.feedURL.props}
             label="Feed URL"
-            name="feedURL"
             placeholder=""
-            handleInputChange={this.handleInputChange}
-            handleInputBlur={this.handleInputBlur}
             error={this.state.feedURLError}
             errorMessage={"Please provide the feed URL"}
           />
+        </Form>
 
-          <button className="btn btn-primary form-submit" type="submit">
-            Submit
-          </button>
-        </form>
         <ResponseModal
           show={this.state.showModal}
           closeModal={this.closeModal}

@@ -1,4 +1,5 @@
 import React from "react";
+import Form from "./form";
 import ResponseModal from "./modules/responseModal";
 import Input from "./modules/input";
 import Select from "./modules/select";
@@ -139,9 +140,8 @@ class SimpleInteraction extends React.Component {
 
   render() {
     return (
-      <div className="container form-container">
-        <h1 className="page-header">Create Simple Interaction Skill</h1>
-        <form onSubmit={this.submitForm}>
+      <div>
+        <Form submitForm={this.submitForm} label={"Simple Interaction Form"}>
           <Input
             {...this.state.email.props}
             label="Email address"
@@ -293,13 +293,8 @@ class SimpleInteraction extends React.Component {
             error={""}
             errorMessage={""}
           />
+        </Form>
 
-          <button className="btn btn-primary form-submit" type="submit">
-            Submit
-          </button>
-        </form>
-
-        {/* Server response modal */}
         <ResponseModal
           show={this.state.showModal}
           closeModal={this.closeModal}
