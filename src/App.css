@@ -145,12 +145,34 @@ h3 {
 /*
  * HOME
  */
-.logo img {
-  width: 60%;
-  display: block;
-  margin: auto;
+ .home-section-1 {
+  height: 550px;
+  position: absolute;
+  top: 100px;
+  right: 0px;
+}
+.home-section-2 {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+}
+.home-section-2 h1 {
+  font-size: 100px;
+}
+.home-section-2 h3 {
+  font-size: 35px;
+}
+.home-section-2 span {
+  font-weight: bold;
+  color:#0880f7;
+}
+.home-section-1 img{
+  height: 100%;
 }
 
+/*
+ * DEMO
+ */
 .demoVid {
   margin-bottom: 50px;
 }
@@ -407,10 +429,6 @@ footer {
   /*width: 80%;*/
 }
 
-.home-section-1 {
-  height: ;
-}
-
 .hidden {
   display: none;
 }
@@ -435,5 +453,5 @@ footer {
 }
 
 .select-skill-text {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
