@@ -32,7 +32,7 @@ class SignIn extends React.Component {
         console.log("Login response: ", resp);
         if (resp.data.status === "SUCCESS") {
           window.localStorage.setItem("userId", resp.data.userId);
-          this.props.history.push("/");
+          this.props.history.push("/profile");
         }
       })
       .catch(error => {
@@ -53,7 +53,7 @@ class SignIn extends React.Component {
             onChange={this.handleInputChange}
           />
           <h5 className="lbl">
-            Password <a href="#!forgotPass">Forgot Password</a>
+            Password
           </h5>
 
           <input
@@ -62,6 +62,9 @@ class SignIn extends React.Component {
             name="password"
             onChange={this.handleInputChange}
           />
+
+          <h5 className="forgotPass"><a href="#!forgotPass">Forgot Password</a></h5>
+
           <button className="btn btn-lg btn-block mainBtn" type="submit">
             Sign in
           </button>

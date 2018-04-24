@@ -7,6 +7,8 @@ const signOut = props => {
   props.history.push("/");
 };
 
+
+
 const Navigation = props => (
   <nav className="menu">
     <ul className="menuList text-right">
@@ -21,17 +23,6 @@ const Navigation = props => (
         </NavLink>
       </li>
 
-      <li className="menuListElement">
-        <NavLink exact activeClassName="current" to="/create-skill">
-          CREATE NEW SKILL
-        </NavLink>
-      </li>
-      <li className="menuListElement">
-        <NavLink exact activeClassName="current" to="/view-skills">
-          VIEW MY SKILLS
-        </NavLink>
-      </li>
-
       <li className="menuListElement dropdwn">
         {window.localStorage.userId ? (
           <div>
@@ -41,12 +32,18 @@ const Navigation = props => (
               activeClassName="current"
               to="/profile"
             >
-              PROFILE
+            PROFILE
             </NavLink>
+
             <div className="dropdown-content text-left">
-              <NavLink exact activeClassName="current" to="/profile">
-                MY PROFILE
+              <NavLink exact activeClassName="current" to="/create-skill">
+                CREATE NEW SKILL
               </NavLink>
+
+              <NavLink exact activeClassName="current" to="/view-skills">
+                VIEW MY SKILLS
+              </NavLink>
+
               <NavLink
                 activeClassName="current"
                 onClick={() => {
