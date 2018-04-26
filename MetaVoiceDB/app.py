@@ -45,7 +45,7 @@ def ViewSkills():
     UserId = json.loads(request.get_json())['UserId']
     print("Requesting Skills for User")
     _db = db(cs)
-    resp = _db.attempt_get_skills(limit=None)
+    resp = _db.attempt_get_skills(UserId=UserId,limit=None)
     _db.shutdown()
     return good_response(resp)
 
@@ -57,6 +57,15 @@ def NewSkill():
     resp = _db.new_skill(jsonData)
     _db.shutdown()
     return good_response(resp)
+
+@app.route('/editskill', methods=['POST'])
+def EditSkill():
+    jsonData =request.get_json()
+    print('Edit skill request')
+    _db = db(cs)
+    status = _db.edit_skill(jsonData)
+    _db.shutdown()
+    return good_response(status)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.

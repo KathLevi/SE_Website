@@ -18,6 +18,7 @@ class db:
 
     def attempt_login ( self , json ):
         status = {}
+        json = js.loads(json)
         try:
             q = self.get_user_and_profile ( Email=json[ 'Email' ] , Password=json[ 'Password' ] )
             if q is None:
@@ -32,16 +33,16 @@ class db:
 
     def attempt_register ( self , json ):
         resp = {}
-
-        q = self.session.query ( User ).\
+            
+        try:
+            q = self.session.query ( User ).\
             filter_by( Email = json[ 'Email' ] ).\
             one_or_none ( )
 
-        if q is not None:
-            resp[ 'status' ] = 'USER_ALREADY_EXISTS_ERROR'
-            print("Failed to Register " + json[ 'Email' ])
-        else:
-            try:
+            if q is not None:
+                resp[ 'status' ] = 'USER_ALREADY_EXISTS_ERROR'
+                print("Failed to Register " + json[ 'Email' ])
+            else:
                 self.session.add ( self.build_user ( json ) )
                 self.session.commit ( )
                 q = self.get_user_and_profile ( json[ 'Email' ] , json[ 'Password' ] )
@@ -50,13 +51,13 @@ class db:
 
                 resp['userId'] = q.Id
                 resp['status'] = "SUCCESS"
-            except Exception as e:
+        except Exception as e:
                 print ("Unexpected error at attempt_register: " + str(e))
                 resp['status'] = "SERVER_ERROR"
 
         return resp
 
-    def attempt_get_skills(self,UserId):
+    def attempt_get_skills(self,UserId,limit=None):
         # This can be a seperate function
         skills = self.get_skills(Id=UserId)
         return skills
@@ -75,7 +76,6 @@ class db:
         except Exception as e:
             print("Unexpected error at build_feed: " + str(e))
         return "SERVER_ERROR"
-        
 
     def build_user ( self , json ):
         u = User(
@@ -120,7 +120,8 @@ class db:
             ShortDesc=json.get('ShortDesc', 'Default'),
             LongDesc=json.get('LongDesc', 'Default') ,
             Keywords= str(Keywords),
-            TemplateId=0
+            TemplateId=0,
+            SkillId=json.get('SkillId', None)
         )
         
     def get_user_and_profile ( self , Email , Password ):
@@ -144,19 +145,42 @@ class db:
 
             for Skill in SkillIds:
                 viewskills[Skill.SkillId] = Skill.dict()
-            for id in viewskills.keys():
-                Resps = self.session.query(Response).filter_by(SkillId = id).all()
+                viewskills[Skill.SkillId]['Responses'] = self.get_skill_resps(Id=Skill.SkillId)
+                viewskills[Skill.SkillId]['Utterances'] = self.get_skill_uttrs(Id=Skill.SkillId)
 
-                viewskills[id]['Responses'] = []
-                viewskills[id]['Utterances'] = []
-
-                for r in Resps:
-                    viewskills[id]['Responses'].append(r.dict())
-                Uttrs = self.session.query(Utterances).filter_by(SkillId = id).all()
-                for u in Uttrs:
-                    viewskills[id]['Utterances'].append(u.dict())
         return viewskills
-    
+
+    def submit_feeds(self,json,id):
+        try:
+            feeds = json.get ( 'Feeds' , None )
+            if feeds:
+                for feed in feeds:
+                    self.session.add ( self.build_feed ( feed , id ) )
+        except Exception as e:
+            print('Unexpected error in submit_feeds: ' + str(e))
+        return
+
+    def submit_uttrs(self,json,id):
+        try:
+            utters = json.get ( 'Utterances' , None )
+            SkillUtterances = [ ]
+            if utters:
+                for ut in utters:
+                    self.session.add ( self.build_utter ( ut , id ) )
+        except Exception as e:
+            print('Unexpected error in submit_uttrs: ' + str(e))
+        return
+
+    def submit_resps(self,json,id):
+        try:
+            resps = json.get ( 'Responses' , None )
+            if resps:
+                for resp in resps:
+                    self.session.add ( self.build_resp ( resp , id ) )
+        except Exception as e:
+            print('Unexpected error in submit_resps: ' + str(e))
+        return
+
     def new_skill(self,json):
         response = {}
         json = js.loads ( json )
@@ -167,22 +191,11 @@ class db:
             self.session.refresh(s)
             
             if json.get('template', None) == 'Alexa Flash Briefing':
-                feeds = json.get('Feeds', None)
-                if feeds:
-                    for feed in feeds:
-                        self.session.add(self.build_feed(feed,s.SkillId))
+                self.submit_feeds(json,s.SkillId)
             else:
-                utters = json.get('Utterances',None)
-                SkillUtterances = []
-                if utters:
-                    for ut in utters:
-                        self.session.add(self.build_utter(ut,s.SkillId))
-                
-                resps = json.get('Responses', None)
-                if resps:
-                    for resp in resps:
-                        self.session.add(self.build_resp(resp,s.SkillId))
-            
+                self.submit_uttrs(json,s.SkillId)
+                self.submit_resps(json,s.SkillId)
+
             self.session.commit()
             response['SkillId'] = s.SkillId
             response['status'] = "SUCCESS"
@@ -192,3 +205,76 @@ class db:
             response['status'] = "SERVER_ERROR"
         
         return response
+
+    def get_skill_resps(self,Id,):
+        Resps = []
+        _ = self.session.query ( Response ).filter_by ( SkillId=id ).all ( )
+        for r in _:
+            Resps.append(_.dict())
+
+        return Resps
+
+    def get_skill_uttrs(self,Id):
+        Utters = []
+        _ = self.session.query ( Utterances ).filter_by ( SkillId=id ).all ( )
+        for u in _:
+            Utters.append ( u.dict ( ) )
+        return Utters
+
+    def edit_skill(self,json):
+        response = {}
+        json = js.loads(json)
+        try:
+            q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
+            if q:
+                if json.get('template', None) == 'Alexa Flash Briefing':
+                    print('Flash Brief')
+                    q = self.update_skill(q,json)
+                    self.replace_feeds(json,q.SkillId)
+                    self.session.commit()
+                    # Need to swap out all the feeds
+                else:
+                    print('Skill is simple/complex')
+
+            else:
+                print('Skill does not exist. Try creating it')
+        except Exception as e:
+            print("Unexpected error at edit_skill: " + str(e))
+            response['status'] = 'SERVER_ERROR'
+
+        return
+
+    def replace_uttrs(self,json,SkillId):
+        try:
+            self.session.query(Utterances).filter_by(SkillId=SkillId).all().delete()
+            self.submit_uttrs(json,SkillId)
+
+        except Exception as e:
+            print('Unexpected error in replace_uttrs: ' + str(e))
+        return
+
+    def replace_feeds(self,json,SkillId):
+        try:
+            self.session.query ( Feed ).filter_by ( SkillId=SkillId ).delete ( )
+            self.submit_feeds ( json , SkillId )
+
+        except Exception as e:
+            print ( 'Unexpected error in replace_uttrs: ' + str ( e ) )
+        return
+
+    def replace_resps(self,json,SkillId):
+        try:
+            self.session.query(Utterances).filter_by(SkillId=SkillId).delete()
+            self.submit_resps(json,SkillId)
+        except Exception as e:
+            print('Unexpected error in replace_resps: ' + str(e))
+        return
+
+    def update_skill(self,Skill,json):
+        Skill.Name = json.get('Name')
+        Skill.Status = json.get('Status')
+        Skill.Category = json.get('Category')
+        Skill.ShortDesc = json.get('ShortDesc')
+        Skill.LongDesc = json.get('LongDesc')
+        Skill.Keywords = str(json.get('Keywords'))
+        return Skill

@@ -82,6 +82,7 @@ class Skills(Base):
     LongDesc = Column(String(200))
     Keywords = Column(String(200))
     # Maps many to many relationship with Utterances and Responses
+    Feeds = relationship('Feed')
     Utterances = relationship('Utterances')
     Responses = relationship('Response')
     TemplateId = Column(Integer, ForeignKey('Templates.TemplateId'))
