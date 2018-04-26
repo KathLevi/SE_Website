@@ -16,20 +16,38 @@ class db:
     def __str__ ( self ):
         return "Database(%r)" % (self.conn_string)
 
+
+    # Function for checking the reason for an invalid login
+    # returns an error type string
+    def invalid_login(self,json):
+        q = self.session.query(User).filter_by(Email=json['Email']).one_or_none()
+        if q:
+            return 'Password Incorrect'
+        else:
+            return 'Username Incorrect'
+
+    # Function that attempts to login the user to their account
+    # Returns either that users login information or a detailed login error
     def attempt_login ( self , json ):
         status = {}
         try:
             q = self.get_user_and_profile ( Email=json[ 'Email' ] , Password=json[ 'Password' ] )
             if q is None:
                 status['status'] = "INVALID_LOGIN"
+                status['error'] = self.invalid_login(json)
             else:
                 status[ 'userId' ] = q.Id
                 status[ 'status'] = "SUCCESS"
         except Exception as e:
             print ("Unexpected error at attempt_login: " +  str(e))
             status['status'] = "SERVER_ERROR"
+            status['error'] = str(e)
+
         return status
 
+    # Function that attempts to register a user under an email and pw
+    # Returns either that the user was registered and their User_Profile information
+    # or a detailed error of why the registration failed
     def attempt_register ( self , json ):
         resp = {}
             
@@ -47,20 +65,25 @@ class db:
                 q = self.get_user_and_profile ( json[ 'Email' ] , json[ 'Password' ] )
                 print ("Attempting registration")
                 print ( "Registered: " + q.Email )
-
                 resp['userId'] = q.Id
                 resp['status'] = "SUCCESS"
+
         except Exception as e:
                 print ("Unexpected error at attempt_register: " + str(e))
                 resp['status'] = "SERVER_ERROR"
+                resp['error'] = str(e)
 
         return resp
 
+    # Function that gets a list of skills for a user on that users UserId
+    # LIMIT HAS NOT BEEN IMPLEMENTED DO NOT USE
+    # Does not return detailed error as to why skills were not returned
     def attempt_get_skills(self,UserId,limit=None):
         # This can be a seperate function
         skills = self.get_skills(Id=UserId)
         return skills
 
+    # Builds a new Feed Object with on SkillID, from JSON
     def build_feed(self, feed,SkillId):
         try:
             f = Feed(
@@ -76,6 +99,7 @@ class db:
             print("Unexpected error at build_feed: " + str(e))
         return "SERVER_ERROR"
 
+    # Builds a new User object from JSON
     def build_user ( self , json ):
         u = User(
             Email=json[ 'Email' ] ,
@@ -96,18 +120,21 @@ class db:
         u.User_Profile = up
         return u
 
+    # Builds a new Utterance object on a SkillId from JSON
     def build_utter(self,ut,SkillId):
         return Utterances(
             SkillId = SkillId,
             Utter = ut
         )
 
+    # Builds a new Response object on a SkillId from JSON
     def build_resp(self,resp,SkillId):
         return Response(
             SkillId=SkillId,
             Resp=resp
         )
 
+    # Builds a new Skill Object from JSON
     def build_skill(self,json):
         Keywords = json.get('Keywords', 'Default')
         return Skills(
@@ -122,7 +149,8 @@ class db:
             TemplateId=0,
             SkillId=json.get('SkillId', None)
         )
-        
+
+    # Returns a User object joined with that users User_Profile
     def get_user_and_profile ( self , Email , Password ):
         q = self.session.query ( User ).\
             join ( User_Profile ).\
@@ -132,9 +160,13 @@ class db:
             one_or_none ( )
         return q
 
+    # Shuts down the DB engine
     def shutdown ( self ):
         return self.engine.dispose ( )
 
+    # Function that gets a list of skills for a user on that users UserId
+    # LIMIT HAS NOT BEEN IMPLEMENTED DO NOT USE
+    # Does not return detailed error as to why skills were not returned
     def get_skills(self,Id,Limit=None):
         viewskills = {}
         if Limit:
@@ -149,6 +181,7 @@ class db:
 
         return viewskills
 
+    # Submits list of new Feed objects to the database on a certain SkillId
     def submit_feeds(self,json,id):
         try:
             feeds = json.get ( 'Feeds' , None )
@@ -159,6 +192,7 @@ class db:
             print('Unexpected error in submit_feeds: ' + str(e))
         return
 
+    # Submits list of new Utterance objects to the database on a certain SkillId
     def submit_uttrs(self,json,id):
         try:
             utters = json.get ( 'Utterances' , None )
@@ -170,6 +204,7 @@ class db:
             print('Unexpected error in submit_uttrs: ' + str(e))
         return
 
+    # Submits list of new Response objects to the database on a certain SkillId
     def submit_resps(self,json,id):
         try:
             resps = json.get ( 'Responses' , None )
@@ -180,6 +215,9 @@ class db:
             print('Unexpected error in submit_resps: ' + str(e))
         return
 
+    # Function that creates a new skill from a JSON object
+    # returns the new SkillId upon sucess
+    # returns a error status and reason upon failure
     def new_skill(self,json):
         response = {}
         json = js.loads ( json )
@@ -198,13 +236,14 @@ class db:
             self.session.commit()
             response['SkillId'] = s.SkillId
             response['status'] = "SUCCESS"
-        
+
         except Exception as e:
             print ("Unexpected error at new_skill: " + str(e))
             response['status'] = "SERVER_ERROR"
-        
+            response['error'] = str(e)
         return response
 
+    # Function that returns a list of Response objects for a certain SkillId
     def get_skill_resps(self,Id,):
         Resps = []
         _ = self.session.query ( Response ).filter_by ( SkillId=id ).all ( )
@@ -213,6 +252,7 @@ class db:
 
         return Resps
 
+    # Function taht reutnrs a list of Utterance objects for a certain SkillId
     def get_skill_uttrs(self,Id):
         Utters = []
         _ = self.session.query ( Utterances ).filter_by ( SkillId=id ).all ( )
@@ -220,6 +260,9 @@ class db:
             Utters.append ( u.dict ( ) )
         return Utters
 
+    # Function that takes in a FULL SKILL JSON OBJECT and attempts to resubmit it to the database
+    # Updates the skill and then replaces information for the Skills database dependencies
+    # Sends error message upon issue editing the object
     def edit_skill(self,json):
         response = {}
         json = js.loads(json)
@@ -227,25 +270,26 @@ class db:
             q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
             if q:
                 if json.get('Template', None) == 'Alexa Flash Briefing':
-                    print('Flash Brief')
                     q = self.update_skill(q,json)
                     self.replace_feeds(json,q.SkillId)
                     self.session.commit()
-                    # Need to swap out all the feeds
                 else:
-                    print('Skill is simple/complex')
                     q = self.update_skill(q,json)
                     self.replace_resps(json,q.SkillId)
                     self.replace_uttrs(json,q.SkillId)
                     self.session.commit()
             else:
-                print('Skill does not exist. Try creating it')
+                response['status'] = 'EDIT_ERROR'
+                response['error'] = 'Skill does not exist. Why are you trying to edit it?'
         except Exception as e:
             print("Unexpected error at edit_skill: " + str(e))
             response['status'] = 'SERVER_ERROR'
+            response['error'] = str(e)
 
         return
 
+    # Function that deletes all Utterances based on a SkillId
+    # Submits new Utterances from JSON object
     def replace_uttrs(self,json,SkillId):
         try:
             _ = self.session.query(Utterances).filter_by(SkillId=SkillId).all()
@@ -259,6 +303,8 @@ class db:
             print('Unexpected error in replace_uttrs: ' + str(e))
         return
 
+    # Function that deletes all Feeds based on a SkillId
+    # Submits new Feeds from JSON object
     def replace_feeds(self,json,SkillId):
         try:
             _ = self.session.query ( Feed ).filter_by ( SkillId=SkillId ).all()
@@ -271,6 +317,9 @@ class db:
             print ( 'Unexpected error in replace_uttrs: ' + str ( e ) )
         return
 
+
+    # Function that deletes all Responses based on a SkillId
+    # Submits new Responses from JSON object
     def replace_resps(self,json,SkillId):
         try:
             _ = self.session.query(Response).filter_by(SkillId=SkillId).all()
@@ -283,6 +332,8 @@ class db:
             print('Unexpected error in replace_resps: ' + str(e))
         return
 
+    # Replaces a Skill DB objects attributes necessary for a Skill Edit
+    # Returns the new Skill DB object
     def update_skill(self,Skill,json):
         Skill.Name = json.get('Name')
         Skill.Status = json.get('Status')
