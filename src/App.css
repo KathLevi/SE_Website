@@ -342,29 +342,9 @@ td {
 /*
  * CONTACT
  */
-#contact {
-  padding-top: 60px;
-  width: 100%;
-  width: 100vw;
-  height: 550px;
-}
-.content-header {
-  color: #0880f7;
-  font-size: 45px;
-}
-.section-content {
-  text-align: center;
-}
 .contact-section {
   padding-top: 40px;
 }
-.contact-section .col-md-6 {
-  width: 50%;
-}
-.form-line {
-  border-right: 1px solid #b29999;
-}
-
 /*
  * FOOTER
  */
