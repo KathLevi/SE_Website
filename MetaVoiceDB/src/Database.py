@@ -18,7 +18,6 @@ class db:
 
     def attempt_login ( self , json ):
         status = {}
-        json = js.loads(json)
         try:
             q = self.get_user_and_profile ( Email=json[ 'Email' ] , Password=json[ 'Password' ] )
             if q is None:
