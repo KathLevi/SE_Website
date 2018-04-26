@@ -5,7 +5,7 @@
 :root {
   --main-blue : #3d85c6;
   --light-grey : lightgrey;
-  --dark-grey : grey;
+  --grey : grey;
 }
 
 html {
@@ -367,10 +367,12 @@ footer {
   line-height: 1.5rem;
   vertical-align: top;
 }
+.footerCol a {
+  color: var(--grey);
+}
 .leftCol {
   padding-left: 100px;
 }
-
 .rightCol {
   padding-right: 100px;
 }

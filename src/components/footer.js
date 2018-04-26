@@ -18,7 +18,9 @@ const Footer = () => (
     </div>  
     <div className = "footerCol text-center">
       <span>CONTACT US</span>
-      <p>info@bluemarble.com</p>
+      <p>
+        <a href="mailto:info@bluemarble.com?Subject=Hello%20again" target="_top">info@bluemarble.com</a>
+     </p>
       <p>(123) 456-7890</p>
     </div>
     <div className = "footerCol text-right rightCol">
