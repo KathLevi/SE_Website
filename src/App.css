@@ -44,7 +44,6 @@ h3 {
   padding: 0;
   overflow: hidden;
   background-color: #232f3e;
-  min-width: 632px;
 }
 .menuListElement {
   display: inline;
@@ -93,21 +92,30 @@ h3 {
 /*
  * FOOTER
  */
+.menu {
+  height: 100%;
+  width: 100%;
+}
 .fmenuList {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   background-color: #232f3e;
 }
 .fmenuListElement {
   display: inline;
+  padding: 20px 24px;
 }
 .fmenuListElement a,
 .fdropbtn {
   display: inline-block;
   color: white;
-  padding: 20px 24px;
   text-decoration: none;
 }
 .fmenuListElement a:hover,
@@ -387,8 +395,6 @@ footer {
   bottom: 0;
   height: 100px;
   width: 100%;
-  padding-top: 40px;
-  min-width: 632px;
 }
 
 .form-submit {
@@ -439,4 +445,11 @@ footer {
 
 .select-skill-text {
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 632px) {
+  .fmenuListElement {
+    max-width: 200px;
+    padding: 14px 14px;
+  }
 }

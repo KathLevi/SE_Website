@@ -1,9 +1,8 @@
 import React from "react";
-import { PageHeader } from "react-bootstrap";
 
 const Profile = () => (
   <div className="container">
-    <PageHeader>My Profile</PageHeader>
+    <h1>My Profile</h1>
   </div>
 );
 

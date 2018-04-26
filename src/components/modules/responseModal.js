@@ -1,22 +1,22 @@
 import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const ResponseModal = props => (
   <Modal
-    size="lg"
-    className="response-modal"
-    show={props.show}
-    onHide={props.closeModal}
+    isOpen={props.show}
+    toggle={props.closeModal}
+    className={props.className}
   >
-    <Modal.Header closeButton>
-      <Modal.Title>Server response</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <p>{props.message}</p>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button onClick={props.closeModal}>Close</Button>
-    </Modal.Footer>
+    <ModalHeader toggle={props.closeModal}>Server response</ModalHeader>
+    <ModalBody>{props.message}</ModalBody>
+    <ModalFooter>
+      <Button color="primary" onClick={props.closeModal}>
+        Do Something
+      </Button>{" "}
+      <Button color="secondary" onClick={props.closeModal}>
+        Cancel
+      </Button>
+    </ModalFooter>
   </Modal>
 );
 

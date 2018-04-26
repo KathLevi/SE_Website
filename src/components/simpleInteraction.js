@@ -93,6 +93,8 @@ class SimpleInteraction extends React.Component {
   submitForm = e => {
     e.preventDefault();
 
+    this.showModal("hi");
+
     if (!this.validate()) return;
 
     let data = {
