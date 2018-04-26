@@ -190,7 +190,7 @@ class db:
             self.session.flush()
             self.session.refresh(s)
             
-            if json.get('template', None) == 'Alexa Flash Briefing':
+            if json.get('Template', None) == 'Alexa Flash Briefing':
                 self.submit_feeds(json,s.SkillId)
             else:
                 self.submit_uttrs(json,s.SkillId)
@@ -227,7 +227,7 @@ class db:
         try:
             q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
             if q:
-                if json.get('template', None) == 'Alexa Flash Briefing':
+                if json.get('Template', None) == 'Alexa Flash Briefing':
                     print('Flash Brief')
                     q = self.update_skill(q,json)
                     self.replace_feeds(json,q.SkillId)
@@ -235,7 +235,10 @@ class db:
                     # Need to swap out all the feeds
                 else:
                     print('Skill is simple/complex')
-
+                    q = self.update_skill(q,json)
+                    self.replace_resps(json,q.SkillId)
+                    self.replace_uttrs(json,q.SkillId)
+                    self.session.commit()
             else:
                 print('Skill does not exist. Try creating it')
         except Exception as e:
@@ -246,7 +249,11 @@ class db:
 
     def replace_uttrs(self,json,SkillId):
         try:
-            self.session.query(Utterances).filter_by(SkillId=SkillId).all().delete()
+            _ = self.session.query(Utterances).filter_by(SkillId=SkillId).all()
+            for x in _:
+                self.session.delete(x)
+
+            self.session.commit()
             self.submit_uttrs(json,SkillId)
 
         except Exception as e:
@@ -255,7 +262,10 @@ class db:
 
     def replace_feeds(self,json,SkillId):
         try:
-            self.session.query ( Feed ).filter_by ( SkillId=SkillId ).delete ( )
+            _ = self.session.query ( Feed ).filter_by ( SkillId=SkillId ).all()
+            for x in _:
+                self.session.delete(x)
+            self.session.commit()
             self.submit_feeds ( json , SkillId )
 
         except Exception as e:
@@ -264,7 +274,11 @@ class db:
 
     def replace_resps(self,json,SkillId):
         try:
-            self.session.query(Utterances).filter_by(SkillId=SkillId).delete()
+            _ = self.session.query(Response).filter_by(SkillId=SkillId).all()
+            for x in _:
+                self.session.delete(x)
+
+            self.session.commit()
             self.submit_resps(json,SkillId)
         except Exception as e:
             print('Unexpected error in replace_resps: ' + str(e))

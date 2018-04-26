@@ -3,9 +3,9 @@ import json
 
 # Data formatting standards for a new skill request should look like either of these
 FBdata = {
-   "SkillId" : 7,
+   "SkillId" : 28,
    "UserId" : 1,
-   "template":"Alexa Flash Briefing",
+   "Template":"Alexa Flash Briefing",
    "Name":"Test Skill CHANGED",
    'Status' : 'ALMOST THERE',
    "Category":"Television MAYBE",
@@ -22,42 +22,40 @@ FBdata = {
          "Preamble":"Pramble",
          "UpdateFreq":"Hourly",
          "Genre":"Headline News",
-         "URL":"https://docs.google.com/document/d/1PAui9nkdnFX06YW1miJ_QVtn_x7IbrzTdoTbo1ajPeA/edit"
+         "URL":"https://www.gm.com"
       },
       {
          "Name":"Test Feed",
          "Preamble":"Pramble",
          "UpdateFreq":"Hourly",
          "Genre":"Headline News",
-         "URL":"https://docs.google.com/document/d/1PAui9nkdnFX06YW1miJ_QVtn_x7IbrzTdoTbo1ajPeA/edit"
+         "URL":"https://www.reddit.com/r/nba"
       }
    ]
 }
 
 SSData = {
-   "SkillId" : 3,
+   "SkillId" : 29,
    "UserId" : 1,
-   "Email":"Hello",
-   "Template":"Alexa Flash Briefing",
-   "firstName":"Andrew",
-   "lastName":"Gazeley",
-   "Name":"Test Skill Edited",
+   "Template":"Simple Skill",
+    "Status" : 'Still works',
+   "Name":"IT WORKED",
    "Category":"NIKE JUST DO IT",
-   "ShortDesc":"Descriptive words here",
-   "LongDesc":"Longer descriptive words",
+   "ShortDesc":"Desc",
+   "LongDesc":"Long",
    "Keywords":[
       "Key1",
       "Key2",
       "Key3"
    ],
     "Utterances":[
-        "hello",
-        "world"
+        "IT WORKED1",
+        "You sure about that ANdrew?"
     ],
     "Responses":[
-        "Set",
-        "Me",
-        "Free"
+        "How about now?",
+        "WORKDED4",
+        "Maybe Now?"
     ]
 }
 
@@ -67,7 +65,7 @@ resp_FB = requests.post('http://127.0.0.1:5004/editskill', json=jsonData)
 
 jsonData = json.dumps(SSData)
 print("Data : " + jsonData)
-#resp_SS = requests.post('http://127.0.0.1:5004/editskill', json=jsonData)
+resp_SS = requests.post('http://127.0.0.1:5004/editskill', json=jsonData)
 
 print("Success? " + str(resp_FB))
-#print("Success? " + str(resp_SS))
+print("Success? " + str(resp_SS))
