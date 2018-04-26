@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
+import logo from "../assets/logo_ball.png";
 
 const signOut = props => {
   window.localStorage.removeItem("userId");
@@ -9,8 +10,11 @@ const signOut = props => {
 
 
 
-const Navigation = props => (
-  <nav className="menu">
+const Navigation = props => (    
+  <nav>
+    <div className="logo text-left">
+      <span>Blue</span>marble<img src={logo} alt="blue marble logo" />
+    </div>
     <ul className="menuList text-right">
       <li className="menuListElement">
         <NavLink exact activeClassName="current" to="/">
@@ -20,6 +24,11 @@ const Navigation = props => (
       <li className="menuListElement">
         <NavLink exact activeClassName="current" to="/demo">
           DEMO
+        </NavLink>
+      </li>
+      <li className="menuListElement">
+        <NavLink exact activeClassName="current" to="/team">
+          ABOUT US
         </NavLink>
       </li>
 

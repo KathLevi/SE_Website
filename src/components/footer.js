@@ -2,23 +2,29 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => (
-  <footer>  
-    <nav className="menu">
-    <ul className="fmenuList text-center">
-    @2018 - Blue Marble. All rights reserved.    
-      <li className="fmenuListElement">
-          <NavLink exact activeClassName="current" to="/team">
-            OUR TEAM
-          </NavLink>
-        </li>
-        <li className="fmenuListElement">
-        <NavLink exact activeClassName="current" to="/contact">
-          CONTACT US
+  <footer>   
+    <div className = "footerCol text-left">
+      <span>MORE BLUE MARBLE</span>
+      <p className="fmenuListElement">
+        <NavLink exact activeClassName="footer_current" to="/team">
+          Meet Our Team
         </NavLink>
-      </li>
-        </ul>
-  </nav>
-    
+      </p>
+      <p className="fmenuListElement">
+        <NavLink exact activeClassName="footer_current" to="/contact">
+          Contact Us
+        </NavLink>
+      </p>
+    </div>  
+    <div className = "footerCol text-center">
+      <span>CONTACT US</span>
+      <p>info@bluemarble.com</p>
+      <p>(123) 456-7890</p>
+    </div>
+    <div className = "footerCol text-right">
+      <span>SOCIAL MEDIA</span>
+      <p>insert social media icons here</p>
+    </div> 
   </footer>
 );
 

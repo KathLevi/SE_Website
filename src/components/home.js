@@ -6,7 +6,7 @@ const Home = () => (
   <div className="home-section">
     <div className="home-section-2">
       <h1>Blue <span>Marble</span></h1>
-      <h3>Create a new skill with one simple form.</h3>
+      <h3>Insert witty slogan here.</h3>
       <NavLink
       className="btn btn-primary"
       exact
