@@ -5,10 +5,10 @@ import { NavLink } from "react-router-dom";
 const Home = () => (
   <div className="home-section">
     <div className="home-section-2">
-      <h1>Blue <span>Marble</span></h1>
+      <h1><span>Blue</span>marble</h1>
       <h3>Insert witty slogan here.</h3>
       <NavLink
-      className="btn btn-primary"
+      className="btn btn-primary emptyBtn"
       exact
       activeClassName="current"
       to="/demo">

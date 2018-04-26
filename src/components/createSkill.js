@@ -16,7 +16,7 @@ const CreateSkill = () => (
               trigger the skill and Alexa will respond with a static response.
             </p>
             <NavLink
-              className="btn btn-primary select-skill-btn"
+              className="btn btn-primary select-skill-btn emptyBtn"
               exact
               activeClassName="current"
               to="/createSkill/simple-interaction"
@@ -37,7 +37,7 @@ const CreateSkill = () => (
               briefing skill.
             </p>
             <NavLink
-              className="btn btn-primary select-skill-btn"
+              className="btn btn-primary select-skill-btn emptyBtn"
               exact
               activeClassName="current"
               to="/createSkill/flash-briefing"
@@ -57,7 +57,7 @@ const CreateSkill = () => (
               trigger the skill and Alexa will respond with dynamic responses.
             </p>
             <NavLink
-              className="btn btn-primary select-skill-btn"
+              className="btn btn-primary select-skill-btn emptyBtn"
               exact
               activeClassName="current"
               to="/createSkill/flash-briefing"

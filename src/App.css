@@ -19,7 +19,12 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
 }
-
+.emptyBtn {
+  background-color: white;
+  color: var(--main-blue);
+  border-color: var(--main-blue);
+  border-radius: 0px;
+}
 h3 {
   padding-bottom: 8px;
 }

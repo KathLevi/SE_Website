@@ -6,7 +6,7 @@ const ViewSkills = () => (
   <div className="container">
     <PageHeader>My Skills
       <NavLink
-        className="btn btn-primary pull-right"
+        className="btn btn-primary pull-right emptyBtn"
           exact
           activeClassName="current"
           to="/create-skill"
