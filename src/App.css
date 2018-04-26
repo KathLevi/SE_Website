@@ -116,7 +116,7 @@ h3 {
  * HOME
  */
  .home-section-1 {
-  height: 550px;
+  height: 65%;
   position: absolute;
   top: 100px;
   right: 0px;
@@ -375,7 +375,7 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   min-width: 632px;
 }
 .footer_current {
@@ -384,9 +384,15 @@ footer {
 .footerCol {
   width: 33%;
   display: inline-block;
-  padding: 0px 100px;
   line-height: 1.5rem;
   vertical-align: top;
+}
+.leftCol {
+  padding-left: 100px;
+}
+
+.rightCol {
+  padding-right: 100px;
 }
 .footerCol span {
   font-weight: bold;
