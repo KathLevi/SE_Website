@@ -85,10 +85,10 @@ class Skills(Base):
     Feeds = relationship('Feed')
     Utterances = relationship('Utterances')
     Responses = relationship('Response')
-    TemplateId = Column(Integer, ForeignKey('Templates.TemplateId'))
+    Template = Column(String(50))
 
     def __init__(self,Name=None, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
-                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,TemplateId=None):
+                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,Template=None):
         self.Name = Name
         self.SkillId = SkillId
         self.UserId = UserId
@@ -98,7 +98,7 @@ class Skills(Base):
         self.ShortDesc = ShortDesc
         self.LongDesc = LongDesc
         self.Keywords = Keywords
-        self.TemplateId = TemplateId        
+        self.Template = Template
         return
 
     def dict(self):
@@ -111,7 +111,7 @@ class Skills(Base):
             'ShortDesc' : self.ShortDesc,
             'LongDesk' : self.LongDesc,
             'Keywords' : self.Keywords,
-            'TemplateId' : self.TemplateId
+            'Template' : self.Template
         }
 
 class Utterances(Base):
@@ -158,23 +158,6 @@ class Response(Base):
             'SkillId' : self.SkillId,
             'Resp' : self.Resp,
             'IntentId' : self.IntentId
-        }
-
-class Template(Base):
-    __tablename__ = 'Templates'
-    Skills = relationship('Skills')
-    TemplateId = Column(Integer, primary_key=True, )
-    Name = Column(String(20))
-
-    def __init__(self, TemplateId=None, Name=None):
-        self.TemplateId = TemplateId
-        self.Name = Name
-        return
-
-    def dict(self):
-        return {
-            'TemplateId' : self.TemplateId,
-            'Name' : self.Name
         }
 
 class Feed(Base):

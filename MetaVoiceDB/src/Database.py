@@ -3,6 +3,18 @@ from sqlalchemy.orm import sessionmaker
 from src.Models import User , User_Profile , Base, Skills, Response, Utterances, Feed, Intent
 import json as js
 
+# TODO
+# Split some of this up. There can be 'helper' classes that modulate these tasks more
+# Modify /editskill to work with mutliple intents
+# Modify /editskill to work with intents with multiple responses?
+# Modify /newskill to work with multiple intents
+# Modify /newskill to work with intents with multitple responses
+# Find out why socket errors keep occuring when completing a large number of updates
+# Modify methods that update rows so they are not deleting. Instead they are using the update() function
+# Reorganize functions to be grouped by use
+# Need to update ViewSkills to work properly
+# Need to add submission of template type to skills
+
 class db:
     def __init__ ( self , conn_string=None ):
         self.conn_string = conn_string
@@ -15,7 +27,6 @@ class db:
 
     def __str__ ( self ):
         return "Database(%r)" % (self.conn_string)
-
 
     # Function for checking the reason for an invalid login
     # returns an error type string
@@ -147,7 +158,7 @@ class db:
             ShortDesc=json.get('shortDescription', 'Default'),
             LongDesc=json.get('longDescription', 'Default') ,
             Keywords= str(Keywords),
-            TemplateId=0,
+            Template=json.get('template','Simple Skill'),
             SkillId=json.get('SkillId', None)
         )
 
@@ -177,9 +188,11 @@ class db:
 
             for Skill in SkillIds:
                 viewskills[Skill.SkillId] = Skill.dict()
-                viewskills[Skill.SkillId]['Responses'] = self.get_skill_resps(Id=Skill.SkillId)
-                viewskills[Skill.SkillId]['Utterances'] = self.get_skill_uttrs(Id=Skill.SkillId)
-
+                
+                if Skill.Template == 'Alexa Flash Briefing':
+                    viewskills[ Skill.SkillId ][ 'feeds' ] = self.get_skill_feeds ( Skill.SkillId )
+                else:
+                    viewskills[ Skill.SkillId ][ 'intents' ] = self.get_skill_intent ( Skill.SkillId )
         return viewskills
 
     # Submits list of new Feed objects to the database on a certain SkillId
@@ -248,16 +261,16 @@ class db:
     # Function that returns a list of Response objects for a certain SkillId
     def get_skill_resps(self,Id,):
         Resps = []
-        _ = self.session.query ( Response ).filter_by ( SkillId=id ).all ( )
+        _ = self.session.query ( Response ).filter_by ( IntentId=Id ).all ( )
         for r in _:
-            Resps.append(_.dict())
+            Resps.append(r.dict())
 
         return Resps
 
     # Function taht reutnrs a list of Utterance objects for a certain SkillId
     def get_skill_uttrs(self,Id):
         Utters = []
-        _ = self.session.query ( Utterances ).filter_by ( SkillId=id ).all ( )
+        _ = self.session.query ( Utterances ).filter_by ( IntentId=Id ).all ( )
         for u in _:
             Utters.append ( u.dict ( ) )
         return Utters
@@ -355,6 +368,7 @@ class db:
         Skill.ShortDesc = json.get('shortDescription')
         Skill.LongDesc = json.get('longDescription')
         Skill.Keywords = str(json.get('keywords'))
+        Skill.Template = json.get('template')
         return Skill
 
     # creates a new intent, submits to the DB and then maps the responses and utterances to that intent
@@ -387,3 +401,22 @@ class db:
             print('Unexpected error in submit_intent: ' + str(e))
         
         return
+
+    def get_skill_intent(self,id):
+        intents = []
+        _ = self.session.query ( Intent ).filter_by ( SkillId=id ).all ( )
+        for intent in _:
+            id = intent.IntentId
+            intent = intent.dict()
+            intent['utterances'] = self.get_skill_uttrs(id)
+            intent['response'] = self.get_skill_resps(id)
+            intents.append(intent)
+        return intents
+
+    def get_skill_feeds(self,id):
+        feeds = []
+        _ = self.session.query(Feed).filter_by(SkillId=id).all()
+        for feed in _:
+            feeds.append(feed.dict())
+
+        return feeds
