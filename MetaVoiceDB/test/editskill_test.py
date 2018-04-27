@@ -5,7 +5,7 @@ import json
 FBdata = {
    "firstName" : 'Name',
    "lastName" : "Name2",
-   "SkillId" : 46
+   "SkillId" : 64,
    "UserId" : 3,
    "template":"Alexa Flash Briefing",
    'amz_SkillId' : 'jiasdlkjdsakjldsakj',
@@ -14,6 +14,8 @@ FBdata = {
    "shortDescription":"App to make sandwich",
    "longDescription":"Longer desc of sandwiches",
    "keywords": "Sandwich, cheese, mayo",
+   "status" : 'GREEN MEANS GO',
+   "amz_SkillId" : "hasdhjasdjkhk123123",
    "feeds":[  
       {  
          "name":"Feed1 TEST",
@@ -34,13 +36,15 @@ FBdata = {
 
 SSData = {
    "UserId" : 1,
-   "SkillId" : 49,
+   "SkillId" : 65,
    "template":"Simple Skill",
    "name":"Test Simple Skill CHANGED",
    "category":"Metal Ship Sailing",
    "shortDescription":"Descriptive words here - CHANGED",
    "longDescription":"Longer descriptive words - CHANGED",
    "keywords": "Keword1, Hellp, Help, NEWKEYWORD",
+   "status" : "HELLO WORLD I AM HERE",
+   'amz_SkillId' : "jhsadkjlhsdakjl--sadk212",
    "intents" : [
        {
         # These should be able to be modified for a many to many approach

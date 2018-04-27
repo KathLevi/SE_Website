@@ -233,7 +233,7 @@ class db:
                 self.submit_feeds(json,s.SkillId)
             else:
                 # Need to restructure to work with Intents
-                self.submit_intent(json,s.SkillId)
+                self.submit_new_intent(json,s.SkillId)
 
             self.session.commit()
             response['SkillId'] = s.SkillId
@@ -271,14 +271,15 @@ class db:
         try:
             q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
             if q:
-                if json.get('Template', None) == 'Alexa Flash Briefing':
+                if json.get('template', None) == 'Alexa Flash Briefing':
                     q = self.update_skill(q,json)
                     self.replace_feeds(json,q.SkillId)
                     self.session.commit()
                 else:
                     q = self.update_skill(q,json)
-                    self.replace_resps(json,q.SkillId)
-                    self.replace_uttrs(json,q.SkillId)
+                    self.replace_intents(json,q.SkillId)
+                    
+                   
                     self.session.commit()
             else:
                 response['status'] = 'EDIT_ERROR'
@@ -292,14 +293,14 @@ class db:
 
     # Function that deletes all Utterances based on a SkillId
     # Submits new Utterances from JSON object
-    def replace_uttrs(self,json,SkillId):
+    def replace_uttrs(self,json,SkillId, OldIntentId, NewIntentId):
         try:
-            _ = self.session.query(Utterances).filter_by(SkillId=SkillId).all()
+            _ = self.session.query(Utterances).filter_by(IntentId=OldIntentId).all()
             for x in _:
                 self.session.delete(x)
 
             self.session.commit()
-            self.submit_uttrs(json,SkillId)
+            self.submit_uttrs(json['intents'][0], SkillId, NewIntentId)
 
         except Exception as e:
             print('Unexpected error in replace_uttrs: ' + str(e))
@@ -321,17 +322,29 @@ class db:
 
     # Function that deletes all Responses based on a SkillId
     # Submits new Responses from JSON object
-    def replace_resps(self,json,SkillId):
+    def replace_resps(self,json,SkillId, OldIntentId,NewIntentId):
         try:
-            _ = self.session.query(Response).filter_by(SkillId=SkillId).all()
+            _ = self.session.query(Response).filter_by(IntentId=OldIntentId).all()
             for x in _:
                 self.session.delete(x)
-
             self.session.commit()
-            self.submit_resps(json,SkillId)
+            self.submit_resps(json['intents'][0], SkillId, NewIntentId)
         except Exception as e:
             print('Unexpected error in replace_resps: ' + str(e))
         return
+
+    #TODO Needs to be able to work for multiple intents
+    def replace_intents(self,json,SkillId):
+        try:
+            _ = self.session.query(Intent).filter_by(SkillId=SkillId).all()
+            for x in _:
+                id = x.IntentId
+                self.session.delete(x)
+                IntentId = self.submit_intent(json,SkillId)
+                self.replace_resps(json, SkillId, id, IntentId)
+                self.replace_uttrs(json, SkillId, id, IntentId)
+        except Exception as e:
+            print("Unexpected error in replace_intents: " + str(e))
 
     # Replaces a Skill DB objects attributes necessary for a Skill Edit
     # Returns the new Skill DB object
@@ -346,21 +359,31 @@ class db:
 
     # creates a new intent, submits to the DB and then maps the responses and utterances to that intent
     # TODO Modify to allow for multiple intents
-    def submit_intent(self,json,id):
-        i = Intent(
-            SkillId=id,
-            Intent=json['intents'][0].get('intent','default intent')
-        )
-
+    def submit_new_intent(self,json,id):
+        IntentId = self.submit_intent(json,id)
         try:
-            self.session.add(i)
-            self.session.flush()
-            self.session.refresh(i)
-            self.submit_uttrs(json['intents'][0], id, i.IntentId)
-            self.submit_resps(json['intents'][0], id, i.IntentId)
+            self.submit_uttrs(json['intents'][0], id, IntentId)
+            self.submit_resps(json['intents'][0], id, IntentId)
 
         except Exception as e:
             print("Unexpencted error in submit_intent: " + str(e))
 
         return
+    
+    # Function that builds and submits a new intent
+    # returns the new intents id
+    def submit_intent(self,json,id):
+        i = Intent(
+            SkillId=id,
+            Intent=json['intents'][0].get('intent','default intent')
+        )
+        try:
+            self.session.add(i)
+            self.session.flush()
+            self.session.refresh(i)
+            
+            return i.IntentId
+        except Exception as e:
+            print('Unexpected error in submit_intent: ' + str(e))
         
+        return
