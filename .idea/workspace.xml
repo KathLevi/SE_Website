@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9bb6f79-739a-4506-94ea-8e8c0d64f374" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/src/Models.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/src/Models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,10 +17,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
+            <state relative-caret-position="570">
               <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -38,33 +39,79 @@
       <file leaf-file-name="Database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
+            <state relative-caret-position="124">
+              <caret line="357" column="35" lean-forward="false" selection-start-line="357" selection-start-column="35" selection-end-line="357" selection-end-column="35" />
               <folding>
-                <element signature="e#0#36#0" expanded="true" />
-                <element signature="e#246#508#0" expanded="false" />
-                <element signature="e#544#586#0" expanded="false" />
-                <element signature="e#635#1137#0" expanded="false" />
-                <element signature="e#1189#2070#0" expanded="false" />
-                <element signature="e#2132#2231#0" expanded="false" />
-                <element signature="e#2281#2756#0" expanded="false" />
-                <element signature="e#2802#3538#0" expanded="false" />
-                <element signature="e#3586#3668#0" expanded="false" />
-                <element signature="e#3717#3794#0" expanded="false" />
-                <element signature="e#3836#4397#0" expanded="false" />
-                <element signature="e#4473#4739#0" expanded="false" />
-                <element signature="e#4776#4806#0" expanded="false" />
-                <element signature="e#4856#5329#0" expanded="false" />
-                <element signature="e#5375#5666#0" expanded="false" />
-                <element signature="e#5712#6042#0" expanded="false" />
-                <element signature="e#6088#6383#0" expanded="false" />
-                <element signature="e#7219#7383#0" expanded="false" />
-                <element signature="e#7427#7600#0" expanded="false" />
-                <element signature="e#7641#8649#0" expanded="false" />
-                <element signature="e#8701#9040#0" expanded="false" />
-                <element signature="e#9092#9441#0" expanded="false" />
-                <element signature="e#9493#9829#0" expanded="false" />
-                <element signature="e#9878#10161#0" expanded="false" />
+                <element signature="e#254#516#0" expanded="false" />
+                <element signature="e#552#594#0" expanded="false" />
+                <element signature="e#601#656#0" expanded="false" />
+                <element signature="e#734#921#0" expanded="false" />
+                <element signature="e#921#980#0" expanded="false" />
+                <element signature="e#1104#1673#0" expanded="false" />
+                <element signature="e#1141#1468#0" expanded="false" />
+                <element signature="e#1269#1362#0" expanded="false" />
+                <element signature="e#1397#1468#0" expanded="false" />
+                <element signature="e#1512#1650#0" expanded="false" />
+                <element signature="e#1679#1744#0" expanded="false" />
+                <element signature="e#1937#2857#0" expanded="false" />
+                <element signature="e#1985#2643#0" expanded="false" />
+                <element signature="e#2145#2254#0" expanded="false" />
+                <element signature="e#2289#2643#0" expanded="false" />
+                <element signature="e#2692#2836#0" expanded="false" />
+                <element signature="e#2863#2932#0" expanded="false" />
+                <element signature="e#3113#3170#0" expanded="false" />
+                <element signature="e#3279#3759#0" expanded="false" />
+                <element signature="e#3296#3635#0" expanded="false" />
+                <element signature="e#3846#4582#0" expanded="false" />
+                <element signature="e#4699#4814#0" expanded="false" />
+                <element signature="e#4932#5040#0" expanded="false" />
+                <element signature="e#5124#5704#0" expanded="false" />
+                <element signature="e#5836#6102#0" expanded="false" />
+                <element signature="e#6170#6200#0" expanded="false" />
+                <element signature="e#6206#6275#0" expanded="false" />
+                <element signature="e#6444#6917#0" expanded="false" />
+                <element signature="e#6532#6890#0" expanded="false" />
+                <element signature="e#6657#6890#0" expanded="false" />
+                <element signature="e#7039#7330#0" expanded="false" />
+                <element signature="e#7056#7219#0" expanded="false" />
+                <element signature="e#7130#7219#0" expanded="false" />
+                <marker date="1524850900327" expanded="true" signature="199:13863" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="7462:7790" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="7475:7679" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="7552:7679" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="7796:7962" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="8225:8418" ph="..." />
+                <marker date="1524850900327" expanded="true" signature="8225:8307" ph="..." />
+                <marker date="1524850900327" expanded="true" signature="8225:8307" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="8424:8573" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="8603:9395" ph="..." />
+                <marker date="1524850900327" expanded="true" signature="8706:9189" ph="..." />
+                <marker date="1524850900327" expanded="true" signature="8957:9067" ph="..." />
+                <marker date="1524850900327" expanded="true" signature="9221:9371" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="9508:9681" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="9794:9976" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="9982:10222" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="10253:11240" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="10318:11043" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="10440:10884" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="10513:10660" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="10682:10884" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="10902:11043" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="11074:11224" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="11246:11349" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="11391:11739" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="11404:11626" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="11745:11838" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="11880:12238" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="11893:12119" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="12244:12345" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="12387:12732" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="12400:12620" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="12738:12843" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="12882:13188" ph="..." />
+                <marker date="1524850900327" expanded="false" signature="13194:13341" ph="..." />
+                <marker date="1524850900327" expanded="true" signature="13378:13863" ph="..." />
+                <marker date="1524850900327" expanded="true" signature="13515:13748" ph="..." />
               </folding>
             </state>
           </provider>
@@ -73,20 +120,24 @@
       <file leaf-file-name="Models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="78" column="12" lean-forward="false" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
+            <state relative-caret-position="72">
+              <caret line="138" column="21" lean-forward="false" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
                 <element signature="e#222#1252#0" expanded="false" />
                 <element signature="e#1276#2219#0" expanded="false" />
                 <element signature="e#1773#1932#0" expanded="false" />
                 <element signature="e#2062#2219#0" expanded="false" />
+                <element signature="e#2245#3802#0" expanded="false" />
                 <element signature="e#3055#3393#0" expanded="false" />
                 <element signature="e#3423#3802#0" expanded="false" />
-                <element signature="e#3832#4321#0" expanded="false" />
-                <element signature="e#4349#4828#0" expanded="false" />
-                <element signature="e#4856#5255#0" expanded="false" />
-                <element signature="e#5279#6168#0" expanded="false" />
+                <element signature="e#3832#4472#0" expanded="false" />
+                <element signature="e#4500#5135#0" expanded="false" />
+                <element signature="e#4818#4942#0" expanded="false" />
+                <element signature="e#4972#5135#0" expanded="false" />
+                <element signature="e#5163#5562#0" expanded="false" />
+                <element signature="e#5586#6475#0" expanded="false" />
+                <element signature="e#6501#6995#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -95,25 +146,11 @@
       <file leaf-file-name="newskill_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+            <state relative-caret-position="135">
+              <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#123#801#0" expanded="false" />
-                <element signature="e#812#1260#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editskill_test.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#123#841#0" expanded="false" />
+                <element signature="e#123#845#0" expanded="false" />
+                <element signature="e#856#1450#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -143,10 +180,10 @@
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/login_test.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/test_suite.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/app.py" />
-        <option value="$PROJECT_DIR$/MetaVoiceDB/src/Models.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py" />
-        <option value="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py" />
+        <option value="$PROJECT_DIR$/MetaVoiceDB/src/Models.py" />
+        <option value="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" />
       </list>
     </option>
   </component>
@@ -171,6 +208,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -216,33 +254,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SE_Website" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SE_Website" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MetaVoiceDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="ToolWindowRun.ShowToolbar" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -256,7 +274,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.editskill_test">
+  <component name="RunManager" selected="Python.app">
     <configuration default="false" name="login_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -417,9 +435,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.editskill_test" />
-        <item index="1" class="java.lang.String" itemvalue="Python.newskill_test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.app" />
+        <item index="0" class="java.lang.String" itemvalue="Python.newskill_test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.app" />
+        <item index="2" class="java.lang.String" itemvalue="Python.editskill_test" />
         <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_suite.py" />
         <item index="4" class="java.lang.String" itemvalue="Python.login_test" />
       </list>
@@ -483,35 +501,24 @@
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13856068" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3590034" sideWeight="0.5085929" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3590034" sideWeight="0.4914071" order="2" side_tool="false" content_ui="tabs" x="557" y="138" width="949" height="1041" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25295383" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.36333698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-956" y="-261" width="953" height="1041" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43601358" sideWeight="0.4935553" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47225368" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.36333698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="390" y="0" width="953" height="1041" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47310647" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -542,11 +549,11 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py</url>
-          <line>35</line>
+          <line>33</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="39" />
+      <option name="time" value="43" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -566,7 +573,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
           <caret line="1996" column="0" lean-forward="false" selection-start-line="1996" selection-start-column="0" selection-end-line="1996" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -616,7 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
           <caret line="399" column="0" lean-forward="false" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -645,9 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -655,9 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="12" column="33" lean-forward="false" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -671,12 +670,16 @@
             <element signature="e#1276#2219#0" expanded="false" />
             <element signature="e#1773#1932#0" expanded="false" />
             <element signature="e#2062#2219#0" expanded="false" />
+            <element signature="e#2245#3802#0" expanded="false" />
             <element signature="e#3055#3393#0" expanded="false" />
             <element signature="e#3423#3802#0" expanded="false" />
-            <element signature="e#3832#4321#0" expanded="false" />
-            <element signature="e#4349#4828#0" expanded="false" />
-            <element signature="e#4856#5255#0" expanded="false" />
-            <element signature="e#5279#6168#0" expanded="false" />
+            <element signature="e#3832#4472#0" expanded="false" />
+            <element signature="e#4500#5135#0" expanded="false" />
+            <element signature="e#4818#4942#0" expanded="false" />
+            <element signature="e#4972#5135#0" expanded="false" />
+            <element signature="e#5163#5562#0" expanded="false" />
+            <element signature="e#5586#6475#0" expanded="false" />
+            <element signature="e#6501#6995#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -703,20 +706,76 @@
         <state relative-caret-position="81">
           <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#1189#2070#0" expanded="false" />
-            <element signature="e#2132#2231#0" expanded="false" />
-            <element signature="e#2281#2756#0" expanded="false" />
-            <element signature="e#2802#3538#0" expanded="false" />
-            <element signature="e#3586#3668#0" expanded="false" />
-            <element signature="e#3717#3794#0" expanded="false" />
-            <element signature="e#3836#4397#0" expanded="false" />
-            <element signature="e#4473#4739#0" expanded="false" />
-            <element signature="e#4776#4806#0" expanded="false" />
-            <element signature="e#4856#5329#0" expanded="false" />
-            <element signature="e#6423#7174#0" expanded="false" />
-            <element signature="e#7219#7383#0" expanded="false" />
-            <element signature="e#7427#7600#0" expanded="false" />
+            <element signature="e#254#516#0" expanded="false" />
+            <element signature="e#552#594#0" expanded="false" />
+            <element signature="e#601#656#0" expanded="false" />
+            <element signature="e#734#921#0" expanded="false" />
+            <element signature="e#921#980#0" expanded="false" />
+            <element signature="e#1104#1673#0" expanded="false" />
+            <element signature="e#1141#1468#0" expanded="false" />
+            <element signature="e#1269#1362#0" expanded="false" />
+            <element signature="e#1397#1468#0" expanded="false" />
+            <element signature="e#1512#1650#0" expanded="false" />
+            <element signature="e#1679#1744#0" expanded="false" />
+            <element signature="e#1937#2857#0" expanded="false" />
+            <element signature="e#1985#2643#0" expanded="false" />
+            <element signature="e#2145#2254#0" expanded="false" />
+            <element signature="e#2289#2643#0" expanded="false" />
+            <element signature="e#2692#2836#0" expanded="false" />
+            <element signature="e#2863#2932#0" expanded="false" />
+            <element signature="e#3113#3170#0" expanded="false" />
+            <element signature="e#3279#3759#0" expanded="false" />
+            <element signature="e#3296#3635#0" expanded="false" />
+            <element signature="e#3846#4582#0" expanded="false" />
+            <element signature="e#4699#4814#0" expanded="false" />
+            <element signature="e#4932#5040#0" expanded="false" />
+            <element signature="e#5124#5704#0" expanded="false" />
+            <element signature="e#5836#6102#0" expanded="false" />
+            <element signature="e#6170#6200#0" expanded="false" />
+            <element signature="e#6206#6275#0" expanded="false" />
+            <element signature="e#6444#6917#0" expanded="false" />
+            <element signature="e#6532#6890#0" expanded="false" />
+            <element signature="e#6657#6890#0" expanded="false" />
+            <element signature="e#7039#7330#0" expanded="false" />
+            <element signature="e#7056#7219#0" expanded="false" />
+            <element signature="e#7130#7219#0" expanded="false" />
+            <marker date="1524850900327" expanded="true" signature="199:13863" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="7462:7790" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="7475:7679" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="7552:7679" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="7796:7962" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="8225:8418" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="8225:8307" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="8225:8307" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="8424:8573" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="8603:9395" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="8706:9189" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="8957:9067" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="9221:9371" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="9508:9681" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="9794:9976" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="9982:10222" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10253:11240" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10318:11043" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10440:10884" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10513:10660" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10682:10884" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10902:11043" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11074:11224" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11246:11349" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11391:11739" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11404:11626" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11745:11838" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11880:12238" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11893:12119" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12244:12345" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12387:12732" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12400:12620" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12738:12843" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12882:13188" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="13194:13341" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="13378:13863" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="13515:13748" ph="..." />
           </folding>
         </state>
       </provider>
@@ -755,12 +814,16 @@
             <element signature="e#1276#2219#0" expanded="false" />
             <element signature="e#1773#1932#0" expanded="false" />
             <element signature="e#2062#2219#0" expanded="false" />
+            <element signature="e#2245#3802#0" expanded="false" />
             <element signature="e#3055#3393#0" expanded="false" />
             <element signature="e#3423#3802#0" expanded="false" />
-            <element signature="e#3832#4321#0" expanded="false" />
-            <element signature="e#4349#4828#0" expanded="false" />
-            <element signature="e#4856#5255#0" expanded="false" />
-            <element signature="e#5279#6168#0" expanded="false" />
+            <element signature="e#3832#4472#0" expanded="false" />
+            <element signature="e#4500#5135#0" expanded="false" />
+            <element signature="e#4818#4942#0" expanded="false" />
+            <element signature="e#4972#5135#0" expanded="false" />
+            <element signature="e#5163#5562#0" expanded="false" />
+            <element signature="e#5586#6475#0" expanded="false" />
+            <element signature="e#6501#6995#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -829,7 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -837,7 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1551">
           <caret line="400" column="0" lean-forward="true" selection-start-line="400" selection-start-column="0" selection-end-line="400" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -845,7 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -853,9 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-108">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -863,9 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="13" column="73" lean-forward="false" selection-start-line="13" selection-start-column="73" selection-end-line="13" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -873,9 +927,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -883,9 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -893,7 +941,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="507" column="0" lean-forward="false" selection-start-line="507" selection-start-column="0" selection-end-line="507" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -901,7 +948,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
           <caret line="234" column="0" lean-forward="false" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -909,33 +955,138 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="1597" column="0" lean-forward="false" selection-start-line="1597" selection-start-column="0" selection-end-line="1597" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#15#0" expanded="false" />
+            <element signature="e#123#841#0" expanded="false" />
+            <element signature="e#852#1292#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="357" column="35" lean-forward="false" selection-start-line="357" selection-start-column="35" selection-end-line="357" selection-end-column="35" />
+          <folding>
+            <element signature="e#254#516#0" expanded="false" />
+            <element signature="e#552#594#0" expanded="false" />
+            <element signature="e#601#656#0" expanded="false" />
+            <element signature="e#734#921#0" expanded="false" />
+            <element signature="e#921#980#0" expanded="false" />
+            <element signature="e#1104#1673#0" expanded="false" />
+            <element signature="e#1141#1468#0" expanded="false" />
+            <element signature="e#1269#1362#0" expanded="false" />
+            <element signature="e#1397#1468#0" expanded="false" />
+            <element signature="e#1512#1650#0" expanded="false" />
+            <element signature="e#1679#1744#0" expanded="false" />
+            <element signature="e#1937#2857#0" expanded="false" />
+            <element signature="e#1985#2643#0" expanded="false" />
+            <element signature="e#2145#2254#0" expanded="false" />
+            <element signature="e#2289#2643#0" expanded="false" />
+            <element signature="e#2692#2836#0" expanded="false" />
+            <element signature="e#2863#2932#0" expanded="false" />
+            <element signature="e#3113#3170#0" expanded="false" />
+            <element signature="e#3279#3759#0" expanded="false" />
+            <element signature="e#3296#3635#0" expanded="false" />
+            <element signature="e#3846#4582#0" expanded="false" />
+            <element signature="e#4699#4814#0" expanded="false" />
+            <element signature="e#4932#5040#0" expanded="false" />
+            <element signature="e#5124#5704#0" expanded="false" />
+            <element signature="e#5836#6102#0" expanded="false" />
+            <element signature="e#6170#6200#0" expanded="false" />
+            <element signature="e#6206#6275#0" expanded="false" />
+            <element signature="e#6444#6917#0" expanded="false" />
+            <element signature="e#6532#6890#0" expanded="false" />
+            <element signature="e#6657#6890#0" expanded="false" />
+            <element signature="e#7039#7330#0" expanded="false" />
+            <element signature="e#7056#7219#0" expanded="false" />
+            <element signature="e#7130#7219#0" expanded="false" />
+            <marker date="1524850900327" expanded="true" signature="199:13863" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="7462:7790" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="7475:7679" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="7552:7679" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="7796:7962" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="8225:8418" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="8225:8307" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="8225:8307" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="8424:8573" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="8603:9395" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="8706:9189" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="8957:9067" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="9221:9371" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="9508:9681" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="9794:9976" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="9982:10222" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10253:11240" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10318:11043" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10440:10884" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10513:10660" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10682:10884" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="10902:11043" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11074:11224" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11246:11349" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11391:11739" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11404:11626" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11745:11838" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11880:12238" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="11893:12119" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12244:12345" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12387:12732" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12400:12620" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12738:12843" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="12882:13188" ph="..." />
+            <marker date="1524850900327" expanded="false" signature="13194:13341" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="13378:13863" ph="..." />
+            <marker date="1524850900327" expanded="true" signature="13515:13748" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="78" column="12" lean-forward="false" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
+        <state relative-caret-position="72">
+          <caret line="138" column="21" lean-forward="false" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
           <folding>
             <element signature="e#0#67#0" expanded="true" />
             <element signature="e#222#1252#0" expanded="false" />
             <element signature="e#1276#2219#0" expanded="false" />
             <element signature="e#1773#1932#0" expanded="false" />
             <element signature="e#2062#2219#0" expanded="false" />
+            <element signature="e#2245#3802#0" expanded="false" />
             <element signature="e#3055#3393#0" expanded="false" />
             <element signature="e#3423#3802#0" expanded="false" />
-            <element signature="e#3832#4321#0" expanded="false" />
-            <element signature="e#4349#4828#0" expanded="false" />
-            <element signature="e#4856#5255#0" expanded="false" />
-            <element signature="e#5279#6168#0" expanded="false" />
+            <element signature="e#3832#4472#0" expanded="false" />
+            <element signature="e#4500#5135#0" expanded="false" />
+            <element signature="e#4818#4942#0" expanded="false" />
+            <element signature="e#4972#5135#0" expanded="false" />
+            <element signature="e#5163#5562#0" expanded="false" />
+            <element signature="e#5586#6475#0" expanded="false" />
+            <element signature="e#6501#6995#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+          <folding>
+            <element signature="e#123#845#0" expanded="false" />
+            <element signature="e#856#1450#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MetaVoiceDB/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
+        <state relative-caret-position="570">
           <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -946,62 +1097,6 @@
             <element signature="e#1192#1408#0" expanded="false" />
             <element signature="e#1472#1637#0" expanded="false" />
             <element signature="e#1903#2052#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Database.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#246#508#0" expanded="false" />
-            <element signature="e#544#586#0" expanded="false" />
-            <element signature="e#635#1137#0" expanded="false" />
-            <element signature="e#1189#2070#0" expanded="false" />
-            <element signature="e#2132#2231#0" expanded="false" />
-            <element signature="e#2281#2756#0" expanded="false" />
-            <element signature="e#2802#3538#0" expanded="false" />
-            <element signature="e#3586#3668#0" expanded="false" />
-            <element signature="e#3717#3794#0" expanded="false" />
-            <element signature="e#3836#4397#0" expanded="false" />
-            <element signature="e#4473#4739#0" expanded="false" />
-            <element signature="e#4776#4806#0" expanded="false" />
-            <element signature="e#4856#5329#0" expanded="false" />
-            <element signature="e#5375#5666#0" expanded="false" />
-            <element signature="e#5712#6042#0" expanded="false" />
-            <element signature="e#6088#6383#0" expanded="false" />
-            <element signature="e#7219#7383#0" expanded="false" />
-            <element signature="e#7427#7600#0" expanded="false" />
-            <element signature="e#7641#8649#0" expanded="false" />
-            <element signature="e#8701#9040#0" expanded="false" />
-            <element signature="e#9092#9441#0" expanded="false" />
-            <element signature="e#9493#9829#0" expanded="false" />
-            <element signature="e#9878#10161#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#123#801#0" expanded="false" />
-            <element signature="e#812#1260#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#123#841#0" expanded="false" />
           </folding>
         </state>
       </provider>

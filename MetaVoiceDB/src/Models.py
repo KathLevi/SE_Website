@@ -120,17 +120,20 @@ class Utterances(Base):
     UtterId = Column(Integer, primary_key=True)
     SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
     Utter = Column(String(100))
+    IntentId = Column(Integer, ForeignKey('Intents.IntentId'))
 
-    def __init(self,UtterId=None,SkillId=None,Utter=None):
+    def __init(self,UtterId=None,SkillId=None,Utter=None, IntentId=None):
         self.UtterId = UtterId
         self.SkillId = SkillId
         self.Utter = Utter
+        self.IntentId = IntentId
         return
     def dict(self):
         return {
             'UtterId' : self.UtterId,
             'SkillId' : self.SkillId,
-            'Utter' : self.Utter
+            'Utter' : self.Utter,
+            'IntentId' : self.IntentId
         }
 
 class Response(Base):
@@ -138,19 +141,23 @@ class Response(Base):
 
     RespId = Column(Integer, primary_key=True)
     SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
+    IntentId = Column(Integer, ForeignKey('Intents.IntentId'))
     Resp = Column(String(100))
+    
 
-    def __init__(self,RespId=None,SkillId=None,Resp=None):
+    def __init__(self,RespId=None,SkillId=None,Resp=None, IntentId=None):
         self.RespId = RespId
         self.SkillId = SkillId
         self.Resp = Resp
+        self.IntentId = IntentId
         return
 
     def dict(self):
         return {
             'RespId' : self.RespId,
             'SkillId' : self.SkillId,
-            'Resp' : self.Resp
+            'Resp' : self.Resp,
+            'IntentId' : self.IntentId
         }
 
 class Template(Base):
@@ -199,4 +206,23 @@ class Feed(Base):
             'UpdateFreq' : self.UpdateFreq,
             'Genre' : self.Genre,
             'URL' : self.URL
+        }
+
+class Intent(Base):
+    __tablename__ = 'Intents'
+
+    IntentId = Column(Integer, primary_key=True)
+    SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
+    Intent = Column(String(100))
+
+    def __init__(self,IntentId = None, SkillId = None, Intent = None):
+        self.IntentId = IntentId
+        self.SkillId = SkillId
+        self.Intent = Intent
+
+    def dict(self):
+        return {
+            'IntentId' : self.IntentId,
+            'SkillId' : self.SkillId,
+            'Intent' : self.Intent
         }

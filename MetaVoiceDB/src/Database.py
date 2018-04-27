@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.Models import User , User_Profile , Base, Skills, Response, Utterances, Feed
+from src.Models import User , User_Profile , Base, Skills, Response, Utterances, Feed, Intent
 import json as js
 
 class db:
@@ -31,7 +31,7 @@ class db:
     def attempt_login ( self , json ):
         status = {}
         try:
-            q = self.get_user_and_profile ( Email=json[ 'Email' ] , Password=json[ 'Password' ] )
+            q = self.get_user_and_profile ( Email=json[ 'email' ] , Password=json[ 'password' ] )
             if q is None:
                 status['status'] = "INVALID_LOGIN"
                 status['error'] = self.invalid_login(json)
@@ -53,16 +53,16 @@ class db:
             
         try:
             q = self.session.query ( User ).\
-            filter_by( Email = json[ 'Email' ] ).\
+            filter_by( Email = json[ 'email' ] ).\
             one_or_none ( )
 
             if q is not None:
                 resp[ 'status' ] = 'USER_ALREADY_EXISTS_ERROR'
-                print("Failed to Register " + json[ 'Email' ])
+                print("Failed to Register " + json[ 'email' ])
             else:
                 self.session.add ( self.build_user ( json ) )
                 self.session.commit ( )
-                q = self.get_user_and_profile ( json[ 'Email' ] , json[ 'Password' ] )
+                q = self.get_user_and_profile ( json[ 'email' ] , json[ 'password' ] )
                 print ("Attempting registration")
                 print ( "Registered: " + q.Email )
                 resp['userId'] = q.Id
@@ -79,20 +79,19 @@ class db:
     # LIMIT HAS NOT BEEN IMPLEMENTED DO NOT USE
     # Does not return detailed error as to why skills were not returned
     def attempt_get_skills(self,UserId,limit=None):
-        # This can be a seperate function
         skills = self.get_skills(Id=UserId)
         return skills
 
     # Builds a new Feed Object with on SkillID, from JSON
-    def build_feed(self, feed,SkillId):
+    def build_feed(self, feed, SkillId):
         try:
             f = Feed(
-            Name = feed.get('Name', 'Default') ,
+            Name = feed.get('name', 'Default') ,
             SkillId = SkillId , 
-            Preamble= feed.get('Preamble', 'Default') ,
-            UpdateFreq= feed.get('UpdateFreq', 'Default') ,
-            Genre = feed.get('Genre', 'Default') ,
-            URL = feed.get('URL', 'Default')
+            Preamble= feed.get('preamble', 'Default') ,
+            UpdateFreq= feed.get('updateFrequency', 'Default') ,
+            Genre = feed.get('genre', 'Default') ,
+            URL = feed.get('url', 'Default')
         )
             return f
         except Exception as e:
@@ -121,30 +120,32 @@ class db:
         return u
 
     # Builds a new Utterance object on a SkillId from JSON
-    def build_utter(self,ut,SkillId):
+    def build_utter(self,ut, SkillId,IntentId):
         return Utterances(
             SkillId = SkillId,
+            IntentId = IntentId,
             Utter = ut
         )
 
     # Builds a new Response object on a SkillId from JSON
-    def build_resp(self,resp,SkillId):
+    def build_resp(self,resp, SkillId, IntentId):
         return Response(
             SkillId=SkillId,
+            IntentId=IntentId,
             Resp=resp
         )
 
     # Builds a new Skill Object from JSON
     def build_skill(self,json):
-        Keywords = json.get('Keywords', 'Default')
+        Keywords = json.get('keywords', 'Default')
         return Skills(
-            UserId=json.get("UserId",0) ,
-            Name=json.get("Name","Default Name"),
-            AMZ_SkillId= json.get('AMZ_SkillId','Default') ,
-            Status=json.get('Status', 'In Development') ,
-            Category=json.get('Category','Default') , 
-            ShortDesc=json.get('ShortDesc', 'Default'),
-            LongDesc=json.get('LongDesc', 'Default') ,
+            UserId=json.get("userId",0) ,
+            Name=json.get("skillName","Default Name"),
+            AMZ_SkillId= json.get('amz_SkillId','Default') ,
+            Status=json.get('status', 'In Development') ,
+            Category=json.get('category','Default') , 
+            ShortDesc=json.get('shortDescription', 'Default'),
+            LongDesc=json.get('longDescription', 'Default') ,
             Keywords= str(Keywords),
             TemplateId=0,
             SkillId=json.get('SkillId', None)
@@ -184,7 +185,7 @@ class db:
     # Submits list of new Feed objects to the database on a certain SkillId
     def submit_feeds(self,json,id):
         try:
-            feeds = json.get ( 'Feeds' , None )
+            feeds = json.get ( 'feeds' , None )
             if feeds:
                 for feed in feeds:
                     self.session.add ( self.build_feed ( feed , id ) )
@@ -193,24 +194,25 @@ class db:
         return
 
     # Submits list of new Utterance objects to the database on a certain SkillId
-    def submit_uttrs(self,json,id):
+    def submit_uttrs(self,json,SkillId,IntentId):
         try:
-            utters = json.get ( 'Utterances' , None )
-            SkillUtterances = [ ]
+            utters = json.get ( 'utterances' , None )
             if utters:
                 for ut in utters:
-                    self.session.add ( self.build_utter ( ut , id ) )
+                    self.session.add ( self.build_utter ( utters[ut] , SkillId, IntentId ) )
         except Exception as e:
             print('Unexpected error in submit_uttrs: ' + str(e))
         return
 
     # Submits list of new Response objects to the database on a certain SkillId
-    def submit_resps(self,json,id):
+    # TODO make sure to check here when modifying to submit skills with multiple responses
+    # Add for loop for each element in 'responses' key
+    # currently only grabs 'response' key and submits whatever that is
+    def submit_resps(self,json,SkillId,IntentId):
         try:
-            resps = json.get ( 'Responses' , None )
+            resps = json.get ( 'response' , None )
             if resps:
-                for resp in resps:
-                    self.session.add ( self.build_resp ( resp , id ) )
+                self.session.add ( self.build_resp ( resps , SkillId, IntentId ) )
         except Exception as e:
             print('Unexpected error in submit_resps: ' + str(e))
         return
@@ -227,11 +229,11 @@ class db:
             self.session.flush()
             self.session.refresh(s)
             
-            if json.get('Template', None) == 'Alexa Flash Briefing':
+            if json.get('template', None) == 'Alexa Flash Briefing':
                 self.submit_feeds(json,s.SkillId)
             else:
-                self.submit_uttrs(json,s.SkillId)
-                self.submit_resps(json,s.SkillId)
+                # Need to restructure to work with Intents
+                self.submit_intent(json,s.SkillId)
 
             self.session.commit()
             response['SkillId'] = s.SkillId
@@ -317,7 +319,6 @@ class db:
             print ( 'Unexpected error in replace_uttrs: ' + str ( e ) )
         return
 
-
     # Function that deletes all Responses based on a SkillId
     # Submits new Responses from JSON object
     def replace_resps(self,json,SkillId):
@@ -335,10 +336,31 @@ class db:
     # Replaces a Skill DB objects attributes necessary for a Skill Edit
     # Returns the new Skill DB object
     def update_skill(self,Skill,json):
-        Skill.Name = json.get('Name')
-        Skill.Status = json.get('Status')
-        Skill.Category = json.get('Category')
-        Skill.ShortDesc = json.get('ShortDesc')
-        Skill.LongDesc = json.get('LongDesc')
-        Skill.Keywords = str(json.get('Keywords'))
+        Skill.Name = json.get('name')
+        Skill.Status = json.get('status')
+        Skill.Category = json.get('category')
+        Skill.ShortDesc = json.get('shortDescription')
+        Skill.LongDesc = json.get('longDescription')
+        Skill.Keywords = str(json.get('keywords'))
         return Skill
+
+    # creates a new intent, submits to the DB and then maps the responses and utterances to that intent
+    # TODO Modify to allow for multiple intents
+    def submit_intent(self,json,id):
+        i = Intent(
+            SkillId=id,
+            Intent=json['intents'][0].get('intent','default intent')
+        )
+
+        try:
+            self.session.add(i)
+            self.session.flush()
+            self.session.refresh(i)
+            self.submit_uttrs(json['intents'][0], id, i.IntentId)
+            self.submit_resps(json['intents'][0], id, i.IntentId)
+
+        except Exception as e:
+            print("Unexpencted error in submit_intent: " + str(e))
+
+        return
+        
