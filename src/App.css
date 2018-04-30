@@ -4,8 +4,8 @@
 /*COLORS*/
 :root {
   --main-blue : #3d85c6;
-  --light-grey : lightgrey;
-  --grey : grey;
+  --light-grey : #d3d3d3;
+  --grey : #4d4d4d;
 }
 
 html {
