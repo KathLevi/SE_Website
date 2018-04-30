@@ -277,9 +277,9 @@ h3 {
 /*
  * VIEW MY SKILLS
  */
-.viewskills {
-  height: 0px;
-  border-bottom: solid 2px black;
+.skills-btn {
+  color: var(--main-blue);
+  padding: 0px 10px;
 }
 .table {
   width: 100%;
@@ -288,7 +288,6 @@ th {
   padding-top: 15px;
   padding-bottom: 10px;
   text-align: center;
-  border-bottom: 1.2px solid;
   white-space: nowrap;
 }
 
@@ -296,7 +295,6 @@ td {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
-  border-bottom: 0.5px solid;
   white-space: nowrap;
 }
 

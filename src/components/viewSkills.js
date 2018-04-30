@@ -31,17 +31,15 @@ const ViewSkills = () => (
           <td>In Development</td>
           <td>
           <NavLink
-                className="btn"
+                className="skills-btn"
                 exact
-                activeClassName="current"
                 to="/view-skills"
               >
                 Edit
               </NavLink> | 
               <NavLink
-                className="btn"
+                className="skills-btn"
                 exact
-                activeClassName="current"
                 to="/view-skills"
               >
                 Delete
@@ -56,17 +54,15 @@ const ViewSkills = () => (
           <td>In Certification</td>
           <td>
           <NavLink
-                className="btn"
+                className="skills-btn"
                 exact
-                activeClassName="current"
                 to="/view-skills"
               >
                 Edit
               </NavLink> | 
               <NavLink
-                className="btn"
+                className="skills-btn"
                 exact
-                activeClassName="current"
                 to="/view-skills"
               >
                 Delete
