@@ -1,6 +1,7 @@
 import React from "react";
 import { PageHeader } from "react-bootstrap";
-
+import { NavLink } from "react-router-dom";
+import profile from "../assets/profile.jpg";
 
 class Profile extends React.Component {
   constructor() {
@@ -18,17 +19,34 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="container">
-        <PageHeader>Hello, {this.state.userName}</PageHeader>
-        <div>USER INFO</div>
-        <div>Name: {this.state.fName} {this.state.lName}</div>
-        <div>Company: {this.state.address}</div>
-        <div>Email: {this.state.email}</div>
+        <PageHeader>My Profile
+          <NavLink
+            className="btn btn-primary pull-right emptyBtn"
+              exact
+              activeClassName="current"
+              to="/view-skills"
+                  >
+              View My Skills
+          </NavLink>
+        </PageHeader>
 
-        <div>CONTACT INFO</div>
-        <div>Phone Number: {this.state.phoneNum}</div>
-        <div>Address: {this.state.address}</div>
-        <div>Email: {this.state.email}</div>
-
+        <div className="profile1">
+          <img src={profile} alt="profile image" />
+        </div>
+        <div className="profile2">
+          <div>Full Name:</div>
+          <div>Company:</div>
+          <div>Email Address:</div>
+          <div>Phone Number:</div>
+          <div>Address:</div>
+        </div> 
+        <div className="profile3">
+          <div>{this.state.fName} {this.state.lName}</div>
+          <div>{this.state.address}</div>
+          <div>{this.state.email}</div>
+          <div>{this.state.phoneNum}</div>
+          <div>{this.state.address}</div>
+        </div>        
       </div>  
 
     );

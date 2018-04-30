@@ -213,19 +213,30 @@ h3 {
   width: 100px;
 }
 /*
- * PORTFOLIO
+ * PROFILE
  */
-.gallery {
-  -webkit-column-count: 4; /* Chrome, Safari, Opera */
-  -moz-column-count: 4; /* Firefox */
-  column-count: 4;
-  margin: 15px;
+.profile1 {
+  width: 30%;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 70px;
 }
-.galleryImg {
+.profile1 img {
   width: 100%;
-  margin: 5px;
 }
-
+.profile2 {
+  width: 20%;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 5rem;
+}
+.profile3 {
+  width: 40%;
+  display: inline-block;
+  font-size: 20px;
+  line-height: 5rem;
+}
 /*
  * Button Cards
  */
