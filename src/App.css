@@ -5,7 +5,8 @@
 :root {
   --main-blue : #3d85c6;
   --light-grey : #d3d3d3;
-  --grey : #4d4d4d;
+  --grey : grey;
+  --dark-grey : #4d4d4d;
 }
 
 html {
@@ -158,10 +159,11 @@ h3 {
   margin: 0 auto;
   background-color: WhiteSmoke;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
 }
-.lbl {
-  font-weight: bold;
+.form-signin input {
+  background-color: whitesmoke;
+  border: none;
+  border-bottom: 1px solid black;
 }
 .forgotPass a {
   cursor: pointer;
@@ -180,12 +182,16 @@ h3 {
   max-width: 800px;
 }
 .mainBtn {
-  background-color: #0880f7;
-  color: white;
+  background-color: whitesmoke;
+  color: var(--main-blue);
+  border-color: var(--main-blue);
+  border-radius: 0px;
 }
 .newCustBtn {
-  background-color: grey;
-  color: white;
+  background-color: whitesmoke;
+  color: var(--grey);
+  border-color: var(--grey);
+  border-radius: 0px;
 }
 .TnC {
   padding-top: 20px;
@@ -351,7 +357,7 @@ td {
  */
 footer {
   background-color: var(--light-grey);
-  color: var(--grey);
+  color: var(--dark-grey);
   position: absolute;
   left: 0;
   bottom: 0;
@@ -369,7 +375,7 @@ footer {
   vertical-align: top;
 }
 .footerCol a {
-  color: var(--grey);
+  color: var(--dark-grey);
 }
 .leftCol {
   padding-left: 100px;
@@ -382,7 +388,7 @@ footer {
   line-height: 4.5rem;
 }
 .fmenuListElement a{
-  color: var(--grey);
+  color: var(--dark-grey);
   text-decoration: none;
 }
 
