@@ -343,7 +343,10 @@ td {
  * CONTACT
  */
 .contact-section {
-  padding-top: 40px;
+  padding-top: 50px;
+}
+.form-control {
+  border-radius: 0px;
 }
 /*
  * FOOTER
