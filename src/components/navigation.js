@@ -8,9 +8,7 @@ const signOut = props => {
   props.history.push("/");
 };
 
-
-
-const Navigation = props => (    
+const Navigation = props => (
   <nav>
     <div className="logo text-left">
       <span>Blue</span>marble<img src={logo} alt="blue marble logo" />
@@ -41,7 +39,7 @@ const Navigation = props => (
               activeClassName="current"
               to="/profile"
             >
-            PROFILE
+              PROFILE
             </NavLink>
 
             <div className="dropdown-content text-left">
@@ -54,7 +52,6 @@ const Navigation = props => (
               </NavLink>
 
               <NavLink
-                activeClassName="current"
                 onClick={() => {
                   signOut(props);
                 }}

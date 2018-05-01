@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Transition from "react-transition-group/Transition";
 
 class SignIn extends React.Component {
   constructor() {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      loading: false,
+      responseError: ""
     };
   }
 
@@ -21,6 +24,8 @@ class SignIn extends React.Component {
   submitForm = e => {
     e.preventDefault();
 
+    this.setState({ loading: true });
+
     let data = {
       Email: this.state.email,
       Password: this.state.password
@@ -29,6 +34,14 @@ class SignIn extends React.Component {
     axios
       .post("http://127.0.0.1:5004/login", data)
       .then(resp => {
+        let responseError = "";
+        if ("error" in resp.data) {
+          responseError = resp.data.error;
+        }
+        this.setState({
+          loading: false,
+          responseError: responseError
+        });
         console.log("Login response: ", resp);
         if (resp.data.status === "SUCCESS") {
           window.localStorage.setItem("userId", resp.data.userId);
@@ -36,49 +49,91 @@ class SignIn extends React.Component {
         }
       })
       .catch(error => {
-        //alert("Error");
+        this.setState({
+          loading: false,
+          responseError: "Server error"
+        });
       });
+  };
+
+  duration = 500;
+
+  defaultStyle = {
+    transition: `opacity ${this.duration}ms ease-in-out`,
+    opacity: 0
+  };
+
+  transitionStyles = {
+    entering: { opacity: 0 },
+    entered: { opacity: 1 }
   };
 
   render() {
     return (
       <div className="signInBox">
-        <form className="form-signin" onSubmit={this.submitForm}>
-          <h2 className="form-signin-heading">Sign in</h2>
-          <h5 className="lbl">Email</h5>
-          <input
-            type="text"
-            className="form-control"
-            name="email"
-            onChange={this.handleInputChange}
-          />
-          <h5 className="lbl">
-            Password
-          </h5>
+        <Transition timeout={this.duration} in={this.state.loading}>
+          {state => (
+            <div
+              className="spinner"
+              style={{
+                ...this.defaultStyle,
+                ...this.transitionStyles[state]
+              }}
+            />
+          )}
+        </Transition>
 
-          <input
-            type="password"
-            className="form-control signin-password"
-            name="password"
-            onChange={this.handleInputChange}
-          />
+        <Transition timeout={this.duration} in={!this.state.loading}>
+          {tState => (
+            <form
+              className="form-signin"
+              style={{
+                ...this.defaultStyle,
+                ...this.transitionStyles[tState]
+              }}
+              onSubmit={this.submitForm}
+            >
+              <h2 className="form-signin-heading">Sign in</h2>
+              <h5 className="lbl">Email</h5>
+              <input
+                type="text"
+                className="form-control"
+                name="email"
+                onChange={this.handleInputChange}
+              />
+              <h5 className="lbl">Password</h5>
 
-          <h5 className="forgotPass"><a href="#!forgotPass">Forgot Password</a></h5>
+              <input
+                type="password"
+                className="form-control signin-password"
+                name="password"
+                onChange={this.handleInputChange}
+              />
+              <h5 className="forgotPass">
+                <a href="#!forgotPass">Forgot Password</a>
+              </h5>
 
-          <button className="btn btn-lg btn-block mainBtn" type="submit">
-            Sign in
-          </button>
+              <h5 className="response-error">
+                {(tState === "entered" || tState == "exiting") &&
+                  this.state.responseError}
+              </h5>
 
-          <h5>
-            By signing in you are agreeing to our{" "}
-            <a href="#!TnC">Terms and Conditions</a>
-          </h5>
+              <button className="btn btn-lg btn-block mainBtn" type="submit">
+                Sign in
+              </button>
 
-          <hr />
-          <Link className="btn btn-lg btn-block newCustBtn" to="/register">
-            I am new to bluemarble
-          </Link>
-        </form>
+              <h5>
+                By signing in you are agreeing to our{" "}
+                <a href="#!TnC">Terms and Conditions</a>
+              </h5>
+
+              <hr />
+              <Link className="btn btn-lg btn-block newCustBtn" to="/register">
+                I am new to bluemarble
+              </Link>
+            </form>
+          )}
+        </Transition>
       </div>
     );
   }

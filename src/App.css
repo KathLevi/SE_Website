@@ -3,10 +3,10 @@
 
 /*COLORS*/
 :root {
-  --main-blue : #3d85c6;
-  --light-grey : #d3d3d3;
-  --grey : grey;
-  --dark-grey : #4d4d4d;
+  --main-blue: #3d85c6;
+  --light-grey: #d3d3d3;
+  --grey: grey;
+  --dark-grey: #4d4d4d;
 }
 
 html {
@@ -69,8 +69,7 @@ h3 {
   text-decoration: none;
 }
 .current {
-  background-color: white;
-  color: black !important;
+  background-color: var(--main-blue);
 }
 .menuListElement a:hover,
 .dropdwn:hover .dropbtn,
@@ -103,7 +102,7 @@ h3 {
 /*
  * HOME
  */
- .home-section-1 {
+.home-section-1 {
   height: 65%;
   position: absolute;
   top: 100px;
@@ -122,9 +121,9 @@ h3 {
 }
 .home-section-2 span {
   font-weight: bold;
-  color:#0880f7;
+  color: #0880f7;
 }
-.home-section-1 img{
+.home-section-1 img {
   height: 100%;
 }
 
@@ -138,7 +137,8 @@ h3 {
  * SIGN IN
  */
 .signInBox {
-  margin-top: 80px;
+  margin-top: 40px;
+  margin-bottom: 65px;
 }
 .form-signin {
   max-width: 380px;
@@ -181,7 +181,7 @@ h3 {
   border-radius: 0px;
 }
 .TnC {
-  padding-top: 20px;
+  padding-top: 10px;
   text-align: center;
 }
 /*
@@ -385,7 +385,7 @@ footer {
   font-weight: bold;
   line-height: 4.5rem;
 }
-.fmenuListElement a{
+.fmenuListElement a {
   color: var(--dark-grey);
   text-decoration: none;
 }
@@ -434,4 +434,46 @@ footer {
 
 .select-skill-text {
   margin-bottom: 30px;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+
+  border: 2px solid #f3f3f3;
+  border-top: 3px solid var(--main-blue);
+  border-radius: 100%;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.response-error {
+  color: red;
+  font-size: 16px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.learnMoreBtn {
+  margin-top: 20px;
+}
+
+.registerBtn {
+  margin-top: 25px;
 }
