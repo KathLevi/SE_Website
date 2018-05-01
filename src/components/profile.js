@@ -10,6 +10,7 @@ class Profile extends React.Component {
       userName : window.localStorage.getItem("userId"),
       fName: "Hello",
       lName: "World",
+      company: "test company",
       phoneNum: "123-456-7890",
       address: "300 W Hawthorne Rd, Spokane WA 12345",
       email: "test@test.com"
@@ -42,7 +43,7 @@ class Profile extends React.Component {
         </div> 
         <div className="profile3">
           <div>{this.state.fName} {this.state.lName}</div>
-          <div>{this.state.address}</div>
+          <div>{this.state.company}</div>
           <div>{this.state.email}</div>
           <div>{this.state.phoneNum}</div>
           <div>{this.state.address}</div>

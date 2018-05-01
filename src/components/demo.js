@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../assets/logo.png";
 
 const Demo = () => (
-  <div>
+  <div className="container">
     <h1 className="pageHeader">Demo</h1>
 
     <div className="demoVid" align="center">

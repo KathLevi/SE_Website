@@ -121,7 +121,7 @@ h3 {
 }
 .home-section-2 span {
   font-weight: bold;
-  color: #0880f7;
+  color: var(--main-blue);
 }
 .home-section-1 img {
   height: 100%;
