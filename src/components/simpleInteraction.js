@@ -6,95 +6,168 @@ import Select from "./modules/select";
 import { request } from "../helpers/requests.js";
 import { categoryOptions } from "../constants/selectFieldOptions.js";
 
+// input fields
+const inputs = [
+  {
+    name: "email",
+    type: "text",
+    value: "",
+    label: "Email",
+    placeholder: "",
+    errorMessage: "Email is required",
+    optional: false
+  },
+  {
+    name: "platform",
+    type: "radio",
+    value: "amazon",
+    inputs: [
+      { value: "amazon", label: "Amazon Alexa" },
+      { value: "google", label: "Google Voice" }
+    ]
+  },
+  {
+    name: "fName",
+    type: "text",
+    value: "",
+    label: "First name",
+    placeholder: "",
+    errorMessage: "Enter first name",
+    optional: false
+  },
+  {
+    name: "lName",
+    type: "text",
+    value: "",
+    label: "Last name",
+    placeholder: "",
+    errorMessage: "Enter last name",
+    optional: false
+  },
+  {
+    name: "skillName",
+    type: "text",
+    value: "",
+    label: "Skill name",
+    placeholder: "",
+    errorMessage: "Provide a name for your skill",
+    optional: false
+  },
+  {
+    name: "invocation",
+    type: "text",
+    value: "",
+    label: "Invocation phrase",
+    placeholder: "",
+    errorMessage: "Provide an invocation phrase",
+    optional: false
+  },
+  {
+    name: "utterance1",
+    type: "text",
+    value: "",
+    label: "Utterances",
+    placeholder: "",
+    errorMessage: "Provide at least one utterance",
+    optional: false
+  },
+  {
+    name: "utterance2",
+    type: "text",
+    value: "",
+    label: "",
+    placeholder: "",
+    errorMessage: "Invalid field",
+    optional: true
+  },
+  {
+    name: "utterance3",
+    type: "text",
+    value: "",
+    label: "",
+    placeholder: "",
+    errorMessage: "Invalid field",
+    optional: true
+  },
+  {
+    name: "utterance4",
+    type: "text",
+    value: "",
+    label: "",
+    placeholder: "",
+    errorMessage: "Invalid field",
+    optional: true
+  },
+  {
+    name: "utterance5",
+    type: "text",
+    value: "",
+    label: "",
+    placeholder: "",
+    errorMessage: "Invalid field",
+    optional: true
+  },
+  {
+    name: "response",
+    type: "text",
+    value: "",
+    label: "Response",
+    placeholder: "",
+    errorMessage: "Provide a response",
+    optional: false
+  },
+  {
+    name: "category",
+    type: "select",
+    value: "Business & Finance",
+    label: "Category",
+    options: categoryOptions
+  },
+  {
+    name: "skillDescShort",
+    type: "text",
+    value: "",
+    label: "Short description",
+    placeholder: "",
+    errorMessage: "Provide a short description",
+    optional: false
+  },
+  {
+    name: "skillDescLong",
+    type: "text",
+    value: "",
+    label: "Long description",
+    placeholder: "",
+    errorMessage: "Provide a long description",
+    optional: true
+  },
+  {
+    name: "keywords",
+    type: "text",
+    value: "",
+    label: "Keywords",
+    placeholder: "",
+    errorMessage: "Invalid field",
+    optional: true
+  }
+];
+
 class SimpleInteraction extends React.Component {
   constructor() {
     super();
-    // input fields
-    this.inputs = {
-      email: { value: "", optional: false },
-      fName: { value: "", optional: false },
-      lName: { value: "", optional: false },
-      skillName: { value: "", optional: false },
-      invocation: { value: "", optional: false },
-      utterance1: { value: "", optional: false },
-      utterance2: { value: "", optional: true },
-      utterance3: { value: "", optional: true },
-      utterance4: { value: "", optional: true },
-      utterance5: { value: "", optional: true },
-      response: { value: "", optional: false },
-      category: { value: "Business & Finance", optional: false },
-      skillDescShort: { value: "", optional: false },
-      skillDescLong: { value: "", optional: true },
-      keywords: { value: "", optional: true }
-    };
-    this.state = {
-      ...this.inputs
-    };
-    for (let attr of Object.keys(this.inputs)) {
-      this.state[attr].error = "";
-      this.state[attr].ref = React.createRef();
-      this.state[attr].props = {
-        name: attr,
-        handleInputChange: this.handleInputChange,
-        handleInputBlur: this.handleInputBlur,
-        setRef: this.state[attr].ref
-      };
-    }
+
     this.state = {
       ...this.state,
-      platform: "amazon",
-      template: "Alexa Interaction",
       showModal: false,
       modalMessage: ""
     };
   }
 
-  componentDidMount = () => {
-    this.state.email.ref.current.focus();
-  };
-
-  handleInputChange = event => {
-    const target = event.target;
-    this.setState(prevState => ({
-      [target.name]: {
-        ...prevState[target.name],
-        value: target.value
-      }
-    }));
-  };
-
-  handleInputBlur = event => {
-    const target = event.target;
-    this.setState(prevState => ({
-      [target.name]: {
-        ...prevState[target.name],
-        error: prevState[target.name].value === "" ? "EMPTY" : ""
-      }
-    }));
-  };
-
-  validate = () => {
-    let isValid = true;
-    for (let input of Object.keys(this.inputs).reverse()) {
-      if (!this.state[input].optional && !this.state[input].value) {
-        this.setState(prevState => ({
-          [input]: {
-            ...prevState[input],
-            error: "EMPTY"
-          }
-        }));
-        isValid = false;
-        this.state[input].ref.current.focus();
-      }
-    }
-    return isValid;
+  updateStateFromChild = state => {
+    this.setState({ ...state });
   };
 
   submitForm = e => {
-    e.preventDefault();
-
-    if (!this.validate()) return;
-
     let data = {
       email: this.state.email.value,
       template: "Alexa Interaction",
@@ -124,6 +197,8 @@ class SimpleInteraction extends React.Component {
       })
     };
 
+    console.log(data);
+
     request("http://127.0.0.1:5001/post", data, resp => {
       this.setState({ modalMessage: String(resp) });
       this.showModal(resp);
@@ -141,8 +216,13 @@ class SimpleInteraction extends React.Component {
   render() {
     return (
       <div>
-        <Form submitForm={this.submitForm} label={"Simple Interaction Form"}>
-          <Input
+        <Form
+          submitForm={this.submitForm}
+          label={"Simple Interaction Form"}
+          updateParentState={this.updateStateFromChild}
+          inputs={inputs}
+        >
+          {/*}<Input
             {...this.state.email.props}
             label="Email address"
             placeholder="Email address"
@@ -293,6 +373,7 @@ class SimpleInteraction extends React.Component {
             error={""}
             errorMessage={""}
           />
+          */}
         </Form>
 
         <ResponseModal
