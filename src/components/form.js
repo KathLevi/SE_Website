@@ -15,6 +15,7 @@ class Form extends React.Component {
           value: input.value,
           error: input.error,
           errorMessage: input.errorMessage,
+          optional: input.optional,
           ref: React.createRef()
         };
       } else if (input.type == "radio") {
@@ -56,6 +57,7 @@ class Form extends React.Component {
 
   handleInputBlur = event => {
     const target = event.target;
+    if (this.state[target.name].optional) return;
     this.setState(
       prevState => ({
         [target.name]: {
@@ -71,12 +73,15 @@ class Form extends React.Component {
 
   validate = () => {
     let isValid = true;
-    for (let input of this.props.inputs.map(inp => inp.name).reverse()) {
-      if (!this.state[input].optional && !this.state[input].value) {
+    for (let inputName of this.props.inputs.map(inp => inp.name).reverse()) {
+      if (
+        this.state[inputName].optional === false &&
+        !this.state[inputName].value
+      ) {
         this.setState(
           prevState => ({
-            [input]: {
-              ...prevState[input],
+            [inputName]: {
+              ...prevState[inputName],
               error: "EMPTY"
             }
           }),
@@ -85,7 +90,7 @@ class Form extends React.Component {
           }
         );
         isValid = false;
-        this.state[input].ref.current.focus();
+        this.state[inputName].ref.current.focus();
       }
     }
     return isValid;
@@ -106,6 +111,7 @@ class Form extends React.Component {
             if (input.type === "text") {
               return (
                 <Input
+                  key={input.name}
                   name={input.name}
                   handleInputChange={this.handleInputChange}
                   handleInputBlur={this.handleInputBlur}
@@ -119,6 +125,7 @@ class Form extends React.Component {
             } else if (input.type === "radio") {
               return (
                 <RadioGroup
+                  key={input.name}
                   name={input.name}
                   label={input.label}
                   value={this.state[input.name].value}
@@ -131,6 +138,7 @@ class Form extends React.Component {
             } else if (input.type === "select") {
               return (
                 <Select
+                  key={input.name}
                   name={input.name}
                   label={input.label}
                   handleInputChange={this.handleInputChange}

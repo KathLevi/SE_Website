@@ -21,4 +21,20 @@ const categoryOptions = [
   "Utilities"
 ];
 
-export { categoryOptions };
+const updateFrequencies = ["Hourly", "Monthly", "Yearly"];
+
+const contentGenres = [
+  "Headline News",
+  "Business",
+  "Politics",
+  "Entertainment",
+  "Technology",
+  "Humor",
+  "Lifestyle",
+  "Health and Fitness",
+  "Arts and Culture",
+  "Productivity and Utilities",
+  "Other"
+];
+
+export { categoryOptions, updateFrequencies, contentGenres };

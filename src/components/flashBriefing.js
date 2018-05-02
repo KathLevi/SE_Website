@@ -1,94 +1,154 @@
 import React from "react";
 import { request } from "../helpers/requests.js";
 import ResponseModal from "./modules/responseModal";
+import {
+  categoryOptions,
+  updateFrequencies,
+  contentGenres
+} from "../constants/selectFieldOptions.js";
 import Input from "./modules/input";
 import Form from "./form";
+
+const inputs = [
+  {
+    name: "email",
+    type: "text",
+    value: "",
+    label: "Email",
+    placeholder: "",
+    errorMessage: "Email is required",
+    optional: false
+  },
+  {
+    name: "platform",
+    type: "radio",
+    value: "amazon",
+    inputs: [
+      { value: "amazon", label: "Amazon Alexa" },
+      { value: "google", label: "Google Voice" }
+    ]
+  },
+  {
+    name: "fName",
+    type: "text",
+    value: "",
+    label: "First name",
+    placeholder: "",
+    errorMessage: "Enter first name",
+    optional: false
+  },
+  {
+    name: "lName",
+    type: "text",
+    value: "",
+    label: "Last name",
+    placeholder: "",
+    errorMessage: "Enter last name",
+    optional: false
+  },
+  {
+    name: "skillName",
+    type: "text",
+    value: "",
+    label: "Skill name",
+    placeholder: "",
+    errorMessage: "Provide a name for your skill",
+    optional: false
+  },
+  {
+    name: "category",
+    type: "select",
+    value: "Business & Finance",
+    label: "Category",
+    options: categoryOptions
+  },
+  {
+    name: "skillDescShort",
+    type: "text",
+    value: "",
+    label: "Short description",
+    placeholder: "",
+    errorMessage: "Provide a short description",
+    optional: false
+  },
+  {
+    name: "skillDescLong",
+    type: "text",
+    value: "",
+    label: "Long description",
+    placeholder: "",
+    errorMessage: "Provide a long description",
+    optional: true
+  },
+  {
+    name: "keywords",
+    type: "text",
+    value: "",
+    label: "Keywords",
+    placeholder: "",
+    errorMessage: "Invalid field",
+    optional: true
+  },
+  {
+    name: "feedName",
+    type: "text",
+    value: "",
+    label: "Feed name",
+    placeholder: "",
+    errorMessage: "Provide a feed name",
+    optional: false
+  },
+  {
+    name: "preamble",
+    type: "text",
+    value: "",
+    label: "Preamble",
+    placeholder: "",
+    errorMessage: "Preamble is required",
+    optional: false
+  },
+  {
+    name: "updateFrequency",
+    type: "select",
+    value: "",
+    label: "Update frequency",
+    optional: false,
+    options: updateFrequencies
+  },
+  {
+    name: "contentGenre",
+    type: "select",
+    value: "Headline News",
+    label: "Content genre",
+    optional: false,
+    options: contentGenres
+  },
+  {
+    name: "feedURL",
+    type: "text",
+    value: "",
+    label: "Feed URL",
+    placeholder: "",
+    errorMessage: "Provide a URL for the RSS feed",
+    optional: false
+  }
+];
 
 class FlashBriefing extends React.Component {
   constructor() {
     super();
-    this.inputs = {
-      platform: { value: "amazon", optional: false },
-      email: { value: "", optional: false },
-      fName: { value: "", optional: false },
-      lName: { value: "", optional: false },
-      skillName: { value: "", optional: false },
-      category: { value: "Business & Finance", optional: false },
-      skillDescShort: { value: "", optional: false },
-      skillDescLong: { value: "", optional: true },
-      keywords: { value: "", optional: true },
-      feedName: { value: "", optional: false },
-      preamble: { value: "", optional: false },
-      updateFrequency: { value: "Hourly", optional: false },
-      contentGenre: { value: "Headline News", optional: false },
-      feedURL: { value: "", optional: false }
-    };
+
     this.state = {
-      ...this.inputs
-    };
-    for (let attr of Object.keys(this.inputs)) {
-      this.state[attr].error = "";
-      this.state[attr].ref = React.createRef();
-      this.state[attr].props = {
-        name: attr,
-        handleInputChange: this.handleInputChange,
-        handleInputBlur: this.handleInputBlur,
-        setRef: this.state[attr].ref
-      };
-    }
-    this.state = {
-      ...this.state,
       showModal: false,
       modalMessage: ""
     };
   }
 
-  componentDidMount = () => {
-    this.state.email.ref.current.focus();
-  };
-
-  handleInputChange = event => {
-    const target = event.target;
-    this.setState(prevState => ({
-      [target.name]: {
-        ...prevState[target.name],
-        value: target.value
-      }
-    }));
-  };
-
-  handleInputBlur = event => {
-    const target = event.target;
-    this.setState(prevState => ({
-      [target.name]: {
-        ...prevState[target.name],
-        error: prevState[target.name].value === "" ? "EMPTY" : ""
-      }
-    }));
-  };
-
-  validate = () => {
-    let isValid = true;
-    for (let input of Object.keys(this.inputs).reverse()) {
-      if (!this.state[input].optional && !this.state[input].value) {
-        this.setState(prevState => ({
-          [input]: {
-            ...prevState[input],
-            error: "EMPTY"
-          }
-        }));
-        isValid = false;
-        this.state[input].ref.current.focus();
-      }
-    }
-    return isValid;
+  updateStateFromChild = state => {
+    this.setState({ ...state });
   };
 
   submitForm = e => {
-    e.preventDefault();
-
-    if (!this.validate()) return;
-
     let data = {
       email: this.state.email.value,
       template: "Alexa Flash Briefing",
@@ -108,9 +168,11 @@ class FlashBriefing extends React.Component {
       feedURL: this.state.feedURL.value
     };
 
+    console.log(data);
+
     request("http://127.0.0.1:5003/post", data, resp => {
       this.setState({ modalMessage: String(resp) });
-      this.showModal();
+      this.showModal(resp);
     });
   };
 
@@ -125,190 +187,12 @@ class FlashBriefing extends React.Component {
   render() {
     return (
       <div>
-        <Form submitForm={this.submitForm} label={"Flash Briefing Form"}>
-          <Input
-            {...this.state.email.props}
-            label="Email address"
-            placeholder="Email address"
-            error={this.state.email.error}
-            errorMessage="Email is required"
-          />
-          <div className="form-group">
-            <div className="radio">
-              <label className="form-check-label">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="platform"
-                  value="amazon"
-                  checked={this.state.platform === "amazon"}
-                  onChange={this.handleInputChange}
-                />
-                Amazon Alexa
-              </label>
-            </div>
-            <div className="radio">
-              <label className="form-check-label">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="platform"
-                  value="google"
-                  checked={this.state.platform === "google"}
-                  onChange={this.handleInputChange}
-                />
-                Google Voice
-              </label>
-            </div>
-          </div>
-          <Input
-            {...this.state.fName.props}
-            label="First name"
-            placeholder="e.g. John"
-            error={this.state.fName.error}
-            errorMessage={"First name is required"}
-          />
-
-          <Input
-            {...this.state.lName.props}
-            label="Last name"
-            placeholder="e.g. Smith"
-            error={this.state.lName.error}
-            errorMessage={"Last name is required"}
-          />
-
-          <Input
-            {...this.state.skillName.props}
-            label="What name do you want to appear in the Alexa skill store?"
-            placeholder="e.g. MySkill"
-            error={this.state.skillName.error}
-            errorMessage={"Skill name is required"}
-          />
-
-          <div className={"form-group"}>
-            <label className="lblBig">
-              What category will your application show up as on the store?
-            </label>
-            <select
-              className="form-control"
-              name="category"
-              onChange={this.handleInputChange}
-            >
-              <option value="Business & Finance">Business and Finance</option>
-              <option value="Connected Car">Connected Car</option>
-              <option value="Education and Refference">
-                Education and Refference
-              </option>
-              <option value="Food & Drink">Food and Drink</option>
-              <option value="Games, Trivia & Accessories">
-                Games, Trivia, and Accessories
-              </option>
-              <option value="Health & Fitness">Health and Fitness</option>
-              <option value="Kids">Kids</option>
-              <option value="Lifestyle">Lifestyle</option>
-              <option value="Local">Local</option>
-              <option value="Movies & TV">Movies and TV</option>
-              <option value="Music & Audio">Music and Audio</option>
-              <option value="News">News</option>
-              <option value="Novelty & Humor">Novelty and Humor</option>
-              <option value="Productivity">Productivity</option>
-              <option value="Shopping">Shopping</option>
-              <option value="Smart Home">Smart Home</option>
-              <option value="Social">Social</option>
-              <option value="Sports">Sports</option>
-              <option value="Travel & Transportation">
-                Travel and Transportation
-              </option>
-              <option value="Utilities">Utilities</option>
-            </select>
-          </div>
-
-          <Input
-            {...this.state.skillDescShort.props}
-            label="Give a few words describing your skill"
-            placeholder=""
-            error={this.state.skillDescShort.error}
-            errorMessage={"Please give a brief summary"}
-          />
-
-          <Input
-            {...this.state.skillDescLong.props}
-            label="Give a brief description for your skill  (optional)"
-            placeholder=""
-            error={""}
-            errorMessage={""}
-          />
-
-          <Input
-            {...this.state.keywords.props}
-            label="What keywords should your skill have? (optional)"
-            placeholder=""
-            error={""}
-            errorMessage={""}
-          />
-
-          <h3 className="page-header">Feed 1</h3>
-
-          <Input
-            {...this.state.feedName.props}
-            label="Feed name"
-            placeholder="e.g. MyFeed"
-            error={this.state.feedNameError}
-            errorMessage={"Feed name is required"}
-          />
-
-          <Input
-            {...this.state.preamble.props}
-            label="Feed preamble"
-            placeholder=""
-            error={this.state.preambleError}
-            errorMessage={"Preamble is required"}
-          />
-
-          <div className="form-group">
-            <label>Update Frequency</label>
-            <select
-              className="form-control"
-              name="updateFrequency"
-              onChange={this.handleInputChange}
-            >
-              <option value="Hourly">Hourly</option>
-              <option value="Monthly">Monthly</option>
-              <option value="Yearly">Yearly</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Content Genre</label>
-            <select
-              className="form-control"
-              name="contentGenre"
-              onChange={this.handleInputChange}
-            >
-              <option value="Headline News">Headline News</option>
-              <option value="Business">Business</option>
-              <option value="Politics">Politics</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Technology">Technology</option>
-              <option value="Humor">Humor</option>
-              <option value="Lifestyle">Lifestyle</option>
-              <option value="Health and Fitness">Health and Fitness</option>
-              <option value="Arts and Culture">Arts and Culture</option>
-              <option value="Productivity and Utilities">
-                Productivity and Utilities
-              </option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <Input
-            {...this.state.feedURL.props}
-            label="Feed URL"
-            placeholder=""
-            error={this.state.feedURLError}
-            errorMessage={"Please provide the feed URL"}
-          />
-        </Form>
+        <Form
+          submitForm={this.submitForm}
+          label={"Flash Briefing Form"}
+          updateParentState={this.updateStateFromChild}
+          inputs={inputs}
+        />
 
         <ResponseModal
           show={this.state.showModal}

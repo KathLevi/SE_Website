@@ -28,7 +28,8 @@ class SignIn extends React.Component {
     this.state = {
       ...this.state,
       loading: false,
-      responseError: ""
+      responseError: "",
+      success: false
     };
   }
 
@@ -161,16 +162,19 @@ class SignIn extends React.Component {
                 placeholder=""
                 error={this.state.password.error}
                 errorMessage={"Please enter a password"}
+                type={"password"}
               />
 
               <h5 className="forgotPass">
                 <a href="#!forgotPass">Forgot Password</a>
               </h5>
 
-              <h5 className="response-error">
-                {(tState === "entered" || tState == "exiting") &&
-                  this.state.responseError}
-              </h5>
+              <div className="response-error">
+                <h5>
+                  {(tState === "entered" || tState == "exiting") &&
+                    this.state.responseError}
+                </h5>
+              </div>
 
               <button className="btn btn-lg btn-block mainBtn" type="submit">
                 Sign in

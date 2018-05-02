@@ -5,7 +5,7 @@ const RadioGroup = props => {
     <div className="form-group">
       {props.inputs.map(inp => {
         return (
-          <div className="radio">
+          <div className="radio" key={inp.value}>
             <label className="form-check-label">
               <input
                 className="form-check-input"
@@ -20,20 +20,6 @@ const RadioGroup = props => {
           </div>
         );
       })}
-
-      {/*}<div className="radio">
-        <label className="form-check-label">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="platform"
-            value="google"
-            checked={props.platform === "google"}
-            onChange={props.handleInputChange}
-          />
-          Google Voice
-        </label>
-      </div>*/}
     </div>
   );
 };
