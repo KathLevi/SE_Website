@@ -46,9 +46,11 @@ h3 {
   background-color: black;
   display: inline-block;
   padding: 12.3px 24px;
-  color: white;
+  color: white !important;
   overflow: hidden;
   font-size: 25px;
+  cursor: pointer;
+  text-decoration: none;
 }
 .logo span {
   color: var(--main-blue);
@@ -66,16 +68,19 @@ h3 {
   display: inline-block;
   color: white;
   padding: 20px 24px;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .current {
   background-color: var(--main-blue);
+  color: white !important;
 }
 .menuListElement a:hover,
 .dropdwn:hover .dropbtn,
 .dropdown-content a:hover {
   text-decoration: underline;
+  /*color: #62b3ff;*/
 }
+
 .menuListElement.dropdwn {
   display: inline-block;
 }
@@ -464,10 +469,11 @@ footer {
 }
 
 .response-error {
-  color: red;
-  font-size: 16px;
-  margin-top: 30px;
-  margin-bottom: 15px;
+  color: #ed493d;
+  font-size: 15px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  opacity: 0.9;
 }
 
 .learnMoreBtn {
@@ -476,4 +482,48 @@ footer {
 
 .registerBtn {
   margin-top: 25px;
+}
+
+.cls-1 {
+  fill: none;
+  stroke: #231f20;
+  stroke-miterlimit: 10;
+  stroke-width: 5px;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 150px;
+  height: 150px;
+  display: block;
+
+  .cls-1 {
+    stroke: green;
+  }
+}
+
+.circle {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+}
+
+.checkmark {
+  stroke-dasharray: 150;
+  stroke-dashoffset: 150;
+}
+
+.run-animation {
+  .circle {
+    animation: 2.5s circleDraw forwards;
+  }
+
+  .checkmark {
+    animation: 0.75s checkmarkDraw forwards;
+    animation-delay: 1s;
+  }
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import logo from "../assets/logo.png";
+import { PageHeader } from "react-bootstrap";
 
 const Demo = () => (
   <div className="container">
-    <h1 className="pageHeader">Demo</h1>
-
+    <PageHeader>How It Works</PageHeader>
     <div className="demoVid" align="center">
       <video width="800" height="500" controls poster={logo}>
         <source src="" type="video/mp4" />

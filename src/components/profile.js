@@ -7,7 +7,7 @@ class Profile extends React.Component {
   constructor() {
     super();
     this.state = {
-      userName : window.localStorage.getItem("userId"),
+      userName: window.localStorage.getItem("userId"),
       fName: "Hello",
       lName: "World",
       company: "test company",
@@ -20,36 +20,40 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="container">
-        <PageHeader>My Profile
+        <PageHeader>
+          My Profile
           <NavLink
             className="btn btn-primary pull-right emptyBtn"
-              exact
-              activeClassName="current"
-              to="/view-skills"
-                  >
-              View My Skills
+            exact
+            activeClassName="current"
+            to="/view-skills"
+          >
+            View My Skills
           </NavLink>
         </PageHeader>
 
-        <div className="profile1">
-          <img src={profile} alt="profile image" />
+        <div className="container">
+          <div className="profile1">
+            <img src={profile} alt="profile" />
+          </div>
+          <div className="profile2">
+            <div>Full Name:</div>
+            <div>Company:</div>
+            <div>Email Address:</div>
+            <div>Phone Number:</div>
+            <div>Address:</div>
+          </div>
+          <div className="profile3">
+            <div>
+              {this.state.fName} {this.state.lName}
+            </div>
+            <div>{this.state.company}</div>
+            <div>{this.state.email}</div>
+            <div>{this.state.phoneNum}</div>
+            <div>{this.state.address}</div>
+          </div>
         </div>
-        <div className="profile2">
-          <div>Full Name:</div>
-          <div>Company:</div>
-          <div>Email Address:</div>
-          <div>Phone Number:</div>
-          <div>Address:</div>
-        </div> 
-        <div className="profile3">
-          <div>{this.state.fName} {this.state.lName}</div>
-          <div>{this.state.company}</div>
-          <div>{this.state.email}</div>
-          <div>{this.state.phoneNum}</div>
-          <div>{this.state.address}</div>
-        </div>        
-      </div>  
-
+      </div>
     );
   }
 }

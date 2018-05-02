@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import logo from "../assets/logo_ball.png";
 
@@ -10,9 +10,9 @@ const signOut = props => {
 
 const Navigation = props => (
   <nav>
-    <div className="logo text-left">
+    <Link to="/" style={{ textDecoration: "none" }} className="logo text-left">
       <span>Blue</span>marble<img src={logo} alt="blue marble logo" />
-    </div>
+    </Link>
     <ul className="menuList text-right">
       <li className="menuListElement">
         <NavLink exact activeClassName="current" to="/">
@@ -24,11 +24,13 @@ const Navigation = props => (
           DEMO
         </NavLink>
       </li>
-      <li className="menuListElement">
-        <NavLink exact activeClassName="current" to="/team">
-          ABOUT US
-        </NavLink>
-      </li>
+      {window.localStorage.userId && (
+        <li className="menuListElement">
+          <NavLink exact activeClassName="current" to="/create-skill">
+            CREATE SKILL
+          </NavLink>
+        </li>
+      )}
 
       <li className="menuListElement dropdwn">
         {window.localStorage.userId ? (
@@ -43,11 +45,12 @@ const Navigation = props => (
             </NavLink>
 
             <div className="dropdown-content text-left">
-              <NavLink exact activeClassName="current" to="/create-skill">
-                CREATE NEW SKILL
-              </NavLink>
-
-              <NavLink exact activeClassName="current" to="/view-skills">
+              <NavLink
+                exact
+                activeClassName="current"
+                className="dropdown-link"
+                to="/view-skills"
+              >
                 VIEW MY SKILLS
               </NavLink>
 
@@ -56,6 +59,7 @@ const Navigation = props => (
                   signOut(props);
                 }}
                 to="/"
+                className="dropdown-link"
               >
                 SIGN OUT
               </NavLink>

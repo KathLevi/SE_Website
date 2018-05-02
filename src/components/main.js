@@ -24,10 +24,14 @@ const Main = () => (
     <Route exact path="/create-skill" component={CreateSkill} />
     <Route
       exact
-      path="/createSkill/simple-interaction"
+      path="/create-skill/simple-interaction"
       component={SimpleInteraction}
     />
-    <Route exact path="/createSkill/flash-briefing" component={FlashBriefing} />
+    <Route
+      exact
+      path="/create-skill/flash-briefing"
+      component={FlashBriefing}
+    />
     <Route exact path="/register" component={Register} />
   </Switch>
 );
