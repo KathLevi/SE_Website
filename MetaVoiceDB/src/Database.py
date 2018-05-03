@@ -250,6 +250,8 @@ class db:
     # returns a error status and reason upon failure
     def new_skill(self,json):
         response = {}
+        print "Request Object: "
+        print json
         s = self.jsonHelper.build_skill(json)
         try:
             self.session.add(s)
@@ -263,6 +265,7 @@ class db:
 
             self.session.commit()
             response['SkillId'] = s.SkillId
+            response['skill'] = s.dict()
             response['status'] = "SUCCESS"
 
         except Exception as e:
@@ -305,7 +308,7 @@ class db:
                     q = self.update_skill(q,json)
                     self.replace_intents(json,q.SkillId)
                     response['Id'] = q.SkillId
-                   
+
                     self.session.commit()
             else:
                 response['status'] = 'EDIT_ERROR'
@@ -396,7 +399,7 @@ class db:
             print("Unexpencted error in submit_intent: " + str(e))
 
         return
-    
+
     # Function that builds and submits a new intent
     # returns the new intents id
     def submit_intent(self,json,id):
@@ -408,11 +411,11 @@ class db:
             self.session.add(i)
             self.session.flush()
             self.session.refresh(i)
-            
+
             return i.IntentId
         except Exception as e:
             print('Unexpected error in submit_intent: ' + str(e))
-        
+
         return
 
     def get_skill_intent(self,id):
@@ -447,7 +450,7 @@ class db:
         Skill = self.session.query ( Skills ).filter_by ( SkillId = Id ).one_or_none()
         if Skill:
             if Skill.Template == 'Alexa Flash Briefing':
-                Feeds = self.session.query(Feed).filter_by(SkillId = Id).all()    
+                Feeds = self.session.query(Feed).filter_by(SkillId = Id).all()
                 # Format Skill + all Feeds into JSON Object
                 jsonData = self.jsonHelper.flashBriefToJson(Skill,Feeds)
             else:
@@ -458,7 +461,21 @@ class db:
                 # Since it is a simple skill we are only accepting one response
                 # can be modified to have multiple responses/intents
                 # need to make sure that utterances are mapped to the correct intent
-                jsonData = self.jsonHelper.simpleSkillToJson(Skill,Ints[0],resp[0],Utters) 
-                
+                jsonData = self.jsonHelper.simpleSkillToJson(Skill,Ints[0],resp[0],Utters)
+
         # Submit Skill object to MetaVoiceLambda port:5001 /post
         return jsonData
+
+    def attempt_get_profile(self,json):
+        email = "";
+        users = self.session.query ( User ).filter_by ( Id = json.get('userId') ).all()
+        if users:
+            email = users[0].Email
+
+        profiles = self.session.query ( User_Profile ).filter_by ( UserId = json.get('userId') ).all()
+        if profiles:
+            response = profiles[0].dict()
+            response['email'] = email
+            return response
+        else:
+            return {}

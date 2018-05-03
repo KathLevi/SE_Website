@@ -8,12 +8,12 @@ class ViewSkills extends React.Component {
     super(props);
 
     this.state = {
-      skills: Object.values(props.skills)
+      skills: Object.values(props.userData.skills)
     };
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ skills: Object.values(props.skills) });
+    this.setState({ skills: Object.values(props.userData.skills) });
   }
 
   componentDidMount() {
@@ -24,14 +24,13 @@ class ViewSkills extends React.Component {
         })
         .then(resp => {
           this.props.updateGlobalState({
-            skills: { hi: "hello" },
+            userData: { skills: Object.values(resp.data) },
             skillsLoaded: true
           });
           console.log(resp);
         })
         .catch(error => {
           this.props.updateGlobalState({
-            skills: { hi: "hello" },
             skillsLoaded: true
           });
           console.log(error);
@@ -85,6 +84,15 @@ class ViewSkills extends React.Component {
             })}
           </tbody>
         </table>
+        {!this.props.skillsLoaded && <div className="spinner-small" />}
+        {!this.state.skills.length &&
+          this.props.skillsLoaded && (
+            <div className="container" style={{ textAlign: "center" }}>
+              <h1 style={{ fontSize: "18px" }}>
+                {"No Alexa skills. Add one now!"}
+              </h1>
+            </div>
+          )}
       </div>
     );
   }

@@ -100,22 +100,23 @@ class SignIn extends React.Component {
         console.log("Login response is: ", resp);
         if (resp.data.status === "SUCCESS") {
           console.log("success");
+          this.props.updateGlobalState({ ...resp });
           window.localStorage.setItem("userId", resp.data.userId);
-          this.props.history.push("/profile");
+          this.props.history.replace("/profile");
           axios
             .post("http://127.0.0.1:5004/viewskills", {
               UserId: resp.data.userId
             })
             .then(resp => {
               this.props.updateGlobalState({
-                skills: { hi: "hello" },
+                userData: { skills: Object.values(resp.data) },
                 skillsLoaded: true
               });
               console.log(resp);
             })
             .catch(error => {
               this.props.updateGlobalState({
-                skills: { hi: "hello" },
+                userData: { skills: Object.values(resp.data) },
                 skillsLoaded: true
               });
               console.log(error);

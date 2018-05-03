@@ -207,7 +207,7 @@ class SimpleInteraction extends React.Component {
     request(
       "http://127.0.0.1:5004/newskill",
       {
-        UserId: localStorage.getItem("userId"),
+        userId: localStorage.getItem("userId"),
         skillName: data.skillName,
         amz_SkillId: 0,
         status: "In development",
@@ -217,11 +217,19 @@ class SimpleInteraction extends React.Component {
         longDescription: data.longDescription,
         keywords: data.keywords,
         template: data.template,
-        intents : data.intents,
+        intents: data.intents
       },
       resp => {
         this.setState({ modalMessage: String(resp) });
         this.showModal(resp);
+        console.log(resp);
+        if (resp.data && resp.data.status === "SUCCESS") {
+          console.log(this.props);
+          let updatedSkills = this.props.userData.skills;
+          console.log(updatedSkills);
+          updatedSkills.push(resp.data.skill);
+          this.props.updateGlobalState({ userData: { skills: updatedSkills } });
+        }
       }
     );
   };

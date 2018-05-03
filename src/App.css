@@ -292,6 +292,7 @@ h3 {
 }
 .table {
   width: 100%;
+  margin-bottom: 60px;
 }
 th {
   padding-top: 15px;
@@ -444,6 +445,24 @@ footer {
 .spinner {
   width: 80px;
   height: 80px;
+
+  border: 2px solid #f3f3f3;
+  border-top: 3px solid var(--main-blue);
+  border-radius: 100%;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  animation: spin 1s infinite linear;
+}
+
+.spinner-small {
+  width: 40px;
+  height: 40px;
 
   border: 2px solid #f3f3f3;
   border-top: 3px solid var(--main-blue);

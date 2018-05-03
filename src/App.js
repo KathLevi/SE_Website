@@ -9,14 +9,15 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      skills: [],
+      userData: { skills: [] },
       updateGlobalState: this.updateGlobalState
     };
   }
 
   updateGlobalState = newState => {
     this.setState({
-      ...newState
+      ...newState,
+      userData: { ...this.state.userData, ...newState.userData }
     });
   };
 
