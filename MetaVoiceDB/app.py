@@ -79,7 +79,7 @@ def SubmitSkill():
     _db = db(cs)
     jsonData = _db.submit_skill(jsonData)
     _db.shutdown()
-    
+
     # Post skill to be submitteds data to Service1 MetaVoiceLambda
     # change config to 'aws' when testing on aws ec2
     resp = requests.post(config.local +  ':5001/post', json=jsonData)
@@ -88,6 +88,15 @@ def SubmitSkill():
     }
 
     return good_response(status)
+
+@app.route('/getprofile', methods=['POST'])
+def GetProfile():
+    jsonData = request.get_json()
+    print("Getting Profile")
+    _db = db(cs)
+    resp = _db.attempt_get_profile(jsonData)
+    _db.shutdown()
+    return good_response(resp)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.

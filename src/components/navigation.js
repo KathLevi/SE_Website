@@ -5,6 +5,7 @@ import logo from "../assets/logo_ball.png";
 
 const signOut = props => {
   window.localStorage.removeItem("userId");
+  props.updateGlobalState({ userData: {} });
   props.history.push("/");
 };
 
