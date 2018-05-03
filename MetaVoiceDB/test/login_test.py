@@ -2,8 +2,8 @@ import requests
 import json
 
 data = {
-    'Email' : 'Test',
-    'Password' : 'World',
+    'email' : 'Hello',
+    'password' : 'World',
     'Fname' : 'Andrew',
     'Lname' : 'Gazeley'
 }

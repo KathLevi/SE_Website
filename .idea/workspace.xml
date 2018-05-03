@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9bb6f79-739a-4506-94ea-8e8c0d64f374" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py" afterPath="$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py" />
-    </list>
+    <list default="true" id="a9bb6f79-739a-4506-94ea-8e8c0d64f374" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,10 +15,9 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <state relative-caret-position="-351">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
                 <element signature="e#365#562#0" expanded="false" />
                 <element signature="e#625#654#0" expanded="false" />
                 <element signature="e#719#892#0" expanded="false" />
@@ -38,33 +33,13 @@
       <file leaf-file-name="Database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
+            <state relative-caret-position="685">
+              <caret line="412" column="34" lean-forward="false" selection-start-line="412" selection-start-column="34" selection-end-line="412" selection-end-column="34" />
               <folding>
-                <element signature="e#0#36#0" expanded="true" />
-                <element signature="e#246#508#0" expanded="false" />
-                <element signature="e#544#586#0" expanded="false" />
-                <element signature="e#635#1137#0" expanded="false" />
-                <element signature="e#1189#2070#0" expanded="false" />
-                <element signature="e#2132#2231#0" expanded="false" />
-                <element signature="e#2281#2756#0" expanded="false" />
-                <element signature="e#2802#3538#0" expanded="false" />
-                <element signature="e#3586#3668#0" expanded="false" />
-                <element signature="e#3717#3794#0" expanded="false" />
-                <element signature="e#3836#4397#0" expanded="false" />
-                <element signature="e#4473#4739#0" expanded="false" />
-                <element signature="e#4776#4806#0" expanded="false" />
-                <element signature="e#4856#5329#0" expanded="false" />
-                <element signature="e#5375#5666#0" expanded="false" />
-                <element signature="e#5712#6042#0" expanded="false" />
-                <element signature="e#6088#6383#0" expanded="false" />
-                <element signature="e#7219#7383#0" expanded="false" />
-                <element signature="e#7427#7600#0" expanded="false" />
-                <element signature="e#7641#8649#0" expanded="false" />
-                <element signature="e#8701#9040#0" expanded="false" />
-                <element signature="e#9092#9441#0" expanded="false" />
-                <element signature="e#9493#9829#0" expanded="false" />
-                <element signature="e#9878#10161#0" expanded="false" />
+                <element signature="e#8942#9213#0" expanded="false" />
+                <element signature="e#9407#10194#0" expanded="false" />
+                <element signature="e#10603#10777#0" expanded="false" />
+                <element signature="e#11063#12029#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -73,20 +48,22 @@
       <file leaf-file-name="Models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="78" column="12" lean-forward="false" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
+            <state relative-caret-position="540">
+              <caret line="81" column="34" lean-forward="false" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
                 <element signature="e#222#1252#0" expanded="false" />
                 <element signature="e#1276#2219#0" expanded="false" />
                 <element signature="e#1773#1932#0" expanded="false" />
                 <element signature="e#2062#2219#0" expanded="false" />
-                <element signature="e#3055#3393#0" expanded="false" />
-                <element signature="e#3423#3802#0" expanded="false" />
-                <element signature="e#3832#4321#0" expanded="false" />
-                <element signature="e#4349#4828#0" expanded="false" />
-                <element signature="e#4856#5255#0" expanded="false" />
-                <element signature="e#5279#6168#0" expanded="false" />
+                <element signature="e#3018#3344#0" expanded="false" />
+                <element signature="e#3374#3749#0" expanded="false" />
+                <element signature="e#4447#5082#0" expanded="false" />
+                <marker date="1524858553469" expanded="false" signature="3774:4419" ph="..." />
+                <marker date="1524858553469" expanded="false" signature="4756:4889" ph="..." />
+                <marker date="1524858553469" expanded="false" signature="4910:5082" ph="..." />
+                <marker date="1524858553469" expanded="false" signature="5101:5995" ph="..." />
+                <marker date="1524858553469" expanded="false" signature="6016:6515" ph="..." />
               </folding>
             </state>
           </provider>
@@ -95,12 +72,11 @@
       <file leaf-file-name="newskill_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+            <state relative-caret-position="64">
+              <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#123#801#0" expanded="false" />
-                <element signature="e#812#1260#0" expanded="false" />
+                <element signature="e#123#845#0" expanded="false" />
+                <element signature="e#856#1450#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -109,11 +85,22 @@
       <file leaf-file-name="editskill_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state relative-caret-position="186">
+              <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+              <folding>
+                <element signature="e#1386#1720#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getskills_test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/getskills_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#123#841#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -128,6 +115,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Resps.app</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -138,15 +130,15 @@
         <option value="$PROJECT_DIR$/MetaVoiceDB/src/Routes.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/src/Server.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/reg_test.py" />
-        <option value="$PROJECT_DIR$/MetaVoiceDB/test/getskills_test.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/__init__.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/login_test.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/test_suite.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/app.py" />
-        <option value="$PROJECT_DIR$/MetaVoiceDB/src/Models.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py" />
-        <option value="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" />
         <option value="$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py" />
+        <option value="$PROJECT_DIR$/MetaVoiceDB/src/Models.py" />
+        <option value="$PROJECT_DIR$/MetaVoiceDB/src/Database.py" />
+        <option value="$PROJECT_DIR$/MetaVoiceDB/test/getskills_test.py" />
       </list>
     </option>
   </component>
@@ -171,6 +163,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -230,19 +223,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="queries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="ToolWindowRun.ShowToolbar" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -256,25 +247,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.editskill_test">
-    <configuration default="false" name="login_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MetaVoiceDB/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SE_Website" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MetaVoiceDB/test/login_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.getskills_test">
     <configuration default="false" name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -339,6 +312,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="SE_Website" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="getskills_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MetaVoiceDB/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SE_Website" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MetaVoiceDB/test/getskills_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -409,19 +400,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.login_test" />
-      <item index="1" class="java.lang.String" itemvalue="Python.app" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test_suite.py" />
-      <item index="3" class="java.lang.String" itemvalue="Python.editskill_test" />
-      <item index="4" class="java.lang.String" itemvalue="Python.newskill_test" />
+      <item index="0" class="java.lang.String" itemvalue="Python.app" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test_suite.py" />
+      <item index="2" class="java.lang.String" itemvalue="Python.editskill_test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.newskill_test" />
+      <item index="4" class="java.lang.String" itemvalue="Python.getskills_test" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.editskill_test" />
-        <item index="1" class="java.lang.String" itemvalue="Python.newskill_test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.app" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_suite.py" />
-        <item index="4" class="java.lang.String" itemvalue="Python.login_test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.getskills_test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.app" />
+        <item index="2" class="java.lang.String" itemvalue="Python.editskill_test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.newskill_test" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_suite.py" />
       </list>
     </recent_temporary>
   </component>
@@ -483,35 +474,24 @@
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13856068" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3590034" sideWeight="0.5085929" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3590034" sideWeight="0.4914071" order="2" side_tool="false" content_ui="tabs" x="557" y="138" width="949" height="1041" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25295383" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.36333698" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" x="966" y="38" width="953" height="991" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43601358" sideWeight="0.4935553" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.36333698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="390" y="0" width="953" height="1041" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47310647" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -542,17 +522,20 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py</url>
-          <line>35</line>
+          <line>33</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MetaVoiceDB/src/Database.py</url>
+          <line>282</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="39" />
+      <option name="time" value="55" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/setup.py" />
     <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Routes.py" />
     <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Server.py" />
     <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/login_test.py">
@@ -566,7 +549,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
           <caret line="1996" column="0" lean-forward="false" selection-start-line="1996" selection-start-column="0" selection-end-line="1996" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -616,7 +598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
           <caret line="399" column="0" lean-forward="false" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -645,9 +626,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -656,7 +634,7 @@
         <state relative-caret-position="324">
           <caret line="12" column="33" lean-forward="false" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
           <folding>
-            <element signature="e#0#15#0" expanded="false" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -671,12 +649,14 @@
             <element signature="e#1276#2219#0" expanded="false" />
             <element signature="e#1773#1932#0" expanded="false" />
             <element signature="e#2062#2219#0" expanded="false" />
-            <element signature="e#3055#3393#0" expanded="false" />
-            <element signature="e#3423#3802#0" expanded="false" />
-            <element signature="e#3832#4321#0" expanded="false" />
-            <element signature="e#4349#4828#0" expanded="false" />
-            <element signature="e#4856#5255#0" expanded="false" />
-            <element signature="e#5279#6168#0" expanded="false" />
+            <element signature="e#3018#3344#0" expanded="false" />
+            <element signature="e#3374#3749#0" expanded="false" />
+            <element signature="e#4447#5082#0" expanded="false" />
+            <marker date="1524858553469" expanded="false" signature="3774:4419" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="4756:4889" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="4910:5082" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="5101:5995" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="6016:6515" ph="..." />
           </folding>
         </state>
       </provider>
@@ -686,7 +666,6 @@
         <state relative-caret-position="-887">
           <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
             <element signature="e#365#562#0" expanded="false" />
             <element signature="e#625#654#0" expanded="false" />
             <element signature="e#719#892#0" expanded="false" />
@@ -703,20 +682,10 @@
         <state relative-caret-position="81">
           <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#1189#2070#0" expanded="false" />
-            <element signature="e#2132#2231#0" expanded="false" />
-            <element signature="e#2281#2756#0" expanded="false" />
-            <element signature="e#2802#3538#0" expanded="false" />
-            <element signature="e#3586#3668#0" expanded="false" />
-            <element signature="e#3717#3794#0" expanded="false" />
-            <element signature="e#3836#4397#0" expanded="false" />
-            <element signature="e#4473#4739#0" expanded="false" />
-            <element signature="e#4776#4806#0" expanded="false" />
-            <element signature="e#4856#5329#0" expanded="false" />
-            <element signature="e#6423#7174#0" expanded="false" />
-            <element signature="e#7219#7383#0" expanded="false" />
-            <element signature="e#7427#7600#0" expanded="false" />
+            <element signature="e#8942#9213#0" expanded="false" />
+            <element signature="e#9407#10194#0" expanded="false" />
+            <element signature="e#10603#10777#0" expanded="false" />
+            <element signature="e#11063#12029#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -733,7 +702,6 @@
         <state relative-caret-position="837">
           <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
             <element signature="e#365#562#0" expanded="false" />
             <element signature="e#625#654#0" expanded="false" />
             <element signature="e#719#892#0" expanded="false" />
@@ -755,12 +723,14 @@
             <element signature="e#1276#2219#0" expanded="false" />
             <element signature="e#1773#1932#0" expanded="false" />
             <element signature="e#2062#2219#0" expanded="false" />
-            <element signature="e#3055#3393#0" expanded="false" />
-            <element signature="e#3423#3802#0" expanded="false" />
-            <element signature="e#3832#4321#0" expanded="false" />
-            <element signature="e#4349#4828#0" expanded="false" />
-            <element signature="e#4856#5255#0" expanded="false" />
-            <element signature="e#5279#6168#0" expanded="false" />
+            <element signature="e#3018#3344#0" expanded="false" />
+            <element signature="e#3374#3749#0" expanded="false" />
+            <element signature="e#4447#5082#0" expanded="false" />
+            <marker date="1524858553469" expanded="false" signature="3774:4419" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="4756:4889" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="4910:5082" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="5101:5995" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="6016:6515" ph="..." />
           </folding>
         </state>
       </provider>
@@ -829,7 +799,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -837,7 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1551">
           <caret line="400" column="0" lean-forward="true" selection-start-line="400" selection-start-column="0" selection-end-line="400" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -845,7 +813,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -853,9 +820,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-108">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -863,9 +827,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="13" column="73" lean-forward="false" selection-start-line="13" selection-start-column="73" selection-end-line="13" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -873,19 +834,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/getskills_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -893,15 +841,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="507" column="0" lean-forward="false" selection-start-line="507" selection-start-column="0" selection-end-line="507" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python/Python36-32/Lib/site-packages/sqlalchemy/orm/attributes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="234" column="0" lean-forward="false" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -909,36 +848,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="1597" column="0" lean-forward="false" selection-start-line="1597" selection-start-column="0" selection-end-line="1597" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python/Python36-32/Lib/site-packages/sqlalchemy/orm/attributes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="238" column="0" lean-forward="false" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Models.py">
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/queries/ViewUserSkillInfo.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="78" column="12" lean-forward="false" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#67#0" expanded="true" />
-            <element signature="e#222#1252#0" expanded="false" />
-            <element signature="e#1276#2219#0" expanded="false" />
-            <element signature="e#1773#1932#0" expanded="false" />
-            <element signature="e#2062#2219#0" expanded="false" />
-            <element signature="e#3055#3393#0" expanded="false" />
-            <element signature="e#3423#3802#0" expanded="false" />
-            <element signature="e#3832#4321#0" expanded="false" />
-            <element signature="e#4349#4828#0" expanded="false" />
-            <element signature="e#4856#5255#0" expanded="false" />
-            <element signature="e#5279#6168#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="81">
+          <caret line="3" column="23" lean-forward="true" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/queries/Get User Skills.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MetaVoiceDB/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+        <state relative-caret-position="-351">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
             <element signature="e#365#562#0" expanded="false" />
             <element signature="e#625#654#0" expanded="false" />
             <element signature="e#719#892#0" expanded="false" />
@@ -950,58 +891,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Database.py">
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
+        <state relative-caret-position="64">
+          <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#246#508#0" expanded="false" />
-            <element signature="e#544#586#0" expanded="false" />
-            <element signature="e#635#1137#0" expanded="false" />
-            <element signature="e#1189#2070#0" expanded="false" />
-            <element signature="e#2132#2231#0" expanded="false" />
-            <element signature="e#2281#2756#0" expanded="false" />
-            <element signature="e#2802#3538#0" expanded="false" />
-            <element signature="e#3586#3668#0" expanded="false" />
-            <element signature="e#3717#3794#0" expanded="false" />
-            <element signature="e#3836#4397#0" expanded="false" />
-            <element signature="e#4473#4739#0" expanded="false" />
-            <element signature="e#4776#4806#0" expanded="false" />
-            <element signature="e#4856#5329#0" expanded="false" />
-            <element signature="e#5375#5666#0" expanded="false" />
-            <element signature="e#5712#6042#0" expanded="false" />
-            <element signature="e#6088#6383#0" expanded="false" />
-            <element signature="e#7219#7383#0" expanded="false" />
-            <element signature="e#7427#7600#0" expanded="false" />
-            <element signature="e#7641#8649#0" expanded="false" />
-            <element signature="e#8701#9040#0" expanded="false" />
-            <element signature="e#9092#9441#0" expanded="false" />
-            <element signature="e#9493#9829#0" expanded="false" />
-            <element signature="e#9878#10161#0" expanded="false" />
+            <element signature="e#123#845#0" expanded="false" />
+            <element signature="e#856#1450#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/newskill_test.py">
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+        <state relative-caret-position="540">
+          <caret line="81" column="34" lean-forward="false" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#67#0" expanded="true" />
+            <element signature="e#222#1252#0" expanded="false" />
+            <element signature="e#1276#2219#0" expanded="false" />
+            <element signature="e#1773#1932#0" expanded="false" />
+            <element signature="e#2062#2219#0" expanded="false" />
+            <element signature="e#3018#3344#0" expanded="false" />
+            <element signature="e#3374#3749#0" expanded="false" />
+            <element signature="e#4447#5082#0" expanded="false" />
+            <marker date="1524858553469" expanded="false" signature="3774:4419" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="4756:4889" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="4910:5082" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="5101:5995" ph="..." />
+            <marker date="1524858553469" expanded="false" signature="6016:6515" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/src/Database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="685">
+          <caret line="412" column="34" lean-forward="false" selection-start-line="412" selection-start-column="34" selection-end-line="412" selection-end-column="34" />
+          <folding>
+            <element signature="e#8942#9213#0" expanded="false" />
+            <element signature="e#9407#10194#0" expanded="false" />
+            <element signature="e#10603#10777#0" expanded="false" />
+            <element signature="e#11063#12029#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/getskills_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#123#801#0" expanded="false" />
-            <element signature="e#812#1260#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MetaVoiceDB/test/editskill_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+        <state relative-caret-position="186">
+          <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#123#841#0" expanded="false" />
+            <element signature="e#1386#1720#0" expanded="false" />
           </folding>
         </state>
       </provider>
