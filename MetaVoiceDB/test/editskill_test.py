@@ -1,62 +1,64 @@
 import requests
 import json
 
-# Data formatting standards for a new skill request should look like either of these
+# Data formatting standards for a edit skill request should look like either of these
 FBdata = {
-   "SkillId" : 28,
-   "UserId" : 1,
-   "Template":"Alexa Flash Briefing",
-   "Name":"Test Skill CHANGED",
-   'Status' : 'ALMOST THERE',
-   "Category":"Television MAYBE",
-   "ShortDesc":"Descriptive words and HERE",
-   "LongDesc":"Longer descriptive words and HERE",
-   "Keywords":[
-      "Key1",
-      "Key69",
-      "Key3"
-   ],
-   "Feeds":[
-      {
-         "Name":"Test Feed",
-         "Preamble":"Pramble",
-         "UpdateFreq":"Hourly",
-         "Genre":"Headline News",
-         "URL":"https://www.gm.com"
+   "firstName" : 'Name',
+   "lastName" : "Name2",
+   "SkillId" : 80,
+   "UserId" : 99,
+   "template":"Alexa Flash Briefing",
+   'amz_SkillId' : 'jiasdlkjdsakjldsakj',
+   "name":"Test News Skill CHANGED",
+   "category":"Test Skills NEWCAT",
+   "shortDescription":"App to make sandwich",
+   "longDescription":"Longer desc of sandwiches",
+   "keywords": "Sandwich, cheese, mayo",
+   "status" : 'GREEN MEANS GO',
+   "amz_SkillId" : "hasdhjasdjkhk123123",
+   "feeds":[  
+      {  
+         "name":"Feed1 TEST",
+         "preamble":"Pramble",
+         "updateFrequency":"Weekly",
+         "genre":"News",
+         "url":"https://www.AboveandBeyond.nu"
       },
-      {
-         "Name":"Test Feed",
-         "Preamble":"Pramble",
-         "UpdateFreq":"Hourly",
-         "Genre":"Headline News",
-         "URL":"https://www.reddit.com/r/nba"
+      {  
+         "name":"Feed2 TEST",
+         "preamble":"Pramble",
+         "updateFrequency":"Hourly",
+         "genre":"News",
+         "url":"https://www.gm.com"
       }
    ]
 }
 
 SSData = {
-   "SkillId" : 29,
-   "UserId" : 1,
-   "Template":"Simple Skill",
-    "Status" : 'Still works',
-   "Name":"IT WORKED",
-   "Category":"NIKE JUST DO IT",
-   "ShortDesc":"Desc",
-   "LongDesc":"Long",
-   "Keywords":[
-      "Key1",
-      "Key2",
-      "Key3"
-   ],
-    "Utterances":[
-        "IT WORKED1",
-        "You sure about that ANdrew?"
-    ],
-    "Responses":[
-        "How about now?",
-        "WORKDED4",
-        "Maybe Now?"
-    ]
+   "UserId" : 0,
+   "SkillId" : 81,
+   "template":"Simple Skill",
+   "name":"Test Simple Skill CHANGED",
+   "category":"Metal Ship Sailing",
+   "shortDescription":"Descriptive words here - CHANGED",
+   "longDescription":"Longer descriptive words - CHANGED",
+   "keywords": "Keword1, Hellp, Help, NEWKEYWORD",
+   "status" : "HELLO WORLD I AM HERE",
+   'amz_SkillId' : "jhsadkjlhsdakjl--sadk212",
+   "intents" : [
+       {
+        # These should be able to be modified for a many to many approach
+        "intent" : "My Intent Changed",
+        "utterances":{  
+           '1' : "Hello",
+           '2' : "world",
+           '3' : "My",
+           '4' : "Crean",
+           '5' : "Peaches"
+        },
+        "response": "Response!"
+       }
+   ]
 }
 
 jsonData = json.dumps(FBdata)

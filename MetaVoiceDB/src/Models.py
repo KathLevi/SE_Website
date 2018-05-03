@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+import datetime
 
 Base = declarative_base()
 
@@ -81,15 +82,21 @@ class Skills(Base):
     ShortDesc = Column(String(60))
     LongDesc = Column(String(200))
     Keywords = Column(String(200))
+    Invoke = Column(String(60))
+    Template = Column ( String ( 50 ) )
+    CreationDate = Column(DateTime, default=datetime.datetime.utcnow)
+
     # Maps many to many relationship with Utterances and Responses
     Feeds = relationship('Feed')
     Utterances = relationship('Utterances')
     Responses = relationship('Response')
-    TemplateId = Column(Integer, ForeignKey('Templates.TemplateId'))
+
+    Template = Column(String(50))
     CreationDate = Column(DateTime())
 
     def __init__(self,Name=None, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
-                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,TemplateId=None,CreationDate=None):
+                Category=None,ShortDesc=None,LongDesc=None,
+                 Keywords=None,Template=None, Invoke=None, CreationDate = None):
         self.Name = Name
         self.SkillId = SkillId
         self.UserId = UserId
@@ -99,8 +106,9 @@ class Skills(Base):
         self.ShortDesc = ShortDesc
         self.LongDesc = LongDesc
         self.Keywords = Keywords
-        self.TemplateId = TemplateId
         self.CreationDate = CreationDate
+        self.Template = Template
+        self.Invoke = Invoke
         return
 
     def dict(self):
@@ -114,8 +122,9 @@ class Skills(Base):
             'ShortDesc' : self.ShortDesc,
             'LongDesk' : self.LongDesc,
             'Keywords' : self.Keywords,
-            'TemplateId' : self.TemplateId,
-            'CreationDate' : self.CreationDate
+            'CreationDate' : self.CreationDate,
+            'Template' : self.Template,
+            'Invoke' : self.Invoke
         }
 
 class Utterances(Base):
@@ -124,17 +133,20 @@ class Utterances(Base):
     UtterId = Column(Integer, primary_key=True)
     SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
     Utter = Column(String(100))
+    IntentId = Column(Integer, ForeignKey('Intents.IntentId'))
 
-    def __init(self,UtterId=None,SkillId=None,Utter=None):
+    def __init(self,UtterId=None,SkillId=None,Utter=None, IntentId=None):
         self.UtterId = UtterId
         self.SkillId = SkillId
         self.Utter = Utter
+        self.IntentId = IntentId
         return
     def dict(self):
         return {
             'UtterId' : self.UtterId,
             'SkillId' : self.SkillId,
-            'Utter' : self.Utter
+            'Utter' : self.Utter,
+            'IntentId' : self.IntentId
         }
 
 class Response(Base):
@@ -142,36 +154,23 @@ class Response(Base):
 
     RespId = Column(Integer, primary_key=True)
     SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
+    IntentId = Column(Integer, ForeignKey('Intents.IntentId'))
     Resp = Column(String(100))
+    
 
-    def __init__(self,RespId=None,SkillId=None,Resp=None):
+    def __init__(self,RespId=None,SkillId=None,Resp=None, IntentId=None):
         self.RespId = RespId
         self.SkillId = SkillId
         self.Resp = Resp
+        self.IntentId = IntentId
         return
 
     def dict(self):
         return {
             'RespId' : self.RespId,
             'SkillId' : self.SkillId,
-            'Resp' : self.Resp
-        }
-
-class Template(Base):
-    __tablename__ = 'Templates'
-    Skills = relationship('Skills')
-    TemplateId = Column(Integer, primary_key=True, )
-    Name = Column(String(20))
-
-    def __init__(self, TemplateId=None, Name=None):
-        self.TemplateId = TemplateId
-        self.Name = Name
-        return
-
-    def dict(self):
-        return {
-            'TemplateId' : self.TemplateId,
-            'Name' : self.Name
+            'Resp' : self.Resp,
+            'IntentId' : self.IntentId
         }
 
 class Feed(Base):
@@ -203,4 +202,23 @@ class Feed(Base):
             'UpdateFreq' : self.UpdateFreq,
             'Genre' : self.Genre,
             'URL' : self.URL
+        }
+
+class Intent(Base):
+    __tablename__ = 'Intents'
+
+    IntentId = Column(Integer, primary_key=True)
+    SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
+    Intent = Column(String(100))
+
+    def __init__(self,IntentId = None, SkillId = None, Intent = None):
+        self.IntentId = IntentId
+        self.SkillId = SkillId
+        self.Intent = Intent
+
+    def dict(self):
+        return {
+            'IntentId' : self.IntentId,
+            'SkillId' : self.SkillId,
+            'Intent' : self.Intent
         }

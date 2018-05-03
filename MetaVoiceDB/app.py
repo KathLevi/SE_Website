@@ -1,9 +1,13 @@
 from flask import Flask, request
 from flask_cors import CORS
 from src.Database import db
-import json
+from src.Config import Config
+import json as js
 import os
+import requests
 
+
+config = Config()
 app = Flask(__name__)
 CORS(app)
 
@@ -13,7 +17,7 @@ cs = "mysql://apeacock18:Pirate21@" \
 
 # generates 200 response and packeges dictionary into json to send
 def good_response(resp):
-    response = app.response_class ( response=json.dumps ( resp ) ,
+    response = app.response_class ( response=js.dumps ( resp ) ,
                                     status=200 ,
                                     mimetype='application/json' )
     return response
@@ -42,7 +46,9 @@ def Register():
 
 @app.route('/viewskills', methods=['POST'])
 def ViewSkills():
-    UserId = request.get_json()['UserId']
+    json = request.get_json()
+    json = js.loads(json)
+    UserId = json['UserId']
     print("Requesting Skills for User")
     _db = db(cs)
     resp = _db.attempt_get_skills(UserId=UserId,limit=None)
@@ -52,6 +58,7 @@ def ViewSkills():
 @app.route('/newskill', methods=['POST'])
 def NewSkill():
     jsonData = request.get_json()
+    jsonData = js.loads(jsonData)
     print("New Skill Submission")
     _db = db(cs)
     resp = _db.new_skill(jsonData)
@@ -65,6 +72,23 @@ def EditSkill():
     _db = db(cs)
     status = _db.edit_skill(jsonData)
     _db.shutdown()
+    return good_response(status)
+
+@app.route('/submit', methods=['POST'])
+def SubmitSkill():
+    jsonData = request.get_json()
+    print('Skill Submission Request')
+    _db = db(cs)
+    jsonData = _db.submit_skill(jsonData)
+    _db.shutdown()
+    
+    # Post skill to be submitteds data to Service1 MetaVoiceLambda
+    # change config to 'aws' when testing on aws ec2
+    resp = requests.post(config.local +  ':5001/post', json=jsonData)
+    status = {
+        'Posted' : resp.status_code
+    }
+
     return good_response(status)
 
 if __name__ == '__main__':
