@@ -179,13 +179,23 @@ class FlashBriefing extends React.Component {
       "http://127.0.0.1:5004/newskill",
       {
         UserId: localStorage.getItem("userId"),
-        Name: data.skillName,
-        AMZ_SkillId: 0,
-        Status: "In development",
-        Category: data.category,
-        ShortDesc: data.shortDescription,
-        LongDesc: data.longDescription,
-        Keywords: data.keywords
+        skillName: data.skillName,
+        amz_SkillId: 0,
+        status: "In development",
+        category: data.category,
+        shortDescription: data.shortDescription,
+        longDescription: data.longDescription,
+        keywords: data.keywords,
+        template: data.template,
+        feeds : [
+          {
+            name : data.feedName,
+            preamble: data.preamble,
+            updateFrequency : data.updateFrequency,
+            genre : data.genre,
+            url : data.feedURL,
+          }
+        ]
       },
       resp => {
         this.setState({ modalMessage: String(resp) });
