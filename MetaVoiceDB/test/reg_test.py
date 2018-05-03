@@ -2,18 +2,18 @@ import json
 import requests
 
 data = {
-    'Email' : 'test1@test.com',
-    'Password' : 'test',
-    'Fname' : 'test1',
-    'Lname' : 'test1',
-    'Company' : 'SomeCompany',
-    'Address' : 'SomeAddress',
-    'Premise' : 'SomePremise',
-    'City' : 'Portland',
-    'State' : 'Oregon',
-    'Zipcode' : 97221,
-    'Country' : 'USA',
-    'Cell'  : '(123)-456-7890',
+    'email' : 'andrew@test.com',
+    'password' : 'test',
+    'firstName' : 'test1',
+    'lastName' : 'test1',
+    'company' : 'SomeCompany',
+    'address' : 'SomeAddress',
+    'premise' : 'SomePremise',
+    'city' : 'Portland',
+    'state' : 'Oregon',
+    'zipcode' : 97221,
+    'country' : 'USA',
+    'cell'  : '(123)-456-7890',
 }
 
 # Success Case, need to change data to make succeed

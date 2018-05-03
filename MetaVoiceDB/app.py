@@ -1,9 +1,13 @@
 from flask import Flask, request
 from flask_cors import CORS
 from src.Database import db
+from src.Config import Config
 import json
 import os
+import requests
 
+
+config = Config()
 app = Flask(__name__)
 CORS(app)
 
@@ -65,6 +69,23 @@ def EditSkill():
     _db = db(cs)
     status = _db.edit_skill(jsonData)
     _db.shutdown()
+    return good_response(status)
+
+@app.route('/submit', methods=['POST'])
+def SubmitSkill():
+    jsonData = request.get_json()
+    print('Skill Submission Request')
+    _db = db(cs)
+    jsonData = _db.submit_skill(jsonData)
+    _db.shutdown()
+    
+    # Post skill to be submitteds data to Service1 MetaVoiceLambda
+    # change config to 'aws' when testing on aws ec2
+    resp = requests.post(config.local +  ':5001/post', json=jsonData)
+    status = {
+        'Posted' : resp.status_code
+    }
+
     return good_response(status)
 
 if __name__ == '__main__':

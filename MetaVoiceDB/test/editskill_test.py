@@ -5,8 +5,8 @@ import json
 FBdata = {
    "firstName" : 'Name',
    "lastName" : "Name2",
-   "SkillId" : 64,
-   "UserId" : 3,
+   "SkillId" : 80,
+   "UserId" : 99,
    "template":"Alexa Flash Briefing",
    'amz_SkillId' : 'jiasdlkjdsakjldsakj',
    "name":"Test News Skill CHANGED",
@@ -35,8 +35,8 @@ FBdata = {
 }
 
 SSData = {
-   "UserId" : 1,
-   "SkillId" : 65,
+   "UserId" : 0,
+   "SkillId" : 81,
    "template":"Simple Skill",
    "name":"Test Simple Skill CHANGED",
    "category":"Metal Ship Sailing",

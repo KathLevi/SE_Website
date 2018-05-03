@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+import datetime
 
 Base = declarative_base()
 
@@ -81,14 +82,18 @@ class Skills(Base):
     ShortDesc = Column(String(60))
     LongDesc = Column(String(200))
     Keywords = Column(String(200))
+    Invoke = Column(String(60))
+    Template = Column ( String ( 50 ) )
+    CreationDate = Column(DateTime, default=datetime.datetime.utcnow)
+
     # Maps many to many relationship with Utterances and Responses
     Feeds = relationship('Feed')
     Utterances = relationship('Utterances')
     Responses = relationship('Response')
-    Template = Column(String(50))
+
 
     def __init__(self,Name=None, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
-                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,Template=None):
+                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,Template=None, Invoke=None):
         self.Name = Name
         self.SkillId = SkillId
         self.UserId = UserId
@@ -99,6 +104,7 @@ class Skills(Base):
         self.LongDesc = LongDesc
         self.Keywords = Keywords
         self.Template = Template
+        self.Invoke = Invoke
         return
 
     def dict(self):
@@ -111,7 +117,8 @@ class Skills(Base):
             'ShortDesc' : self.ShortDesc,
             'LongDesk' : self.LongDesc,
             'Keywords' : self.Keywords,
-            'Template' : self.Template
+            'Template' : self.Template,
+            'Invoke' : self.Invoke
         }
 
 class Utterances(Base):
