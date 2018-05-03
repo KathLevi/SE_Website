@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
 import Main from "./components/main";
-import Navigation from "./components/navigation";
 import Footer from "./components/footer";
+import Navigation from "./components/navigation";
 
 const App = () => (
-  <div className="app">
+  <div>
     <Navigation />
     <Main />
     <Footer />

@@ -101,6 +101,17 @@ class SignIn extends React.Component {
         if (resp.data.status === "SUCCESS") {
           window.localStorage.setItem("userId", resp.data.userId);
           this.props.history.push("/profile");
+          axios
+            .post("http://127.0.0.1:5004/viewskills", {
+              UserId: resp.data.userId
+            })
+            .then(resp => {
+              localStorage.setItem("skills", JSON.stringify(resp.data));
+              console.log(resp);
+            })
+            .catch(error => {
+              console.log(error);
+            });
         }
       })
       .catch(error => {

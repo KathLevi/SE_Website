@@ -42,7 +42,7 @@ def Register():
 
 @app.route('/viewskills', methods=['POST'])
 def ViewSkills():
-    UserId = json.loads(request.get_json())['UserId']
+    UserId = request.get_json()['UserId']
     print("Requesting Skills for User")
     _db = db(cs)
     resp = _db.attempt_get_skills(UserId=UserId,limit=None)

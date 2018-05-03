@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from src.Models import User , User_Profile , Base, Skills, Response, Utterances, Feed
 import json as js
+import datetime
 
 class db:
     def __init__ ( self , conn_string=None ):
@@ -50,7 +51,7 @@ class db:
     # or a detailed error of why the registration failed
     def attempt_register ( self , json ):
         resp = {}
-            
+
         try:
             q = self.session.query ( User ).\
             filter_by( Email = json[ 'Email' ] ).\
@@ -88,7 +89,7 @@ class db:
         try:
             f = Feed(
             Name = feed.get('Name', 'Default') ,
-            SkillId = SkillId , 
+            SkillId = SkillId ,
             Preamble= feed.get('Preamble', 'Default') ,
             UpdateFreq= feed.get('UpdateFreq', 'Default') ,
             Genre = feed.get('Genre', 'Default') ,
@@ -137,17 +138,19 @@ class db:
     # Builds a new Skill Object from JSON
     def build_skill(self,json):
         Keywords = json.get('Keywords', 'Default')
+        now = datetime.datetime.now()
         return Skills(
             UserId=json.get("UserId",0) ,
             Name=json.get("Name","Default Name"),
             AMZ_SkillId= json.get('AMZ_SkillId','Default') ,
             Status=json.get('Status', 'In Development') ,
-            Category=json.get('Category','Default') , 
+            Category=json.get('Category','Default') ,
             ShortDesc=json.get('ShortDesc', 'Default'),
             LongDesc=json.get('LongDesc', 'Default') ,
             Keywords= str(Keywords),
             TemplateId=0,
-            SkillId=json.get('SkillId', None)
+            SkillId=json.get('SkillId', None),
+            CreationDate=now
         )
 
     # Returns a User object joined with that users User_Profile
@@ -168,16 +171,19 @@ class db:
     # LIMIT HAS NOT BEEN IMPLEMENTED DO NOT USE
     # Does not return detailed error as to why skills were not returned
     def get_skills(self,Id,Limit=None):
-        viewskills = {}
+        viewskills = []
         if Limit:
             print("Limit!")
         else:
             SkillIds = self.session.query ( Skills ).filter_by ( UserId = Id ).all()
 
-            for Skill in SkillIds:
-                viewskills[Skill.SkillId] = Skill.dict()
-                viewskills[Skill.SkillId]['Responses'] = self.get_skill_resps(Id=Skill.SkillId)
-                viewskills[Skill.SkillId]['Utterances'] = self.get_skill_uttrs(Id=Skill.SkillId)
+            for idx, skill in enumerate(SkillIds):
+                viewskills.append(skill.dict())
+                print viewskills
+                print idx
+                viewskills[idx]['CreationDate'] = str(viewskills[idx]['CreationDate'])
+                viewskills[idx]['Responses'] = self.get_skill_resps(Id=skill.SkillId)
+                viewskills[idx]['Utterances'] = self.get_skill_uttrs(Id=skill.SkillId)
 
         return viewskills
 
@@ -220,13 +226,13 @@ class db:
     # returns a error status and reason upon failure
     def new_skill(self,json):
         response = {}
-        json = js.loads ( json )
+        #json = js.loads ( json )
         s = self.build_skill(json)
         try:
             self.session.add(s)
             self.session.flush()
             self.session.refresh(s)
-            
+
             if json.get('Template', None) == 'Alexa Flash Briefing':
                 self.submit_feeds(json,s.SkillId)
             else:

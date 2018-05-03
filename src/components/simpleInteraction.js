@@ -198,10 +198,29 @@ class SimpleInteraction extends React.Component {
 
     console.log(data);
 
-    request("http://127.0.0.1:5001/post", data, resp => {
+    /*request("http://127.0.0.1:5001/post", data, resp => {
       this.setState({ modalMessage: String(resp) });
       this.showModal(resp);
-    });
+      console.log(resp);
+    });*/
+
+    request(
+      "http://127.0.0.1:5004/newskill",
+      {
+        UserId: localStorage.getItem("userId"),
+        Name: data.skillName,
+        AMZ_SkillId: 0,
+        Status: "In development",
+        Category: data.category,
+        ShortDesc: data.shortDescription,
+        LongDesc: data.longDescription,
+        Keywords: data.keywords
+      },
+      resp => {
+        this.setState({ modalMessage: String(resp) });
+        this.showModal(resp);
+      }
+    );
   };
 
   showModal = () => {

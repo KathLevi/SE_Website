@@ -4,12 +4,16 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
 
+const Context = React.createContext({});
+
 // Wrap the rendering in a function:
 const render = Component => {
   ReactDOM.render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>,
+    <Context.Provider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Context.Provider>,
     document.getElementById("root")
   );
 };

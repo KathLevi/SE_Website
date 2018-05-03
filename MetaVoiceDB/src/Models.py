@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -86,9 +86,10 @@ class Skills(Base):
     Utterances = relationship('Utterances')
     Responses = relationship('Response')
     TemplateId = Column(Integer, ForeignKey('Templates.TemplateId'))
+    CreationDate = Column(DateTime())
 
     def __init__(self,Name=None, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
-                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,TemplateId=None):
+                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,TemplateId=None,CreationDate=None):
         self.Name = Name
         self.SkillId = SkillId
         self.UserId = UserId
@@ -98,11 +99,13 @@ class Skills(Base):
         self.ShortDesc = ShortDesc
         self.LongDesc = LongDesc
         self.Keywords = Keywords
-        self.TemplateId = TemplateId        
+        self.TemplateId = TemplateId
+        self.CreationDate = CreationDate
         return
 
     def dict(self):
         return {
+            'Name' : self.Name,
             'SkillId' : self.SkillId,
             'UserId' : self.UserId,
             'AMZ_SkillId' : self.AMZ_SkillId,
@@ -111,7 +114,8 @@ class Skills(Base):
             'ShortDesc' : self.ShortDesc,
             'LongDesk' : self.LongDesc,
             'Keywords' : self.Keywords,
-            'TemplateId' : self.TemplateId
+            'TemplateId' : self.TemplateId,
+            'CreationDate' : self.CreationDate
         }
 
 class Utterances(Base):
@@ -190,7 +194,7 @@ class Feed(Base):
         self.Genre = Genre
         self.URL = URL
         return
-    
+
     def dict(self):
         return {
             'FeedId' : self.FeedId,

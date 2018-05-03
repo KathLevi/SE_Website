@@ -58,10 +58,10 @@ const Navigation = props => (
                 onClick={() => {
                   signOut(props);
                 }}
-                to="/"
+                to="/signin"
                 className="dropdown-link"
               >
-                SIGN OUT
+                SWITCH ACCOUNTS
               </NavLink>
             </div>
           </div>
