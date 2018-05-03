@@ -82,8 +82,8 @@ class SignIn extends React.Component {
     this.setState({ loading: true });
 
     let data = {
-      Email: this.state.email.value,
-      Password: this.state.password.value
+      email: this.state.email.value,
+      password: this.state.password.value
     };
 
     axios

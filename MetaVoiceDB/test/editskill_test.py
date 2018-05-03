@@ -6,7 +6,7 @@ FBdata = {
    "firstName" : 'Name',
    "lastName" : "Name2",
    "SkillId" : 80,
-   "UserId" : 99,
+   "UserId" : 2,
    "template":"Alexa Flash Briefing",
    'amz_SkillId' : 'jiasdlkjdsakjldsakj',
    "name":"Test News Skill CHANGED",
@@ -35,7 +35,7 @@ FBdata = {
 }
 
 SSData = {
-   "UserId" : 0,
+   "UserId" : 2,
    "SkillId" : 81,
    "template":"Simple Skill",
    "name":"Test Simple Skill CHANGED",
