@@ -90,18 +90,13 @@ class Skills(Base):
     Feeds = relationship('Feed')
     Utterances = relationship('Utterances')
     Responses = relationship('Response')
-<<<<<<< HEAD
-    TemplateId = Column(Integer, ForeignKey('Templates.TemplateId'))
+
+    Template = Column(String(50))
     CreationDate = Column(DateTime())
 
     def __init__(self,Name=None, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
-                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,TemplateId=None,CreationDate=None):
-=======
-
-
-    def __init__(self,Name=None, SkillId=None, UserId=None, AMZ_SkillId=None, Status=None,
-                Category=None,ShortDesc=None,LongDesc=None,Keywords=None,Template=None, Invoke=None):
->>>>>>> variableRefactor
+                Category=None,ShortDesc=None,LongDesc=None,
+                 Keywords=None,Template=None, Invoke=None, CreationDate = None):
         self.Name = Name
         self.SkillId = SkillId
         self.UserId = UserId
@@ -111,13 +106,9 @@ class Skills(Base):
         self.ShortDesc = ShortDesc
         self.LongDesc = LongDesc
         self.Keywords = Keywords
-<<<<<<< HEAD
-        self.TemplateId = TemplateId
         self.CreationDate = CreationDate
-=======
         self.Template = Template
         self.Invoke = Invoke
->>>>>>> variableRefactor
         return
 
     def dict(self):
@@ -131,13 +122,9 @@ class Skills(Base):
             'ShortDesc' : self.ShortDesc,
             'LongDesk' : self.LongDesc,
             'Keywords' : self.Keywords,
-<<<<<<< HEAD
-            'TemplateId' : self.TemplateId,
-            'CreationDate' : self.CreationDate
-=======
+            'CreationDate' : self.CreationDate,
             'Template' : self.Template,
             'Invoke' : self.Invoke
->>>>>>> variableRefactor
         }
 
 class Utterances(Base):

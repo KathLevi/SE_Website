@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from src.Database import db
 from src.Config import Config
-import json
+import json as js
 import os
 import requests
 
@@ -17,7 +17,7 @@ cs = "mysql://apeacock18:Pirate21@" \
 
 # generates 200 response and packeges dictionary into json to send
 def good_response(resp):
-    response = app.response_class ( response=json.dumps ( resp ) ,
+    response = app.response_class ( response=js.dumps ( resp ) ,
                                     status=200 ,
                                     mimetype='application/json' )
     return response
@@ -46,7 +46,9 @@ def Register():
 
 @app.route('/viewskills', methods=['POST'])
 def ViewSkills():
-    UserId = request.get_json()['UserId']
+    json = request.get_json()
+    json = js.loads(json)
+    UserId = json['UserId']
     print("Requesting Skills for User")
     _db = db(cs)
     resp = _db.attempt_get_skills(UserId=UserId,limit=None)
@@ -56,6 +58,7 @@ def ViewSkills():
 @app.route('/newskill', methods=['POST'])
 def NewSkill():
     jsonData = request.get_json()
+    jsonData = js.loads(jsonData)
     print("New Skill Submission")
     _db = db(cs)
     resp = _db.new_skill(jsonData)

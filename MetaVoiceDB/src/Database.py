@@ -2,9 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from src.Models import User , User_Profile , Base, Skills, Response, Utterances, Feed, Intent
 import json as js
-<<<<<<< HEAD
 import datetime
-=======
 from src.helpers.jsonHelper import jsonHelper
 
 # TODO
@@ -22,7 +20,7 @@ from src.helpers.jsonHelper import jsonHelper
 # Need to send accurate info about why failed logins didint work
 # Update DB to handle Datetime field in Skills
 # Modify jsonHelper build functions to match with json datamodel, see register
->>>>>>> variableRefactor
+
 
 class db:
     def __init__ ( self , conn_string=None ):
@@ -78,11 +76,7 @@ class db:
     # or a detailed error of why the registration failed
     def attempt_register ( self , json ):
         resp = {}
-<<<<<<< HEAD
-
-=======
         json = js.loads(json)
->>>>>>> variableRefactor
         try:
             q = self.session.query ( User ).\
             filter_by( Email = json[ 'email' ] ).\
@@ -114,7 +108,7 @@ class db:
         skills = self.get_skills(Id=UserId)
         return skills
 
-<<<<<<< HEAD
+
     # Builds a new Feed Object with on SkillID, from JSON
     def build_feed(self, feed,SkillId):
         try:
@@ -168,7 +162,7 @@ class db:
 
     # Builds a new Skill Object from JSON
     def build_skill(self,json):
-        Keywords = json.get('Keywords', 'Default')
+        Keywords = json.get('keywords', 'Default')
         now = datetime.datetime.now()
         return Skills(
             UserId=json.get("UserId",0) ,
@@ -179,13 +173,10 @@ class db:
             ShortDesc=json.get('ShortDesc', 'Default'),
             LongDesc=json.get('LongDesc', 'Default') ,
             Keywords= str(Keywords),
-            TemplateId=0,
             SkillId=json.get('SkillId', None),
             CreationDate=now
         )
 
-=======
->>>>>>> variableRefactor
     # Returns a User object joined with that users User_Profile
     def get_user_and_profile ( self , Email , Password ):
         q = self.session.query ( User ).\
@@ -209,25 +200,15 @@ class db:
             print("Limit!")
         else:
             SkillIds = self.session.query ( Skills ).filter_by ( UserId = Id ).all()
-
-<<<<<<< HEAD
             for idx, skill in enumerate(SkillIds):
                 viewskills.append(skill.dict())
-                print viewskills
-                print idx
                 viewskills[idx]['CreationDate'] = str(viewskills[idx]['CreationDate'])
                 viewskills[idx]['Responses'] = self.get_skill_resps(Id=skill.SkillId)
                 viewskills[idx]['Utterances'] = self.get_skill_uttrs(Id=skill.SkillId)
-
-=======
-            for Skill in SkillIds:
-                viewskills[Skill.SkillId] = Skill.dict()
-                if Skill.Template == 'Alexa Flash Briefing':
-                    viewskills[ Skill.SkillId ][ 'feeds' ] = self.get_skill_feeds ( Skill.SkillId )
+                if skill.Template == 'Alexa Flash Briefing':
+                    viewskills[ idx ][ 'feeds' ] = self.get_skill_feeds ( skill.SkillId )
                 else:
-                    viewskills[ Skill.SkillId ][ 'intents' ] = self.get_skill_intent ( Skill.SkillId )
-        
->>>>>>> variableRefactor
+                    viewskills[ idx ][ 'intents' ] = self.get_skill_intent ( skill.SkillId )
         return viewskills
 
     # Submits list of new Feed objects to the database on a certain SkillId
@@ -270,24 +251,12 @@ class db:
     # returns a error status and reason upon failure
     def new_skill(self,json):
         response = {}
-<<<<<<< HEAD
-        #json = js.loads ( json )
-        s = self.build_skill(json)
-=======
-        json = js.loads ( json )
         s = self.jsonHelper.build_skill(json)
->>>>>>> variableRefactor
         try:
             self.session.add(s)
             self.session.flush()
             self.session.refresh(s)
-<<<<<<< HEAD
-
-            if json.get('Template', None) == 'Alexa Flash Briefing':
-=======
-            
             if json.get('template', None) == 'Alexa Flash Briefing':
->>>>>>> variableRefactor
                 self.submit_feeds(json,s.SkillId)
             else:
                 # Need to restructure to work with Intents
@@ -325,7 +294,6 @@ class db:
     # Sends error message upon issue editing the object
     def edit_skill(self,json):
         response = {}
-        json = js.loads(json)
         try:
             q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
             if q:
@@ -465,7 +433,8 @@ class db:
             feeds.append(feed.dict())
 
         return feeds
-    
+
+    #NOT IMPLEMENTED FULLY YET
     def submit_skill(self,json):
         # Assuming that JSON object is same as used in /newskill
         # Update skill in db to reflect new draft changes
@@ -484,7 +453,7 @@ class db:
             else:
                 Ints = self.session.query(Intent).filter_by(SkillId = Id).all()
                 Resps = self.session.query(Response).filter_by(SkillId = Id).all()
-                Utters - self.session.query(Utterances).filter_by(SkillID = Id).all()
+                Utters = self.session.query(Utterances).filter_by(SkillID = Id).all()
                 # Build JSON Object for skill
                 # Since it is a simple skill we are only accepting one response
                 # can be modified to have multiple responses/intents
