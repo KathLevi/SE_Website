@@ -47,7 +47,6 @@ def Register():
 @app.route('/viewskills', methods=['POST'])
 def ViewSkills():
     json = request.get_json()
-    json = js.loads(json)
     UserId = json['UserId']
     print("Requesting Skills for User")
     _db = db(cs)
@@ -58,7 +57,6 @@ def ViewSkills():
 @app.route('/newskill', methods=['POST'])
 def NewSkill():
     jsonData = request.get_json()
-    jsonData = js.loads(jsonData)
     print("New Skill Submission")
     _db = db(cs)
     resp = _db.new_skill(jsonData)

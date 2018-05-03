@@ -39,7 +39,7 @@ class db:
     # Function for checking the reason for an invalid login
     # returns an error type string
     def invalid_login(self,json):
-        q = self.session.query(User).filter_by(Email=json['Email']).one_or_none()
+        q = self.session.query(User).filter_by(Email=json['email']).one_or_none()
         if q:
             return 'Password Incorrect'
         else:
@@ -49,7 +49,7 @@ class db:
     # Returns either that users login information or a detailed login error
     def attempt_login ( self , json ):
         status = {}
-        json = js.loads(json)
+        print(json)
         try:
             q = self.get_user_and_profile ( Email=json[ 'email' ] , Password=json[ 'password' ] )
             if q is None:
@@ -294,6 +294,7 @@ class db:
     # Sends error message upon issue editing the object
     def edit_skill(self,json):
         response = {}
+        json = js.loads(json)
         try:
             q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
             if q:
