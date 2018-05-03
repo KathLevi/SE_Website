@@ -47,8 +47,8 @@ class Register extends React.Component {
       alert("passwords do not match");
     } else {
       let data = {
-        Email: this.state.email,
-        Password: this.state.password
+        email: this.state.email,
+        password: this.state.password
       };
 
       this.setState({ loading: true });

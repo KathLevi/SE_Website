@@ -76,7 +76,6 @@ class db:
     # or a detailed error of why the registration failed
     def attempt_register ( self , json ):
         resp = {}
-        json = js.loads(json)
         try:
             q = self.session.query ( User ).\
             filter_by( Email = json[ 'email' ] ).\
