@@ -8,8 +8,35 @@ class ViewSkills extends React.Component {
     super(props);
 
     this.state = {
-      skills: JSON.parse(localStorage.getItem("skills")) || []
+      skills: Object.values(props.skills)
     };
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({ skills: Object.values(props.skills) });
+  }
+
+  componentDidMount() {
+    if (!this.props.skillsLoaded) {
+      axios
+        .post("http://127.0.0.1:5004/viewskills", {
+          UserId: localStorage.getItem("userId")
+        })
+        .then(resp => {
+          this.props.updateGlobalState({
+            skills: { hi: "hello" },
+            skillsLoaded: true
+          });
+          console.log(resp);
+        })
+        .catch(error => {
+          this.props.updateGlobalState({
+            skills: { hi: "hello" },
+            skillsLoaded: true
+          });
+          console.log(error);
+        });
+    }
   }
 
   render() {

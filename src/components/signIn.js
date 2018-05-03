@@ -97,8 +97,9 @@ class SignIn extends React.Component {
           loading: false,
           responseError: responseError
         });
-        console.log("Login response: ", resp);
+        console.log("Login response is: ", resp);
         if (resp.data.status === "SUCCESS") {
+          console.log("success");
           window.localStorage.setItem("userId", resp.data.userId);
           this.props.history.push("/profile");
           axios
@@ -106,10 +107,17 @@ class SignIn extends React.Component {
               UserId: resp.data.userId
             })
             .then(resp => {
-              localStorage.setItem("skills", JSON.stringify(resp.data));
+              this.props.updateGlobalState({
+                skills: { hi: "hello" },
+                skillsLoaded: true
+              });
               console.log(resp);
             })
             .catch(error => {
+              this.props.updateGlobalState({
+                skills: { hi: "hello" },
+                skillsLoaded: true
+              });
               console.log(error);
             });
         }
