@@ -124,6 +124,7 @@ class Skills(Base):
         self.CreationDate = CreationDate
         self.Template = Template
         self.Invoke = Invoke
+        self.CreationDate = CreationDate
         return
 
     def dict(self):
@@ -139,7 +140,8 @@ class Skills(Base):
             'Keywords' : self.Keywords,
             'CreationDate' : self.CreationDate,
             'Template' : self.Template,
-            'Invoke' : self.Invoke
+            'Invoke' : self.Invoke,
+            'CreationDate' : self.CreationDate
         }
 
 class Utterances(Base):

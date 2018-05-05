@@ -124,7 +124,7 @@ class Register extends React.Component {
                 name="email"
                 onChange={this.handleInputChange}
                 required=""
-                autofocus=""
+                autoFocus
               />
 
               <h5 className="lbl">Password</h5>

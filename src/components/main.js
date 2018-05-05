@@ -11,6 +11,7 @@ import CreateSkill from "./createSkill";
 import SimpleInteraction from "./simpleInteraction";
 import FlashBriefing from "./flashBriefing";
 import Register from "./register";
+import EditSkill from "./editSkill";
 import Context from "../context";
 
 const Main = () => {
@@ -30,6 +31,17 @@ const Main = () => {
                 <Redirect to="/" />
               ) : (
                 <Profile {...state} {...props} />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/edit-skill/:skillName"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <EditSkill {...state} {...props} />
               )
             }
           />

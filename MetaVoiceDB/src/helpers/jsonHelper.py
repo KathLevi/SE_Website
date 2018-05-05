@@ -1,4 +1,5 @@
 import json
+import datetime
 from src.Models import User, User_Profile, Feed, Utterances, Response, Skills
 
 class jsonHelper:
@@ -54,7 +55,7 @@ class jsonHelper:
             'shortDescription' : skill.ShortDesc,
             'longDescription' : skill.LongDesc,
             'keywords' : skill.Keywords,
-            'template' : skill.Template
+            'template' : skill.Template,
         }
 
         return jsonData
@@ -115,6 +116,7 @@ class jsonHelper:
     # Builds a new Skill Object from JSON
     def build_skill(self,json):
         Keywords = json.get('keywords', 'Default')
+        now = datetime.datetime.now()
         return Skills(
             UserId=json.get("userId",0) ,
             Name=json.get("skillName","Default Name"),
@@ -126,5 +128,6 @@ class jsonHelper:
             Keywords= str(Keywords),
             Template=json.get('template','Simple Skill'),
             SkillId=json.get('SkillId', None),
-            Invoke=json.get('invocationName','Default Invoke')
+            Invoke=json.get('invocationName','Default Invoke'),
+            CreationDate=now.__str__()
         )

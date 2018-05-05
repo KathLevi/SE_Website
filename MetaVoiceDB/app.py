@@ -17,7 +17,7 @@ cs = "mysql://apeacock18:Pirate21@" \
 
 # generates 200 response and packeges dictionary into json to send
 def good_response(resp):
-    response = app.response_class ( response=js.dumps ( resp ) ,
+    response = app.response_class ( response=js.dumps ( resp, default=str ) ,
                                     status=200 ,
                                     mimetype='application/json' )
     return response

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { PageHeader } from "react-bootstrap";
 import axios from "axios";
 
@@ -65,9 +65,11 @@ class ViewSkills extends React.Component {
             {this.state.skills.map(skill => {
               return (
                 <tr key={skill.SkillId}>
-                  <td>{skill.Name}</td>
+                  <td>
+                    <Link to={"/edit-skill/" + skill.Name}>{skill.Name}</Link>
+                  </td>
                   <td>{"English"}</td>
-                  <td>{skill.TemplateId}</td>
+                  <td>{skill.Template}</td>
                   <td>{skill.CreationDate}</td>
                   <td>{skill.Status}</td>
                   <td>
