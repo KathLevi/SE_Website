@@ -3,10 +3,11 @@ import home_logo from "../assets/home_logo.png";
 import { NavLink } from "react-router-dom";
 
 const Home = () => (
-  <div className="home-section">
+  <div className="container home-container page-container">
     <div className="home-section-2">
-      <h1>
-        <span>Blue</span>marble
+      <h1 className="home-header">
+        <span>Blue</span>
+        <wbr />marble
       </h1>
       <h3>Alexa skills made easy</h3>
       <NavLink

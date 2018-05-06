@@ -224,9 +224,7 @@ class SimpleInteraction extends React.Component {
         this.showModal(resp);
         console.log(resp);
         if (resp.data && resp.data.status === "SUCCESS") {
-          console.log(this.props);
           let updatedSkills = this.props.userData.skills;
-          console.log(updatedSkills);
           updatedSkills.push(resp.data.skill);
           this.props.updateGlobalState({ userData: { skills: updatedSkills } });
         }
@@ -244,7 +242,7 @@ class SimpleInteraction extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="page-container">
         <Form
           submitForm={this.submitForm}
           label={"Simple Interaction Form"}

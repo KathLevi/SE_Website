@@ -93,7 +93,7 @@ class Register extends React.Component {
 
   render() {
     return (
-      <div className="signInBox">
+      <div className="page-container">
         <Transition timeout={this.duration} in={this.state.loading}>
           {state => (
             <div

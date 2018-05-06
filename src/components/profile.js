@@ -59,7 +59,7 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container page-container">
         {this.state.loading ? (
           <div className="spinner" />
         ) : (

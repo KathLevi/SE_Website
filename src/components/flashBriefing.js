@@ -215,7 +215,7 @@ class FlashBriefing extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="page-container">
         <Form
           submitForm={this.submitForm}
           label={"Flash Briefing Form"}

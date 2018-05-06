@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import { PageHeader } from "react-bootstrap";
 
 const Demo = () => (
-  <div className="container">
+  <div className="container page-container">
     <PageHeader>How It Works</PageHeader>
     <div className="demoVid" align="center">
       <video width="800" height="500" controls poster={logo}>

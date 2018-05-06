@@ -12,6 +12,7 @@ import SimpleInteraction from "./simpleInteraction";
 import FlashBriefing from "./flashBriefing";
 import Register from "./register";
 import EditSkill from "./editSkill";
+import CreateSkillForm from "./createSkillForm";
 import Context from "../context";
 
 const Main = () => {
@@ -79,28 +80,19 @@ const Main = () => {
               )
             }
           />
+
           <Route
             exact
-            path="/create-skill/simple-interaction"
+            path="/create-skill/:templateType"
             render={props =>
               !loggedIn ? (
                 <Redirect to="/" />
               ) : (
-                <SimpleInteraction {...state} {...props} />
+                <CreateSkillForm {...state} {...props} />
               )
             }
           />
-          <Route
-            exact
-            path="/create-skill/flash-briefing"
-            render={props =>
-              !loggedIn ? (
-                <Redirect to="/" />
-              ) : (
-                <FlashBriefing {...state} {...props} />
-              )
-            }
-          />
+
           <Route
             exact
             path="/register"

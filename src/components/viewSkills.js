@@ -40,7 +40,7 @@ class ViewSkills extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container page-container">
         <PageHeader>
           My Skills
           <NavLink
@@ -52,40 +52,42 @@ class ViewSkills extends React.Component {
             Create New Skill
           </NavLink>
         </PageHeader>
-        <table className="table">
-          <tbody>
-            <tr>
-              <th>SKILL NAME</th>
-              <th>LANGUAGE</th>
-              <th>TYPE</th>
-              <th>MODIFIED</th>
-              <th>STATUS</th>
-              <th>ACTIONS</th>
-            </tr>
-            {this.state.skills.map(skill => {
-              return (
-                <tr key={skill.SkillId}>
-                  <td>
-                    <Link to={"/edit-skill/" + skill.Name}>{skill.Name}</Link>
-                  </td>
-                  <td>{"English"}</td>
-                  <td>{skill.Template}</td>
-                  <td>{skill.CreationDate}</td>
-                  <td>{skill.Status}</td>
-                  <td>
-                    <NavLink className="skills-btn" exact to="/view-skills">
-                      Edit
-                    </NavLink>{" "}
-                    |
-                    <NavLink className="skills-btn" exact to="/view-skills">
-                      Delete
-                    </NavLink>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="view-skills-table">
+          <table className="table">
+            <tbody>
+              <tr>
+                <th>SKILL NAME</th>
+                <th>LANGUAGE</th>
+                <th>TYPE</th>
+                <th>MODIFIED</th>
+                <th>STATUS</th>
+                <th>ACTIONS</th>
+              </tr>
+              {this.state.skills.map(skill => {
+                return (
+                  <tr key={skill.SkillId}>
+                    <td>
+                      <Link to={"/edit-skill/" + skill.Name}>{skill.Name}</Link>
+                    </td>
+                    <td>{"English"}</td>
+                    <td>{skill.Template}</td>
+                    <td>{skill.CreationDate}</td>
+                    <td>{skill.Status}</td>
+                    <td>
+                      <NavLink className="skills-btn" exact to="/view-skills">
+                        Edit
+                      </NavLink>{" "}
+                      |
+                      <NavLink className="skills-btn" exact to="/view-skills">
+                        Delete
+                      </NavLink>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
         {!this.props.skillsLoaded && <div className="spinner-small" />}
         {!this.state.skills.length &&
           this.props.skillsLoaded && (
