@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import logo from "../assets/logo_ball.png";
+import onClickOutside from "react-onclickoutside";
 
 const signOut = props => {
   window.localStorage.removeItem("userId");
@@ -18,6 +19,10 @@ class Navigation extends React.Component {
       showProfileDrop: false
     };
   }
+
+  handleClickOutside = e => {
+    this.setState({ collapsed: false });
+  };
 
   signOut = () => {
     console.log("siginign out");
@@ -41,7 +46,7 @@ class Navigation extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-inverse">
-        <div className="container-fluid">
+        <div>
           <div className="navbar-header">
             <button
               type="button"
@@ -145,8 +150,8 @@ class Navigation extends React.Component {
                         to="/signin"
                         className="dropdown-link"
                         onClick={() => {
-                          this.signOut();
                           this.toggleCollapse();
+                          this.signOut();
                         }}
                       >
                         SWITCH ACCOUNTS
@@ -156,7 +161,12 @@ class Navigation extends React.Component {
                 </li>
               ) : (
                 <li>
-                  <NavLink exact activeClassName="current" to="/signin">
+                  <NavLink
+                    exact
+                    activeClassName="current"
+                    to="/signin"
+                    onClick={this.toggleCollapse}
+                  >
                     SIGN IN
                   </NavLink>
                 </li>
@@ -373,4 +383,5 @@ class Navigation extends React.Component {
     }
   }
 }
-export default withRouter(Navigation);
+
+export default onClickOutside(Navigation);

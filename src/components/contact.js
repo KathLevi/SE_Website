@@ -1,9 +1,8 @@
 import React from "react";
 import { PageHeader } from "react-bootstrap";
 
-
 const Contact = () => (
-  <div className="container">
+  <div className="container page-container">
     <PageHeader>Contact Us</PageHeader>
     <div className="contact-section">
       <form>

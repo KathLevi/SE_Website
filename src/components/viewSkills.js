@@ -88,7 +88,7 @@ class ViewSkills extends React.Component {
             </tbody>
           </table>
         </div>
-        {!this.props.skillsLoaded && <div className="spinner-small" />}
+        {/*{!this.props.skillsLoaded && <div className="spinner-small" />}*/}
         {!this.state.skills.length &&
           this.props.skillsLoaded && (
             <div className="container" style={{ textAlign: "center" }}>
