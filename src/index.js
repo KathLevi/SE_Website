@@ -3,17 +3,26 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
+import Context from "./context";
 
-const Context = React.createContext({});
+const updateGlobalState = newState => {
+  state = {
+    ...state,
+    ...newState
+  };
+};
+
+var state = {
+  skills: [],
+  updateGlobalState: updateGlobalState
+};
 
 // Wrap the rendering in a function:
 const render = Component => {
   ReactDOM.render(
-    <Context.Provider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Context.Provider>,
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
     document.getElementById("root")
   );
 };

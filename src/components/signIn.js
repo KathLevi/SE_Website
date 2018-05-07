@@ -97,19 +97,28 @@ class SignIn extends React.Component {
           loading: false,
           responseError: responseError
         });
-        console.log("Login response: ", resp);
+        console.log("Login response is: ", resp);
         if (resp.data.status === "SUCCESS") {
+          console.log("success");
+          this.props.updateGlobalState({ ...resp });
           window.localStorage.setItem("userId", resp.data.userId);
-          this.props.history.push("/profile");
+          this.props.history.replace("/profile");
           axios
             .post("http://127.0.0.1:5004/viewskills", {
               UserId: resp.data.userId
             })
             .then(resp => {
-              localStorage.setItem("skills", JSON.stringify(resp.data));
+              this.props.updateGlobalState({
+                userData: { skills: Object.values(resp.data) },
+                skillsLoaded: true
+              });
               console.log(resp);
             })
             .catch(error => {
+              this.props.updateGlobalState({
+                userData: { skills: Object.values(resp.data) },
+                skillsLoaded: true
+              });
               console.log(error);
             });
         }
@@ -136,18 +145,18 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div className="signInBox">
-        <Transition timeout={this.duration} in={this.state.loading}>
+      <div className="page-container">
+        {/*<Transition timeout={this.duration} in={this.state.loading}>
           {state => (
             <div
-              className="spinner"
+              class="spinner"
               style={{
                 ...this.defaultStyle,
                 ...this.transitionStyles[state]
               }}
             />
           )}
-        </Transition>
+        </Transition>*/}
 
         <Transition timeout={this.duration} in={!this.state.loading}>
           {tState => (

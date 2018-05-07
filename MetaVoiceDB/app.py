@@ -17,7 +17,7 @@ cs = "mysql://apeacock18:Pirate21@" \
 
 # generates 200 response and packeges dictionary into json to send
 def good_response(resp):
-    response = app.response_class ( response=js.dumps ( resp ) ,
+    response = app.response_class ( response=js.dumps ( resp, default=str ) ,
                                     status=200 ,
                                     mimetype='application/json' )
     return response
@@ -79,7 +79,7 @@ def SubmitSkill():
     _db = db(cs)
     resp = _db.submit_skill(jsonData)
     _db.shutdown()
-    
+
     # Post skill to be submitteds data to Service1 MetaVoiceLambda
     # change config to 'aws' when testing on aws ec2
     status = {
@@ -87,6 +87,15 @@ def SubmitSkill():
     }
 
     return good_response(status)
+
+@app.route('/getprofile', methods=['POST'])
+def GetProfile():
+    jsonData = request.get_json()
+    print("Getting Profile")
+    _db = db(cs)
+    resp = _db.attempt_get_profile(jsonData)
+    _db.shutdown()
+    return good_response(resp)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.

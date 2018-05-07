@@ -112,6 +112,10 @@ class db:
         skills = self.get_skills(Id=UserId)
         return skills
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c84593fe0517597b3847d490ea77b91bb7c64992
     # Returns a User object joined with that users User_Profile
     def get_user_and_profile ( self , Email=None , Password=None,Id=None ):
         q = None
@@ -194,6 +198,8 @@ class db:
     # returns a error status and reason upon failure
     def new_skill(self,json):
         response = {}
+        print "Request Object: "
+        print json
         s = self.jsonHelper.build_skill(json)
         try:
             self.session.add(s)
@@ -207,6 +213,7 @@ class db:
 
             self.session.commit()
             response['SkillId'] = s.SkillId
+            response['skill'] = s.dict()
             response['status'] = "SUCCESS"
 
         except Exception as e:
@@ -250,6 +257,10 @@ class db:
                     q = self.update_skill(q,json)
                     self.replace_intents(json,q.SkillId)
                     response['Id'] = q.SkillId
+<<<<<<< HEAD
+=======
+
+>>>>>>> c84593fe0517597b3847d490ea77b91bb7c64992
                     self.session.commit()
             else:
                 response['status'] = 'EDIT_ERROR'
@@ -340,7 +351,7 @@ class db:
             print("Unexpencted error in submit_intent: " + str(e))
 
         return
-    
+
     # Function that builds and submits a new intent
     # returns the new intents id
     def submit_intent(self,json,id):
@@ -352,11 +363,11 @@ class db:
             self.session.add(i)
             self.session.flush()
             self.session.refresh(i)
-            
+
             return i.IntentId
         except Exception as e:
             print('Unexpected error in submit_intent: ' + str(e))
-        
+
         return
 
     def get_skill_intent(self,id):
@@ -382,6 +393,7 @@ class db:
     def submit_skill(self,json):
         # Assuming that JSON object is same as used in /newskill
         # Update skill in db to reflect new draft changes
+<<<<<<< HEAD
         json = js.loads(json)
         Id = json.get('SkillId',0)
 
@@ -413,3 +425,43 @@ class db:
             resp = requests.post('http://' + self.host + ':5001/post',json=json)
         # Submit Skill object to MetaVoiceLambda port:5001 /post
         return resp.status_code
+=======
+        resp = self.edit_skill(json)
+        Id = resp['Id']
+        # Get skill on Id from DB
+        # Going to need Users Fname and Lname
+        jsonData = ""
+
+        Skill = self.session.query ( Skills ).filter_by ( SkillId = Id ).one_or_none()
+        if Skill:
+            if Skill.Template == 'Alexa Flash Briefing':
+                Feeds = self.session.query(Feed).filter_by(SkillId = Id).all()
+                # Format Skill + all Feeds into JSON Object
+                jsonData = self.jsonHelper.flashBriefToJson(Skill,Feeds)
+            else:
+                Ints = self.session.query(Intent).filter_by(SkillId = Id).all()
+                Resps = self.session.query(Response).filter_by(SkillId = Id).all()
+                Utters = self.session.query(Utterances).filter_by(SkillID = Id).all()
+                # Build JSON Object for skill
+                # Since it is a simple skill we are only accepting one response
+                # can be modified to have multiple responses/intents
+                # need to make sure that utterances are mapped to the correct intent
+                jsonData = self.jsonHelper.simpleSkillToJson(Skill,Ints[0],resp[0],Utters)
+
+        # Submit Skill object to MetaVoiceLambda port:5001 /post
+        return jsonData
+
+    def attempt_get_profile(self,json):
+        email = "";
+        users = self.session.query ( User ).filter_by ( Id = json.get('userId') ).all()
+        if users:
+            email = users[0].Email
+
+        profiles = self.session.query ( User_Profile ).filter_by ( UserId = json.get('userId') ).all()
+        if profiles:
+            response = profiles[0].dict()
+            response['email'] = email
+            return response
+        else:
+            return {}
+>>>>>>> c84593fe0517597b3847d490ea77b91bb7c64992

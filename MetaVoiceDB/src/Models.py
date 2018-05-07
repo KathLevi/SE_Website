@@ -38,6 +38,21 @@ class User_Profile(Base):
         self.Cell = Cell
         return
 
+    def dict(self):
+        return {
+            'userId' : self.UserId,
+            'firstName' : self.Fname,
+            'lastName' : self.Lname,
+            'company' : self.Company,
+            'address' : self.Address,
+            'premise' : self.Premise,
+            'country' : self.Country,
+            'sity' : self.City,
+            'state' : self.State,
+            'zipcode' : self.Zipcode,
+            'cell' : self.Cell
+        }
+
 class User(Base):
     __tablename__ = 'Users'
 
@@ -109,6 +124,7 @@ class Skills(Base):
         self.CreationDate = CreationDate
         self.Template = Template
         self.Invoke = Invoke
+        self.CreationDate = CreationDate
         return
 
     def dict(self):
@@ -124,7 +140,8 @@ class Skills(Base):
             'Keywords' : self.Keywords,
             'CreationDate' : self.CreationDate,
             'Template' : self.Template,
-            'Invoke' : self.Invoke
+            'Invoke' : self.Invoke,
+            'CreationDate' : self.CreationDate
         }
 
 class Utterances(Base):
@@ -156,7 +173,7 @@ class Response(Base):
     SkillId = Column(Integer, ForeignKey('Skills.SkillId'))
     IntentId = Column(Integer, ForeignKey('Intents.IntentId'))
     Resp = Column(String(100))
-    
+
 
     def __init__(self,RespId=None,SkillId=None,Resp=None, IntentId=None):
         self.RespId = RespId

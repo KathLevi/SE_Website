@@ -1,10 +1,11 @@
 import json
+import datetime
 from src.Models import User, User_Profile, Feed, Utterances, Response, Skills
 
 class jsonHelper:
     def __init__(self):
         return
-    
+
     def flashBriefToJson(self,skill,feeds):
         jsonData = {}
         jsonData = self.skilltoFormat(skill)
@@ -12,7 +13,7 @@ class jsonHelper:
         for feed in feeds:
             feed = self.feedToFormat(feed)
             jsonData['feeds'].append(feed)
-        
+
         return json.dumps(jsonData)
 
     def simpleSkillToJson(self,skill,intent,response,utterances):
@@ -32,9 +33,9 @@ class jsonHelper:
         for utter in utterances:
             jsonData['utterances'][str(i)] = utter.Utter
             i = i + 1
-        
+
         return jsonData
-    
+
     def feedToFormat(self,feed):
         jsonData = {
             'name' : feed.Name,
@@ -44,7 +45,7 @@ class jsonHelper:
             'url' : feed.URL
         }
         return jsonData
-    
+
     def skilltoFormat(self,skill):
         jsonData = {
             'userId' : skill.UserId,
@@ -54,7 +55,7 @@ class jsonHelper:
             'shortDescription' : skill.ShortDesc,
             'longDescription' : skill.LongDesc,
             'keywords' : skill.Keywords,
-            'template' : skill.Template
+            'template' : skill.Template,
         }
 
         return jsonData
@@ -64,7 +65,7 @@ class jsonHelper:
         try:
             f = Feed(
             Name = feed.get('name', 'Default') ,
-            SkillId = SkillId , 
+            SkillId = SkillId ,
             Preamble= feed.get('preamble', 'Default') ,
             UpdateFreq= feed.get('updateFrequency', 'Default') ,
             Genre = feed.get('genre', 'Default') ,
@@ -115,18 +116,18 @@ class jsonHelper:
     # Builds a new Skill Object from JSON
     def build_skill(self,json):
         Keywords = json.get('keywords', 'Default')
+        now = datetime.datetime.now()
         return Skills(
             UserId=json.get("userId",0) ,
             Name=json.get("skillName","Default Name"),
             AMZ_SkillId= json.get('amz_SkillId','Default') ,
             Status=json.get('status', 'In Development') ,
-            Category=json.get('category','Default') , 
+            Category=json.get('category','Default') ,
             ShortDesc=json.get('shortDescription', 'Default'),
             LongDesc=json.get('longDescription', 'Default') ,
             Keywords= str(Keywords),
             Template=json.get('template','Simple Skill'),
             SkillId=json.get('SkillId', None),
-            Invoke=json.get('invocationName','Default Invoke')
+            Invoke=json.get('invocationName','Default Invoke'),
+            CreationDate=now.__str__()
         )
-
-    

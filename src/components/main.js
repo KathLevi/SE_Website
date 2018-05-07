@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./home";
 import Demo from "./demo";
 import Profile from "./profile";
@@ -11,29 +11,103 @@ import CreateSkill from "./createSkill";
 import SimpleInteraction from "./simpleInteraction";
 import FlashBriefing from "./flashBriefing";
 import Register from "./register";
+import EditSkill from "./editSkill";
+import CreateSkillForm from "./createSkillForm";
+import Context from "../context";
 
-const Main = () => (
-  <Switch>
-    <Route exact path="/" component={Home} />
-    <Route exact path="/demo" component={Demo} />
-    <Route exact path="/profile" component={Profile} />
-    <Route exact path="/team" component={Team} />
-    <Route exact path="/contact" component={Contact} />
-    <Route exact path="/signin" component={SignIn} />
-    <Route exact path="/view-skills" component={ViewSkills} />
-    <Route exact path="/create-skill" component={CreateSkill} />
-    <Route
-      exact
-      path="/create-skill/simple-interaction"
-      component={SimpleInteraction}
-    />
-    <Route
-      exact
-      path="/create-skill/flash-briefing"
-      component={FlashBriefing}
-    />
-    <Route exact path="/register" component={Register} />
-  </Switch>
-);
+const Main = () => {
+  let loggedIn = localStorage.getItem("userId");
+
+  return (
+    <Context.Consumer>
+      {state => (
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/demo" component={Demo} />
+          <Route
+            exact
+            path="/profile"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <Profile {...state} {...props} />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/edit-skill/:skillName"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <EditSkill {...state} {...props} />
+              )
+            }
+          />
+          <Route exact path="/team" component={Team} />
+          <Route exact path="/contact" component={Contact} />
+
+          <Route
+            exact
+            path="/signin"
+            render={props =>
+              loggedIn ? <Redirect to="/" /> : <SignIn {...state} {...props} />
+            }
+          />
+
+          <Route
+            exact
+            path="/view-skills"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <ViewSkills {...state} {...props} />
+              )
+            }
+          />
+
+          <Route
+            exact
+            path="/create-skill"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <CreateSkill {...state} {...props} />
+              )
+            }
+          />
+
+          <Route
+            exact
+            path="/create-skill/:templateType"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <CreateSkillForm {...state} {...props} />
+              )
+            }
+          />
+
+          <Route
+            exact
+            path="/register"
+            render={props =>
+              loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <Register {...state} {...props} />
+              )
+            }
+          />
+        </Switch>
+      )}
+    </Context.Consumer>
+  );
+};
 
 export default Main;

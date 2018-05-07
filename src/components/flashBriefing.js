@@ -150,6 +150,7 @@ class FlashBriefing extends React.Component {
 
   submitForm = e => {
     let data = {
+      userId: localStorage.getItem("userId"),
       email: this.state.email.value,
       template: "Alexa Flash Briefing",
       firstName: this.state.fName.value,
@@ -187,13 +188,13 @@ class FlashBriefing extends React.Component {
         longDescription: data.longDescription,
         keywords: data.keywords,
         template: data.template,
-        feeds : [
+        feeds: [
           {
-            name : data.feedName,
+            name: data.feedName,
             preamble: data.preamble,
-            updateFrequency : data.updateFrequency,
-            genre : data.genre,
-            url : data.feedURL,
+            updateFrequency: data.updateFrequency,
+            genre: data.genre,
+            url: data.feedURL
           }
         ]
       },
@@ -214,7 +215,7 @@ class FlashBriefing extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="page-container">
         <Form
           submitForm={this.submitForm}
           label={"Flash Briefing Form"}

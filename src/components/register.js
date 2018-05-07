@@ -93,7 +93,7 @@ class Register extends React.Component {
 
   render() {
     return (
-      <div className="signInBox">
+      <div className="page-container">
         <Transition timeout={this.duration} in={this.state.loading}>
           {state => (
             <div
@@ -124,7 +124,7 @@ class Register extends React.Component {
                 name="email"
                 onChange={this.handleInputChange}
                 required=""
-                autofocus=""
+                autoFocus
               />
 
               <h5 className="lbl">Password</h5>
