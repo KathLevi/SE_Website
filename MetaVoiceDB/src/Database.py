@@ -4,6 +4,8 @@ from src.Models import User , User_Profile , Base, Skills, Response, Utterances,
 import json as js
 import datetime
 from src.helpers.jsonHelper import jsonHelper
+import requests
+import Config
 
 # TODO
 # Split some of this up. There can be 'helper' classes that modulate these tasks more
@@ -26,6 +28,9 @@ class db:
     def __init__ ( self , conn_string=None ):
         self.conn_string = conn_string
         self.engine = create_engine ( conn_string , convert_unicode=True )
+
+        Config = Config()
+        self.host = Config.Local
 
         Base.metadata.create_all ( bind=self.engine )
         Session = sessionmaker ( bind=self.engine )
@@ -87,7 +92,7 @@ class db:
             else:
                 self.session.add ( self.jsonHelper.build_user ( json ) )
                 self.session.commit ( )
-                q = self.get_user_and_profile ( json[ 'email' ] , json[ 'password' ] )
+                q = self.get_user_and_profile ( Email=json[ 'email' ] , Password=json[ 'password' ] )
                 print ("Attempting registration")
                 print ( "Registered: " + q.Email )
                 resp['userId'] = q.Id
@@ -107,83 +112,22 @@ class db:
         skills = self.get_skills(Id=UserId)
         return skills
 
-
-    # Builds a new Feed Object with on SkillID, from JSON
-    def build_feed(self, feed,SkillId):
-        try:
-            f = Feed(
-            Name = feed.get('Name', 'Default') ,
-            SkillId = SkillId ,
-            Preamble= feed.get('Preamble', 'Default') ,
-            UpdateFreq= feed.get('UpdateFreq', 'Default') ,
-            Genre = feed.get('Genre', 'Default') ,
-            URL = feed.get('URL', 'Default')
-        )
-            return f
-        except Exception as e:
-            print("Unexpected error at build_feed: " + str(e))
-        return "SERVER_ERROR"
-
-    # Builds a new User object from JSON
-    def build_user ( self , json ):
-        u = User(
-            Email=json[ 'Email' ] ,
-            Password=json[ 'Password' ] ,
-            IsAdmin=0)
-        up = User_Profile (
-                Fname=json.get('Fname', 'Default') ,
-                Lname=json.get('Lname', 'Default'),
-                Company=json.get('Company', 'Default') ,
-                Address=json.get('Address', 'Default') ,
-                Premise=json.get('Premise', 'Default') ,
-                Country=json.get('Country', 'Default') ,
-                City=json.get('City', 'Default') ,
-                State=json.get('State', 'Default') ,
-                Zipcode=json.get('Zipcode', 99999) ,
-                Cell=json.get('Cell', 'Default')
-            )
-        u.User_Profile = up
-        return u
-
-    # Builds a new Utterance object on a SkillId from JSON
-    def build_utter(self,ut,SkillId):
-        return Utterances(
-            SkillId = SkillId,
-            Utter = ut
-        )
-
-    # Builds a new Response object on a SkillId from JSON
-    def build_resp(self,resp,SkillId):
-        return Response(
-            SkillId=SkillId,
-            Resp=resp
-        )
-
-    # Builds a new Skill Object from JSON
-    def build_skill(self,json):
-        Keywords = json.get('keywords', 'Default')
-        now = datetime.datetime.now()
-        return Skills(
-            UserId=json.get("UserId",0) ,
-            Name=json.get("Name","Default Name"),
-            AMZ_SkillId= json.get('AMZ_SkillId','Default') ,
-            Status=json.get('Status', 'In Development') ,
-            Category=json.get('Category','Default') ,
-            ShortDesc=json.get('ShortDesc', 'Default'),
-            LongDesc=json.get('LongDesc', 'Default') ,
-            Keywords= str(Keywords),
-            SkillId=json.get('SkillId', None),
-            CreationDate=now
-        )
-
     # Returns a User object joined with that users User_Profile
-    def get_user_and_profile ( self , Email , Password ):
-        q = self.session.query ( User ).\
-            join ( User_Profile ).\
-            filter ( User.Id == User_Profile.UserId ).\
-            filter ( User.Email == Email ).\
-            filter ( User.Password == Password ).\
-            one_or_none ( )
+    def get_user_and_profile ( self , Email=None , Password=None,Id=None ):
+        q = None
+        if Email != None and Password != None:
+            q = self.session.query ( User ).\
+                join ( User_Profile ).\
+                filter ( User.Id == User_Profile.UserId ).\
+                filter ( User.Email == Email ).\
+                filter ( User.Password == Password ).\
+                one_or_none ( )
+        elif Id != None:
+            q = self.session.query(User).\
+                join(User_Profile).\
+                filter(User.Id == User_Profile.UserId).\
+                filter(User.Id == Id).\
+                one_or_none()
         return q
 
     # Shuts down the DB engine
@@ -293,7 +237,8 @@ class db:
     # Sends error message upon issue editing the object
     def edit_skill(self,json):
         response = {}
-        json = js.loads(json)
+        if type(json) != dict:
+            json = js.loads ( json )
         try:
             q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
             if q:
@@ -305,7 +250,6 @@ class db:
                     q = self.update_skill(q,json)
                     self.replace_intents(json,q.SkillId)
                     response['Id'] = q.SkillId
-                   
                     self.session.commit()
             else:
                 response['status'] = 'EDIT_ERROR'
@@ -438,27 +382,34 @@ class db:
     def submit_skill(self,json):
         # Assuming that JSON object is same as used in /newskill
         # Update skill in db to reflect new draft changes
-        resp = self.edit_skill(json)
-        Id = resp['Id']
-        # Get skill on Id from DB
-        # Going to need Users Fname and Lname
-        jsonData = ""
+        json = js.loads(json)
+        Id = json.get('SkillId',0)
 
-        Skill = self.session.query ( Skills ).filter_by ( SkillId = Id ).one_or_none()
-        if Skill:
-            if Skill.Template == 'Alexa Flash Briefing':
-                Feeds = self.session.query(Feed).filter_by(SkillId = Id).all()    
-                # Format Skill + all Feeds into JSON Object
-                jsonData = self.jsonHelper.flashBriefToJson(Skill,Feeds)
+        if Id == 0:
+            # Submit new skill to db and then
+            resp = self.new_skill(json)
+            if resp['status'] == 'SUCCESS':
+                json['SkillId'] = resp['SkillId']
             else:
-                Ints = self.session.query(Intent).filter_by(SkillId = Id).all()
-                Resps = self.session.query(Response).filter_by(SkillId = Id).all()
-                Utters = self.session.query(Utterances).filter_by(SkillID = Id).all()
-                # Build JSON Object for skill
-                # Since it is a simple skill we are only accepting one response
-                # can be modified to have multiple responses/intents
-                # need to make sure that utterances are mapped to the correct intent
-                jsonData = self.jsonHelper.simpleSkillToJson(Skill,Ints[0],resp[0],Utters) 
-                
+                json['submitToDb'] = 'FAILED'
+
+            if json.get('firstName','Default') == 'Default' or json.get('lastName','Default') == 'Default':
+                u = self.get_user_and_profile(Id=json.get('UserId',0))
+                json['firstName'] = u.Fname
+                json['lastName'] = u.Lname
+        else:
+            # Update and submit skill from DB
+            self.edit_skill(json)
+            if json.get('firstName','Default') == 'Default' or json.get('lastName','Default') == 'Default':
+                u = self.get_user_and_profile(Id=json.get('UserId',0))
+                json['firstName'] = u.Fname
+                json['lastName'] = u.Lname
+
+        if json['template'] == 'Alexa Flash Briefing':
+            # Submit to service two
+            resp = requests.post('http://' + self.host + ' :5002/post',json=json)
+        else:
+            # Submit to service one
+            resp = requests.post('http://' + self.host + ':5001/post',json=json)
         # Submit Skill object to MetaVoiceLambda port:5001 /post
-        return jsonData
+        return resp.status_code

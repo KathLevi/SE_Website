@@ -77,14 +77,13 @@ def SubmitSkill():
     jsonData = request.get_json()
     print('Skill Submission Request')
     _db = db(cs)
-    jsonData = _db.submit_skill(jsonData)
+    resp = _db.submit_skill(jsonData)
     _db.shutdown()
     
     # Post skill to be submitteds data to Service1 MetaVoiceLambda
     # change config to 'aws' when testing on aws ec2
-    resp = requests.post(config.local +  ':5001/post', json=jsonData)
     status = {
-        'Posted' : resp.status_code
+        'status_code' : resp
     }
 
     return good_response(status)
