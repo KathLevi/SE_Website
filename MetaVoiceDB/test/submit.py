@@ -53,10 +53,10 @@ jsonData_F = {
         ],
 }
 
-#jsonData = json.dumps(jsonData_SS)
-#print("Data: " + jsonData)
-#resp = requests.post('http://127.0.0.1:5004/submit', json=jsonData)
-#print("Success? " + str(resp))
+jsonData = json.dumps(jsonData_SS)
+print("Data: " + jsonData)
+resp = requests.post('http://127.0.0.1:5004/submit', json=jsonData)
+print("Success? " + str(resp))
 
 jsonData = json.dumps(jsonData_F)
 print("Data: " + jsonData)
