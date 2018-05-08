@@ -216,6 +216,7 @@ class SimpleInteraction extends React.Component {
       keywords: data.keywords,
       template: data.template,
       intents: data.intents,
+      firstName: data.firstName,
       lastName: data.lastName
     };
 

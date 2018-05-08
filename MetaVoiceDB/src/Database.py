@@ -4,6 +4,8 @@ from src.Models import User , User_Profile , Base, Skills, Response, Utterances,
 import json as js
 import datetime
 from src.helpers.jsonHelper import jsonHelper
+import requests
+from Config import Config
 
 # TODO
 # Split some of this up. There can be 'helper' classes that modulate these tasks more
@@ -21,11 +23,14 @@ from src.helpers.jsonHelper import jsonHelper
 # Update DB to handle Datetime field in Skills
 # Modify jsonHelper build functions to match with json datamodel, see register
 
+config = Config()
 
 class db:
     def __init__ ( self , conn_string=None ):
         self.conn_string = conn_string
         self.engine = create_engine ( conn_string , convert_unicode=True )
+
+        self.host = '127.0.0.1'
 
         Base.metadata.create_all ( bind=self.engine )
         Session = sessionmaker ( bind=self.engine )
@@ -87,7 +92,7 @@ class db:
             else:
                 self.session.add ( self.jsonHelper.build_user ( json ) )
                 self.session.commit ( )
-                q = self.get_user_and_profile ( json[ 'email' ] , json[ 'password' ] )
+                q = self.get_user_and_profile ( Email=json[ 'email' ] , Password=json[ 'password' ] )
                 print ("Attempting registration")
                 print ( "Registered: " + q.Email )
                 resp['userId'] = q.Id
@@ -107,15 +112,22 @@ class db:
         skills = self.get_skills(Id=UserId)
         return skills
 
-
     # Returns a User object joined with that users User_Profile
-    def get_user_and_profile ( self , Email , Password ):
-        q = self.session.query ( User ).\
-            join ( User_Profile ).\
-            filter ( User.Id == User_Profile.UserId ).\
-            filter ( User.Email == Email ).\
-            filter ( User.Password == Password ).\
-            one_or_none ( )
+    def get_user_and_profile ( self , Email=None , Password=None,Id=None ):
+        q = None
+        if Email != None and Password != None:
+            q = self.session.query ( User ).\
+                join ( User_Profile ).\
+                filter ( User.Id == User_Profile.UserId ).\
+                filter ( User.Email == Email ).\
+                filter ( User.Password == Password ).\
+                one_or_none ( )
+        elif Id != None:
+            q = self.session.query(User).\
+                join(User_Profile).\
+                filter(User.Id == User_Profile.UserId).\
+                filter(User.Id == Id).\
+                one_or_none()
         return q
 
     # Shuts down the DB engine
@@ -182,8 +194,6 @@ class db:
     # returns a error status and reason upon failure
     def new_skill(self,json):
         response = {}
-        print "Request Object: "
-        print json
         s = self.jsonHelper.build_skill(json)
         try:
             self.session.add(s)
@@ -228,7 +238,8 @@ class db:
     # Sends error message upon issue editing the object
     def edit_skill(self,json):
         response = {}
-
+        if type(json) != dict:
+            json = js.loads ( json )
         try:
             q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
             if q:
@@ -371,41 +382,42 @@ class db:
 
     #NOT IMPLEMENTED FULLY YET
     def submit_skill(self,json):
-        # Assuming that JSON object is same as used in /newskill
-        # Update skill in db to reflect new draft changes
-        resp = self.edit_skill(json)
-        Id = resp['Id']
-        # Get skill on Id from DB
-        # Going to need Users Fname and Lname
-        jsonData = ""
 
-        Skill = self.session.query ( Skills ).filter_by ( SkillId = Id ).one_or_none()
-        if Skill:
-            if Skill.Template == 'Alexa Flash Briefing':
-                Feeds = self.session.query(Feed).filter_by(SkillId = Id).all()
-                # Format Skill + all Feeds into JSON Object
-                jsonData = self.jsonHelper.flashBriefToJson(Skill,Feeds)
+        Id = json.get ( 'SkillId' , 0 )
+
+        if Id == 0:
+            # Submit new skill to db and then
+            resp = self.new_skill ( json )
+            if resp[ 'status' ] == 'SUCCESS':
+                json[ 'SkillId' ] = resp[ 'SkillId' ]
             else:
-                Ints = self.session.query(Intent).filter_by(SkillId = Id).all()
-                Resps = self.session.query(Response).filter_by(SkillId = Id).all()
-                Utters = self.session.query(Utterances).filter_by(SkillId = Id).all()
-                # Build JSON Object for skill
-                # Since it is a simple skill we are only accepting one response
-                # can be modified to have multiple responses/intents
-                # need to make sure that utterances are mapped to the correct intent
+                json['submitToDb'] = 'FAILED'
 
-                jsonData = self.jsonHelper.simpleSkillToJson(Skill,Ints[0],Resps[0],Utters)
-                print "json"
-                print js.dumps(json)
-                jsonData = js.loads(jsonData)
-                jsonData['lastName'] = json['lastName']
-                jsonData = js.dumps(jsonData)
+            if json.get ( 'firstName' , 'Default' ) == 'Default' or json.get ( 'lastName' , 'Default' ) == 'Default':
+                u = self.get_user_and_profile ( Id=json.get ( 'UserId' , 0 ) )
+                json[ 'firstName' ] = u.Fname
+                json[ 'lastName' ] = u.Lname
+        else:
+            # Update and submit skill from DB
+            self.edit_skill ( json )
+            if json.get ( 'firstName' , 'Default' ) == 'Default' or json.get ( 'lastName' , 'Default' ) == 'Default':
+                u = self.get_user_and_profile ( Id=json.get ( 'UserId' , 0 ) )
+                json[ 'firstName' ] = u.Fname
+                json[ 'lastName' ] = u.Lname
 
-        # Submit Skill object to MetaVoiceLambda port:5001 /post
-        return jsonData
+        if json[ 'template' ] == 'Alexa Flash Briefing':
+            # Submit to service two
+            resp = requests.post ( config.local + ':5003/post' , json=js.dumps(json) )
+            return resp.status_code
+        else:
+            # Submit to service one
+            resp = requests.post ( config.local + ':5001/post' , json=js.dumps(json) )
+            return resp.status_code
+
+        return
 
     def attempt_get_profile(self,json):
-        email = "";
+        email = ""
         users = self.session.query ( User ).filter_by ( Id = json.get('userId') ).all()
         if users:
             email = users[0].Email

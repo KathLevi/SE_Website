@@ -19,11 +19,11 @@ jsonData_SS = {
         # These should be able to be modified for a many to many approach
         "intent" : "My Intent",
         "utterances":{
-           '1' : "hello",
-           '2' : "world",
-           '3' : "My",
-           '4' : "Name",
-           '5' : "Is Sam"
+           1 : "hello",
+           2 : "world",
+           3 : "My",
+           4 : "Name",
+           5 : "Is Sam"
         },
         "response": "Response?"
        }
@@ -35,7 +35,7 @@ jsonData_F = {
    "firstName" : 'FNAME',
 
    "UserId" : 1,
-   "template": "Alexa Interaction",
+   "template": "Alexa Flash Briefing",
     #changed
    "skillName":"Test Simple Skill",
    "category":"Wooden Ship Sailing",
