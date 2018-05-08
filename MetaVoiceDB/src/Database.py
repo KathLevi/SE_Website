@@ -30,7 +30,7 @@ class db:
         self.conn_string = conn_string
         self.engine = create_engine ( conn_string , convert_unicode=True )
 
-        self.host = '127.0.0.1'
+        self.host = config.local
 
         Base.metadata.create_all ( bind=self.engine )
         Session = sessionmaker ( bind=self.engine )
