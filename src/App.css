@@ -247,26 +247,7 @@ h3 {
   font-size: 20px;
   line-height: 5rem;
 }
-/*
- * Button Cards
- */
-.card {
-  width: 300px;
-  display: inline-block;
-  background-color: white;
-  margin: 20px;
-}
-.card img {
-  width: 100%;
-  height: 300px;
-  border-radius: 50%;
-}
-.cardTitle {
-  padding: 0 16px;
-  font-size: 20px;
-  color: black;
-  background-color: white;
-}
+
 /*
  * CREATE SKILL
  */
@@ -586,7 +567,19 @@ svg {
   border-bottom-style: solid;
   border-bottom-color: rgb(238, 238, 238);
 }
+.page-container {
+  min-height: 584px !important;
+  overflow: hidden;
+}
+video {
+  width: 100%;
+}
 
+.view-skills-table {
+  overflow-x: scroll;
+}
+
+/*Tablet Adjustments*/
 @media screen and (max-width: 992px) {
   .home-section-1 {
     z-index: -1;
@@ -597,18 +590,13 @@ svg {
     height: auto;
     margin: auto;
   }
-
   .menuListElement {
     display: inline-block;
     float: right;
   }
 }
 
-.page-container {
-  min-height: 584px !important;
-  overflow: hidden;
-}
-
+/*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
   body {
     padding: 0 0 300px;    
@@ -623,18 +611,26 @@ svg {
   .home-section-2 h3 {
     font-size: 25px;
   }
+  .profile1 {
+    width: 100%;
+  }
+  .profile1 img {
+    width: 100%;
+  }
+  .profile2 {
+    width: 40%;
+    font-size: 15px;
+    margin-left: 20px;        
+  }
+  .profile3 {
+    width: 50%;
+    font-size: 17px;
+    margin-left: 10px;    
+  }
   .footerCol {
     display: block;
     width: 100%;
     text-align: left;
     margin-bottom: 30px;
   }
-}
-
-video {
-  width: 100%;
-}
-
-.view-skills-table {
-  overflow-x: scroll;
 }
