@@ -32,15 +32,6 @@ h3 {
 /*
  * HEADER
  */
-.menuList {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: black;
-  min-width: 80%;
-  display: inline-block;
-}
 .logo {
   min-width: 20%;
   display: inline-block;
@@ -60,25 +51,9 @@ h3 {
   padding-left: 10px;
   height: 40px;
 }
-.menuListElement {
-  display: inline;
-}
-.menuListElement a,
-.dropbtn {
-  display: inline-block;
-  color: white;
-  padding: 20px 24px;
-  text-decoration: none !important;
-}
 .current {
   background-color: var(--main-blue) !important;
   color: white !important;
-}
-.menuListElement a:hover,
-.dropdwn:hover .dropbtn,
-.dropdown-content a:hover {
-  text-decoration: underline;
-  /*color: #62b3ff;*/
 }
 .navbar {
   border-radius: 0px;
@@ -90,27 +65,8 @@ h3 {
 .navbar-toggle {
   border-width: 0px;
 }
-.menuListElement.dropdwn {
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 160px;
-  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdwn:hover .dropdown-content {
-  display: block;
-  left: auto;
-  right: 0;
+.dropdown-menu > li > a{
+  padding: 15px 30px;
 }
 .navbar-nav > li > a {
   padding-bottom: 16px !important;
@@ -148,12 +104,19 @@ h3 {
 .home-section-1 img {
   height: 100%;
 }
+.learnMoreBtn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 /*
  * DEMO
  */
 .demoVid {
   margin-bottom: 50px;
+}
+video {
+  width: 100%;
 }
 /*
  * SIGN IN
@@ -207,14 +170,16 @@ h3 {
   padding-top: 10px;
   text-align: center;
 }
+.response-error {
+  color: #ed493d;
+  font-size: 15px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
 /*
  * REGISTER
  */
-#noMatch {
-  color: red;
-  float: right;
-  font-weight: normal;
-}
 .capcha {
   text-align: center;
   padding: 10px;
@@ -222,6 +187,10 @@ h3 {
 #capchaInput {
   width: 100px;
 }
+.registerBtn {
+  margin-top: 25px;
+}
+
 /*
  * PROFILE
  */
@@ -330,6 +299,9 @@ td {
   text-align: center;
   white-space: nowrap;
 }
+.view-skills-table {
+  overflow-x: scroll;
+}
 
 /*
  * TEAM
@@ -393,15 +365,14 @@ footer {
 }
 
 
-
+/*
+ * EXTRA CSS
+ */
 .form-submit {
   margin-bottom: 25px !important;
 }
 .hidden {
   display: none;
-}
-.negative-margin-btm {
-  margin-bottom: -15px;
 }
 .form-container {
   max-width: 750px;
@@ -451,23 +422,6 @@ footer {
   }
 }
 
-.response-error {
-  color: #ed493d;
-  font-size: 15px;
-  margin-top: 50px;
-  margin-bottom: 20px;
-  opacity: 0.9;
-}
-
-.learnMoreBtn {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.registerBtn {
-  margin-top: 25px;
-}
-
 .cls-1 {
   fill: none;
   stroke: #231f20;
@@ -490,17 +444,14 @@ svg {
     stroke: green;
   }
 }
-
 .circle {
   stroke-dasharray: 700;
   stroke-dashoffset: 700;
 }
-
 .checkmark {
   stroke-dasharray: 150;
   stroke-dashoffset: 150;
 }
-
 .run-animation {
   .circle {
     animation: 2.5s circleDraw forwards;
@@ -511,12 +462,10 @@ svg {
     animation-delay: 1s;
   }
 }
-
 .bm-nav {
   height: 60px;
   background-color: black;
 }
-
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0 20px;
@@ -529,13 +478,6 @@ svg {
   min-height: 584px !important;
   overflow: hidden;
 }
-video {
-  width: 100%;
-}
-
-.view-skills-table {
-  overflow-x: scroll;
-}
 
 /*Tablet Adjustments*/
 @media screen and (max-width: 992px) {
@@ -547,10 +489,6 @@ video {
     width: 540px;
     height: auto;
     margin: auto;
-  }
-  .menuListElement {
-    display: inline-block;
-    float: right;
   }
 }
 
