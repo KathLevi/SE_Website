@@ -281,6 +281,30 @@ h3 {
   width: 80%;
   margin: auto;
 }
+/*
+ * CREATE SKILL CHOICE
+ */
+.skill-template-item {
+  padding: 20px;
+  width: 50%;
+  min-width: 200px;
+}
+.skill-template-container {
+  margin-top: 50px;
+  display: flex;
+}
+.thumbnail-ext {
+  height: 100%;
+  position: relative;
+}
+.select-skill-btn {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 5px;
+}
+.select-skill-text {
+  margin-bottom: 30px;
+}
 
 /*
  * VIEW MY SKILLS
@@ -310,41 +334,7 @@ td {
 /*
  * TEAM
  */
-.teamCard {
-  width: 100%;
-  display: inline-block;
-  margin: 10px 40px;
-  margin-left: -15px;
-}
-.teamImg img:hover {
-  height: 120%;
-}
-.teamImg {
-  display: inline-block;
-  width: 225px;
-  height: 225px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0px 50px;
-  cursor: pointer;
-}
-.teamImg img {
-  width: auto;
-  height: 100%;
-}
-.teamInfo {
-  font-size: 20px;
-  width: 60%;
-  text-align: left;
-  margin-bottom: 30px;
-  margin-left: 20px;
-}
-.teamName {
-  font-size: 30px;
-  font-weight: bold;
-  display: inline-block;
-  padding-bottom: 20px;
-}
+
 
 /*
  * CONTACT
@@ -402,49 +392,20 @@ footer {
   margin-top: 6px;
 }
 
+
+
 .form-submit {
   margin-bottom: 25px !important;
 }
-
-.skill-template-item {
-  padding: 20px;
-  width: 50%;
-  min-width: 200px;
-}
-
-.skill-template-container {
-  margin-top: 50px;
-  display: flex;
-  overflow-x: scroll;
-}
-
 .hidden {
   display: none;
 }
-
 .negative-margin-btm {
   margin-bottom: -15px;
 }
-
 .form-container {
   max-width: 750px;
 }
-
-.thumbnail-ext {
-  height: 100%;
-  position: relative;
-}
-
-.select-skill-btn {
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 5px;
-}
-
-.select-skill-text {
-  margin-bottom: 30px;
-}
-
 .spinner {
   width: 80px;
   height: 80px;
@@ -464,7 +425,6 @@ footer {
 
   animation: spin 1s infinite linear;
 }
-
 .spinner-small {
   width: 40px;
   height: 40px;
@@ -482,7 +442,6 @@ footer {
 
   animation: spin 1s infinite linear;
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -626,6 +585,15 @@ video {
     font-size: 17px;
     margin-left: 10px;    
   }
+  .skill-template-item {
+    min-width: 100%;
+  }
+  .skill-template-container {
+    display: block;
+  }
+  .select-skill-text {
+    margin-bottom: 50px;
+  }  
   .footerCol {
     display: block;
     width: 100%;
