@@ -15,6 +15,7 @@ html {
 }
 body {
   margin: 0;
+  padding: 0 0 100px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
@@ -374,6 +375,7 @@ td {
 .form-control {
   border-radius: 0px;
 }
+
 /*
  * FOOTER
  */
@@ -382,6 +384,9 @@ footer {
   color: var(--dark-grey);
   width: 100%;
   padding: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
 .footer_current {
   text-decoration: underline;
@@ -431,10 +436,6 @@ footer {
   margin-top: 50px;
   display: flex;
   overflow-x: scroll;
-}
-
-.response-modal {
-  /*width: 80%;*/
 }
 
 .hidden {
@@ -588,7 +589,8 @@ svg {
 
 @media screen and (max-width: 992px) {
   .home-section-1 {
-    display: none;
+    z-index: -1;
+    opacity: 0.3;
   }
   .home-section-2 {
     width: 540px;
@@ -608,6 +610,19 @@ svg {
 }
 
 @media screen and (max-width: 530px) {
+  body {
+    padding: 0 0 300px;    
+  }
+  .home-section-1 {
+    top: 100px;
+    height: 50%;
+  }
+  .home-section-2 h1 {
+    font-size: 60px;
+  }
+  .home-section-2 h3 {
+    font-size: 25px;
+  }
   .footerCol {
     display: block;
     width: 100%;

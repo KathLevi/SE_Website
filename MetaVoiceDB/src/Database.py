@@ -5,7 +5,7 @@ import json as js
 import datetime
 from src.helpers.jsonHelper import jsonHelper
 import requests
-from Config import Config
+from src.Config import Config
 
 # TODO
 # Split some of this up. There can be 'helper' classes that modulate these tasks more
