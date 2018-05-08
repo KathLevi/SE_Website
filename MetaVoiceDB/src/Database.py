@@ -228,7 +228,7 @@ class db:
     # Sends error message upon issue editing the object
     def edit_skill(self,json):
         response = {}
-        json = js.loads(json)
+
         try:
             q = self.session.query ( Skills ). filter_by( SkillId=json.get('SkillId') ). one_or_none( )
             if q:
@@ -310,7 +310,7 @@ class db:
     # Replaces a Skill DB objects attributes necessary for a Skill Edit
     # Returns the new Skill DB object
     def update_skill(self,Skill,json):
-        Skill.Name = json.get('name')
+        Skill.Name = json.get('skillName')
         Skill.Status = json.get('status')
         Skill.Category = json.get('category')
         Skill.ShortDesc = json.get('shortDescription')
@@ -388,12 +388,18 @@ class db:
             else:
                 Ints = self.session.query(Intent).filter_by(SkillId = Id).all()
                 Resps = self.session.query(Response).filter_by(SkillId = Id).all()
-                Utters = self.session.query(Utterances).filter_by(SkillID = Id).all()
+                Utters = self.session.query(Utterances).filter_by(SkillId = Id).all()
                 # Build JSON Object for skill
                 # Since it is a simple skill we are only accepting one response
                 # can be modified to have multiple responses/intents
                 # need to make sure that utterances are mapped to the correct intent
-                jsonData = self.jsonHelper.simpleSkillToJson(Skill,Ints[0],resp[0],Utters)
+
+                jsonData = self.jsonHelper.simpleSkillToJson(Skill,Ints[0],Resps[0],Utters)
+                print "json"
+                print js.dumps(json)
+                jsonData = js.loads(jsonData)
+                jsonData['lastName'] = json['lastName']
+                jsonData = js.dumps(jsonData)
 
         # Submit Skill object to MetaVoiceLambda port:5001 /post
         return jsonData

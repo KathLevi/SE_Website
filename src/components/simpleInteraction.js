@@ -11,7 +11,7 @@ const inputs = [
   {
     name: "email",
     type: "text",
-    value: "",
+    value: "test@example.com",
     label: "Email",
     placeholder: "",
     errorMessage: "Email is required",
@@ -29,7 +29,7 @@ const inputs = [
   {
     name: "fName",
     type: "text",
-    value: "",
+    value: "Andrew",
     label: "First name",
     placeholder: "",
     errorMessage: "Enter first name",
@@ -38,7 +38,7 @@ const inputs = [
   {
     name: "lName",
     type: "text",
-    value: "",
+    value: "Peacock",
     label: "Last name",
     placeholder: "",
     errorMessage: "Enter last name",
@@ -47,7 +47,7 @@ const inputs = [
   {
     name: "skillName",
     type: "text",
-    value: "",
+    value: "MySkill2",
     label: "Skill name",
     placeholder: "",
     errorMessage: "Provide a name for your skill",
@@ -56,7 +56,7 @@ const inputs = [
   {
     name: "invocation",
     type: "text",
-    value: "",
+    value: "invocation phrase",
     label: "Invocation phrase",
     placeholder: "",
     errorMessage: "Provide an invocation phrase",
@@ -65,7 +65,7 @@ const inputs = [
   {
     name: "utterance1",
     type: "text",
-    value: "",
+    value: "sample utterance",
     label: "Utterances",
     placeholder: "",
     errorMessage: "Provide at least one utterance",
@@ -110,7 +110,7 @@ const inputs = [
   {
     name: "response",
     type: "text",
-    value: "",
+    value: "response",
     label: "Response",
     placeholder: "",
     errorMessage: "Provide a response",
@@ -126,7 +126,7 @@ const inputs = [
   {
     name: "skillDescShort",
     type: "text",
-    value: "",
+    value: "short desc 1",
     label: "Short description",
     placeholder: "",
     errorMessage: "Provide a short description",
@@ -135,7 +135,7 @@ const inputs = [
   {
     name: "skillDescLong",
     type: "text",
-    value: "",
+    value: "long desc 1",
     label: "Long description",
     placeholder: "",
     errorMessage: "Provide a long description",
@@ -144,7 +144,7 @@ const inputs = [
   {
     name: "keywords",
     type: "text",
-    value: "",
+    value: "keywords",
     label: "Keywords",
     placeholder: "",
     errorMessage: "Invalid field",
@@ -204,32 +204,38 @@ class SimpleInteraction extends React.Component {
       console.log(resp);
     });*/
 
-    request(
-      "http://127.0.0.1:5004/newskill",
-      {
-        userId: localStorage.getItem("userId"),
-        skillName: data.skillName,
-        amz_SkillId: 0,
-        status: "In development",
-        invocationName: data.invocationName,
-        category: data.category,
-        shortDescription: data.shortDescription,
-        longDescription: data.longDescription,
-        keywords: data.keywords,
-        template: data.template,
-        intents: data.intents
-      },
-      resp => {
-        this.setState({ modalMessage: String(resp) });
-        this.showModal(resp);
-        console.log(resp);
-        if (resp.data && resp.data.status === "SUCCESS") {
-          let updatedSkills = this.props.userData.skills;
-          updatedSkills.push(resp.data.skill);
-          this.props.updateGlobalState({ userData: { skills: updatedSkills } });
-        }
+    let requestData = {
+      userId: localStorage.getItem("userId"),
+      skillName: data.skillName,
+      amz_SkillId: 0,
+      status: "In development",
+      invocationName: data.invocationName,
+      category: data.category,
+      shortDescription: data.shortDescription,
+      longDescription: data.longDescription,
+      keywords: data.keywords,
+      template: data.template,
+      intents: data.intents,
+      lastName: data.lastName
+    };
+
+    request("http://127.0.0.1:5004/newskill", requestData, resp => {
+      console.log(resp);
+      if (resp.data && resp.data.status === "SUCCESS") {
+        let updatedSkills = this.props.userData.skills;
+        updatedSkills.push(resp.data.skill);
+        this.props.updateGlobalState({ userData: { skills: updatedSkills } });
+        requestData.SkillId = resp.data.SkillId;
+        console.log(requestData);
+        request("http://127.0.0.1:5004/submit", requestData, resp => {
+          console.log("Skill submit response: " + resp);
+          console.log(resp);
+          if (resp.data && resp.data.status === "SUCCESS") {
+            this.props.history.push("/view-skills");
+          }
+        });
       }
-    );
+    });
   };
 
   showModal = () => {

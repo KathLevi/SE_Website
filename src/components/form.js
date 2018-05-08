@@ -112,6 +112,7 @@ class Form extends React.Component {
               return (
                 <Input
                   key={input.name}
+                  value={input.value}
                   name={input.name}
                   handleInputChange={this.handleInputChange}
                   handleInputBlur={this.handleInputBlur}

@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from src.Database import db
 from src.Config import Config
@@ -87,7 +87,7 @@ def SubmitSkill():
         'Posted' : resp.status_code
     }
 
-    return good_response(status)
+    return jsonify(jsonData)
 
 @app.route('/getprofile', methods=['POST'])
 def GetProfile():

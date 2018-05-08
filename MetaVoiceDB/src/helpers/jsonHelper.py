@@ -27,7 +27,7 @@ class jsonHelper:
         jsonData = {
             'intent' : intent.Intent,
             'utterances' : {},
-            'response' : response.resp,
+            'response' : response.Resp,
         }
         i = 1
         for utter in utterances:
@@ -129,5 +129,5 @@ class jsonHelper:
             Template=json.get('template','Simple Skill'),
             SkillId=json.get('SkillId', None),
             Invoke=json.get('invocationName','Default Invoke'),
-            CreationDate=now.__str__()
+            CreationDate=now
         )
