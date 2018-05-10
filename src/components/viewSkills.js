@@ -52,7 +52,16 @@ class ViewSkills extends React.Component {
             Create New Skill
           </NavLink>
         </PageHeader>
-        <div className="view-skills-table">
+        {!this.state.skills.length &&
+        this.props.skillsLoaded && (
+          <div className="container" style={{ textAlign: "center" }}>
+            <h1 style={{ fontSize: "18px" }}>
+              No Alexa skills.<NavLink exact activeClassName="current" to="/create-skill"> Add one now!</NavLink>
+            </h1>
+          </div>
+        )}
+        {this.state.skills.length > 1 && this.props.skillsLoaded && (
+          <div className="view-skills-table">
           <table className="table">
             <tbody>
               <tr>
@@ -88,15 +97,8 @@ class ViewSkills extends React.Component {
             </tbody>
           </table>
         </div>
+        )}  
         {/*{!this.props.skillsLoaded && <div className="spinner-small" />}*/}
-        {!this.state.skills.length &&
-          this.props.skillsLoaded && (
-            <div className="container" style={{ textAlign: "center" }}>
-              <h1 style={{ fontSize: "18px" }}>
-                {"No Alexa skills. Add one now!"}
-              </h1>
-            </div>
-          )}
       </div>
     );
   }
