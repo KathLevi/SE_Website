@@ -150,7 +150,7 @@ class Form extends React.Component {
             }
           })}
           {this.props.children}
-          <button className="btn btn-primary form-submit" type="submit">
+          <button className="btn btn-primary form-submit emptyBtn" type="submit">
             Submit
           </button>
         </form>
