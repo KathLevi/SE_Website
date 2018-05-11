@@ -363,6 +363,14 @@ footer {
   margin-bottom: 10px;
   margin-top: 6px;
 }
+.footerCol svg {
+  width: 30px;
+  height: 30px;
+}
+.footerCol svg:hover{
+  color: var(--main-blue);
+  cursor: pointer;
+}
 
 
 /*
@@ -427,22 +435,6 @@ footer {
   stroke: #231f20;
   stroke-miterlimit: 10;
   stroke-width: 5px;
-}
-
-svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  width: 150px;
-  height: 150px;
-  display: block;
-
-  .cls-1 {
-    stroke: green;
-  }
 }
 .circle {
   stroke-dasharray: 700;
