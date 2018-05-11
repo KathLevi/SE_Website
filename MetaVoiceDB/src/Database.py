@@ -5,7 +5,8 @@ import json as js
 import datetime
 from src.helpers.jsonHelper import jsonHelper
 import requests
-from Config import Config
+from src.Config import Config
+
 
 # TODO
 # Split some of this up. There can be 'helper' classes that modulate these tasks more
@@ -30,7 +31,7 @@ class db:
         self.conn_string = conn_string
         self.engine = create_engine ( conn_string , convert_unicode=True )
 
-        self.host = '127.0.0.1'
+        self.host = config.local
 
         Base.metadata.create_all ( bind=self.engine )
         Session = sessionmaker ( bind=self.engine )
@@ -67,6 +68,9 @@ class db:
                 status['state'] = q.User_Profile.State
                 status['email'] = q.Email
                 status['cell'] = q.User_Profile.Cell
+                status['city'] = q.User_Profile.City
+                status['zipcode'] = q.User_Profile.Zipcode
+                status['country'] = q.User_Profile.Country
                 status[ 'userId' ] = q.Id
                 status[ 'status'] = "SUCCESS"
         except Exception as e:
@@ -449,3 +453,28 @@ class db:
             return response
         else:
             return {}
+
+    def delete_skill(self, id):
+        status = {}
+        q = self.session.query(Skills).filter_by(SkillId = id).one_or_none()
+        n = 0
+        if q:
+            # check what kind of skill it is
+            if q.Template == 'Alexa Flash Briefing':
+                # Deleted Feeds
+                n = self.session.query(Skills).filter_by(SkillId = id).delete()
+                n += self.session.query(Feed).filter_by(SkillId = id).delete()
+            else:
+                # delete associated feeds/utters/resps/intents
+                n = self.session.query(Skills).filter_by(SkillId = id).delete()
+                n += self.session.query(Intent).filter_by(SkillId = id).delete()
+                n += self.session.query(Utterances).filter_by(SkillId = id).delete()
+                n += self.session.query(Response).filter_by(SkillId = id).delete()
+        else:
+            print("How did you get here")
+            # didnt exist so you cant delete it
+            # how did you get here?
+        self.session.commit()
+        # Returns number of rows affected, should be more than zero
+        status['rows'] = n
+        return status

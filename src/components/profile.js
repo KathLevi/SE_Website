@@ -9,24 +9,26 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       userName: window.localStorage.getItem("userId"),
-      fName: "",
-      lName: "",
+      name: "",
       company: "",
       phoneNum: "",
       address: "",
       email: "",
+      cityState: "",
+      country: "",
       loading: true
     };
 
     if (props.data) {
       this.state = {
         ...this.state,
-        fName: props.data.firstName,
-        lName: props.data.lastName,
+        name: props.data.firstName + " " + props.data.lastName,
         company: props.data.company,
         phoneNum: props.data.cell,
         email: props.data.email,
         address: props.data.address,
+        cityState: props.data.city + ", " + props.data.state + " " + props.data.zipcode,
+        country: props.data.country,
         loading: false
       };
     } else {
@@ -47,12 +49,13 @@ class Profile extends React.Component {
   componentWillReceiveProps(props) {
     if (props.data) {
       this.setState({
-        fName: props.data.firstName,
-        lName: props.data.lastName,
+        name: props.data.firstName + " " + props.data.lastName,
         company: props.data.company,
         phoneNum: props.data.cell,
         email: props.data.email,
-        address: props.data.address
+        address: props.data.address,
+        cityState: props.data.city + ", " + props.data.state + " " + props.data.zipcode,
+        country: props.data.country
       });
     }
   }
@@ -89,12 +92,14 @@ class Profile extends React.Component {
               </div>
               <div className="profile3">
                 <div>
-                  {this.state.fName} {this.state.lName}
+                  {this.state.name}
                 </div>
                 <div>{this.state.company}</div>
                 <div>{this.state.email}</div>
                 <div>{this.state.phoneNum}</div>
                 <div>{this.state.address}</div>
+                <div className = "addr">{this.state.cityState}</div>
+                <div className = "addr">{this.state.country}</div>
               </div>
             </div>
           </div>

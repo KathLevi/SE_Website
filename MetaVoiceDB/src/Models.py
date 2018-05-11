@@ -47,7 +47,7 @@ class User_Profile(Base):
             'address' : self.Address,
             'premise' : self.Premise,
             'country' : self.Country,
-            'sity' : self.City,
+            'city' : self.City,
             'state' : self.State,
             'zipcode' : self.Zipcode,
             'cell' : self.Cell

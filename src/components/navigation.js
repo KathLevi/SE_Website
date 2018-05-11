@@ -66,7 +66,6 @@ class Navigation extends React.Component {
               to="/"
               style={{ textDecoration: "none" }}
               className="logo text-left"
-              onClick={this.toggleCollapse}
             >
               <span>Blue</span>marble<img src={logo} alt="blue marble logo" />
             </NavLink>
@@ -123,13 +122,14 @@ class Navigation extends React.Component {
                     onMouseEnter={this.onProfileHover}
                     onMouseLeave={this.onProfileHoverExit}
                     onClick={this.toggleCollapse}
+                    onClick={this.onProfileHover}
                   >
                     PROFILE <span className="caret" />
                   </NavLink>
 
                   <ul
                     className={
-                      "dropdown-menu " + (this.state.showProfileDrop && "show")
+                      "dropdown-menu " + (this.state.showProfileDrop && "show navbar-nav navbar-inverse")
                     }
                     onMouseEnter={this.onProfileHover}
                     onMouseLeave={this.onProfileHoverExit}
@@ -138,7 +138,6 @@ class Navigation extends React.Component {
                       <NavLink
                         exact
                         activeClassName="current"
-                        className="dropdown-link"
                         to="/view-skills"
                         onClick={this.toggleCollapse}
                       >
@@ -148,13 +147,12 @@ class Navigation extends React.Component {
                     <li>
                       <NavLink
                         to="/signin"
-                        className="dropdown-link"
                         onClick={() => {
                           this.toggleCollapse();
                           this.signOut();
                         }}
                       >
-                        SWITCH ACCOUNTS
+                        SIGN OUT
                       </NavLink>
                     </li>
                   </ul>
@@ -176,211 +174,6 @@ class Navigation extends React.Component {
         </div>
       </nav>
     );
-    {
-      /*<div>
-        <nav className="navbar navbar-inverse navbar-fixed-top bm-nav">
-          {" "}
-          <div className="container-fluid">
-            {" "}
-            <div className="navbar-header">
-              {" "}
-              <button
-                type="button"
-                className={"collapsed navbar-toggle"}
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-6"
-                aria-expanded="false"
-                onClick={this.toggleCollapse}
-              >
-                {" "}
-                <span className="sr-only">Toggle navigation</span>{" "}
-                <span className="icon-bar" /> <span className="icon-bar" />{" "}
-                <span className="icon-bar" />{" "}
-              </button>{" "}
-              <Link
-                to="/"
-                style={{ textDecoration: "none" }}
-                className="logo text-left"
-              >
-                <span>Blue</span>marble<img src={logo} alt="blue marble logo" />
-              </Link>
-            </div>{" "}
-            <div
-              className={
-                this.state.collapsed
-                  ? "collapse navbar-collapse"
-                  : "collapse navbar-collapse show"
-              }
-            >
-              {" "}
-              <ul className="navbar-right bm-nav">
-                <li className="menuListElement">
-                  <NavLink exact activeClassName="current" to="/">
-                    HOME
-                  </NavLink>
-                </li>
-                <li className="menuListElement">
-                  <NavLink exact activeClassName="current" to="/demo">
-                    DEMO
-                  </NavLink>
-                </li>
-                {window.localStorage.userId && (
-                  <li className="menuListElement">
-                    <NavLink exact activeClassName="current" to="/create-skill">
-                      CREATE SKILL
-                    </NavLink>
-                  </li>
-                )}
-
-                <li className="menuListElement dropdwn">
-                  {window.localStorage.userId ? (
-                    <div>
-                      <NavLink
-                        exact
-                        className="dropbtn text-center"
-                        activeClassName="current"
-                        to="/profile"
-                      >
-                        PROFILE
-                      </NavLink>
-
-                      <div className="dropdown-content text-left">
-                        <NavLink
-                          exact
-                          activeClassName="current"
-                          className="dropdown-link"
-                          to="/view-skills"
-                        >
-                          VIEW MY SKILLS
-                        </NavLink>
-
-                        <NavLink
-                          onClick={() => {
-                            signOut(this.props);
-                          }}
-                          to="/signin"
-                          className="dropdown-link"
-                        >
-                          SWITCH ACCOUNTS
-                        </NavLink>
-                      </div>
-                    </div>
-                  ) : (
-                    <NavLink
-                      exact
-                      className="dropbtn text-center"
-                      activeClassName="current"
-                      to="/signin"
-                    >
-                      SIGN IN
-                    </NavLink>
-                  )}
-                </li>
-              </ul>{" "}
-            </div>{" "}
-          </div>{" "}
-        </nav></div>*/
-    }
-
-    {
-      /*}<nav className="navbar navbar-default">
-      <div className="container-fluid">
-        <Link
-          to="/"
-          style={{ textDecoration: "none" }}
-          className="logo text-left"
-        >
-          <span>Blue</span>marble<img src={logo} alt="blue marble logo" />
-        </Link>
-        <ul className="menuList text-right nav navbar-nav">
-          <li className="active">
-            <a href="#">
-              Link <span className="sr-only">(current)</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">Link</a>
-          </li>
-          <li className="dropdown">
-            <a
-              href="#"
-              className="dropdown-toggle"
-              data-toggle="dropdown"
-              role="button"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown <span className="caret" />
-            </a>
-            <ul className="dropdown-menu">
-              <li className="menuListElement">
-                <NavLink exact activeClassName="current" to="/">
-                  HOME
-                </NavLink>
-              </li>
-              <li className="menuListElement">
-                <NavLink exact activeClassName="current" to="/demo">
-                  DEMO
-                </NavLink>
-              </li>
-              {window.localStorage.userId && (
-                <li className="menuListElement">
-                  <NavLink exact activeClassName="current" to="/create-skill">
-                    CREATE SKILL
-                  </NavLink>
-                </li>
-              )}
-
-              <li className="menuListElement dropdwn">
-                {window.localStorage.userId ? (
-                  <div>
-                    <NavLink
-                      exact
-                      className="dropbtn text-center"
-                      activeClassName="current"
-                      to="/profile"
-                    >
-                      PROFILE
-                    </NavLink>
-
-                    <div className="dropdown-content text-left">
-                      <NavLink
-                        exact
-                        activeClassName="current"
-                        className="dropdown-link"
-                        to="/view-skills"
-                      >
-                        VIEW MY SKILLS
-                      </NavLink>
-
-                      <NavLink
-                        onClick={() => {
-                          signOut(props);
-                        }}
-                        to="/signin"
-                        className="dropdown-link"
-                      >
-                        SWITCH ACCOUNTS
-                      </NavLink>
-                    </div>
-                  </div>
-                ) : (
-                  <NavLink
-                    exact
-                    className="dropbtn text-center"
-                    activeClassName="current"
-                    to="/signin"
-                  >
-                    SIGN IN
-                  </NavLink>
-                )}
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>*/
-    }
   }
 }
 

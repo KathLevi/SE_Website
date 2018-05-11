@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import * as FontAwesome from "react-icons/lib/fa";
 
 const Footer = () => (
   <footer>
@@ -36,7 +37,11 @@ const Footer = () => (
       <div className="fmenuLabel">
         <span>SOCIAL MEDIA</span>
       </div>
-      <p>insert social media icons here</p>
+      <FontAwesome.FaFacebook />
+      <FontAwesome.FaTwitter />
+      <FontAwesome.FaVimeo />
+      <FontAwesome.FaYoutube />
+      <FontAwesome.FaLinkedin />
     </div>
   </footer>
 );

@@ -109,6 +109,15 @@ def GetProfile():
     _db.shutdown()
     return good_response(resp)
 
+@app.route('/deleteskill', methods=['POST'])
+def DeleteSkill():
+    jsonData = request.get_json()
+    id = js.loads(jsonData)['SkillId']
+    print("Deleting Skill")
+    _db = db(cs)
+    resp = _db.delete_skill(id)
+    return good_response(resp)
+
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
     port = int(os.environ.get('PORT', 5004))
