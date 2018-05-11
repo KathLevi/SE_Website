@@ -491,7 +491,7 @@ footer {
 /*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
   body {
-    padding: 0 0 300px;    
+    padding: 0 0 350px;    
   }
   .home-section-1 {
     top: 100px;
