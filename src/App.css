@@ -189,6 +189,45 @@ video {
 }
 .registerBtn {
   margin-top: 25px;
+  background-color: white;
+  width: 100%;
+}
+.register-form {
+  max-width: 80%;
+  padding: 15px 35px 15px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.register-form input {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.regCol1,
+.regCol2 {
+  width: 40%;
+  display: inline-block;
+  vertical-align: top;
+}
+.regCol2 {
+  float: right;
+}
+.regBreak {
+  height: 70px;
+}
+.doubleReg .col {
+  width: 45%;
+  display: inline-block;
+}
+.doubleReg .col input {
+  width: 100%;
+}
+.col2 {
+  float: right;
+}
+.RegTnC {
+  padding-top: 10px;
 }
 
 /*
@@ -500,12 +539,15 @@ footer {
     height: auto;
     margin: auto;
   }
+  .register-form input {
+    width: 250px;
+  }
 }
 
 /*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
   body {
-    padding: 0 0 300px;
+    padding: 0 0 350px;
   }
   .home-section-1 {
     top: 100px;
@@ -532,6 +574,14 @@ footer {
     width: 50%;
     font-size: 17px;
     margin-left: 10px;
+  }
+  .regCol1,
+  .regCol2 {
+    width: 100%;
+    display: block;
+  }
+  .regBreak {
+    height: 0px;
   }
   .skill-template-item {
     min-width: 100%;
