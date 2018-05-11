@@ -151,7 +151,7 @@ class Form extends React.Component {
           })}
           {this.props.children}
           <button className="btn btn-primary form-submit" type="submit">
-            Submit
+            Save Skill
           </button>
         </form>
       </div>

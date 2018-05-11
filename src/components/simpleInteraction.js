@@ -11,7 +11,7 @@ const inputs = [
   {
     name: "email",
     type: "text",
-    value: "test@example.com",
+    value: "",
     label: "Email",
     placeholder: "",
     errorMessage: "Email is required",
@@ -20,7 +20,7 @@ const inputs = [
   {
     name: "platform",
     type: "radio",
-    value: "amazon",
+    value: "",
     inputs: [
       { value: "amazon", label: "Amazon Alexa" },
       { value: "google", label: "Google Voice" }
@@ -29,7 +29,7 @@ const inputs = [
   {
     name: "fName",
     type: "text",
-    value: "Andrew",
+    value: "",
     label: "First name",
     placeholder: "",
     errorMessage: "Enter first name",
@@ -38,7 +38,7 @@ const inputs = [
   {
     name: "lName",
     type: "text",
-    value: "Peacock",
+    value: "",
     label: "Last name",
     placeholder: "",
     errorMessage: "Enter last name",
@@ -47,7 +47,7 @@ const inputs = [
   {
     name: "skillName",
     type: "text",
-    value: "MySkill2",
+    value: "",
     label: "Skill name",
     placeholder: "",
     errorMessage: "Provide a name for your skill",
@@ -56,7 +56,7 @@ const inputs = [
   {
     name: "invocation",
     type: "text",
-    value: "invocation phrase",
+    value: "",
     label: "Invocation phrase",
     placeholder: "",
     errorMessage: "Provide an invocation phrase",
@@ -65,7 +65,7 @@ const inputs = [
   {
     name: "utterance1",
     type: "text",
-    value: "sample utterance",
+    value: "",
     label: "Utterances",
     placeholder: "",
     errorMessage: "Provide at least one utterance",
@@ -110,7 +110,7 @@ const inputs = [
   {
     name: "response",
     type: "text",
-    value: "response",
+    value: "",
     label: "Response",
     placeholder: "",
     errorMessage: "Provide a response",
@@ -126,7 +126,7 @@ const inputs = [
   {
     name: "skillDescShort",
     type: "text",
-    value: "short desc 1",
+    value: "",
     label: "Short description",
     placeholder: "",
     errorMessage: "Provide a short description",
@@ -135,7 +135,7 @@ const inputs = [
   {
     name: "skillDescLong",
     type: "text",
-    value: "long desc 1",
+    value: "",
     label: "Long description",
     placeholder: "",
     errorMessage: "Provide a long description",
@@ -144,7 +144,7 @@ const inputs = [
   {
     name: "keywords",
     type: "text",
-    value: "keywords",
+    value: "",
     label: "Keywords",
     placeholder: "",
     errorMessage: "Invalid field",
@@ -208,7 +208,7 @@ class SimpleInteraction extends React.Component {
       userId: localStorage.getItem("userId"),
       skillName: data.skillName,
       amz_SkillId: 0,
-      status: "In development",
+      status: "Draft",
       invocationName: data.invocationName,
       category: data.category,
       shortDescription: data.shortDescription,
@@ -220,20 +220,28 @@ class SimpleInteraction extends React.Component {
       lastName: data.lastName
     };
 
+    /* create new skill and push to db */
     request("http://127.0.0.1:5004/newskill", requestData, resp => {
       console.log(resp);
       if (resp.data && resp.data.status === "SUCCESS") {
         let updatedSkills = this.props.userData.skills;
+        //this.props.history.push("/view-skills");
         updatedSkills.push(resp.data.skill);
         this.props.updateGlobalState({ userData: { skills: updatedSkills } });
         requestData.SkillId = resp.data.SkillId;
         console.log(requestData);
-        request("http://127.0.0.1:5004/submit", requestData, resp => {
+        /*request("http://127.0.0.1:5004/submit", requestData, resp => {
           console.log("Skill submit response: " + resp);
           console.log(resp);
           if (resp.data && resp.data.status === "SUCCESS") {
-            this.props.history.push("/view-skills");
+            //this.props.history.push("/view-skills");
+            console.log("SUCCESS: Skill submitted...", resp.data);
           }
+        });*/
+      } else {
+        this.setState({
+          showModal: true,
+          modalMessage: "Server error: Please wait a few minutes and try again"
         });
       }
     });
