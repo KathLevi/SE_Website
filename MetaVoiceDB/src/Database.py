@@ -146,17 +146,37 @@ class db:
         if Limit:
             print("Limit!")
         else:
+            print "querying for skills..."
             SkillIds = self.session.query ( Skills ).filter_by ( UserId = Id ).all()
+            print "skills queried"
             for idx, skill in enumerate(SkillIds):
                 viewskills.append(skill.dict())
-                viewskills[idx]['CreationDate'] = str(viewskills[idx]['CreationDate'])
-                viewskills[idx]['Responses'] = self.get_skill_resps(Id=skill.SkillId)
-                viewskills[idx]['Utterances'] = self.get_skill_uttrs(Id=skill.SkillId)
-                if skill.Template == 'Alexa Flash Briefing':
-                    viewskills[ idx ][ 'feeds' ] = self.get_skill_feeds ( skill.SkillId )
-                else:
-                    viewskills[ idx ][ 'intents' ] = self.get_skill_intent ( skill.SkillId )
+                #viewskills[idx]['CreationDate'] = str(viewskills[idx]['CreationDate'])
+                #viewskills[idx]['Responses'] = self.get_skill_resps(Id=skill.SkillId)
+                #viewskills[idx]['Utterances'] = self.get_skill_uttrs(Id=skill.SkillId)
+                #if skill.Template == 'Alexa Flash Briefing':
+                #    viewskills[ idx ][ 'feeds' ] = self.get_skill_feeds ( skill.SkillId )
+                #else:
+                #    viewskills[ idx ][ 'intents' ] = self.get_skill_intent ( skill.SkillId )
+        print "returning skill list"
         return viewskills
+
+    def get_skill(self,SkillId):
+        skill = {}
+        try:
+            sk = self.session.query ( Skills ).filter_by ( SkillId = SkillId ).all()
+            if sk:
+                skill = sk[0].dict()
+                skill['Responses'] = self.get_skill_resps(Id=SkillId)
+                skill['Utterances'] = self.get_skill_uttrs(Id=SkillId)
+                if skill.Template == 'Alexa Flash Briefing':
+                    skill['Feeds'] = self.get_skill_feeds(SkillId)
+                else:
+                    skill['Intents'] = self.get_skill_intent(SkillId)
+        except Exception as e:
+            print 'Unexpected error in submit_resps: ' + str(e)
+
+        return skill
 
     # Submits list of new Feed objects to the database on a certain SkillId
     def submit_feeds(self,json,id):
@@ -223,7 +243,7 @@ class db:
     # Function that returns a list of Response objects for a certain SkillId
     def get_skill_resps(self,Id,):
         Resps = []
-        _ = self.session.query ( Response ).filter_by ( IntentId=Id ).all ( )
+        _ = self.session.query ( Response ).filter_by ( SkillId=Id ).all ( )
         for r in _:
             Resps.append(r.dict())
 
@@ -232,7 +252,7 @@ class db:
     # Function taht reutnrs a list of Utterance objects for a certain SkillId
     def get_skill_uttrs(self,Id):
         Utters = []
-        _ = self.session.query ( Utterances ).filter_by ( IntentId=Id ).all ( )
+        _ = self.session.query ( Utterances ).filter_by ( SkillId=Id ).all ( )
         for u in _:
             Utters.append ( u.dict ( ) )
         return Utters

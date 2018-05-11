@@ -52,6 +52,18 @@ def ViewSkills():
     _db = db(cs)
     resp = _db.attempt_get_skills(UserId=UserId,limit=None)
     _db.shutdown()
+    print "returning view skill response"
+    return good_response(resp)
+
+@app.route('/getskill', methods=['POST'])
+def GetSkill():
+    json = request.get_json()
+    SkillId = json['SkillId']
+    print("Retrieving skill")
+    _db = db(cs)
+    resp = _db.get_skill(SkillId=SkillId)
+    _db.shutdown()
+    print "returning get skill response"
     return good_response(resp)
 
 @app.route('/newskill', methods=['POST'])
@@ -109,4 +121,4 @@ def DeleteSkill():
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
     port = int(os.environ.get('PORT', 5004))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True, threaded=True)

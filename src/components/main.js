@@ -37,7 +37,7 @@ const Main = () => {
           />
           <Route
             exact
-            path="/edit-skill/:skillName"
+            path="/edit-skill/:skillId"
             render={props =>
               !loggedIn ? (
                 <Redirect to="/" />

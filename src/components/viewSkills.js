@@ -76,7 +76,9 @@ class ViewSkills extends React.Component {
                 return (
                   <tr key={skill.SkillId}>
                     <td>
-                      <Link to={"/edit-skill/" + skill.Name}>{skill.Name}</Link>
+                      <Link to={"edit-skill/" + skill.SkillId}>
+                        {skill.Name}
+                      </Link>
                     </td>
                     <td>{"English"}</td>
                     <td>{skill.Template}</td>
