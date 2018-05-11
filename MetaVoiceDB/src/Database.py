@@ -68,6 +68,9 @@ class db:
                 status['state'] = q.User_Profile.State
                 status['email'] = q.Email
                 status['cell'] = q.User_Profile.Cell
+                status['city'] = q.User_Profile.City
+                status['zipcode'] = q.User_Profile.Zipcode
+                status['country'] = q.User_Profile.Country
                 status[ 'userId' ] = q.Id
                 status[ 'status'] = "SUCCESS"
         except Exception as e:

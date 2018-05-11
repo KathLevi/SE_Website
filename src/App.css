@@ -209,6 +209,7 @@ video {
   font-size: 20px;
   font-weight: bold;
   line-height: 5rem;
+  vertical-align: top;
 }
 .profile3 {
   width: 40%;
@@ -216,7 +217,9 @@ video {
   font-size: 20px;
   line-height: 5rem;
 }
-
+.addr {
+  line-height: 4rem;
+}
 /*
  * CREATE SKILL
  */
@@ -366,6 +369,7 @@ footer {
 .footerCol svg {
   width: 30px;
   height: 30px;
+  margin: 5px;
 }
 .footerCol svg:hover{
   color: var(--main-blue);
