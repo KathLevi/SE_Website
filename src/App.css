@@ -65,7 +65,7 @@ h3 {
 .navbar-toggle {
   border-width: 0px;
 }
-.dropdown-menu > li > a{
+.dropdown-menu > li > a {
   padding: 15px 30px;
 }
 .navbar-nav > li > a {
@@ -310,7 +310,6 @@ td {
  * TEAM
  */
 
-
 /*
  * CONTACT
  */
@@ -371,11 +370,10 @@ footer {
   height: 30px;
   margin: 5px;
 }
-.footerCol svg:hover{
+.footerCol svg:hover {
   color: var(--main-blue);
   cursor: pointer;
 }
-
 
 /*
  * EXTRA CSS
@@ -425,6 +423,22 @@ footer {
 
   animation: spin 1s infinite linear;
 }
+
+.spinner-inline {
+  width: 30px;
+  height: 30px;
+
+  border: 2px solid #f3f3f3;
+  border-top: 3px solid var(--main-blue);
+  border-radius: 100%;
+
+  display: inline-block;
+  margin-left: 15px;
+  margin-bottom: 12px;
+
+  animation: spin 1s infinite linear;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -491,7 +505,7 @@ footer {
 /*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
   body {
-    padding: 0 0 300px;    
+    padding: 0 0 300px;
   }
   .home-section-1 {
     top: 100px;
@@ -512,12 +526,12 @@ footer {
   .profile2 {
     width: 40%;
     font-size: 15px;
-    margin-left: 20px;        
+    margin-left: 20px;
   }
   .profile3 {
     width: 50%;
     font-size: 17px;
-    margin-left: 10px;    
+    margin-left: 10px;
   }
   .skill-template-item {
     min-width: 100%;
@@ -527,11 +541,42 @@ footer {
   }
   .select-skill-text {
     margin-bottom: 50px;
-  }  
+  }
   .footerCol {
     display: block;
     width: 100%;
     text-align: left;
     margin-bottom: 30px;
   }
+}
+
+.edit-skill-container {
+  padding-bottom: 30px;
+}
+
+.submit-skill-btn {
+  margin-bottom: 50px;
+}
+
+.disabled-btn {
+  cursor: default !important;
+  border-color: ;
+}
+
+.error-banner {
+  border: 1px solid red;
+  padding: 20px;
+  background-color: #fcefef;
+}
+
+.error-banner:focus {
+  outline: 0 !important;
+}
+
+.error-banner-title {
+  font-size: 16px;
+}
+
+.error-banner-violation {
+  margin-top: 12px;
 }

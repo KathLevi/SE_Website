@@ -94,11 +94,8 @@ def SubmitSkill():
 
     # Post skill to be submitteds data to Service1 MetaVoiceLambda
     # change config to 'aws' when testing on aws ec2
-    status = {
-        'status_code' : resp
-    }
 
-    return jsonify(jsonData)
+    return resp
 
 @app.route('/getprofile', methods=['POST'])
 def GetProfile():

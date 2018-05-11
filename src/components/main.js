@@ -12,6 +12,7 @@ import SimpleInteraction from "./simpleInteraction";
 import FlashBriefing from "./flashBriefing";
 import Register from "./register";
 import EditSkill from "./editSkill";
+import ViewSkill from "./viewSkill";
 import CreateSkillForm from "./createSkillForm";
 import Context from "../context";
 
@@ -65,6 +66,18 @@ const Main = () => {
                 <Redirect to="/" />
               ) : (
                 <ViewSkills {...state} {...props} />
+              )
+            }
+          />
+
+          <Route
+            exact
+            path="/view-skill/:skillId"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <ViewSkill {...state} {...props} />
               )
             }
           />

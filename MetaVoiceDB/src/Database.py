@@ -430,15 +430,14 @@ class db:
                 json[ 'lastName' ] = u.Lname
 
         if json[ 'template' ] == 'Alexa Flash Briefing':
-            # Submit to service two
+            # Submit to service three
             resp = requests.post ( config.local + ':5003/post' , json=js.dumps(json) )
-            return resp.status_code
+            return resp.text
         else:
             # Submit to service one
             resp = requests.post ( config.local + ':5001/post' , json=js.dumps(json) )
-            return resp.status_code
+            return resp.text
 
-        return
 
     def attempt_get_profile(self,json):
         email = ""

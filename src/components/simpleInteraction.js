@@ -11,7 +11,6 @@ const inputs = [
   {
     name: "email",
     type: "text",
-    value: "",
     label: "Email",
     placeholder: "",
     errorMessage: "Email is required",
@@ -20,7 +19,6 @@ const inputs = [
   {
     name: "platform",
     type: "radio",
-    value: "",
     inputs: [
       { value: "amazon", label: "Amazon Alexa" },
       { value: "google", label: "Google Voice" }
@@ -29,7 +27,6 @@ const inputs = [
   {
     name: "fName",
     type: "text",
-    value: "",
     label: "First name",
     placeholder: "",
     errorMessage: "Enter first name",
@@ -38,7 +35,6 @@ const inputs = [
   {
     name: "lName",
     type: "text",
-    value: "",
     label: "Last name",
     placeholder: "",
     errorMessage: "Enter last name",
@@ -47,7 +43,6 @@ const inputs = [
   {
     name: "skillName",
     type: "text",
-    value: "",
     label: "Skill name",
     placeholder: "",
     errorMessage: "Provide a name for your skill",
@@ -56,7 +51,6 @@ const inputs = [
   {
     name: "invocation",
     type: "text",
-    value: "",
     label: "Invocation phrase",
     placeholder: "",
     errorMessage: "Provide an invocation phrase",
@@ -65,7 +59,6 @@ const inputs = [
   {
     name: "utterance1",
     type: "text",
-    value: "",
     label: "Utterances",
     placeholder: "",
     errorMessage: "Provide at least one utterance",
@@ -74,7 +67,6 @@ const inputs = [
   {
     name: "utterance2",
     type: "text",
-    value: "",
     label: "",
     placeholder: "",
     errorMessage: "Invalid field",
@@ -83,7 +75,6 @@ const inputs = [
   {
     name: "utterance3",
     type: "text",
-    value: "",
     label: "",
     placeholder: "",
     errorMessage: "Invalid field",
@@ -92,7 +83,6 @@ const inputs = [
   {
     name: "utterance4",
     type: "text",
-    value: "",
     label: "",
     placeholder: "",
     errorMessage: "Invalid field",
@@ -101,7 +91,6 @@ const inputs = [
   {
     name: "utterance5",
     type: "text",
-    value: "",
     label: "",
     placeholder: "",
     errorMessage: "Invalid field",
@@ -110,7 +99,6 @@ const inputs = [
   {
     name: "response",
     type: "text",
-    value: "",
     label: "Response",
     placeholder: "",
     errorMessage: "Provide a response",
@@ -126,7 +114,6 @@ const inputs = [
   {
     name: "skillDescShort",
     type: "text",
-    value: "",
     label: "Short description",
     placeholder: "",
     errorMessage: "Provide a short description",
@@ -135,7 +122,6 @@ const inputs = [
   {
     name: "skillDescLong",
     type: "text",
-    value: "",
     label: "Long description",
     placeholder: "",
     errorMessage: "Provide a long description",
@@ -144,7 +130,6 @@ const inputs = [
   {
     name: "keywords",
     type: "text",
-    value: "",
     label: "Keywords",
     placeholder: "",
     errorMessage: "Invalid field",
@@ -167,13 +152,19 @@ class SimpleInteraction extends React.Component {
   };
 
   submitForm = e => {
-    let data = {
-      email: this.state.email.value,
-      template: "Alexa Interaction",
-      firstName: this.state.fName.value,
-      lastName: this.state.lName.value,
+    let requestData = {
+      userId: localStorage.getItem("userId"),
       skillName: this.state.skillName.value,
+      amz_SkillId: 0,
+      status: "Draft",
       invocationName: this.state.invocation.value,
+      category: this.state.category.value,
+      shortDescription: this.state.skillDescShort.value,
+      longDescription: this.state.skillDescLong.value,
+      keywords: this.state.keywords.value.split(",").map(k => {
+        return k.trim();
+      }),
+      template: "Alexa Interaction",
       intents: [
         {
           intent: "intent",
@@ -188,37 +179,11 @@ class SimpleInteraction extends React.Component {
           response: this.state.response.value
         }
       ],
-      category: this.state.category.value,
-      shortDescription: this.state.skillDescShort.value,
-      longDescription: this.state.skillDescLong.value,
-      keywords: this.state.keywords.value.split(",").map(k => {
-        return k.trim();
-      })
+      firstName: this.state.fName.value,
+      lastName: this.state.lName.value
     };
 
-    console.log(data);
-
-    /*request("http://127.0.0.1:5001/post", data, resp => {
-      this.setState({ modalMessage: String(resp) });
-      this.showModal(resp);
-      console.log(resp);
-    });*/
-
-    let requestData = {
-      userId: localStorage.getItem("userId"),
-      skillName: data.skillName,
-      amz_SkillId: 0,
-      status: "Draft",
-      invocationName: data.invocationName,
-      category: data.category,
-      shortDescription: data.shortDescription,
-      longDescription: data.longDescription,
-      keywords: data.keywords,
-      template: data.template,
-      intents: data.intents,
-      firstName: data.firstName,
-      lastName: data.lastName
-    };
+    console.log("sending skill data: ", requestData);
 
     /* create new skill and push to db */
     request("http://127.0.0.1:5004/newskill", requestData, resp => {
@@ -259,8 +224,9 @@ class SimpleInteraction extends React.Component {
     return (
       <div className="page-container">
         <Form
+          editForm={this.props.saveSkill}
           submitForm={this.submitForm}
-          label={"Simple Interaction Form"}
+          label={this.props.title || "Simple Interaction Form"}
           updateParentState={this.updateStateFromChild}
           inputs={inputs}
         />

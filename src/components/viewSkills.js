@@ -53,54 +53,71 @@ class ViewSkills extends React.Component {
           </NavLink>
         </PageHeader>
         {!this.state.skills.length &&
-        this.props.skillsLoaded && (
-          <div className="container" style={{ textAlign: "center" }}>
-            <h1 style={{ fontSize: "18px" }}>
-              No Alexa skills.<NavLink exact activeClassName="current" to="/create-skill"> Add one now!</NavLink>
-            </h1>
-          </div>
-        )}
-        {this.state.skills.length > 1 && this.props.skillsLoaded && (
-          <div className="view-skills-table">
-          <table className="table">
-            <tbody>
-              <tr>
-                <th>SKILL NAME</th>
-                <th>LANGUAGE</th>
-                <th>TYPE</th>
-                <th>MODIFIED</th>
-                <th>STATUS</th>
-                <th>ACTIONS</th>
-              </tr>
-              {this.state.skills.map(skill => {
-                return (
-                  <tr key={skill.SkillId}>
-                    <td>
-                      <Link to={"edit-skill/" + skill.SkillId}>
-                        {skill.Name}
-                      </Link>
-                    </td>
-                    <td>{"English"}</td>
-                    <td>{skill.Template}</td>
-                    <td>{skill.CreationDate}</td>
-                    <td>{skill.Status}</td>
-                    <td>
-                      <NavLink className="skills-btn" exact to="/view-skills">
-                        Edit
-                      </NavLink>{" "}
-                      |
-                      <NavLink className="skills-btn" exact to="/view-skills">
-                        Delete
-                      </NavLink>
-                    </td>
+          this.props.skillsLoaded && (
+            <div className="container" style={{ textAlign: "center" }}>
+              <h1 style={{ fontSize: "18px" }}>
+                No Alexa skills.<NavLink
+                  exact
+                  activeClassName="current"
+                  to="/create-skill"
+                >
+                  {" "}
+                  Add one now!
+                </NavLink>
+              </h1>
+            </div>
+          )}
+        {this.state.skills.length > 1 &&
+          this.props.skillsLoaded && (
+            <div className="view-skills-table">
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <th>SKILL NAME</th>
+                    <th>LANGUAGE</th>
+                    <th>TYPE</th>
+                    <th>MODIFIED</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        )}  
-        {/*{!this.props.skillsLoaded && <div className="spinner-small" />}*/}
+                  {this.state.skills.map(skill => {
+                    return (
+                      <tr key={skill.SkillId}>
+                        <td>
+                          <Link to={"view-skill/" + skill.SkillId}>
+                            {skill.Name}
+                          </Link>
+                        </td>
+                        <td>{"English"}</td>
+                        <td>{skill.Template}</td>
+                        <td>{skill.CreationDate}</td>
+                        <td>{skill.Status}</td>
+                        <td>
+                          <NavLink
+                            className="skills-btn"
+                            exact
+                            to="/view-skills"
+                          >
+                            Edit
+                          </NavLink>{" "}
+                          |
+                          <NavLink
+                            className="skills-btn"
+                            exact
+                            to="/view-skills"
+                          >
+                            Delete
+                          </NavLink>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+        {!this.props.skillsLoaded && <div className="spinner" />}
       </div>
     );
   }
