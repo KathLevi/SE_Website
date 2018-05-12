@@ -41,7 +41,6 @@ class Register extends React.Component {
       state: "",
       zipcode: "",
       cell: ""
-
     };
   }
 
@@ -127,7 +126,7 @@ class Register extends React.Component {
               }}
               onSubmit={this.submitForm}
             >
-            <PageHeader>Register</PageHeader>
+              <PageHeader>Register</PageHeader>
               <div className="regCol1">
                 <h5>First Name</h5>
                 <input
@@ -160,45 +159,45 @@ class Register extends React.Component {
                   required=""
                 />
                 <div className="doubleReg">
-                <div className= "col">
-                  <h5>City</h5>
-                  <input
-                    type="text"
-                    name="city"
-                    onChange={this.handleInputChange}
-                    required=""
-                  />
+                  <div className="col">
+                    <h5>City</h5>
+                    <input
+                      type="text"
+                      name="city"
+                      onChange={this.handleInputChange}
+                      required=""
+                    />
+                  </div>
+                  <div className="col col2">
+                    <h5>State</h5>
+                    <input
+                      type="text"
+                      name="state"
+                      onChange={this.handleInputChange}
+                      required=""
+                    />
+                  </div>
                 </div>
-                <div className= "col col2">
-                  <h5>State</h5>
-                  <input
-                    type="text"
-                    name="state"
-                    onChange={this.handleInputChange}
-                    required=""
-                  />
+                <div className="doubleReg">
+                  <div className="col">
+                    <h5>Zipcode</h5>
+                    <input
+                      type="text"
+                      name="zipcode"
+                      onChange={this.handleInputChange}
+                      required=""
+                    />
+                  </div>
+                  <div className="col col2">
+                    <h5>Country</h5>
+                    <input
+                      type="text"
+                      name="country"
+                      onChange={this.handleInputChange}
+                      required=""
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="doubleReg">
-                <div className= "col">
-                  <h5>Zipcode</h5>
-                  <input
-                    type="text"
-                    name="zipcode"
-                    onChange={this.handleInputChange}
-                    required=""
-                  />
-                </div>
-                <div className= "col col2">
-                  <h5>Country</h5>
-                  <input
-                    type="text"
-                    name="country"
-                    onChange={this.handleInputChange}
-                    required=""
-                  />
-                </div>
-              </div>
               </div>
 
               <div className="regCol2">
@@ -211,9 +210,9 @@ class Register extends React.Component {
                   autoFocus
                 />
 
-                <div className="regBreak"></div>
-                
-                <h5>Retype Password<span id="noMatch">{this.state.error}</span></h5>
+                <h5>
+                  Retype Password<span id="noMatch">{this.state.error}</span>
+                </h5>
                 <input
                   type="password"
                   name="confirmPassword"
@@ -241,7 +240,7 @@ class Register extends React.Component {
                   onChange={this.handleInputChange}
                   required=""
                 />
-                
+
                 <button
                   className="btn btn-lg btn-block emptyBtn registerBtn"
                   type="submit"
@@ -269,12 +268,9 @@ class Register extends React.Component {
               required=""
             />
         </h3>*/}
-
-              
             </form>
           )}
         </Transition>
-
       </div>
     );
   }

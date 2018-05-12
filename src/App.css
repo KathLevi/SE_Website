@@ -193,8 +193,7 @@ video {
   width: 100%;
 }
 .register-form {
-  max-width: 80%;
-  padding: 15px 35px 15px;
+  max-width: 90%;
   margin: 0 auto;
   margin-top: 20px;
 }
@@ -206,9 +205,10 @@ video {
 }
 .regCol1,
 .regCol2 {
-  width: 40%;
+  width: 45%;
   display: inline-block;
   vertical-align: top;
+  margin-bottom: 80px;
 }
 .regCol2 {
   float: right;
@@ -243,18 +243,20 @@ video {
   width: 100%;
 }
 .profile2 {
-  width: 20%;
   display: inline-block;
   font-size: 20px;
   font-weight: bold;
   line-height: 5rem;
-  vertical-align: top;
 }
 .profile3 {
-  width: 40%;
   display: inline-block;
   font-size: 20px;
   line-height: 5rem;
+  margin-left: 50px;
+  min-height: 450px;
+}
+.overflow-visible {
+  overflow: visible;
 }
 .addr {
   line-height: 4rem;
@@ -323,6 +325,7 @@ video {
 .skills-btn {
   color: var(--main-blue);
   padding: 0px 10px;
+  cursor: pointer;
 }
 .table {
   width: 100%;
@@ -430,6 +433,8 @@ footer {
   width: 80px;
   height: 80px;
 
+  z-index: -1;
+
   border: 2px solid #f3f3f3;
   border-top: 3px solid var(--main-blue);
   border-radius: 100%;
@@ -449,6 +454,8 @@ footer {
   width: 40px;
   height: 40px;
 
+  z-index: -1;
+
   border: 2px solid #f3f3f3;
   border-top: 3px solid var(--main-blue);
   border-radius: 100%;
@@ -466,6 +473,8 @@ footer {
 .spinner-inline {
   width: 30px;
   height: 30px;
+
+  z-index: -1;
 
   border: 2px solid #f3f3f3;
   border-top: 3px solid var(--main-blue);
@@ -539,9 +548,6 @@ footer {
     height: auto;
     margin: auto;
   }
-  .register-form input {
-    width: 250px;
-  }
 }
 
 /*Mobile Adjustments*/
@@ -566,14 +572,12 @@ footer {
     width: 100%;
   }
   .profile2 {
-    width: 40%;
     font-size: 15px;
-    margin-left: 20px;
+    margin-left: 10px;
   }
   .profile3 {
-    width: 50%;
     font-size: 17px;
-    margin-left: 10px;
+    margin-left: 5px;
   }
   .regCol1,
   .regCol2 {

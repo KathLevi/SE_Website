@@ -27,7 +27,8 @@ class Profile extends React.Component {
         phoneNum: props.data.cell,
         email: props.data.email,
         address: props.data.address,
-        cityState: props.data.city + ", " + props.data.state + " " + props.data.zipcode,
+        cityState:
+          props.data.city + ", " + props.data.state + " " + props.data.zipcode,
         country: props.data.country,
         loading: false
       };
@@ -54,7 +55,8 @@ class Profile extends React.Component {
         phoneNum: props.data.cell,
         email: props.data.email,
         address: props.data.address,
-        cityState: props.data.city + ", " + props.data.state + " " + props.data.zipcode,
+        cityState:
+          props.data.city + ", " + props.data.state + " " + props.data.zipcode,
         country: props.data.country
       });
     }
@@ -83,23 +85,23 @@ class Profile extends React.Component {
               <div className="profile1">
                 <img src={profile} alt="profile" />
               </div>
-              <div className="profile2">
-                <div>Full Name:</div>
-                <div>Company:</div>
-                <div>Email Address:</div>
-                <div>Phone Number:</div>
-                <div>Address:</div>
-              </div>
-              <div className="profile3">
-                <div>
-                  {this.state.name}
+              <div>
+                <div className="profile2">
+                  <div>Full Name:</div>
+                  <div>Company:</div>
+                  <div>Email Address:</div>
+                  <div>Phone Number:</div>
+                  <div>Address:</div>
                 </div>
-                <div>{this.state.company}</div>
-                <div>{this.state.email}</div>
-                <div>{this.state.phoneNum}</div>
-                <div>{this.state.address}</div>
-                <div className = "addr">{this.state.cityState}</div>
-                <div className = "addr">{this.state.country}</div>
+                <div className="profile3">
+                  <div>{this.state.name}</div>
+                  <div>{this.state.company}</div>
+                  <div>{this.state.email}</div>
+                  <div>{this.state.phoneNum}</div>
+                  <div>{this.state.address}</div>
+                  <div className="addr">{this.state.cityState}</div>
+                  <div className="addr">{this.state.country}</div>
+                </div>
               </div>
             </div>
           </div>

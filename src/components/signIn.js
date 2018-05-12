@@ -146,17 +146,17 @@ class SignIn extends React.Component {
   render() {
     return (
       <div className="page-container">
-        {/*<Transition timeout={this.duration} in={this.state.loading}>
+        <Transition timeout={this.duration} in={this.state.loading}>
           {state => (
             <div
-              class="spinner"
+              className="spinner"
               style={{
                 ...this.defaultStyle,
                 ...this.transitionStyles[state]
               }}
             />
           )}
-        </Transition>*/}
+        </Transition>
 
         <Transition timeout={this.duration} in={!this.state.loading}>
           {tState => (

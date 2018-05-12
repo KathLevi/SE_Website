@@ -471,9 +471,10 @@ class db:
                 n += self.session.query(Response).filter_by(SkillId = id).delete()
         else:
             print("How did you get here")
+            return "FAIL"
             # didnt exist so you cant delete it
             # how did you get here?
         self.session.commit()
         # Returns number of rows affected, should be more than zero
-        status['rows'] = n
-        return status
+
+        return "SUCCESS"
