@@ -12,9 +12,9 @@ class Form extends React.Component {
     for (let input of props.inputs) {
       if (input.type == "text") {
         this.state[input.name] = {
-          value: input.value,
-          error: input.error,
-          errorMessage: input.errorMessage,
+          value: input.value || "",
+          validations: input.validations || [],
+          error: "",
           optional: input.optional,
           ref: React.createRef()
         };
@@ -42,12 +42,13 @@ class Form extends React.Component {
 
   handleInputChange = event => {
     const target = event.target;
+
     this.setState(
       prevState => ({
         [target.name]: {
           ...prevState[target.name],
           value: target.value,
-          error: target.value ? "" : "EMPTY"
+          error: ""
         }
       }),
       () => {
@@ -58,12 +59,18 @@ class Form extends React.Component {
 
   handleInputBlur = event => {
     const target = event.target;
-    if (this.state[target.name].optional) return;
+    let error = "";
+    for (let validation of this.state[target.name].validations) {
+      if (validation.validate(target.value)) {
+        error = validation.message;
+        break;
+      }
+    }
     this.setState(
       prevState => ({
         [target.name]: {
           ...prevState[target.name],
-          error: prevState[target.name].value ? "" : "EMPTY"
+          error: error
         }
       }),
       () => {
@@ -74,25 +81,29 @@ class Form extends React.Component {
 
   validate = () => {
     let isValid = true;
-    for (let inputName of this.props.inputs.map(inp => inp.name).reverse()) {
-      if (
-        this.state[inputName].optional === false &&
-        !this.state[inputName].value
-      ) {
-        this.setState(
-          prevState => ({
-            [inputName]: {
-              ...prevState[inputName],
-              error: "EMPTY"
-            }
-          }),
-          () => {
-            this.props.updateParentState(this.state);
-          }
-        );
-        isValid = false;
-        this.state[inputName].ref.current.focus();
+    for (let inputName of this.props.inputs
+      .filter(i => i.type === "text")
+      .map(inp => inp.name)
+      .reverse()) {
+      let error = "";
+      for (let validation of this.state[inputName].validations) {
+        if (validation.validate(this.state[inputName].value)) {
+          error = validation.message;
+          isValid = false;
+          this.state[inputName].ref.current.focus();
+        }
       }
+      this.setState(
+        prevState => ({
+          [inputName]: {
+            ...prevState[inputName],
+            error: error
+          }
+        }),
+        () => {
+          this.props.updateParentState(this.state);
+        }
+      );
     }
     return isValid;
   };
@@ -121,7 +132,6 @@ class Form extends React.Component {
                   label={input.label}
                   placeholder={input.placeholder}
                   error={this.state[input.name].error}
-                  errorMessage={this.state[input.name].errorMessage}
                 />
               );
             } else if (input.type === "radio") {
@@ -152,7 +162,7 @@ class Form extends React.Component {
           })}
           {this.props.children}
           <button className="btn btn-primary form-submit" type="submit">
-            Save Skill
+            {this.props.submitButtonLabel}
           </button>
         </form>
       </div>

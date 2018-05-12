@@ -8,55 +8,65 @@ class ViewSkills extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    /*this.state = {
       skills: Object.values(props.userData.skills)
+    };*/
+    this.state = {
+      skills: [],
+      skillsLoaded: false
     };
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ skills: Object.values(props.userData.skills) });
+    //this.setState({ skills: Object.values(props.userData.skills) });
   }
 
   componentDidMount() {
-    if (!this.props.skillsLoaded) {
-      axios
-        .post("http://127.0.0.1:5004/viewskills", {
-          UserId: localStorage.getItem("userId")
-        })
-        .then(resp => {
-          this.props.updateGlobalState({
-            userData: { skills: Object.values(resp.data) },
-            skillsLoaded: true
-          });
-          console.log(resp);
-        })
-        .catch(error => {
-          this.props.updateGlobalState({
-            skillsLoaded: true
-          });
-          console.log(error);
+    axios
+      .post("http://127.0.0.1:5004/viewskills", {
+        UserId: localStorage.getItem("userId")
+      })
+      .then(resp => {
+        /*this.props.updateGlobalState({
+          userData: { skills: Object.values(resp.data) },
+          skillsLoaded: true
+        });*/
+        this.setState({ skillsLoaded: true, skills: Object.values(resp.data) });
+        console.log(resp);
+      })
+      .catch(error => {
+        this.props.updateGlobalState({
+          skillsLoaded: true
         });
-    }
+        this.setState({ skillsLoaded: true });
+        console.log(error);
+      });
   }
 
   deleteSkill = skillId => {
     this.props.updateGlobalState({
       skillsLoaded: false
     });
+    this.setState({ skillsLoaded: false });
     console.log("skillId: ", skillId);
     request("http://127.0.0.1:5004/deleteskill", { SkillId: skillId }, resp => {
       console.log("skill response: ", resp);
       if (resp.data === "SUCCESS") {
-        this.props.updateGlobalState({
+        /*this.props.updateGlobalState({
           userData: {
             skills: this.state.skills.filter(s => s.SkillId !== skillId)
           },
           skillsLoaded: true
+        });*/
+        this.setState({
+          skillsLoaded: true,
+          skills: this.state.skills.filter(s => s.SkillId !== skillId)
         });
       } else {
         this.props.updateGlobalState({
           skillsLoaded: true
         });
+        this.setState({ skillsLoaded: true });
       }
     });
   };
@@ -76,7 +86,7 @@ class ViewSkills extends React.Component {
           </NavLink>
         </PageHeader>
         {!this.state.skills.length &&
-          this.props.skillsLoaded && (
+          this.state.skillsLoaded && (
             <div className="container" style={{ textAlign: "center" }}>
               <h1 style={{ fontSize: "18px" }}>
                 No Alexa skills.{" "}
@@ -87,7 +97,7 @@ class ViewSkills extends React.Component {
             </div>
           )}
         {this.state.skills.length > 0 &&
-          this.props.skillsLoaded && (
+          this.state.skillsLoaded && (
             <div className="view-skills-table">
               <table className="table">
                 <tbody>
@@ -115,11 +125,13 @@ class ViewSkills extends React.Component {
                           <NavLink
                             className="skills-btn"
                             exact
-                            to="/view-skills"
+                            to={{
+                              pathname: "/view-skill/" + skill.SkillId,
+                              state: { edit: true, skillId: skill.SkillId }
+                            }}
                           >
                             Edit
                           </NavLink>{" "}
-                          |
                           <a
                             className="skills-btn"
                             onClick={() => this.deleteSkill(skill.SkillId)}
@@ -135,7 +147,7 @@ class ViewSkills extends React.Component {
             </div>
           )}
 
-        {!this.props.skillsLoaded && <div className="spinner" />}
+        {!this.state.skillsLoaded && <div className="spinner" />}
       </div>
     );
   }

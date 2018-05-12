@@ -75,9 +75,9 @@ class Profile extends React.Component {
                 className="btn btn-primary pull-right emptyBtn"
                 exact
                 activeClassName="current"
-                to="/view-skills"
+                to="/edit-profile"
               >
-                View My Skills
+                Edit Profile
               </NavLink>
             </PageHeader>
 

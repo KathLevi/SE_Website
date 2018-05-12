@@ -13,8 +13,16 @@ const inputs = [
     type: "text",
     label: "Email",
     placeholder: "",
-    errorMessage: "Email is required",
-    optional: false
+    validations: [
+      { message: "Email is required", validate: i => i === "" },
+      {
+        message: "Email must be valid",
+        validate: i => {
+          var re = /\S+@\S+\.\S+/;
+          return !re.test(i);
+        }
+      }
+    ]
   },
   {
     name: "platform",
@@ -29,80 +37,75 @@ const inputs = [
     type: "text",
     label: "First name",
     placeholder: "",
-    errorMessage: "Enter first name",
-    optional: false
+    validations: [{ message: "Enter first name", validate: i => i === "" }]
   },
   {
     name: "lName",
     type: "text",
     label: "Last name",
     placeholder: "",
-    errorMessage: "Enter last name",
-    optional: false
+    validations: [{ message: "Enter last name", validate: i => i === "" }]
   },
   {
     name: "skillName",
     type: "text",
     label: "Skill name",
     placeholder: "",
-    errorMessage: "Provide a name for your skill",
-    optional: false
+    validations: [
+      {
+        message: "Please provide a name for your skill",
+        validate: i => i === ""
+      }
+    ]
   },
   {
     name: "invocation",
     type: "text",
     label: "Invocation phrase",
     placeholder: "",
-    errorMessage: "Provide an invocation phrase",
-    optional: false
+    validations: [
+      { message: "Provide an invocation phrase", validate: i => i === "" }
+    ]
   },
   {
     name: "utterance1",
     type: "text",
     label: "Utterances",
     placeholder: "",
-    errorMessage: "Provide at least one utterance",
-    optional: false
+    validations: [
+      { message: "Provide at least one utterance", validate: i => i === "" }
+    ]
   },
   {
     name: "utterance2",
     type: "text",
     label: "",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   },
   {
     name: "utterance3",
     type: "text",
     label: "",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   },
   {
     name: "utterance4",
     type: "text",
     label: "",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   },
   {
     name: "utterance5",
     type: "text",
     label: "",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   },
   {
     name: "response",
     type: "text",
     label: "Response",
     placeholder: "",
-    errorMessage: "Provide a response",
-    optional: false
+    validations: [{ message: "Response is required", validate: i => i === "" }]
   },
   {
     name: "category",
@@ -116,24 +119,24 @@ const inputs = [
     type: "text",
     label: "Short description",
     placeholder: "",
-    errorMessage: "Provide a short description",
-    optional: false
+    validations: [
+      { message: "Provide a short description", validate: i => i === "" }
+    ]
   },
   {
     name: "skillDescLong",
     type: "text",
     label: "Long description",
     placeholder: "",
-    errorMessage: "Provide a long description",
-    optional: true
+    validations: [
+      { message: "Provide a long description", validate: i => i === "" }
+    ]
   },
   {
     name: "keywords",
     type: "text",
     label: "Keywords",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   }
 ];
 
@@ -229,6 +232,7 @@ class SimpleInteraction extends React.Component {
           label={this.props.title || "Simple Interaction Form"}
           updateParentState={this.updateStateFromChild}
           inputs={inputs}
+          submitButtonLabel={"Save skill"}
         />
 
         <ResponseModal

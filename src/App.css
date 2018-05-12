@@ -630,12 +630,26 @@ footer {
   margin-top: 12px;
 }
 
-.profile-table td {
+.profile-table td,
+.profile-table th {
   padding: 15px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   text-align: left;
   font-size: 20px;
+}
+
+.view-skill-table td,
+.view-skill-table th {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  font-size: 16px;
+}
+
+tr {
+  width: 100%;
 }
 
 .profile-table {
@@ -644,9 +658,27 @@ footer {
   max-width: 800px;
 }
 
+.edit-skill-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-skill-table-body {
+  width: 100%;
+  max-width: 500px;
+}
+
+.view-skill-table {
+  width: 80%;
+}
+
 .profile-container {
   display: flex;
   width: 100%;
+}
+
+.edit-input-field {
 }
 
 @media screen and (max-width: 686px) {

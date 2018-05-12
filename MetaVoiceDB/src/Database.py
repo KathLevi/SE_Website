@@ -262,6 +262,7 @@ class db:
     # Sends error message upon issue editing the object
     def edit_skill(self,json):
         response = {}
+        response['status'] = 'SUCCESS'
         if type(json) != dict:
             json = js.loads ( json )
         try:
@@ -352,6 +353,7 @@ class db:
         Skill.LongDesc = json.get('longDescription')
         Skill.Keywords = str(json.get('keywords'))
         Skill.Template = json.get('template')
+        Skill.Invoke = json.get('invocation')
         return Skill
 
     # creates a new intent, submits to the DB and then maps the responses and utterances to that intent

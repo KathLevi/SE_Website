@@ -221,6 +221,7 @@ class FlashBriefing extends React.Component {
           label={"Flash Briefing Form"}
           updateParentState={this.updateStateFromChild}
           inputs={inputs}
+          submitButtonLabel={"Save skill"}
         />
 
         <ResponseModal

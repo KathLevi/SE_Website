@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./home";
 import Demo from "./demo";
 import Profile from "./profile";
+import EditProfile from "./editProfile";
 import Team from "./team";
 import Contact from "./contact";
 import SignIn from "./signIn";
@@ -33,6 +34,17 @@ const Main = () => {
                 <Redirect to="/" />
               ) : (
                 <Profile {...state} {...props} />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/edit-profile"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <EditProfile {...state} {...props} />
               )
             }
           />

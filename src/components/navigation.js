@@ -15,7 +15,7 @@ class Navigation extends React.Component {
     super(props);
 
     this.state = {
-      collapsed: true,
+      collapsed: false,
       showProfileDrop: false
     };
   }
@@ -129,7 +129,9 @@ class Navigation extends React.Component {
 
                   <ul
                     className={
-                      "dropdown-menu " + (this.state.showProfileDrop && "show navbar-nav navbar-inverse")
+                      "dropdown-menu " +
+                      (this.state.showProfileDrop &&
+                        "show navbar-nav navbar-inverse")
                     }
                     onMouseEnter={this.onProfileHover}
                     onMouseLeave={this.onProfileHoverExit}
