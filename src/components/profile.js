@@ -81,28 +81,35 @@ class Profile extends React.Component {
               </NavLink>
             </PageHeader>
 
-            <div className="container">
+            <div className="profile-container">
               <div className="profile1">
                 <img src={profile} alt="profile" />
               </div>
-              <div>
-                <div className="profile2">
-                  <div>Full Name:</div>
-                  <div>Company:</div>
-                  <div>Email Address:</div>
-                  <div>Phone Number:</div>
-                  <div>Address:</div>
-                </div>
-                <div className="profile3">
-                  <div>{this.state.name}</div>
-                  <div>{this.state.company}</div>
-                  <div>{this.state.email}</div>
-                  <div>{this.state.phoneNum}</div>
-                  <div>{this.state.address}</div>
-                  <div className="addr">{this.state.cityState}</div>
-                  <div className="addr">{this.state.country}</div>
-                </div>
-              </div>
+
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Full Name: </td>
+                    <td>{this.state.name}</td>
+                  </tr>
+                  <tr>
+                    <td>Company: </td>
+                    <td>{this.state.company}</td>
+                  </tr>
+                  <tr>
+                    <td>Email Address: </td>
+                    <td>{this.state.email}</td>
+                  </tr>
+                  <tr>
+                    <td>Phone Number: </td>
+                    <td>{this.state.phoneNum}</td>
+                  </tr>
+                  <tr>
+                    <td>{"Address: "}</td>
+                    <td>{this.state.address}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         )}

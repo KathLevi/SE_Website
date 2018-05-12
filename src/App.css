@@ -15,7 +15,6 @@ html {
 }
 body {
   margin: 0;
-  padding: 0 0 100px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
@@ -234,13 +233,13 @@ video {
  * PROFILE
  */
 .profile1 {
-  width: 30%;
+  width: 200px;
   display: inline-block;
   vertical-align: top;
   margin-right: 70px;
 }
 .profile1 img {
-  width: 100%;
+  width: 200px;
 }
 .profile2 {
   display: inline-block;
@@ -313,7 +312,7 @@ video {
 .select-skill-btn {
   position: absolute;
   bottom: 0;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .select-skill-text {
   margin-bottom: 30px;
@@ -370,9 +369,7 @@ footer {
   color: var(--dark-grey);
   width: 100%;
   padding: 10px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  margin-top: 50px;
 }
 .footer_current {
   text-decoration: underline;
@@ -533,7 +530,7 @@ footer {
   border-bottom-color: rgb(238, 238, 238);
 }
 .page-container {
-  min-height: 584px !important;
+  min-height: 534px !important;
   overflow: hidden;
 }
 
@@ -552,9 +549,6 @@ footer {
 
 /*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
-  body {
-    padding: 0 0 350px;
-  }
   .home-section-1 {
     top: 100px;
     height: 50%;
@@ -566,10 +560,10 @@ footer {
     font-size: 25px;
   }
   .profile1 {
-    width: 100%;
+    width: 200px;
   }
   .profile1 img {
-    width: 100%;
+    width: 200px;
   }
   .profile2 {
     font-size: 15px;
@@ -633,4 +627,36 @@ footer {
 
 .error-banner-violation {
   margin-top: 12px;
+}
+
+td {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  font-size: 20px;
+}
+
+table {
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+}
+
+.profile-container {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+}
+
+@media screen and (max-width: 686px) {
+  .profile-container {
+    display: inline-block;
+  }
+
+  table {
+    width: 100%;
+    height: 100%;
+    margin-top: 22px;
+  }
 }

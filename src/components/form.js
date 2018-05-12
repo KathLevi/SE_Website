@@ -62,7 +62,7 @@ class Form extends React.Component {
       prevState => ({
         [target.name]: {
           ...prevState[target.name],
-          error: prevState[target.name].value === "" ? "EMPTY" : ""
+          error: "EMPTY"
         }
       }),
       () => {
