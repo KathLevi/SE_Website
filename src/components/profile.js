@@ -86,7 +86,7 @@ class Profile extends React.Component {
                 <img src={profile} alt="profile" />
               </div>
 
-              <table>
+              <table className="profile-table">
                 <tbody>
                   <tr>
                     <td>Full Name: </td>

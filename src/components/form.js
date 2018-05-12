@@ -46,7 +46,8 @@ class Form extends React.Component {
       prevState => ({
         [target.name]: {
           ...prevState[target.name],
-          value: target.value
+          value: target.value,
+          error: target.value ? "" : "EMPTY"
         }
       }),
       () => {
@@ -62,7 +63,7 @@ class Form extends React.Component {
       prevState => ({
         [target.name]: {
           ...prevState[target.name],
-          error: "EMPTY"
+          error: prevState[target.name].value ? "" : "EMPTY"
         }
       }),
       () => {
