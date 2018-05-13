@@ -16,8 +16,7 @@ const inputs = [
     value: "",
     label: "Email",
     placeholder: "",
-    errorMessage: "Email is required",
-    optional: false
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   },
   {
     name: "platform",
@@ -34,8 +33,7 @@ const inputs = [
     value: "",
     label: "First name",
     placeholder: "",
-    errorMessage: "Enter first name",
-    optional: false
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   },
   {
     name: "lName",
@@ -43,8 +41,7 @@ const inputs = [
     value: "",
     label: "Last name",
     placeholder: "",
-    errorMessage: "Enter last name",
-    optional: false
+    validations: [{ message: "Enter first name", validate: i => i === "" }]
   },
   {
     name: "skillName",
@@ -52,8 +49,7 @@ const inputs = [
     value: "",
     label: "Skill name",
     placeholder: "",
-    errorMessage: "Provide a name for your skill",
-    optional: false
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   },
   {
     name: "category",
@@ -68,8 +64,7 @@ const inputs = [
     value: "",
     label: "Short description",
     placeholder: "",
-    errorMessage: "Provide a short description",
-    optional: false
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   },
   {
     name: "skillDescLong",
@@ -77,8 +72,7 @@ const inputs = [
     value: "",
     label: "Long description",
     placeholder: "",
-    errorMessage: "Provide a long description",
-    optional: true
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   },
   {
     name: "keywords",
@@ -86,8 +80,7 @@ const inputs = [
     value: "",
     label: "Keywords",
     placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   },
   {
     name: "feedName",
@@ -95,8 +88,7 @@ const inputs = [
     value: "",
     label: "Feed name",
     placeholder: "",
-    errorMessage: "Provide a feed name",
-    optional: false
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   },
   {
     name: "preamble",
@@ -104,15 +96,13 @@ const inputs = [
     value: "",
     label: "Preamble",
     placeholder: "",
-    errorMessage: "Preamble is required",
-    optional: false
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   },
   {
     name: "updateFrequency",
     type: "select",
     value: "",
     label: "Update frequency",
-    optional: false,
     options: updateFrequencies
   },
   {
@@ -120,7 +110,6 @@ const inputs = [
     type: "select",
     value: "Headline News",
     label: "Content genre",
-    optional: false,
     options: contentGenres
   },
   {
@@ -129,8 +118,7 @@ const inputs = [
     value: "",
     label: "Feed URL",
     placeholder: "",
-    errorMessage: "Provide a URL for the RSS feed",
-    optional: false
+    validations: [{ message: "Field is required", validate: i => i === "" }]
   }
 ];
 
@@ -179,7 +167,7 @@ class FlashBriefing extends React.Component {
     request(
       "http://127.0.0.1:5004/newskill",
       {
-        UserId: localStorage.getItem("userId"),
+        userId: localStorage.getItem("userId"),
         skillName: data.skillName,
         amz_SkillId: 0,
         status: "In development",
@@ -199,8 +187,7 @@ class FlashBriefing extends React.Component {
         ]
       },
       resp => {
-        this.setState({ modalMessage: String(resp) });
-        this.showModal(resp);
+        console.log("flash briefing skill submit response", resp);
       }
     );
   };

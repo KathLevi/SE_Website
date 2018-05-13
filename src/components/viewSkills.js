@@ -127,7 +127,10 @@ class ViewSkills extends React.Component {
                             exact
                             to={{
                               pathname: "/view-skill/" + skill.SkillId,
-                              state: { edit: true, skillId: skill.SkillId }
+                              state: {
+                                edit: skill.Template === "Alexa Interaction",
+                                skillId: skill.SkillId
+                              }
                             }}
                           >
                             Edit

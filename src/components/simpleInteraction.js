@@ -155,6 +155,13 @@ class SimpleInteraction extends React.Component {
   };
 
   submitForm = e => {
+    let keywords = this.state.keywords.value
+      .split(",")
+      .map(k => {
+        return k.trim();
+      })
+      .join(", ");
+
     let requestData = {
       userId: localStorage.getItem("userId"),
       skillName: this.state.skillName.value,
@@ -164,9 +171,7 @@ class SimpleInteraction extends React.Component {
       category: this.state.category.value,
       shortDescription: this.state.skillDescShort.value,
       longDescription: this.state.skillDescLong.value,
-      keywords: this.state.keywords.value.split(",").map(k => {
-        return k.trim();
-      }),
+      keywords: keywords,
       template: "Alexa Interaction",
       intents: [
         {

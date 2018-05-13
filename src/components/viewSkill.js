@@ -248,7 +248,9 @@ export default class ViewSkill extends React.Component {
   };
 
   editSkill = () => {
-    this.setState({ isEditing: true });
+    if (this.state.skill.Template === "Alexa Interaction") {
+      this.setState({ isEditing: true });
+    }
   };
 
   handleInputChange = event => {
@@ -426,7 +428,7 @@ export default class ViewSkill extends React.Component {
           </div>
         )}
         <PageHeader>
-          View skill
+          {"Skill Details"}
           {this.state.loaded &&
             (!this.state.isEditing ? (
               <button
