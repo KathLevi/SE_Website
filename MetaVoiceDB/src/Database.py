@@ -288,6 +288,45 @@ class db:
 
         return response
 
+
+    def edit_profile(self,json):
+        response = {}
+        response['status'] = 'SUCCESS'
+        if type(json) != dict:
+            json = js.loads ( json )
+        try:
+
+            profiles = self.session.query ( User_Profile ).filter_by ( UserId = json.get('userId') ).all()
+            if profiles:
+                profile = {}
+                for p in profiles:
+                    profile = p.dict()
+                    self.session.delete(p)
+                self.session.commit()
+                up = User_Profile (
+                        UserId=json.get('userId'),
+                        Fname=json.get('firstName', profile['firstName']) ,
+                        Lname=json.get('lastName', profile['lastName']),
+                        Company=json.get('company', profile['company']) ,
+                        Address=json.get('address', profile['address']) ,
+                        Premise=json.get('premise', profile['premise']) ,
+                        Country=json.get('country', profile['country']) ,
+                        City=json.get('city', profile['city']) ,
+                        State=json.get('state', profile['state']) ,
+                        Zipcode=json.get('zipcode', profile['zipcode']) ,
+                        Cell=json.get('cell', profile['cell'])
+                    )
+                self.session.add(up)
+                self.session.commit()
+            else:
+                response['status'] = 'FAIL'
+        except Exception as e:
+            print("Unexpected error at edit_skill: " + str(e))
+            response['status'] = 'SERVER_ERROR'
+            response['error'] = str(e)
+
+        return response
+
     # Function that deletes all Utterances based on a SkillId
     # Submits new Utterances from JSON object
     def replace_uttrs(self,json,SkillId, OldIntentId, NewIntentId):
@@ -436,8 +475,9 @@ class db:
             resp = requests.post ( config.local + ':5003/post' , json=js.dumps(json) )
             return resp.text
         else:
-            # Submit to service one
             resp = requests.post ( config.local + ':5001/post' , json=js.dumps(json) )
+            print "response: "
+            print resp.text
             return resp.text
 
 

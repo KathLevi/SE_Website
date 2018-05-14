@@ -84,6 +84,15 @@ def EditSkill():
     _db.shutdown()
     return good_response(status)
 
+@app.route('/editprofile', methods=['POST'])
+def EditProfile():
+    jsonData = request.get_json()
+    print('Edit profile request')
+    _db = db(cs)
+    status = _db.edit_profile(jsonData)
+    _db.shutdown()
+    return good_response(status)
+
 @app.route('/submit', methods=['POST'])
 def SubmitSkill():
     jsonData = request.get_json()
