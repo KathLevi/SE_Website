@@ -43,32 +43,36 @@ class ViewSkills extends React.Component {
       });
   }
 
-  deleteSkill = skillId => {
+  deleteSkill = (skillId, amznSkillId) => {
     this.props.updateGlobalState({
       skillsLoaded: false
     });
     this.setState({ skillsLoaded: false });
     console.log("skillId: ", skillId);
-    request("http://127.0.0.1:5004/deleteskill", { SkillId: skillId }, resp => {
-      console.log("skill response: ", resp);
-      if (resp.data === "SUCCESS") {
-        /*this.props.updateGlobalState({
+    request(
+      "http://127.0.0.1:5004/deleteskill",
+      { SkillId: skillId, amznSkillId: amznSkillId },
+      resp => {
+        console.log("skill response: ", resp);
+        if (resp.status === "SUCCESS") {
+          /*this.props.updateGlobalState({
           userData: {
             skills: this.state.skills.filter(s => s.SkillId !== skillId)
           },
           skillsLoaded: true
         });*/
-        this.setState({
-          skillsLoaded: true,
-          skills: this.state.skills.filter(s => s.SkillId !== skillId)
-        });
-      } else {
-        this.props.updateGlobalState({
-          skillsLoaded: true
-        });
-        this.setState({ skillsLoaded: true });
+          this.setState({
+            skillsLoaded: true,
+            skills: this.state.skills.filter(s => s.SkillId !== skillId)
+          });
+        } else {
+          this.props.updateGlobalState({
+            skillsLoaded: true
+          });
+          this.setState({ skillsLoaded: true });
+        }
       }
-    });
+    );
   };
 
   render() {
@@ -137,7 +141,9 @@ class ViewSkills extends React.Component {
                           </NavLink>{" "}
                           <a
                             className="skills-btn"
-                            onClick={() => this.deleteSkill(skill.SkillId)}
+                            onClick={() =>
+                              this.deleteSkill(skill.SkillId, skill.AMZ_SkillId)
+                            }
                           >
                             Delete
                           </a>

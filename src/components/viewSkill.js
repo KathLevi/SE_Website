@@ -179,9 +179,9 @@ export default class ViewSkill extends React.Component {
 
     let requestData = {
       userId: localStorage.getItem("userId"),
+      skillId: this.state.skill.SkillId,
       skillName: this.state.skill.Name,
-      amz_SkillId: 0,
-      status: "In development",
+      amz_SkillId: this.state.skill.AMZ_SkillId,
       invocationName: this.state.skill.Invoke,
       category: this.state.skill.Category,
       shortDescription: this.state.skill.ShortDesc,
@@ -232,7 +232,7 @@ export default class ViewSkill extends React.Component {
       console.log("Skill submit response: " + resp);
       console.log(resp);
       this.setState({ submitted: false });
-      if (resp.data && "error" in resp.data) {
+      if (resp.data && resp.data.error) {
         let violations = resp.data.error.violations.map(v => v.message);
         this.setState({
           errorMessage: resp.data.error.message,

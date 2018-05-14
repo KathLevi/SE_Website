@@ -104,7 +104,7 @@ def SubmitSkill():
     # Post skill to be submitteds data to Service1 MetaVoiceLambda
     # change config to 'aws' when testing on aws ec2
 
-    return resp
+    return jsonify(resp)
 
 @app.route('/getprofile', methods=['POST'])
 def GetProfile():
@@ -119,10 +119,11 @@ def GetProfile():
 def DeleteSkill():
     jsonData = request.get_json()
     id = jsonData['SkillId']
+
     print("Deleting Skill")
     _db = db(cs)
-    resp = _db.delete_skill(id)
-    return resp
+    resp = _db.delete_skill(id, jsonData['amznSkillId'])
+    return jsonify(resp)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
