@@ -528,7 +528,7 @@ class db:
 
             self.session.commit()
 
-            if amznSkillId:
+            if str(amznSkillId) != '0':
                 curr_dir = os.path.dirname(__file__)
                 script_path = os.path.join(curr_dir, "./cli/delete_skill.sh")
 

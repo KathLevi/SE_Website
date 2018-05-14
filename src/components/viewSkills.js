@@ -54,7 +54,7 @@ class ViewSkills extends React.Component {
       { SkillId: skillId, amznSkillId: amznSkillId },
       resp => {
         console.log("skill response: ", resp);
-        if (resp.status === "SUCCESS") {
+        if (resp.data.status === "SUCCESS") {
           /*this.props.updateGlobalState({
           userData: {
             skills: this.state.skills.filter(s => s.SkillId !== skillId)
