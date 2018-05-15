@@ -154,9 +154,9 @@ class db:
         if Limit:
             print("Limit!")
         else:
-            print "querying for skills..."
+            print("querying for skills...")
             SkillIds = self.session.query(Skills).filter_by(UserId=Id).all()
-            print "skills queried"
+            print("skills queried")
             for idx, skill in enumerate(SkillIds):
                 viewskills.append(skill.dict())
                 #viewskills[idx]['CreationDate'] = str(viewskills[idx]['CreationDate'])
@@ -166,7 +166,7 @@ class db:
                 #    viewskills[ idx ][ 'feeds' ] = self.get_skill_feeds ( skill.SkillId )
                 # else:
                 #    viewskills[ idx ][ 'intents' ] = self.get_skill_intent ( skill.SkillId )
-        print "returning skill list"
+        print("returning skill list")
         return viewskills
 
     def get_skill(self, SkillId):
@@ -182,7 +182,7 @@ class db:
                 else:
                     skill['Intents'] = self.get_skill_intent(SkillId)
         except Exception as e:
-            print 'Unexpected error in submit_resps: ' + str(e)
+            print( 'Unexpected error in submit_resps: ' + str(e))
 
         return skill
 
@@ -481,13 +481,13 @@ class db:
                 config.local + ':5001/post', json=js.dumps(json))
 
         resp = resp.json()
-        print resp
+        print(resp)
         if 'amznSkillId' in resp['resp']:
-            print 'updating skill...'
+            print('updating skill...')
             skill = self.session.query(Skills). filter_by(
                 SkillId=json.get('skillId')). one_or_none()
             if skill:
-                print resp['resp']['amznSkillId']
+                print(resp['resp']['amznSkillId'])
                 skill.AMZ_SkillId = resp['resp']['amznSkillId']
                 skill.Status = 'In development'
                 self.session.commit()
@@ -541,13 +541,13 @@ class db:
                 errcode = process.returncode
 
                 if err != "":
-                    print "err"
-                    print type(err)
-                    print err
+                    print("err")
+                    print(type(err))
+                    print(err)
                     return {'status': 'ASK_ERROR', 'resp': js.loads('\n'.join(err.splitlines()[2:]))}
                 else:
-                    print "out"
-                    print out
+                    print("out")
+                    print(out)
                     return {'status': 'SUCCESS', 'resp': out}
 
         else:

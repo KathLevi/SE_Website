@@ -52,7 +52,7 @@ def ViewSkills():
     _db = db(cs)
     resp = _db.attempt_get_skills(UserId=UserId,limit=None)
     _db.shutdown()
-    print "returning view skill response"
+    print("returning view skill response")
     return good_response(resp)
 
 @app.route('/getskill', methods=['POST'])
@@ -63,7 +63,7 @@ def GetSkill():
     _db = db(cs)
     resp = _db.get_skill(SkillId=SkillId)
     _db.shutdown()
-    print "returning get skill response"
+    print("returning get skill response")
     return good_response(resp)
 
 @app.route('/newskill', methods=['POST'])

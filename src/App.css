@@ -370,7 +370,9 @@ footer {
   color: var(--dark-grey);
   width: 100%;
   padding: 10px;
-  margin-top: 50px;
+  margin-top: 57px;
+  position: relative;
+  bottom: 0px;
 }
 .footer_current {
   text-decoration: underline;
