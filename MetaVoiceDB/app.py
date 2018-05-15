@@ -52,6 +52,18 @@ def ViewSkills():
     _db = db(cs)
     resp = _db.attempt_get_skills(UserId=UserId,limit=None)
     _db.shutdown()
+    print("returning view skill response")
+    return good_response(resp)
+
+@app.route('/getskill', methods=['POST'])
+def GetSkill():
+    json = request.get_json()
+    SkillId = json['SkillId']
+    print("Retrieving skill")
+    _db = db(cs)
+    resp = _db.get_skill(SkillId=SkillId)
+    _db.shutdown()
+    print("returning get skill response")
     return good_response(resp)
 
 @app.route('/newskill', methods=['POST'])
@@ -72,6 +84,15 @@ def EditSkill():
     _db.shutdown()
     return good_response(status)
 
+@app.route('/editprofile', methods=['POST'])
+def EditProfile():
+    jsonData = request.get_json()
+    print('Edit profile request')
+    _db = db(cs)
+    status = _db.edit_profile(jsonData)
+    _db.shutdown()
+    return good_response(status)
+
 @app.route('/submit', methods=['POST'])
 def SubmitSkill():
     jsonData = request.get_json()
@@ -82,11 +103,8 @@ def SubmitSkill():
 
     # Post skill to be submitteds data to Service1 MetaVoiceLambda
     # change config to 'aws' when testing on aws ec2
-    status = {
-        'status_code' : resp
-    }
 
-    return jsonify(jsonData)
+    return jsonify(resp)
 
 @app.route('/getprofile', methods=['POST'])
 def GetProfile():
@@ -100,13 +118,14 @@ def GetProfile():
 @app.route('/deleteskill', methods=['POST'])
 def DeleteSkill():
     jsonData = request.get_json()
-    id = js.loads(jsonData)['SkillId']
+    id = jsonData['SkillId']
+
     print("Deleting Skill")
     _db = db(cs)
-    resp = _db.delete_skill(id)
-    return good_response(resp)
+    resp = _db.delete_skill(id, jsonData['amznSkillId'])
+    return jsonify(resp)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
     port = int(os.environ.get('PORT', 5004))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True, threaded=True)

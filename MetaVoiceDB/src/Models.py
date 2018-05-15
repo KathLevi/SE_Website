@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
+import json
 
 Base = declarative_base()
 
@@ -47,7 +48,7 @@ class User_Profile(Base):
             'address' : self.Address,
             'premise' : self.Premise,
             'country' : self.Country,
-            'sity' : self.City,
+            'city' : self.City,
             'state' : self.State,
             'zipcode' : self.Zipcode,
             'cell' : self.Cell

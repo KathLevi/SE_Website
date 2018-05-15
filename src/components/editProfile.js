@@ -4,7 +4,7 @@ import Input from "./modules/input";
 import { request } from "../helpers/requests";
 import { PageHeader } from "react-bootstrap";
 
-export default class EditSkill extends React.Component {
+export default class EditProfile extends React.Component {
   constructor(props) {
     super(props);
     let skill =
@@ -52,7 +52,7 @@ export default class EditSkill extends React.Component {
             ))}
           </div>
         )}
-        <PageHeader>Edit skill</PageHeader>
+        <PageHeader>Edit Profile</PageHeader>
         {this.state.loaded ? (
           <div>
             <div className="edit-skill-container">

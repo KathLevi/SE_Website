@@ -15,7 +15,6 @@ html {
 }
 body {
   margin: 0;
-  padding: 0 0 100px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
@@ -65,7 +64,7 @@ h3 {
 .navbar-toggle {
   border-width: 0px;
 }
-.dropdown-menu > li > a{
+.dropdown-menu > li > a {
   padding: 15px 30px;
 }
 .navbar-nav > li > a {
@@ -189,34 +188,78 @@ video {
 }
 .registerBtn {
   margin-top: 25px;
+  background-color: white;
+  width: 100%;
+}
+.register-form {
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.register-form input {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.regCol1,
+.regCol2 {
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 80px;
+}
+.regCol2 {
+  float: right;
+}
+.regBreak {
+  height: 70px;
+}
+.doubleReg .col {
+  width: 45%;
+  display: inline-block;
+}
+.doubleReg .col input {
+  width: 100%;
+}
+.col2 {
+  float: right;
+}
+.RegTnC {
+  padding-top: 10px;
 }
 
 /*
  * PROFILE
  */
 .profile1 {
-  width: 30%;
+  width: 200px;
   display: inline-block;
   vertical-align: top;
   margin-right: 70px;
 }
 .profile1 img {
-  width: 100%;
+  width: 200px;
 }
 .profile2 {
-  width: 20%;
   display: inline-block;
   font-size: 20px;
   font-weight: bold;
   line-height: 5rem;
 }
 .profile3 {
-  width: 40%;
   display: inline-block;
   font-size: 20px;
   line-height: 5rem;
+  margin-left: 50px;
+  min-height: 450px;
 }
-
+.overflow-visible {
+  overflow: visible;
+}
+.addr {
+  line-height: 4rem;
+}
 /*
  * CREATE SKILL
  */
@@ -269,7 +312,8 @@ video {
 .select-skill-btn {
   position: absolute;
   bottom: 0;
-  margin-bottom: 5px;
+  right: 10px;
+  margin-bottom: 10px;
 }
 .select-skill-text {
   margin-bottom: 30px;
@@ -281,6 +325,7 @@ video {
 .skills-btn {
   color: var(--main-blue);
   padding: 0px 10px;
+  cursor: pointer;
 }
 .table {
   width: 100%;
@@ -307,7 +352,6 @@ td {
  * TEAM
  */
 
-
 /*
  * CONTACT
  */
@@ -326,9 +370,9 @@ footer {
   color: var(--dark-grey);
   width: 100%;
   padding: 10px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  margin-top: 57px;
+  position: relative;
+  bottom: 0px;
 }
 .footer_current {
   text-decoration: underline;
@@ -363,7 +407,15 @@ footer {
   margin-bottom: 10px;
   margin-top: 6px;
 }
-
+.footerCol svg {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+}
+.footerCol svg:hover {
+  color: var(--main-blue);
+  cursor: pointer;
+}
 
 /*
  * EXTRA CSS
@@ -380,6 +432,8 @@ footer {
 .spinner {
   width: 80px;
   height: 80px;
+
+  z-index: -1;
 
   border: 2px solid #f3f3f3;
   border-top: 3px solid var(--main-blue);
@@ -400,6 +454,8 @@ footer {
   width: 40px;
   height: 40px;
 
+  z-index: -1;
+
   border: 2px solid #f3f3f3;
   border-top: 3px solid var(--main-blue);
   border-radius: 100%;
@@ -413,6 +469,24 @@ footer {
 
   animation: spin 1s infinite linear;
 }
+
+.spinner-inline {
+  width: 30px;
+  height: 30px;
+
+  z-index: -1;
+
+  border: 2px solid #f3f3f3;
+  border-top: 3px solid var(--main-blue);
+  border-radius: 100%;
+
+  display: inline-block;
+  margin-left: 15px;
+  margin-bottom: 12px;
+
+  animation: spin 1s infinite linear;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -427,22 +501,6 @@ footer {
   stroke: #231f20;
   stroke-miterlimit: 10;
   stroke-width: 5px;
-}
-
-svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  width: 150px;
-  height: 150px;
-  display: block;
-
-  .cls-1 {
-    stroke: green;
-  }
 }
 .circle {
   stroke-dasharray: 700;
@@ -475,8 +533,9 @@ svg {
   border-bottom-color: rgb(238, 238, 238);
 }
 .page-container {
-  min-height: 584px !important;
+  min-height: 534px !important;
   overflow: hidden;
+  position: relative;
 }
 
 /*Tablet Adjustments*/
@@ -494,9 +553,6 @@ svg {
 
 /*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
-  body {
-    padding: 0 0 300px;    
-  }
   .home-section-1 {
     top: 100px;
     height: 50%;
@@ -508,20 +564,26 @@ svg {
     font-size: 25px;
   }
   .profile1 {
-    width: 100%;
+    width: 200px;
   }
   .profile1 img {
-    width: 100%;
+    width: 200px;
   }
   .profile2 {
-    width: 40%;
     font-size: 15px;
-    margin-left: 20px;        
+    margin-left: 10px;
   }
   .profile3 {
-    width: 50%;
     font-size: 17px;
-    margin-left: 10px;    
+    margin-left: 5px;
+  }
+  .regCol1,
+  .regCol2 {
+    width: 100%;
+    display: block;
+  }
+  .regBreak {
+    height: 0px;
   }
   .skill-template-item {
     min-width: 100%;
@@ -531,11 +593,108 @@ svg {
   }
   .select-skill-text {
     margin-bottom: 50px;
-  }  
+  }
   .footerCol {
     display: block;
     width: 100%;
     text-align: left;
     margin-bottom: 30px;
   }
+}
+
+.edit-skill-container {
+  padding-bottom: 30px;
+}
+
+.submit-skill-btn {
+  margin-bottom: 50px;
+}
+
+.disabled-btn {
+  cursor: default !important;
+  border-color: ;
+}
+
+.error-banner {
+  border: 1px solid red;
+  padding: 20px;
+  background-color: #fcefef;
+}
+
+.error-banner:focus {
+  outline: 0 !important;
+}
+
+.error-banner-title {
+  font-size: 16px;
+}
+
+.error-banner-violation {
+  margin-top: 12px;
+}
+
+.profile-table td,
+.profile-table th {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  font-size: 20px;
+}
+
+.view-skill-table td,
+.view-skill-table th {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  font-size: 16px;
+}
+
+tr {
+  width: 100%;
+}
+
+.profile-table {
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+}
+
+.edit-skill-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-skill-table-body {
+  width: 100%;
+  max-width: 500px;
+}
+
+.view-skill-table {
+  width: 80%;
+}
+
+.profile-container {
+  display: flex;
+  width: 100%;
+}
+
+.edit-input-field {
+}
+
+@media screen and (max-width: 686px) {
+  .profile-container {
+    display: inline-block;
+    max-width: 500px;
+  }
+
+  .profile-table {
+    margin-top: 22px;
+  }
+}
+
+.save-profile-btn {
+  margin-top: 30px;
 }

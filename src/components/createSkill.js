@@ -23,7 +23,6 @@ const CreateSkill = () => (
             >
               Choose skill
             </NavLink>
-            <p />
           </div>
         </div>
       </div>

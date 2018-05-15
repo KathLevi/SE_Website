@@ -1,21 +1,20 @@
 import React from "react";
 
-const Input = props => {
+const EditInput = props => {
   var classNames = " " + props.classes;
 
   return (
-    <div
-      className={"form-group " + (props.error ? "has-error" : "") + classNames}
-    >
+    <div className={" " + (props.error ? "has-error" : "") + classNames}>
       <label>{props.label}</label>
       <input
         name={props.name}
-        className="form-control"
+        className="edit-input-field"
         placeholder={props.placeholder}
         onChange={props.handleInputChange}
         onBlur={props.handleInputBlur}
         ref={props.setRef}
         type={props.type}
+        defaultValue={props.value}
       />
       <span className={"help-block " + (props.error ? "" : "hidden")}>
         {props.error}
@@ -24,4 +23,4 @@ const Input = props => {
   );
 };
 
-export default Input;
+export default EditInput;

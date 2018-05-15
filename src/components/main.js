@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./home";
 import Demo from "./demo";
 import Profile from "./profile";
+import EditProfile from "./editProfile";
 import Team from "./team";
 import Contact from "./contact";
 import SignIn from "./signIn";
@@ -12,6 +13,7 @@ import SimpleInteraction from "./simpleInteraction";
 import FlashBriefing from "./flashBriefing";
 import Register from "./register";
 import EditSkill from "./editSkill";
+import ViewSkill from "./viewSkill";
 import CreateSkillForm from "./createSkillForm";
 import Context from "../context";
 
@@ -37,7 +39,18 @@ const Main = () => {
           />
           <Route
             exact
-            path="/edit-skill/:skillName"
+            path="/edit-profile"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <EditProfile {...state} {...props} />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/edit-skill/:skillId"
             render={props =>
               !loggedIn ? (
                 <Redirect to="/" />
@@ -65,6 +78,18 @@ const Main = () => {
                 <Redirect to="/" />
               ) : (
                 <ViewSkills {...state} {...props} />
+              )
+            }
+          />
+
+          <Route
+            exact
+            path="/view-skill/:skillId"
+            render={props =>
+              !loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <ViewSkill {...state} {...props} />
               )
             }
           />

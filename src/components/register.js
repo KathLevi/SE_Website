@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Transition from "react-transition-group/Transition";
+import { PageHeader } from "react-bootstrap";
 
 class Register extends React.Component {
   constructor() {
@@ -29,7 +30,17 @@ class Register extends React.Component {
       userAns: "",
       answer: answer,
       loading: false,
-      responseError: ""
+      responseError: "",
+      fname: "",
+      lname: "",
+      company: "",
+      address: "",
+      presmise: "",
+      country: "",
+      city: "",
+      state: "",
+      zipcode: "",
+      cell: ""
     };
   }
 
@@ -108,44 +119,140 @@ class Register extends React.Component {
         <Transition timeout={this.duration} in={!this.state.loading}>
           {tState => (
             <form
-              className="form-signin"
+              className="register-form"
               style={{
                 ...this.defaultStyle,
                 ...this.transitionStyles[tState]
               }}
               onSubmit={this.submitForm}
             >
-              <h2 className="form-signin-heading">Register</h2>
+              <PageHeader>Register</PageHeader>
+              <div className="regCol1">
+                <h5>First Name</h5>
+                <input
+                  type="text"
+                  name="fname"
+                  onChange={this.handleInputChange}
+                  required=""
+                  autoFocus
+                />
+                <h5>Email</h5>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={this.handleInputChange}
+                  required=""
+                  autoFocus
+                />
+                <h5>Password</h5>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={this.handleInputChange}
+                  required=""
+                />
+                <h5>Address</h5>
+                <input
+                  type="text"
+                  name="address"
+                  onChange={this.handleInputChange}
+                  required=""
+                />
+                <div className="doubleReg">
+                  <div className="col">
+                    <h5>City</h5>
+                    <input
+                      type="text"
+                      name="city"
+                      onChange={this.handleInputChange}
+                      required=""
+                    />
+                  </div>
+                  <div className="col col2">
+                    <h5>State</h5>
+                    <input
+                      type="text"
+                      name="state"
+                      onChange={this.handleInputChange}
+                      required=""
+                    />
+                  </div>
+                </div>
+                <div className="doubleReg">
+                  <div className="col">
+                    <h5>Zipcode</h5>
+                    <input
+                      type="text"
+                      name="zipcode"
+                      onChange={this.handleInputChange}
+                      required=""
+                    />
+                  </div>
+                  <div className="col col2">
+                    <h5>Country</h5>
+                    <input
+                      type="text"
+                      name="country"
+                      onChange={this.handleInputChange}
+                      required=""
+                    />
+                  </div>
+                </div>
+              </div>
 
-              <h5 className="lbl">Email</h5>
-              <input
-                type="email"
-                className="form-control"
-                name="email"
-                onChange={this.handleInputChange}
-                required=""
-                autoFocus
-              />
+              <div className="regCol2">
+                <h5>Last Name</h5>
+                <input
+                  type="text"
+                  name="lname"
+                  onChange={this.handleInputChange}
+                  required=""
+                  autoFocus
+                />
 
-              <h5 className="lbl">Password</h5>
-              <input
-                type="password"
-                className="form-control"
-                name="password"
-                onChange={this.handleInputChange}
-                required=""
-              />
+                <h5>
+                  Retype Password<span id="noMatch">{this.state.error}</span>
+                </h5>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  onChange={this.handleInputChange}
+                  required=""
+                />
+                <h5>Cell Phone</h5>
+                <input
+                  type="text"
+                  name="cell"
+                  onChange={this.handleInputChange}
+                  required=""
+                />
+                <h5>Company</h5>
+                <input
+                  type="text"
+                  name="company"
+                  onChange={this.handleInputChange}
+                  required=""
+                />
+                <h5>Premise</h5>
+                <input
+                  type="text"
+                  name="premise"
+                  onChange={this.handleInputChange}
+                  required=""
+                />
 
-              <h5 className="lbl">
-                Retype Password<span id="noMatch">{this.state.error}</span>
-              </h5>
-              <input
-                type="password"
-                className="form-control"
-                name="confirmPassword"
-                onChange={this.handleInputChange}
-                required=""
-              />
+                <button
+                  className="btn btn-lg btn-block emptyBtn registerBtn"
+                  type="submit"
+                >
+                  Register
+                </button>
+
+                <div className="RegTnC">
+                  By registering you are agreeing to our{" "}
+                  <a href="#!TnC">Terms and Conditions</a>
+                </div>
+              </div>
 
               {/*
           <h3 className="capcha">
@@ -161,18 +268,6 @@ class Register extends React.Component {
               required=""
             />
         </h3>*/}
-
-              <button
-                className="btn btn-lg btn-block mainBtn registerBtn"
-                type="submit"
-              >
-                Register
-              </button>
-
-              <h6 className="TnC">
-                By registering you are agreeing to our{" "}
-                <a href="#!TnC">Terms and Conditions</a>
-              </h6>
             </form>
           )}
         </Transition>

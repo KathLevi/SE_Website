@@ -11,16 +11,22 @@ const inputs = [
   {
     name: "email",
     type: "text",
-    value: "test@example.com",
     label: "Email",
     placeholder: "",
-    errorMessage: "Email is required",
-    optional: false
+    validations: [
+      { message: "Email is required", validate: i => i === "" },
+      {
+        message: "Email must be valid",
+        validate: i => {
+          var re = /\S+@\S+\.\S+/;
+          return !re.test(i);
+        }
+      }
+    ]
   },
   {
     name: "platform",
     type: "radio",
-    value: "amazon",
     inputs: [
       { value: "amazon", label: "Amazon Alexa" },
       { value: "google", label: "Google Voice" }
@@ -29,92 +35,77 @@ const inputs = [
   {
     name: "fName",
     type: "text",
-    value: "Andrew",
     label: "First name",
     placeholder: "",
-    errorMessage: "Enter first name",
-    optional: false
+    validations: [{ message: "Enter first name", validate: i => i === "" }]
   },
   {
     name: "lName",
     type: "text",
-    value: "Peacock",
     label: "Last name",
     placeholder: "",
-    errorMessage: "Enter last name",
-    optional: false
+    validations: [{ message: "Enter last name", validate: i => i === "" }]
   },
   {
     name: "skillName",
     type: "text",
-    value: "MySkill2",
     label: "Skill name",
     placeholder: "",
-    errorMessage: "Provide a name for your skill",
-    optional: false
+    validations: [
+      {
+        message: "Please provide a name for your skill",
+        validate: i => i === ""
+      }
+    ]
   },
   {
     name: "invocation",
     type: "text",
-    value: "invocation phrase",
     label: "Invocation phrase",
     placeholder: "",
-    errorMessage: "Provide an invocation phrase",
-    optional: false
+    validations: [
+      { message: "Provide an invocation phrase", validate: i => i === "" }
+    ]
   },
   {
     name: "utterance1",
     type: "text",
-    value: "sample utterance",
     label: "Utterances",
     placeholder: "",
-    errorMessage: "Provide at least one utterance",
-    optional: false
+    validations: [
+      { message: "Provide at least one utterance", validate: i => i === "" }
+    ]
   },
   {
     name: "utterance2",
     type: "text",
-    value: "",
     label: "",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   },
   {
     name: "utterance3",
     type: "text",
-    value: "",
     label: "",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   },
   {
     name: "utterance4",
     type: "text",
-    value: "",
     label: "",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   },
   {
     name: "utterance5",
     type: "text",
-    value: "",
     label: "",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   },
   {
     name: "response",
     type: "text",
-    value: "response",
     label: "Response",
     placeholder: "",
-    errorMessage: "Provide a response",
-    optional: false
+    validations: [{ message: "Response is required", validate: i => i === "" }]
   },
   {
     name: "category",
@@ -126,29 +117,26 @@ const inputs = [
   {
     name: "skillDescShort",
     type: "text",
-    value: "short desc 1",
     label: "Short description",
     placeholder: "",
-    errorMessage: "Provide a short description",
-    optional: false
+    validations: [
+      { message: "Provide a short description", validate: i => i === "" }
+    ]
   },
   {
     name: "skillDescLong",
     type: "text",
-    value: "long desc 1",
     label: "Long description",
     placeholder: "",
-    errorMessage: "Provide a long description",
-    optional: true
+    validations: [
+      { message: "Provide a long description", validate: i => i === "" }
+    ]
   },
   {
     name: "keywords",
     type: "text",
-    value: "keywords",
     label: "Keywords",
-    placeholder: "",
-    errorMessage: "Invalid field",
-    optional: true
+    placeholder: ""
   }
 ];
 
@@ -167,13 +155,24 @@ class SimpleInteraction extends React.Component {
   };
 
   submitForm = e => {
-    let data = {
-      email: this.state.email.value,
-      template: "Alexa Interaction",
-      firstName: this.state.fName.value,
-      lastName: this.state.lName.value,
+    let keywords = this.state.keywords.value
+      .split(",")
+      .map(k => {
+        return k.trim();
+      })
+      .join(", ");
+
+    let requestData = {
+      userId: localStorage.getItem("userId"),
       skillName: this.state.skillName.value,
+      amz_SkillId: 0,
+      status: "Draft",
       invocationName: this.state.invocation.value,
+      category: this.state.category.value,
+      shortDescription: this.state.skillDescShort.value,
+      longDescription: this.state.skillDescLong.value,
+      keywords: keywords,
+      template: "Alexa Interaction",
       intents: [
         {
           intent: "intent",
@@ -188,52 +187,34 @@ class SimpleInteraction extends React.Component {
           response: this.state.response.value
         }
       ],
-      category: this.state.category.value,
-      shortDescription: this.state.skillDescShort.value,
-      longDescription: this.state.skillDescLong.value,
-      keywords: this.state.keywords.value.split(",").map(k => {
-        return k.trim();
-      })
+      firstName: this.state.fName.value,
+      lastName: this.state.lName.value
     };
 
-    console.log(data);
+    console.log("sending skill data: ", requestData);
 
-    /*request("http://127.0.0.1:5001/post", data, resp => {
-      this.setState({ modalMessage: String(resp) });
-      this.showModal(resp);
-      console.log(resp);
-    });*/
-
-    let requestData = {
-      userId: localStorage.getItem("userId"),
-      skillName: data.skillName,
-      amz_SkillId: 0,
-      status: "In development",
-      invocationName: data.invocationName,
-      category: data.category,
-      shortDescription: data.shortDescription,
-      longDescription: data.longDescription,
-      keywords: data.keywords,
-      template: data.template,
-      intents: data.intents,
-      firstName: data.firstName,
-      lastName: data.lastName
-    };
-
+    /* create new skill and push to db */
     request("http://127.0.0.1:5004/newskill", requestData, resp => {
       console.log(resp);
       if (resp.data && resp.data.status === "SUCCESS") {
         let updatedSkills = this.props.userData.skills;
+        //this.props.history.push("/view-skills");
         updatedSkills.push(resp.data.skill);
         this.props.updateGlobalState({ userData: { skills: updatedSkills } });
         requestData.SkillId = resp.data.SkillId;
         console.log(requestData);
-        request("http://127.0.0.1:5004/submit", requestData, resp => {
+        /*request("http://127.0.0.1:5004/submit", requestData, resp => {
           console.log("Skill submit response: " + resp);
           console.log(resp);
           if (resp.data && resp.data.status === "SUCCESS") {
-            this.props.history.push("/view-skills");
+            //this.props.history.push("/view-skills");
+            console.log("SUCCESS: Skill submitted...", resp.data);
           }
+        });*/
+      } else {
+        this.setState({
+          showModal: true,
+          modalMessage: "Server error: Please wait a few minutes and try again"
         });
       }
     });
@@ -251,10 +232,12 @@ class SimpleInteraction extends React.Component {
     return (
       <div className="page-container">
         <Form
+          editForm={this.props.saveSkill}
           submitForm={this.submitForm}
-          label={"Simple Interaction Form"}
+          label={this.props.title || "Simple Interaction Form"}
           updateParentState={this.updateStateFromChild}
           inputs={inputs}
+          submitButtonLabel={"Save skill"}
         />
 
         <ResponseModal
