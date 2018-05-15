@@ -3,9 +3,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import datetime
 import requests
-<<<<<<< HEAD
-from .Config import Config
-=======
 import subprocess
 import sys
 import os
@@ -14,7 +11,6 @@ from src.helpers.jsonHelper import jsonHelper
 from src.Models import User, User_Profile, Base, Skills, Response, Utterances, Feed, Intent
 from src.Config import Config
 
->>>>>>> 9732303ba6061821d40100a8b6d02ece8847104c
 
 # TODO
 # Split some of this up. There can be 'helper' classes that modulate these tasks more
