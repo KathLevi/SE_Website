@@ -8,6 +8,7 @@ def check():
     print(str(datetime.datetime.now()))
     return
 
+# http://apscheduler.readthedocs.io/en/latest/index.html
 scheduler = BackgroundScheduler()
 job = scheduler.add_job(check,'interval',minutes=2)
 
