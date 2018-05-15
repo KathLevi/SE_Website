@@ -698,3 +698,35 @@ tr {
 .save-profile-btn {
   margin-top: 30px;
 }
+
+.utterance-group {
+  padding: 20px;
+  padding-top: 35px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: #f2f2f2;
+}
+
+.add-utterances-btn {
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.add-intent-btn {
+  cursor: pointer;
+}
+
+.intent {
+  margin-bottom: 20px;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.utterance-input {
+  margin-top: -15px;
+}
+
+.utterance-group label {
+  margin-bottom: 20px;
+}

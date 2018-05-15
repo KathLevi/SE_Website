@@ -39,7 +39,14 @@ class Profile extends React.Component {
         type: "text",
         placeholder: "",
         validations: [
-          { message: "Field can't be empty", validate: i => i === "" }
+          { message: "Email is required", validate: i => i === "" },
+          {
+            message: "Email must be valid",
+            validate: i => {
+              var re = /\S+@\S+\.\S+/;
+              return !re.test(i);
+            }
+          }
         ]
       },
       {
