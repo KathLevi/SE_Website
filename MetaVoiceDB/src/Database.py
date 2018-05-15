@@ -1,5 +1,5 @@
 from flask import jsonify
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, or_
 from sqlalchemy.orm import sessionmaker
 import datetime
 import requests
@@ -559,3 +559,43 @@ class db:
         # Returns number of rows affected, should be more than zero
 
         return {'status': "SUCCESS"}
+    
+    # updates a list of skills
+    # updates AMZ_SkillId
+    # updates Status
+    def update_statuses(self,jsonData):
+        resp = {}
+        jsonData = js.loads(jsonData)
+        
+        updates = jsonData.get('updates',None)
+        
+        if updates:
+            try:
+                for skill in updates:
+                    q = self.session.query(Skills).filter_by(SkillId = skill.get('SkillId')).one_or_none()
+                    if q:
+                        q.Status = skill.get('status')
+                        q.AMZ_SkillId = skill.get('amznSkillId')
+                self.session.commit()
+            except Exception as e:
+                resp['status'] = 'FAILURE'
+                resp['error'] = str(e)
+        else:
+            print("Nothing to update")
+        
+        if resp.get('error', None) == None:
+            resp['status'] = 'SUCCESS'
+
+        return resp   
+
+    def get_unfinished_skills(self):
+
+        # TODO update with actual status values for confirmed/denied
+        q = self.session.query(Skills).filter(or_(Skills.Status != 'Approved', Skills.Status != 'Denied')).all()
+        ids = []
+        status = {}
+        
+        for skill in q:
+            ids.append((skill.SkillId,skill.AMZ_SkillId))
+        
+        return ids

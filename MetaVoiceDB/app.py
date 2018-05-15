@@ -125,6 +125,24 @@ def DeleteSkill():
     resp = _db.delete_skill(id, jsonData['amznSkillId'])
     return jsonify(resp)
 
+@app.route('/updatestatus', methods=['POST'])
+def UpdateStatus():
+    jsonData = request.get_json()
+
+    print("Updating Skills Status'")
+    _db = db(cs)
+    resp = _db.update_statuses(jsonData)
+
+    return good_response(resp)
+
+@app.route('/getunfinishedskills', methods=['POST'])
+def GetUnfinishedSkills():
+    print('Getting unfinished skills')
+    _db = db(cs)
+    resp = _db.get_unfinished_skills()
+    
+    return good_response(resp)
+
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
     port = int(os.environ.get('PORT', 5004))

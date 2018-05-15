@@ -4,14 +4,13 @@ import datetime
 import os
 
 def check():
-    print("Job run")
+    print("Starting Job")
     print(str(datetime.datetime.now()))
     return
 
 # http://apscheduler.readthedocs.io/en/latest/index.html
 scheduler = BackgroundScheduler()
 job = scheduler.add_job(check,'interval',minutes=2)
-
 
 if __name__ == '__main__':
     scheduler.start()
