@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.js";
 import { NavLink, Link } from "react-router-dom";
 import { PageHeader } from "react-bootstrap";
 import axios from "axios";
@@ -23,7 +24,7 @@ class ViewSkills extends React.Component {
 
   componentDidMount() {
     axios
-      .post("http://127.0.0.1:5004/viewskills", {
+      .post(config.local + ":5004/viewskills", {
         UserId: localStorage.getItem("userId")
       })
       .then(resp => {
@@ -50,7 +51,7 @@ class ViewSkills extends React.Component {
     this.setState({ skillsLoaded: false });
     console.log("skillId: ", skillId);
     request(
-      "http://127.0.0.1:5004/deleteskill",
+      config.local + ":5004/deleteskill",
       { SkillId: skillId, amznSkillId: amznSkillId },
       resp => {
         console.log("skill response: ", resp);

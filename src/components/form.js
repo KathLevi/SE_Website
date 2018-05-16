@@ -51,7 +51,7 @@ class Form extends React.Component {
 
   componentDidMount = () => {
     if (this.props.inputs) {
-      this.state[this.props.inputs[1].name].ref.current.focus();
+      this.state[this.props.inputs[0].name].ref.current.focus();
     }
   };
 

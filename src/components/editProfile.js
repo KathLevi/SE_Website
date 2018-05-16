@@ -3,6 +3,7 @@ import SimpleInteraction from "./simpleInteraction";
 import Input from "./modules/input";
 import { request } from "../helpers/requests";
 import { PageHeader } from "react-bootstrap";
+import config from "../config.js";
 
 export default class EditProfile extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class EditProfile extends React.Component {
       )[0] || {};
     console.log(skill);
     request(
-      "http://127.0.0.1:5004/getskill",
+      config.local + ":5004/getskill",
       { SkillId: props.match.params.skillId },
       resp => {
         console.log("skill response: ", resp);

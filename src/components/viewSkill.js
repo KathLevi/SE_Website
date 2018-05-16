@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.js";
 import { toWords } from "number-to-words";
 import SimpleInteraction from "./simpleInteraction";
 import { request } from "../helpers/requests";
@@ -131,7 +132,7 @@ export default class ViewSkill extends React.Component {
 
   requestSkill = () => {
     request(
-      "http://127.0.0.1:5004/getskill",
+      config.local + ":5004/getskill",
       { SkillId: this.props.match.params.skillId },
       resp => {
         let updateObj = {};
@@ -171,7 +172,7 @@ export default class ViewSkill extends React.Component {
     this.requestSkill();
     if (!this.props.data) {
       request(
-        "http://127.0.0.1:5004/getprofile",
+        config.local + ":5004/getprofile",
         {
           userId: localStorage.getItem("userId")
         },
@@ -226,7 +227,7 @@ export default class ViewSkill extends React.Component {
 
     console.log("requestData", requestData);
 
-    request("http://127.0.0.1:5004/submit", requestData, resp => {
+    request(config.local + ":5004/submit", requestData, resp => {
       console.log("Skill submit response: " + resp);
       console.log(resp);
       this.setState({ submitted: false });
@@ -369,14 +370,14 @@ export default class ViewSkill extends React.Component {
     this.setState({ loaded: false });
 
     /* create new skill and push to db */
-    request("http://127.0.0.1:5004/editskill", requestData, resp => {
+    request(config.local + ":5004/editskill", requestData, resp => {
       console.log(resp);
       if (resp.data && resp.data.status === "SUCCESS") {
         let updatedSkills = this.props.userData.skills;
         //this.props.history.push("/view-skills");
         updatedSkills.push(resp.data.skill);
         this.props.updateGlobalState({ userData: { skills: updatedSkills } });
-        /*request("http://127.0.0.1:5004/submit", requestData, resp => {
+        /*request(config.local + ":5004/submit", requestData, resp => {
           console.log("Skill submit response: " + resp);
           console.log(resp);
           if (resp.data && resp.data.status === "SUCCESS") {

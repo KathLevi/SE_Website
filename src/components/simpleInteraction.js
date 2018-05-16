@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.js";
 import Form from "./form";
 import ResponseModal from "./modules/responseModal";
 import Input from "./modules/input";
@@ -9,14 +10,6 @@ import { toWords } from "number-to-words";
 
 // input fields
 const inputs = [
-  {
-    name: "platform",
-    type: "radio",
-    inputs: [
-      { value: "amazon", label: "Amazon Alexa" },
-      { value: "google", label: "Google Voice" }
-    ]
-  },
   {
     name: "skillName",
     type: "text",
@@ -91,7 +84,7 @@ class SimpleInteraction extends React.Component {
   componentDidMount = () => {
     if (!this.props.data) {
       request(
-        "http://127.0.0.1:5004/getprofile",
+        config.local + ":5004/getprofile",
         {
           userId: localStorage.getItem("userId")
         },
@@ -148,7 +141,7 @@ class SimpleInteraction extends React.Component {
     console.log("sending skill data: ", requestData);
 
     /* create new skill and push to db */
-    request("http://127.0.0.1:5004/newskill", requestData, resp => {
+    request(config.local + ":5004/newskill", requestData, resp => {
       console.log(resp);
       if (resp.data && resp.data.status === "SUCCESS") {
         let updatedSkills = this.props.userData.skills;
@@ -157,7 +150,7 @@ class SimpleInteraction extends React.Component {
         this.props.updateGlobalState({ userData: { skills: updatedSkills } });
         requestData.SkillId = resp.data.SkillId;
         console.log(requestData);
-        /*request("http://127.0.0.1:5004/submit", requestData, resp => {
+        /*request(config.local + ":5004/submit", requestData, resp => {
           console.log("Skill submit response: " + resp);
           console.log(resp);
           if (resp.data && resp.data.status === "SUCCESS") {

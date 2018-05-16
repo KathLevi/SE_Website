@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.js";
 import { request } from "../helpers/requests.js";
 import ResponseModal from "./modules/responseModal";
 import {
@@ -159,13 +160,13 @@ class FlashBriefing extends React.Component {
 
     console.log(data);
 
-    /*request("http://127.0.0.1:5003/post", data, resp => {
+    /*request(config.local + ":5003/post", data, resp => {
       this.setState({ modalMessage: String(resp) });
       this.showModal(resp);
     });*/
 
     request(
-      "http://127.0.0.1:5004/newskill",
+      config.local + ":5004/newskill",
       {
         userId: localStorage.getItem("userId"),
         skillName: data.skillName,

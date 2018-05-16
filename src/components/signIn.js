@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Transition from "react-transition-group/Transition";
@@ -87,7 +88,7 @@ class SignIn extends React.Component {
     };
 
     axios
-      .post("http://127.0.0.1:5004/login", data)
+      .post(config.local + ":5004/login", data)
       .then(resp => {
         let responseError = "";
         if ("error" in resp.data) {
@@ -104,7 +105,7 @@ class SignIn extends React.Component {
           window.localStorage.setItem("userId", resp.data.userId);
           this.props.history.replace("/profile");
           axios
-            .post("http://127.0.0.1:5004/viewskills", {
+            .post(config.local + ":5004/viewskills", {
               UserId: resp.data.userId
             })
             .then(resp => {

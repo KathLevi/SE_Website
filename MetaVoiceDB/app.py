@@ -3,6 +3,9 @@ from flask_cors import CORS
 from src.Database import db
 from src.Config import Config
 import json as js
+from apscheduler.schedulers.background import BackgroundScheduler
+import time
+import datetime
 import os
 import requests
 
@@ -140,10 +143,25 @@ def GetUnfinishedSkills():
     print('Getting unfinished skills')
     _db = db(cs)
     resp = _db.get_unfinished_skills()
-    
+
     return good_response(resp)
 
+def check():
+    print("running job...")
+    requests.post('http://127.0.0.1:5004/checkstatuses', json=js.dumps(json))
+    return
+
+# http://apscheduler.readthedocs.io/en/latest/index.html
+scheduler = BackgroundScheduler()
+#job = scheduler.add_job(check,'interval',seconds=10)
+
 if __name__ == '__main__':
+    scheduler.start()
+
+    # found here
+    # https://stackoverflow.com/questions/29223222/how-do-i-schedule-an-interval-job-with-apscheduler
+    print ( 'Press Ctrl+{0} to exit'.format ( 'Break' if os.name == 'nt' else 'C' ) )
+
     # Bind to PORT if defined, otherwise default to 5004.
     port = int(os.environ.get('PORT', 5004))
-    app.run(host='0.0.0.0', port=port, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False, threaded=True)

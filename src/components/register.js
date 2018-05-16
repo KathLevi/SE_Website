@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.js";
 import axios from "axios";
 import Transition from "react-transition-group/Transition";
 import { PageHeader } from "react-bootstrap";
@@ -65,7 +66,7 @@ class Register extends React.Component {
       this.setState({ loading: true });
 
       axios
-        .post("http://127.0.0.1:5004/register", data)
+        .post(config.local + ":5004/register", data)
         .then(resp => {
           let responseError = "";
           if (resp.data.status === "USER_ALREADY_EXISTS_ERROR") {
