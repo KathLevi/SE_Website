@@ -674,6 +674,7 @@ tr {
 
 .view-skill-table {
   width: 80%;
+  border-collapse: collapse;
 }
 
 .profile-container {
@@ -729,4 +730,9 @@ tr {
 
 .utterance-group label {
   margin-bottom: 20px;
+}
+
+.table-intent {
+  background-color: #efefef;
+  width: 100%;
 }

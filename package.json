@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
+    "number-to-words": "^1.2.3",
     "react": "^16.0.0",
     "react-app-rewire-hot-loader": "^1.0.1",
     "react-bootstrap": "^0.32.1",

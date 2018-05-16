@@ -5,6 +5,7 @@ import Input from "./modules/input";
 import Select from "./modules/select";
 import { request } from "../helpers/requests.js";
 import { categoryOptions } from "../constants/selectFieldOptions.js";
+import { toWords } from "number-to-words";
 
 // input fields
 const inputs = [
@@ -130,7 +131,11 @@ class SimpleInteraction extends React.Component {
       keywords: keywords,
       template: "Alexa Interaction",
       intents: [...Array(this.state.intentNum).keys()].map(i => ({
-        intent: "intent " + i,
+        intent:
+          "intent_" +
+          toWords(i)
+            .split(" ")
+            .join(""),
         utterances: [...Array(this.state["utterance" + i + "Num"]).keys()]
           .map(j => this.state["utterance" + j + "_" + i].value)
           .filter(x => x),
@@ -143,7 +148,7 @@ class SimpleInteraction extends React.Component {
     console.log("sending skill data: ", requestData);
 
     /* create new skill and push to db */
-    /*request("http://127.0.0.1:5004/newskill", requestData, resp => {
+    request("http://127.0.0.1:5004/newskill", requestData, resp => {
       console.log(resp);
       if (resp.data && resp.data.status === "SUCCESS") {
         let updatedSkills = this.props.userData.skills;
@@ -160,13 +165,13 @@ class SimpleInteraction extends React.Component {
             console.log("SUCCESS: Skill submitted...", resp.data);
           }
         });*/
-    /*} else {
+      } else {
         this.setState({
           showModal: true,
           modalMessage: "Server error: Please wait a few minutes and try again"
         });
       }
-    });*/
+    });
   };
 
   showModal = () => {
