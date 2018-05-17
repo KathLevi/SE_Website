@@ -345,9 +345,6 @@ td {
   text-align: center;
   white-space: nowrap;
 }
-.view-skills-table {
-  overflow-x: scroll;
-}
 
 /*
  * TEAM
@@ -554,6 +551,9 @@ footer {
 
 /*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
+  body {
+    padding: 0 0 350px;    
+  }
   .home-section-1 {
     top: 100px;
     height: 50%;
@@ -565,10 +565,10 @@ footer {
     font-size: 25px;
   }
   .profile1 {
-    width: 200px;
+    width: 100%;
   }
   .profile1 img {
-    width: 200px;
+    width: 100%;
   }
   .profile2 {
     font-size: 15px;
@@ -594,6 +594,9 @@ footer {
   }
   .select-skill-text {
     margin-bottom: 50px;
+  }
+  .view-skills-table {
+    overflow-x: scroll;
   }
   .footerCol {
     display: block;
