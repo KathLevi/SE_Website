@@ -15,6 +15,7 @@ html {
 }
 body {
   margin: 0;
+  padding: 0 0 100px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
@@ -344,9 +345,6 @@ td {
   text-align: center;
   white-space: nowrap;
 }
-.view-skills-table {
-  overflow-x: scroll;
-}
 
 /*
  * TEAM
@@ -371,7 +369,7 @@ footer {
   width: 100%;
   padding: 10px;
   margin-top: 57px;
-  position: relative;
+  position: absolute;
   bottom: 0px;
 }
 .footer_current {
@@ -553,6 +551,9 @@ footer {
 
 /*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
+  body {
+    padding: 0 0 350px;    
+  }
   .home-section-1 {
     top: 100px;
     height: 50%;
@@ -564,10 +565,10 @@ footer {
     font-size: 25px;
   }
   .profile1 {
-    width: 200px;
+    width: 100%;
   }
   .profile1 img {
-    width: 200px;
+    width: 100%;
   }
   .profile2 {
     font-size: 15px;
@@ -593,6 +594,9 @@ footer {
   }
   .select-skill-text {
     margin-bottom: 50px;
+  }
+  .view-skills-table {
+    overflow-x: scroll;
   }
   .footerCol {
     display: block;
@@ -674,6 +678,7 @@ tr {
 
 .view-skill-table {
   width: 80%;
+  border-collapse: collapse;
 }
 
 .profile-container {
@@ -697,4 +702,41 @@ tr {
 
 .save-profile-btn {
   margin-top: 30px;
+}
+
+.utterance-group {
+  padding: 20px;
+  padding-top: 35px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: #f2f2f2;
+}
+
+.add-utterances-btn {
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.add-intent-btn {
+  cursor: pointer;
+}
+
+.intent {
+  margin-bottom: 20px;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.utterance-input {
+  margin-top: -15px;
+}
+
+.utterance-group label {
+  margin-bottom: 20px;
+}
+
+.table-intent {
+  background-color: #efefef;
+  width: 100%;
 }

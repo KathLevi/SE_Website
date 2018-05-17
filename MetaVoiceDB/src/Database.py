@@ -204,7 +204,7 @@ class db:
             if utters:
                 for ut in utters:
                     self.session.add(self.jsonHelper.build_utter(
-                        utters[ut], SkillId, IntentId))
+                        ut, SkillId, IntentId))
         except Exception as e:
             print('Unexpected error in submit_uttrs: ' + str(e))
         return
@@ -237,7 +237,7 @@ class db:
                 self.submit_feeds(json, s.SkillId)
             else:
                 # Need to restructure to work with Intents
-                self.submit_new_intent(json, s.SkillId)
+                self.submit_new_intents(json, s.SkillId)
 
             self.session.commit()
             response['SkillId'] = s.SkillId
@@ -410,20 +410,34 @@ class db:
 
     # creates a new intent, submits to the DB and then maps the responses and utterances to that intent
     # TODO Modify to allow for multiple intents
-    def submit_new_intent(self, json, id):
-        IntentId = self.submit_intent(json, id)
-        try:
-            self.submit_uttrs(json['intents'][0], id, IntentId)
-            self.submit_resps(json['intents'][0], id, IntentId)
+    def submit_new_intents(self, json, id):
 
-        except Exception as e:
-            print("Unexpencted error in submit_intent: " + str(e))
+        for intent in json['intents']:
+            i = Intent(
+                SkillId=id,
+                Intent=intent.get('intent', 'default intent')
+            )
+            try:
+                self.session.add(i)
+                self.session.flush()
+                self.session.refresh(i)
+
+            except Exception as e:
+                print('Unexpected error in submit_intent: ' + str(e))
+
+            try:
+                self.submit_uttrs(intent, id, i.IntentId)
+                self.submit_resps(intent, id, i.IntentId)
+
+            except Exception as e:
+                print("Unexpencted error in submit_new_intents: " + str(e))
 
         return
 
     # Function that builds and submits a new intent
     # returns the new intents id
     def submit_intent(self, json, id):
+
         i = Intent(
             SkillId=id,
             Intent=json['intents'][0].get('intent', 'default intent')
@@ -433,7 +447,6 @@ class db:
             self.session.flush()
             self.session.refresh(i)
 
-            return i.IntentId
         except Exception as e:
             print('Unexpected error in submit_intent: ' + str(e))
 
@@ -559,16 +572,16 @@ class db:
         # Returns number of rows affected, should be more than zero
 
         return {'status': "SUCCESS"}
-    
+
     # updates a list of skills
     # updates AMZ_SkillId
     # updates Status
     def update_statuses(self,jsonData):
         resp = {}
         jsonData = js.loads(jsonData)
-        
+
         updates = jsonData.get('updates',None)
-        
+
         if updates:
             try:
                 for skill in updates:
@@ -582,11 +595,11 @@ class db:
                 resp['error'] = str(e)
         else:
             print("Nothing to update")
-        
+
         if resp.get('error', None) == None:
             resp['status'] = 'SUCCESS'
 
-        return resp   
+        return resp
 
     # Gets list of all skills where their Status is either 'Approved' or 'Denied'
     def get_unfinished_skills(self):
@@ -595,9 +608,10 @@ class db:
         q = self.session.query(Skills).filter(or_(Skills.Status != 'Approved', Skills.Status != 'Denied')).all()
         ids = []
         status = {}
-        
+
         for skill in q:
             ids.append((skill.SkillId,skill.AMZ_SkillId))
+<<<<<<< HEAD
         
         return ids
 
@@ -624,3 +638,7 @@ class db:
             resp['status'] = 'FAILURE'
 
         return resp
+=======
+
+        return ids
+>>>>>>> 65ee5c3f7d3cdfe75bfa4f437c6df66a05b90e3a

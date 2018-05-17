@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.js";
 import SimpleInteraction from "./simpleInteraction";
 import Input from "./modules/input";
 import { request } from "../helpers/requests";
@@ -13,7 +14,7 @@ export default class EditSkill extends React.Component {
       )[0] || {};
     console.log(skill);
     request(
-      "http://127.0.0.1:5004/getskill",
+      config.local + ":5004/getskill",
       { SkillId: props.match.params.skillId },
       resp => {
         console.log("skill response: ", resp);
@@ -90,7 +91,7 @@ export default class EditSkill extends React.Component {
 
             <button
               className={
-                "btn btn-primary submit-skill-btn" +
+                "btn btn-primary submit-skill-btn emptyBtn" +
                 (this.state.submitted ? " disabled disabled-btn" : "")
               }
               onClick={this.saveSkill}

@@ -1,4 +1,5 @@
 import React from "react";
+import config from "../config.js";
 import { PageHeader } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import profile from "../assets/profile.jpg";
@@ -39,7 +40,14 @@ class Profile extends React.Component {
         type: "text",
         placeholder: "",
         validations: [
-          { message: "Field can't be empty", validate: i => i === "" }
+          { message: "Email is required", validate: i => i === "" },
+          {
+            message: "Email must be valid",
+            validate: i => {
+              var re = /\S+@\S+\.\S+/;
+              return !re.test(i);
+            }
+          }
         ]
       },
       {
@@ -119,7 +127,7 @@ class Profile extends React.Component {
       };
     } else {
       request(
-        "http://127.0.0.1:5004/getprofile",
+        config.local + ":5004/getprofile",
         {
           userId: localStorage.getItem("userId")
         },
@@ -251,12 +259,12 @@ class Profile extends React.Component {
     console.log("sending profile data: ", requestData);
 
     /* create new skill and push to db */
-    request("http://127.0.0.1:5004/editprofile", requestData, resp => {
+    request(config.local + ":5004/editprofile", requestData, resp => {
       console.log(resp);
       if (resp.data && resp.data.status === "SUCCESS") {
         console.log("SUCCESS", resp.data);
         request(
-          "http://127.0.0.1:5004/getprofile",
+          config.local + ":5004/getprofile",
           {
             userId: localStorage.getItem("userId")
           },
@@ -352,7 +360,7 @@ class Profile extends React.Component {
             {this.state.isEditing && (
               <button
                 className={
-                  "btn btn-primary save-profile-btn" +
+                  "btn btn-primary save-profile-btn emptyBtn" +
                   (this.state.submitted ? " disabled disabled-btn" : "")
                 }
                 onClick={this.saveProfile}

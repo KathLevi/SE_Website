@@ -1,51 +1,15 @@
 import React from "react";
+import config from "../config.js";
 import Form from "./form";
 import ResponseModal from "./modules/responseModal";
 import Input from "./modules/input";
 import Select from "./modules/select";
 import { request } from "../helpers/requests.js";
 import { categoryOptions } from "../constants/selectFieldOptions.js";
+import { toWords } from "number-to-words";
 
 // input fields
 const inputs = [
-  {
-    name: "email",
-    type: "text",
-    label: "Email",
-    placeholder: "",
-    validations: [
-      { message: "Email is required", validate: i => i === "" },
-      {
-        message: "Email must be valid",
-        validate: i => {
-          var re = /\S+@\S+\.\S+/;
-          return !re.test(i);
-        }
-      }
-    ]
-  },
-  {
-    name: "platform",
-    type: "radio",
-    inputs: [
-      { value: "amazon", label: "Amazon Alexa" },
-      { value: "google", label: "Google Voice" }
-    ]
-  },
-  {
-    name: "fName",
-    type: "text",
-    label: "First name",
-    placeholder: "",
-    validations: [{ message: "Enter first name", validate: i => i === "" }]
-  },
-  {
-    name: "lName",
-    type: "text",
-    label: "Last name",
-    placeholder: "",
-    validations: [{ message: "Enter last name", validate: i => i === "" }]
-  },
   {
     name: "skillName",
     type: "text",
@@ -68,44 +32,11 @@ const inputs = [
     ]
   },
   {
-    name: "utterance1",
-    type: "text",
-    label: "Utterances",
+    name: "intentGroup",
+    type: "intentGroup",
+    label: "intents",
     placeholder: "",
-    validations: [
-      { message: "Provide at least one utterance", validate: i => i === "" }
-    ]
-  },
-  {
-    name: "utterance2",
-    type: "text",
-    label: "",
-    placeholder: ""
-  },
-  {
-    name: "utterance3",
-    type: "text",
-    label: "",
-    placeholder: ""
-  },
-  {
-    name: "utterance4",
-    type: "text",
-    label: "",
-    placeholder: ""
-  },
-  {
-    name: "utterance5",
-    type: "text",
-    label: "",
-    placeholder: ""
-  },
-  {
-    name: "response",
-    type: "text",
-    label: "Response",
-    placeholder: "",
-    validations: [{ message: "Response is required", validate: i => i === "" }]
+    validations: []
   },
   {
     name: "category",
@@ -150,11 +81,30 @@ class SimpleInteraction extends React.Component {
     };
   }
 
+  componentDidMount = () => {
+    if (!this.props.data) {
+      request(
+        config.local + ":5004/getprofile",
+        {
+          userId: localStorage.getItem("userId")
+        },
+        resp => {
+          console.log(resp);
+          this.props.updateGlobalState({ data: { ...resp.data } });
+        }
+      );
+    }
+  };
+
   updateStateFromChild = state => {
     this.setState({ ...state });
   };
 
   submitForm = e => {
+    if (!this.props.data) {
+      return;
+    }
+
     let keywords = this.state.keywords.value
       .split(",")
       .map(k => {
@@ -173,28 +123,25 @@ class SimpleInteraction extends React.Component {
       longDescription: this.state.skillDescLong.value,
       keywords: keywords,
       template: "Alexa Interaction",
-      intents: [
-        {
-          intent: "intent",
-          utterances: {
-            "1": this.state.utterance1.value,
-            "2": this.state.utterance2.value,
-            "3": this.state.utterance3.value,
-            "4": this.state.utterance4.value,
-            "5": this.state.utterance5.value,
-            "6": ""
-          },
-          response: this.state.response.value
-        }
-      ],
-      firstName: this.state.fName.value,
-      lastName: this.state.lName.value
+      intents: [...Array(this.state.intentNum).keys()].map(i => ({
+        intent:
+          "intent_" +
+          toWords(i)
+            .split(" ")
+            .join(""),
+        utterances: [...Array(this.state["utterance" + i + "Num"]).keys()]
+          .map(j => this.state["utterance" + j + "_" + i].value)
+          .filter(x => x),
+        response: this.state["response" + i].value
+      })),
+      firstName: this.props.data.firstName,
+      lastName: this.props.data.lastName
     };
 
     console.log("sending skill data: ", requestData);
 
     /* create new skill and push to db */
-    request("http://127.0.0.1:5004/newskill", requestData, resp => {
+    request(config.local + ":5004/newskill", requestData, resp => {
       console.log(resp);
       if (resp.data && resp.data.status === "SUCCESS") {
         let updatedSkills = this.props.userData.skills;
@@ -203,7 +150,7 @@ class SimpleInteraction extends React.Component {
         this.props.updateGlobalState({ userData: { skills: updatedSkills } });
         requestData.SkillId = resp.data.SkillId;
         console.log(requestData);
-        /*request("http://127.0.0.1:5004/submit", requestData, resp => {
+        /*request(config.local + ":5004/submit", requestData, resp => {
           console.log("Skill submit response: " + resp);
           console.log(resp);
           if (resp.data && resp.data.status === "SUCCESS") {

@@ -1,4 +1,6 @@
 import React from "react";
+import config from "../config.js";
+import { toWords } from "number-to-words";
 import SimpleInteraction from "./simpleInteraction";
 import { request } from "../helpers/requests";
 import { PageHeader } from "react-bootstrap";
@@ -130,7 +132,7 @@ export default class ViewSkill extends React.Component {
 
   requestSkill = () => {
     request(
-      "http://127.0.0.1:5004/getskill",
+      config.local + ":5004/getskill",
       { SkillId: this.props.match.params.skillId },
       resp => {
         let updateObj = {};
@@ -168,6 +170,18 @@ export default class ViewSkill extends React.Component {
 
   componentDidMount = () => {
     this.requestSkill();
+    if (!this.props.data) {
+      request(
+        config.local + ":5004/getprofile",
+        {
+          userId: localStorage.getItem("userId")
+        },
+        resp => {
+          console.log(resp);
+          this.props.updateGlobalState({ data: { ...resp.data } });
+        }
+      );
+    }
   };
 
   submitSkill = () => {
@@ -188,37 +202,22 @@ export default class ViewSkill extends React.Component {
       longDescription: this.state.skill.LongDesk,
       keywords: [this.state.skill.Keywords],
       template: "Alexa Interaction",
-      intents: [
-        {
-          intent: "intent",
-          utterances: {
-            "1":
-              (this.state.skill.Utterances[0] &&
-                this.state.skill.Utterances[0].Utter) ||
-              "",
-            "2":
-              (this.state.skill.Utterances[1] &&
-                this.state.skill.Utterances[1].Utter) ||
-              "",
-            "3":
-              (this.state.skill.Utterances[2] &&
-                this.state.skill.Utterances[2].Utter) ||
-              "",
-            "4":
-              (this.state.skill.Utterances[3] &&
-                this.state.skill.Utterances[3].Utter) ||
-              "",
-            "5":
-              (this.state.skill.Utterances[4] &&
-                this.state.skill.Utterances[4].Utter) ||
-              "",
-            "6": ""
-          },
-          response: this.state.skill.Responses[0].Resp
-        }
-      ],
-      firstName: "FIRSTNAME",
-      lastName: "LASTNAME"
+      intents: this.state.skill.Responses.map((r, i) => ({
+        intent:
+          "intent_" +
+          toWords(i)
+            .split(" ")
+            .join(""),
+        utterances: this.state.skill.Utterances.map((u, j) => ({
+          val: this.state["utterance" + j].value,
+          intentId: u.IntentId
+        }))
+          .filter(x => x.intentId == r.IntentId)
+          .map(x => x.val),
+        response: this.state["response" + i].value
+      })),
+      firstName: this.props.data.firstName,
+      lastName: this.props.data.lastName
     };
 
     this.setState({
@@ -228,12 +227,15 @@ export default class ViewSkill extends React.Component {
 
     console.log("requestData", requestData);
 
-    request("http://127.0.0.1:5004/submit", requestData, resp => {
+    request(config.local + ":5004/submit", requestData, resp => {
       console.log("Skill submit response: " + resp);
       console.log(resp);
       this.setState({ submitted: false });
       if (resp.data && resp.data.error) {
-        let violations = resp.data.error.violations.map(v => v.message);
+        let violations = [];
+        if (resp.data.error.violations) {
+          violations = resp.data.error.violations.map(v => v.message);
+        }
         this.setState({
           errorMessage: resp.data.error.message,
           violations: violations
@@ -345,38 +347,22 @@ export default class ViewSkill extends React.Component {
       longDescription: this.state.longDesc.value || this.state.skill.LongDesk,
       keywords: this.state.keywords.value || this.state.skill.Keywords,
       template: "Alexa Interaction",
-      intents: [
-        {
-          intent: "intent",
-          utterances: {
-            "1":
-              this.state.utterance0.value ||
-              (this.state.skill.Utterances[0] &&
-                this.state.skill.Utterances[0].Utter),
-            "2":
-              this.state.utterance1.value ||
-              (this.state.skill.Utterances[1] &&
-                this.state.skill.Utterances[1].Utter),
-            "3":
-              this.state.utterance2.value ||
-              (this.state.skill.Utterances[2] &&
-                this.state.skill.Utterances[2].Utter),
-            "4":
-              this.state.utterance3.value ||
-              (this.state.skill.Utterances[3] &&
-                this.state.skill.Utterances[3].Utter),
-            "5":
-              this.state.utterance4.value ||
-              (this.state.skill.Utterances[4] &&
-                this.state.skill.Utterances[4].Utter),
-            "6": ""
-          },
-          response:
-            this.state.response0.value || this.state.skill.Responses[0].Resp
-        }
-      ],
-      firstName: "FIRSTNAME",
-      lastName: "LASTNAME"
+      intents: this.state.skill.Responses.map((r, i) => ({
+        intent:
+          "intent_" +
+          toWords(i)
+            .split(" ")
+            .join(""),
+        utterances: this.state.skill.Utterances.map((u, j) => ({
+          val: this.state["utterance" + j].value,
+          intentId: u.IntentId
+        }))
+          .filter(x => x.intentId == r.IntentId)
+          .map(x => x.val),
+        response: this.state["response" + i].value
+      })),
+      firstName: this.props.data.firstName,
+      lastName: this.props.data.lastName
     };
 
     console.log("sending skill data: ", requestData);
@@ -384,14 +370,14 @@ export default class ViewSkill extends React.Component {
     this.setState({ loaded: false });
 
     /* create new skill and push to db */
-    request("http://127.0.0.1:5004/editskill", requestData, resp => {
+    request(config.local + ":5004/editskill", requestData, resp => {
       console.log(resp);
       if (resp.data && resp.data.status === "SUCCESS") {
         let updatedSkills = this.props.userData.skills;
         //this.props.history.push("/view-skills");
         updatedSkills.push(resp.data.skill);
         this.props.updateGlobalState({ userData: { skills: updatedSkills } });
-        /*request("http://127.0.0.1:5004/submit", requestData, resp => {
+        /*request(config.local + ":5004/submit", requestData, resp => {
           console.log("Skill submit response: " + resp);
           console.log(resp);
           if (resp.data && resp.data.status === "SUCCESS") {
@@ -450,84 +436,122 @@ export default class ViewSkill extends React.Component {
           <div>
             <div className="edit-skill-container">
               <table className="view-skill-table">
-                <tbody className="view-skill-table-body">
-                  <tr>
-                    <th>Skill name </th>
-                    <td>
-                      {this.renderField(this.state.skill.Name, "skillName")}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Short description </th>
-                    <td>
-                      {this.renderField(
-                        this.state.skill.ShortDesc,
-                        "shortDesc"
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Long description </th>
-                    <td>
-                      {this.renderField(this.state.skill.LongDesk, "longDesc")}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Category </th>
-                    <td>
-                      {this.renderField(this.state.skill.Category, "category")}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>{"Status "}</th>
-                    <td>
-                      {this.renderField(this.state.skill.Status, "status")}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>{"Keywords "}</th>
-                    <td>
-                      {this.renderField(this.state.skill.Keywords, "keywords")}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>{"Invocation phrase "}</th>
-                    <td>
-                      {this.renderField(this.state.skill.Invoke, "invocation")}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>{"Creation date "}</th>
-                    <td>
-                      {this.renderField(
-                        this.state.skill.CreationDate,
-                        "creationDate"
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>{"Utterances "}</th>
-                    <td>
-                      {this.state.skill.Utterances.map((x, idx) =>
-                        this.renderField(x.Utter, "utterance" + idx)
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>{"Responses "}</th>
-                    <td>
-                      {this.state.skill.Responses.map((x, idx) =>
-                        this.renderField(x.Resp, "response" + idx)
-                      )}
-                    </td>
-                  </tr>
-                </tbody>
+                {this.state.skill.Responses.map((r, idx) => (
+                  <tbody className="view-skill-table-body">
+                    {idx == 0 && (
+                      <tr>
+                        <th>Skill name </th>
+                        <td>
+                          {this.renderField(this.state.skill.Name, "skillName")}
+                        </td>
+                      </tr>
+                    )}
+                    {idx == 0 && (
+                      <tr>
+                        <th>Short description </th>
+                        <td>
+                          {this.renderField(
+                            this.state.skill.ShortDesc,
+                            "shortDesc"
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                    {idx == 0 && (
+                      <tr>
+                        <th>Long description </th>
+                        <td>
+                          {this.renderField(
+                            this.state.skill.LongDesk,
+                            "longDesc"
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                    {idx == 0 && (
+                      <tr>
+                        <th>Category </th>
+                        <td>
+                          {this.renderField(
+                            this.state.skill.Category,
+                            "category"
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                    {idx == 0 && (
+                      <tr>
+                        <th>{"Status "}</th>
+                        <td>
+                          {this.renderField(this.state.skill.Status, "status")}
+                        </td>
+                      </tr>
+                    )}
+                    {idx == 0 && (
+                      <tr>
+                        <th>{"Keywords "}</th>
+                        <td>
+                          {this.renderField(
+                            this.state.skill.Keywords,
+                            "keywords"
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                    {idx == 0 && (
+                      <tr>
+                        <th>{"Invocation phrase "}</th>
+                        <td>
+                          {this.renderField(
+                            this.state.skill.Invoke,
+                            "invocation"
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                    {idx == 0 && (
+                      <tr>
+                        <th>{"Creation date "}</th>
+                        <td>
+                          {this.renderField(
+                            this.state.skill.CreationDate,
+                            "creationDate"
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                    <tr className="table-intent">
+                      <th>{"Intent " + (idx + 1)}</th>
+                      <td />
+                    </tr>
+                    <tr>
+                      <th>{"Utterances "}</th>
+                      <td>
+                        {this.state.skill.Utterances.filter(
+                          u => u.IntentId == r.IntentId
+                        ).map((x, idx) =>
+                          this.renderField(x.Utter, "utterance" + idx)
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>{"Responses "}</th>
+                      <td>
+                        {this.state.skill.Responses.filter(
+                          x => x.IntentId == r.IntentId
+                        ).map((x, idx) =>
+                          this.renderField(x.Resp, "response" + idx)
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
               </table>
             </div>
             {!this.state.isEditing ? (
               <button
                 className={
-                  "btn btn-primary submit-skill-btn" +
+                  "btn btn-primary submit-skill-btn emptyBtn" +
                   (this.state.submitted ? " disabled disabled-btn" : "")
                 }
                 onClick={this.submitSkill}
@@ -537,7 +561,7 @@ export default class ViewSkill extends React.Component {
             ) : (
               <button
                 className={
-                  "btn btn-primary submit-skill-btn" +
+                  "btn btn-primary submit-skill-btn emptyBtn" +
                   (this.state.submitted ? " disabled disabled-btn" : "")
                 }
                 onClick={this.saveSkill}

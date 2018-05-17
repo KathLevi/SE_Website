@@ -7,7 +7,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = { utterance0Num: 3, intentNum: 1 };
 
     for (let input of props.inputs) {
       if (input.type == "text") {
@@ -30,6 +30,21 @@ class Form extends React.Component {
         };
       }
     }
+
+    for (let i = 0; i < this.state.utterance0Num; i++) {
+      this.state["utterance" + i + "_0"] = {
+        value: "",
+        validations: [],
+        error: "",
+        ref: React.createRef()
+      };
+    }
+
+    this.state["response0"] = {
+      validations: [],
+      error: "",
+      ref: React.createRef()
+    };
 
     console.log(this.state);
   }
@@ -114,6 +129,67 @@ class Form extends React.Component {
     this.props.submitForm();
   };
 
+  addUtterances = intentNum => {
+    let newState = {};
+    for (
+      let i = this.state["utterance" + intentNum + "Num"] - 1;
+      i < this.state["utterance" + intentNum + "Num"] + 3;
+      i++
+    ) {
+      newState["utterance" + i + "_" + intentNum] = {
+        value: "",
+        validations: [],
+        error: "",
+        ref: React.createRef()
+      };
+    }
+    this.setState({
+      ...newState,
+      ["utterance" + intentNum + "Num"]:
+        this.state["utterance" + intentNum + "Num"] + 3
+    });
+  };
+
+  addIntent = () => {
+    let newState = {};
+    for (let i = this.state.intentNum; i < this.state.intentNum + 1; i++) {
+      newState["response" + i] = {
+        value: "",
+        validations: [],
+        error: "",
+        ref: React.createRef()
+      };
+    }
+    let iNum = this.state.intentNum;
+    this.setState(
+      {
+        ...newState,
+        intentNum: this.state.intentNum + 1,
+        ["utterance" + iNum + "Num"]: 0
+      },
+      () => {
+        let newState = {};
+        for (
+          let i = this.state["utterance" + iNum + "Num"];
+          i < this.state["utterance" + iNum + "Num"] + 4;
+          i++
+        ) {
+          newState["utterance" + i + "_" + iNum] = {
+            value: "",
+            validations: [],
+            error: "",
+            ref: React.createRef()
+          };
+        }
+        this.setState({
+          ...newState,
+          ["utterance" + iNum + "Num"]:
+            this.state["utterance" + iNum + "Num"] + 3
+        });
+      }
+    );
+  };
+
   render() {
     return (
       <div className="container form-container">
@@ -133,6 +209,62 @@ class Form extends React.Component {
                   placeholder={input.placeholder}
                   error={this.state[input.name].error}
                 />
+              );
+            } else if (input.type === "intentGroup") {
+              return (
+                <div key={input.name}>
+                  {[...Array(this.state.intentNum).keys()].map(j => (
+                    <div key={j} className="intent">
+                      <label>{"Intent " + (j + 1)}</label>
+                      <div className="utterance-group">
+                        {[
+                          ...Array(this.state["utterance" + j + "Num"]).keys()
+                        ].map(i => (
+                          <Input
+                            key={i}
+                            value={""}
+                            name={"utterance" + i + "_" + j}
+                            handleInputChange={this.handleInputChange}
+                            handleInputBlur={this.handleInputBlur}
+                            setRef={
+                              this.state["utterance" + i + "_" + j] &&
+                              this.state["utterance" + i + "_" + j].ref
+                            }
+                            label={i == 0 && "Utterances"}
+                            placeholder={""}
+                            error={
+                              this.state["utterance" + i + "_" + j] &&
+                              this.state["utterance" + i + "_" + j].error
+                            }
+                            classes={"utterance-input"}
+                          />
+                        ))}
+                        <a
+                          className="add-utterances-btn"
+                          onClick={() => this.addUtterances(j)}
+                        >
+                          Add additional utterances
+                        </a>
+                      </div>
+                      <Input
+                        key={j}
+                        value={""}
+                        name={"response" + j}
+                        handleInputChange={this.handleInputChange}
+                        handleInputBlur={this.handleInputBlur}
+                        setRef={this.state["response" + j].ref}
+                        label={"Response"}
+                        placeholder={""}
+                        error={this.state["response" + j].error}
+                      />
+                      {j == this.state.intentNum - 1 && (
+                        <a className="add-intent-btn" onClick={this.addIntent}>
+                          Add additional intent
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
               );
             } else if (input.type === "radio") {
               return (
@@ -161,7 +293,7 @@ class Form extends React.Component {
             }
           })}
           {this.props.children}
-          <button className="btn btn-primary form-submit" type="submit">
+          <button className="btn btn-primary form-submit emptyBtn" type="submit">
             {this.props.submitButtonLabel}
           </button>
         </form>

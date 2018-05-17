@@ -31,6 +31,8 @@ if __name__ == '__main__':
     # https://stackoverflow.com/questions/29223222/how-do-i-schedule-an-interval-job-with-apscheduler
     print ( 'Press Ctrl+{0} to exit'.format ( 'Break' if os.name == 'nt' else 'C' ) )
     try:
+
+        requests.post('http://127.0.0.1:5004/checkstatuses', json=js.dumps(json))
         # This is here to simulate application activity (which keeps the main thread alive).
         while True:
             time.sleep ( 5 )
