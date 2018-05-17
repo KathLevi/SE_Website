@@ -588,6 +588,7 @@ class db:
 
         return resp   
 
+    # Gets list of all skills where their Status is either 'Approved' or 'Denied'
     def get_unfinished_skills(self):
 
         # TODO update with actual status values for confirmed/denied
@@ -599,3 +600,27 @@ class db:
             ids.append((skill.SkillId,skill.AMZ_SkillId))
         
         return ids
+
+    # uses amznSkillId to update the status of skills
+    def complex_status_update(self,jsonData):
+        resp = {}
+        jsonData = js.loads(jsonData)
+
+        for skill in jsonData.get('updates'):
+            try:
+                q = self.session.query(Skills).filter_by(AMZ_SkillId = skill.get('amznSkillId')).one_or_none()
+                if q:
+                    q.Status = skill.get('status')
+                else:
+                    print("Skill Id does not exist in DB")
+            except Exception as e:
+                print(str(e))
+                resp['error'] = str(e)
+        self.session.commit()
+
+        if resp.get('error',None) == None:
+            resp['status'] = 'SUCCESS'
+        else:
+            resp['status'] = 'FAILURE'
+
+        return resp

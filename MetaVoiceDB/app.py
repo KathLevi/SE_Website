@@ -134,14 +134,22 @@ def UpdateStatus():
     resp = _db.update_statuses(jsonData)
 
     return good_response(resp)
-
+@app.route('/complexstatusupdate',methods=['POST'])
+def ComplexStatusUpdate()
+    jsonData = request.get_json()
+    print("Updating status' on amznSkillId")
+    _db = db(cs)
+    resp = _db.complex_status_update(jsonData)
+    
+    return good_response(resp)
 @app.route('/getunfinishedskills', methods=['POST'])
 def GetUnfinishedSkills():
     print('Getting unfinished skills')
     _db = db(cs)
     resp = _db.get_unfinished_skills()
-    
+
     return good_response(resp)
+
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5004.
