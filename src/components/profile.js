@@ -360,7 +360,7 @@ class Profile extends React.Component {
             {this.state.isEditing && (
               <button
                 className={
-                  "btn btn-primary save-profile-btn" +
+                  "btn btn-primary save-profile-btn emptyBtn" +
                   (this.state.submitted ? " disabled disabled-btn" : "")
                 }
                 onClick={this.saveProfile}

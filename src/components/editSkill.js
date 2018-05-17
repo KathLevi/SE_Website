@@ -91,7 +91,7 @@ export default class EditSkill extends React.Component {
 
             <button
               className={
-                "btn btn-primary submit-skill-btn" +
+                "btn btn-primary submit-skill-btn emptyBtn" +
                 (this.state.submitted ? " disabled disabled-btn" : "")
               }
               onClick={this.saveSkill}
