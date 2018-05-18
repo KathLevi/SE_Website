@@ -552,7 +552,7 @@ footer {
 /*Mobile Adjustments*/
 @media screen and (max-width: 530px) {
   body {
-    padding: 0 0 350px;    
+    padding: 0 0 350px;
   }
   .home-section-1 {
     top: 100px;
@@ -739,4 +739,12 @@ tr {
 .table-intent {
   background-color: #efefef;
   width: 100%;
+}
+
+td p {
+  max-width: 500px;
+}
+
+td {
+  overflow: scroll;
 }
