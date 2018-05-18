@@ -450,7 +450,7 @@ class db:
         except Exception as e:
             print('Unexpected error in submit_intent: ' + str(e))
 
-        return
+        return i.IntentId
 
     def get_skill_intent(self, id):
         intents = []
